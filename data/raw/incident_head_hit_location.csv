@@ -1,0 +1,1807 @@
+id,head_hit_location,patient_id
+0,Front of Head,52e19a89-140a-41a4-a3dc-002ebef77f96
+1,Left Side of Head,c7143c39-e497-4afd-9a17-4572e13a1fca
+2,Top of Head,c7143c39-e497-4afd-9a17-4572e13a1fca
+3,Back of Head,417a14f7-b224-4b8d-89aa-4fbb51f630ca
+4,Top of Head,d6a8454b-c7ae-43c7-b972-436d5dea1b3c
+5,Assault,91b48894-9b6d-46ff-b0fb-124270a72810
+6,Front of Head,91b48894-9b6d-46ff-b0fb-124270a72810
+7,Left Side of Head,91b48894-9b6d-46ff-b0fb-124270a72810
+8,Loss of Consciousness,91b48894-9b6d-46ff-b0fb-124270a72810
+9,Disorientation,91b48894-9b6d-46ff-b0fb-124270a72810
+10,Incoherent Speech,91b48894-9b6d-46ff-b0fb-124270a72810
+11,Confusion,91b48894-9b6d-46ff-b0fb-124270a72810
+12,Memory Loss,91b48894-9b6d-46ff-b0fb-124270a72810
+13,Dazed or Vacant Stare,91b48894-9b6d-46ff-b0fb-124270a72810
+14,"Headaches, nausea, vomitting, nose-bleed, bruising",91b48894-9b6d-46ff-b0fb-124270a72810
+15,Right Side of Head,251e92a8-c302-4975-8dad-e141f8736a26
+16,Left Side of Head,251e92a8-c302-4975-8dad-e141f8736a26
+17,Back of Head,251e92a8-c302-4975-8dad-e141f8736a26
+18,Front of Head,251e92a8-c302-4975-8dad-e141f8736a26
+19,Back of Head,e7864bad-9195-4b0c-82fb-ae295df3f43e
+20,Front of Head,3260d114-1aba-4e70-bc65-a15fd0b17670
+21,Right Side of Head,3260d114-1aba-4e70-bc65-a15fd0b17670
+22,Neck,3260d114-1aba-4e70-bc65-a15fd0b17670
+23,Front of Head,3260d114-1aba-4e70-bc65-a15fd0b17670
+24,Right Side of Head,3260d114-1aba-4e70-bc65-a15fd0b17670
+25,Neck,3260d114-1aba-4e70-bc65-a15fd0b17670
+26,Left Side of Head,c0ceaa17-a2e6-4978-8dcb-64dd497e87f9
+27,Front of Head,ec6f218c-8c8b-4f4e-ad3e-679439679e83
+28,Front of Head,ec6f218c-8c8b-4f4e-ad3e-679439679e83
+29,Front of Head,7ad699e9-6df6-48a0-87c1-683a7da30c89
+30,Back of Head,7ad699e9-6df6-48a0-87c1-683a7da30c89
+31,Back of Head,4f5bc5c5-d944-436e-a937-0d53a98e0658
+32,Front of Head,4f5bc5c5-d944-436e-a937-0d53a98e0658
+33,Front of Head,499f1ec8-f1bc-4ed5-ade6-2b342ab58023
+34,Left Side of Head,499f1ec8-f1bc-4ed5-ade6-2b342ab58023
+35,Top of Head,499f1ec8-f1bc-4ed5-ade6-2b342ab58023
+36,Right Side of Head,499f1ec8-f1bc-4ed5-ade6-2b342ab58023
+37,Right Side of Head,499f1ec8-f1bc-4ed5-ade6-2b342ab58023
+38,Top of Head,499f1ec8-f1bc-4ed5-ade6-2b342ab58023
+39,Front of Head,4abcb76e-b374-4418-a24f-85e4fda9a0d7
+40,Back of Head,4abcb76e-b374-4418-a24f-85e4fda9a0d7
+41,Left Side of Head,4abcb76e-b374-4418-a24f-85e4fda9a0d7
+42,Top of Head,4abcb76e-b374-4418-a24f-85e4fda9a0d7
+43,Right Side of Head,4abcb76e-b374-4418-a24f-85e4fda9a0d7
+44,Neck,4abcb76e-b374-4418-a24f-85e4fda9a0d7
+45,Back of Head,9c0887a5-9d01-4938-8cfa-775b686411a6
+46,Right Side of Head,fb9390aa-9daf-4598-ba95-40200cdf1c9e
+47,Whiplash,79d5939a-100e-4491-b36c-418d87a5bea8
+48,Back of Head,fd1e607a-6955-4bdc-aec1-d8aa079b1034
+49,Front of Head,e9081a34-4515-4b70-b875-f9f5244b280c
+50,Back of Head,e9081a34-4515-4b70-b875-f9f5244b280c
+51,Right Side of Head,e9081a34-4515-4b70-b875-f9f5244b280c
+52,Neck,e9081a34-4515-4b70-b875-f9f5244b280c
+53,Left Side of Head,d8f97f7d-8720-4c7a-aba8-40b7d2fc4516
+54,Top of Head,d8f97f7d-8720-4c7a-aba8-40b7d2fc4516
+55,Neck,d8f97f7d-8720-4c7a-aba8-40b7d2fc4516
+56,Back of Head,40791f0b-d266-4123-ab9d-9ae45f5a725b
+57,Back of Head,40791f0b-d266-4123-ab9d-9ae45f5a725b
+58,Front of Head,dd135438-8fcd-4d94-9472-445dc27bf56c
+59,Neck,05fd3960-f2f8-4387-8d2e-9acde9986355
+60,Back of Head,c945e774-d427-41a8-9507-48118ce9975a
+61,Left Side of Head,2a719e6f-a4f9-4a7a-b798-472ff29bdf7f
+62,Top of Head,2a719e6f-a4f9-4a7a-b798-472ff29bdf7f
+63,Front of Head,2a719e6f-a4f9-4a7a-b798-472ff29bdf7f
+64,Neck,2a719e6f-a4f9-4a7a-b798-472ff29bdf7f
+65,Back of Head,c06a5a53-f8b3-491a-bbdf-b0f837d49edd
+66,Front of Head,c06a5a53-f8b3-491a-bbdf-b0f837d49edd
+67,Left Side of Head,c06a5a53-f8b3-491a-bbdf-b0f837d49edd
+68,Right Side of Head,c06a5a53-f8b3-491a-bbdf-b0f837d49edd
+69,Top of Head,c06a5a53-f8b3-491a-bbdf-b0f837d49edd
+70,Neck,c06a5a53-f8b3-491a-bbdf-b0f837d49edd
+71,"Left eye, face",c06a5a53-f8b3-491a-bbdf-b0f837d49edd
+72,Front of Head,9ed5974c-258e-4433-8e9b-296d2359feea
+73,Left Side of Head,9ed5974c-258e-4433-8e9b-296d2359feea
+74,Left Side of Head,f99dee48-7f1a-45ea-a876-21f337757e23
+75,Stroke like event,f99dee48-7f1a-45ea-a876-21f337757e23
+76,Right Side of Head,05d558eb-39fb-484c-be18-a0f0f9ba9de8
+78,Front of Head,670252cb-c462-4df4-920d-b6813593d793
+79,Bil frontal lobes,670252cb-c462-4df4-920d-b6813593d793
+80,Other,863aa0a3-7843-41cf-b0c0-d3c03127f654
+81,Back of Head,627ac856-66ad-4707-9cff-bd8b517b42aa
+87,Right Side of Head,e3c1209c-1053-4fc5-ad50-cb8eac56e775
+88,Tumor on left side,141cb898-ce8f-47f4-a7f1-cb088216e3ed
+89,Do not know,023dc8f5-f09f-40a6-b1d4-78dfb483a4e0
+90,Left Side of Head,269692f9-6290-43ff-8ccf-053910389c6b
+91,Right Side of Head,269692f9-6290-43ff-8ccf-053910389c6b
+92,Top of Head,269692f9-6290-43ff-8ccf-053910389c6b
+93,Front of Head,4a73e40d-0a51-4153-b63a-e0dd3aafe262
+94,Back of Head,4a73e40d-0a51-4153-b63a-e0dd3aafe262
+95,Top of Head,4a73e40d-0a51-4153-b63a-e0dd3aafe262
+96,Left Side of Head,4a73e40d-0a51-4153-b63a-e0dd3aafe262
+97,Front of Head,0c69bb33-c652-4642-aaac-18613b524086
+98,Left Side of Head,f45fea53-a517-4c3c-a2d7-ff784d8c53a2
+99,Brain stem,ae19d854-add9-47ac-997b-e431b22b0154
+100,Front of Head,c40aaf7f-f590-4ae3-a3fe-1d21f6a74886
+101,Back of Head,c40aaf7f-f590-4ae3-a3fe-1d21f6a74886
+102,Right Side of Head,c40aaf7f-f590-4ae3-a3fe-1d21f6a74886
+103,Front of Head,d1fd0c5a-b558-4f89-a458-d722cd50a7aa
+104,Back of Head,d1fd0c5a-b558-4f89-a458-d722cd50a7aa
+105,Right Side of Head,d1fd0c5a-b558-4f89-a458-d722cd50a7aa
+106,Neck,d1fd0c5a-b558-4f89-a458-d722cd50a7aa
+107,Front of Head,02c88e13-e777-478d-b6eb-a44669819d87
+108,Neck,02c88e13-e777-478d-b6eb-a44669819d87
+109,Left Side of Head,02c88e13-e777-478d-b6eb-a44669819d87
+110,Right Side of Head,02c88e13-e777-478d-b6eb-a44669819d87
+111,Right Side of Head,873660ae-737d-4f80-8056-2c090261fa11
+112,Left Side of Head,873660ae-737d-4f80-8056-2c090261fa11
+113,Left Side of Head,1f923f78-f7b1-4e6f-a288-0762240a992a
+114,Back of Head,0b4109d4-05e9-40d3-a5ca-c1822aff328d
+115,Neck,56f9428f-38c9-4abb-8855-02ac7cec0588
+116,Left Side of Head,8f265870-507c-448b-892b-83fefe740a04
+117,Top of Head,ca1e64ee-ac19-4d75-bd32-85c538a99b45
+118,Back of Head,ca1e64ee-ac19-4d75-bd32-85c538a99b45
+119,Right Side of Head,ca1e64ee-ac19-4d75-bd32-85c538a99b45
+120,Front of Head,b1ac9661-e3e1-4151-a221-968e15141a0f
+121,Top of Head,b1ac9661-e3e1-4151-a221-968e15141a0f
+86,All,801e415d-8584-49e6-b990-e79919deb6e4
+122,Left Side of Head,b1ac9661-e3e1-4151-a221-968e15141a0f
+123,Right Side of Head,b1ac9661-e3e1-4151-a221-968e15141a0f
+124,Back of Head,b1ac9661-e3e1-4151-a221-968e15141a0f
+125,Left Side of Head,54cb5141-0f81-4c4e-804e-1eaef0e08419
+126,Left Side of Head,4cdef5dd-82c3-45e0-95d4-bc286cfb64a6
+127,Front of Head,864ceaa8-ef09-48ff-9229-de2ed21436cd
+128,Neck,864ceaa8-ef09-48ff-9229-de2ed21436cd
+129,Front of Head,b820482d-79ab-4b9a-b6db-5d9d38753315
+130,Right Side of Head,c6445e6d-d6f2-4a5c-aad6-6440e124e23d
+131,Left Side of Head,54cb5141-0f81-4c4e-804e-1eaef0e08419
+132,?,9efcc829-c770-424e-bbba-b83a84a24002
+133,Back of Head,20609316-b2a2-4d41-87cc-77b17012db9e
+134,Back of Head,e8167431-3237-4b05-9ea5-e0dbfd3164cb
+135,Right Side of Head,e8167431-3237-4b05-9ea5-e0dbfd3164cb
+136,Other,979976fa-d089-47f9-8b6d-efc5a0b7a7dc
+137,Back of Head,de364a83-e53e-4e26-a9ff-27d7d48b9c4b
+138,Neck,de364a83-e53e-4e26-a9ff-27d7d48b9c4b
+139,Back,de364a83-e53e-4e26-a9ff-27d7d48b9c4b
+140,Shoulder,de364a83-e53e-4e26-a9ff-27d7d48b9c4b
+141,Right Side of Head,00469456-99a5-4c99-aa48-a918986c7c45
+142,Front of Head,236a3b7f-a32e-4bfd-b2f4-2dd6b5c24100
+143,Left Side of Head,236a3b7f-a32e-4bfd-b2f4-2dd6b5c24100
+144,Neck,236a3b7f-a32e-4bfd-b2f4-2dd6b5c24100
+145,Back of Head,236a3b7f-a32e-4bfd-b2f4-2dd6b5c24100
+146,Right Side of Head,92ae7b47-3b10-4362-a585-7f036c8caf49
+147,Back of Head,0ae54f2a-f1a8-429e-8411-195ec35e833d
+148,Front of Head,abdd4b3d-7678-4629-b604-a6692399bb76
+149,Right Side of Head,abdd4b3d-7678-4629-b604-a6692399bb76
+150,Back of Head,f0356db8-f2ab-4c5c-b409-16a34527b625
+151,Back of Head,f0a8f081-7bc3-4291-b6fd-a88e94ec892a
+153,Lkj,517a3e10-01aa-41b5-b4b9-2649ccadcd36
+154,Back right side of head,c69cb224-3904-4a3b-ac89-266150bba920
+155,Top of Head,f07d99b0-9eb2-4535-bfe8-6cd6f0e3827d
+156,Back of Head,92247e42-3b3b-445e-ac05-56a5eef44902
+157,Front of Head,cce5a3b1-c529-4aa0-8d52-deec86d1fc98
+158,Left Side of Head,d5fbfbf0-d638-4ae4-a848-b891eae3e1b9
+159,Left and back of head,d5fbfbf0-d638-4ae4-a848-b891eae3e1b9
+160,Left Side of Head,b50d3a40-e393-4317-892e-581fb9f9ecd1
+161,Neck,b50d3a40-e393-4317-892e-581fb9f9ecd1
+162,Front of Head,5f2ec1f3-a1d6-45e6-b034-7a661528bf51
+163,Right Side of Head,eda83cd1-7db9-4964-84e9-5b2a2720394b
+164,Right Side of Head,eda83cd1-7db9-4964-84e9-5b2a2720394b
+165,Neck,eda83cd1-7db9-4964-84e9-5b2a2720394b
+166,Front of Head,1c59da5b-3ae6-4ed6-8699-a91734e795a3
+167,Top of Head,9ba09415-1e3f-431d-a557-3b640ec3a7d3
+168,Back of Head,9ba09415-1e3f-431d-a557-3b640ec3a7d3
+169,Neck,9ba09415-1e3f-431d-a557-3b640ec3a7d3
+170,Front of Head,a14436a8-3b6e-465e-a5ff-f18d02f675bf
+171,"Not sure, the front of my head was what was hurting immediately after",a14436a8-3b6e-465e-a5ff-f18d02f675bf
+172,Front of Head,480428dd-c576-463c-a005-ff692cc05f4b
+173,Back of Head,102ac21d-6d37-4598-8c93-8bf48c10dc16
+174,Back of Head,4c757fda-3239-4fe8-8d64-691c775df7f4
+175,Left Side of Head,4c757fda-3239-4fe8-8d64-691c775df7f4
+176,Right Side of Head,4c757fda-3239-4fe8-8d64-691c775df7f4
+177,Neck,4c757fda-3239-4fe8-8d64-691c775df7f4
+178,Inflammation,21dbc593-f4dd-454d-b296-ba2e15c3c373
+179,Right Side of Head,217ed79d-76f2-4b07-9d4c-546f8cdc89f8
+180,Front of Head,418a2d54-77f9-4023-94ba-ee2769ca9710
+181,Front of Head,609da6c8-f39b-4045-b8fb-0a5c11c212cf
+182,Front of Head,0439d6ad-f9eb-4d98-9244-3d7fa9a6461c
+183,Neck,e31204c8-ad01-425a-afe8-d75c6984b078
+184,Back of Head,e31204c8-ad01-425a-afe8-d75c6984b078
+185,Left Side of Head,5009a668-252d-4063-aedc-f79a02d69918
+186,Back of Head,b39dcb64-f0ba-45d3-b83c-02d7f1a78d18
+187,Front of Head,a81917ae-8720-4e15-8084-ae4fcd9e62d2
+188,Front of Head,cc585f25-7a83-42be-a44c-d2dbd2ba41a6
+189,Back of Head,cc585f25-7a83-42be-a44c-d2dbd2ba41a6
+190,Left Side of Head,cc585f25-7a83-42be-a44c-d2dbd2ba41a6
+191,Top of Head,cc585f25-7a83-42be-a44c-d2dbd2ba41a6
+192,Right Side of Head,cc585f25-7a83-42be-a44c-d2dbd2ba41a6
+193,Neck,cc585f25-7a83-42be-a44c-d2dbd2ba41a6
+194,Top of Head,e70620d5-7ebd-4887-acaa-1c4706effa59
+195,Surgical ptsd,1abcff0b-dcb3-4200-9915-ad86f5e6d31c
+196,Front of Head,4237cbbe-ec1d-4885-8b5a-5cfe0e5dc3ad
+197,Neck,4237cbbe-ec1d-4885-8b5a-5cfe0e5dc3ad
+198,Front of Head,92aecb8d-7372-4eb0-b77e-66a0c11f171d
+199,Left Side of Head,92aecb8d-7372-4eb0-b77e-66a0c11f171d
+200,Front of Head,92aecb8d-7372-4eb0-b77e-66a0c11f171d
+201,Left Side of Head,92aecb8d-7372-4eb0-b77e-66a0c11f171d
+202,Back of Head,a202305a-2bd7-43dc-9bf1-c8ba5a0d82e8
+203,Left Side of Head,fc393653-b169-40e2-bd8b-af5ecaddbdb1
+204,Left Side of Head,b0a50546-4efc-45cf-a1e1-1d61c4ffb17e
+205,Right Side of Head,b0a50546-4efc-45cf-a1e1-1d61c4ffb17e
+206,Left Side of Head,c75f46ef-679a-4cd8-8c56-e5e9fe65f843
+207,Left jaw,c75f46ef-679a-4cd8-8c56-e5e9fe65f843
+208,Back of Head,1844110c-6504-46bd-acc7-f79ffb6e51a4
+209,Right Side of Head,17286263-edfc-49ec-99f8-6191ce53d5a1
+210,Front of Head,17286263-edfc-49ec-99f8-6191ce53d5a1
+211,Right Side of Head,4d10421e-e9d6-4ef5-8611-05d3e697d2e0
+212,"Front, left side, and back of head",e77a349a-ad28-4179-88a2-5274d79807a4
+213,Back of Head,651c0b4e-8a89-425b-a277-f55f8281d59a
+214,Front of Head,641b6fc6-22d7-4b14-8d01-4245298b0fe7
+215,Back of Head,641b6fc6-22d7-4b14-8d01-4245298b0fe7
+216,Top of Head,641b6fc6-22d7-4b14-8d01-4245298b0fe7
+217,Left Side of Head,641b6fc6-22d7-4b14-8d01-4245298b0fe7
+218,Right Side of Head,641b6fc6-22d7-4b14-8d01-4245298b0fe7
+219,Neck,641b6fc6-22d7-4b14-8d01-4245298b0fe7
+220,No,59ec74b9-f290-4903-a210-ae55a70ce842
+221,Front of Head,ae37833c-41b8-4cae-aa12-5dce1fe6a193
+222,Back of Head,ae37833c-41b8-4cae-aa12-5dce1fe6a193
+223,Neck,ae37833c-41b8-4cae-aa12-5dce1fe6a193
+224,Left Side of Head,39b6d970-53b4-4647-bd9e-1a0901ef6e5f
+225,Left Side of Head,b53fbeb6-94f8-4d47-aaf4-ade6a9207f9f
+226,Top of Head,5fb6fc30-47e1-435c-bb5a-c56d3f04d234
+227,Back of Head,ff042f79-a5f3-45d9-83d6-8915a5ec65a0
+228,Neck,ff042f79-a5f3-45d9-83d6-8915a5ec65a0
+229,Right Side of Head,ff042f79-a5f3-45d9-83d6-8915a5ec65a0
+230,Back of Head,bed7633d-45d1-4103-a39c-ae82a6f1108b
+231,No oxygen to brain,3ca3b8bf-e6b5-42c1-ac5a-da2bfee372a6
+233,Front of Head,c48e6045-90c7-4ff1-a004-df1487222532
+234,Right Side of Head,aecc2e8f-5790-4dd9-a458-ba04cd1a3d67
+235,Right Side of Head,aecc2e8f-5790-4dd9-a458-ba04cd1a3d67
+236,Right Side of Head,1955bc8d-a797-4acd-bf2e-6b62da47d26f
+237,Back of Head,b740cba3-5c26-4677-84a8-53521cea424c
+238,Top of Head,b740cba3-5c26-4677-84a8-53521cea424c
+239,Front of Head,19dc482c-08aa-45f3-9eb4-b1cc38872929
+240,Left Side of Head,19dc482c-08aa-45f3-9eb4-b1cc38872929
+241,Top of Head,19dc482c-08aa-45f3-9eb4-b1cc38872929
+242,Left Side of Head,e071bd35-1c84-4d3a-8a2f-2cc7a9187112
+243,Right Side of Head,e071bd35-1c84-4d3a-8a2f-2cc7a9187112
+244,Back of Head,e071bd35-1c84-4d3a-8a2f-2cc7a9187112
+245,Front of Head,ae0ac572-cfa8-4535-93f9-250e872e0c7d
+246,Front of Head,2cac7a79-3ddc-4599-9495-02bcd4fc456e
+247,Do not know - in seatbelt,5c36e1ba-cd72-415a-a6d5-be6d8d4b885a
+248,,5c36e1ba-cd72-415a-a6d5-be6d8d4b885a
+249,Right side stroke,1654cffa-abff-4f11-a66e-a8bae39cd986
+250,Front of Head,4214a341-70a6-4eb0-8af5-a6cb21781c92
+251,,960cde30-7a98-4e65-bf3c-6175bbf8d721
+252,Left Side of Head,9f2c585d-c07e-45ab-b8ae-736c3e11c12f
+253,Left Side of Head,750a7aaa-4bfe-4882-bc76-7f0c4905408e
+254,Neck,22ab0bbf-e002-4034-b4c3-16b413023f42
+255,Under chin,22ab0bbf-e002-4034-b4c3-16b413023f42
+256,Body was struck and i went down to the ground,42ce688a-7352-4b16-a586-cbd829ef0de2
+258,Back of Head,b20b504b-ee0d-431e-bc3a-65147ad5d585
+259,Right Side of Head,ccc6c096-79c3-44f5-8661-21d8f4e2c5a0
+260,Neck,fa137523-1f2a-4280-b8f3-40cb191cb40b
+261,Right Side of Head,2f0e2a08-6325-4273-8c92-085dd1355585
+262,Forehead left side,480a85e0-dbfb-4a48-acfc-58aebfcd8943
+263,Front of Head,7d905518-37bd-4606-83d5-1a9720a00d56
+264,Back of Head,7d905518-37bd-4606-83d5-1a9720a00d56
+265,Top of Head,7d905518-37bd-4606-83d5-1a9720a00d56
+266,Neck,7d905518-37bd-4606-83d5-1a9720a00d56
+267,Right Side of Head,e4054c7f-496d-4ea1-8205-b7d3a8c3eaa1
+268,Neck,e4054c7f-496d-4ea1-8205-b7d3a8c3eaa1
+269,Right Side of Head,3ab5c7b9-9a3f-4a7c-8c81-9b00451a6ea1
+270,Front of Head,3ab5c7b9-9a3f-4a7c-8c81-9b00451a6ea1
+271,Back of Head,55472022-7f54-46da-8886-44255270f4ba
+272,Left Side of Head,55472022-7f54-46da-8886-44255270f4ba
+273,Back of Head,8892cbba-0f96-4d85-ace8-96d62711eb42
+274,Front of Head,e7de5f6a-b4fd-429b-a586-583a986ceab8
+275,Front of Head,e450eafa-806e-4990-a153-349894330a64
+276,Back of Head,e450eafa-806e-4990-a153-349894330a64
+277,Left Side of Head,e450eafa-806e-4990-a153-349894330a64
+278,Top of Head,e450eafa-806e-4990-a153-349894330a64
+279,Right Side of Head,e450eafa-806e-4990-a153-349894330a64
+280,None,f2cc5a64-15a1-4182-87a1-c3792a862d19
+281,No pulse several minutes,7e0acc6a-0c0b-4bb9-89d7-16e986cf3435
+282,Other,d04b1e2b-e343-437f-86cf-7357d377ced1
+283,Other,d04b1e2b-e343-437f-86cf-7357d377ced1
+284,Front of Head,1708690a-9519-4d8a-86d9-c4fd27673b46
+285,Back of Head,5f1450f0-0172-4499-b3ed-192f19a3a155
+286,Left Side of Head,5f1450f0-0172-4499-b3ed-192f19a3a155
+287,Right Side of Head,5f1450f0-0172-4499-b3ed-192f19a3a155
+288,Neck,5f1450f0-0172-4499-b3ed-192f19a3a155
+289,Back of Head,d29d650d-46c2-4dc9-b882-c3c664dfcbaf
+290,Right Side of Head,d29d650d-46c2-4dc9-b882-c3c664dfcbaf
+291,Front back side to side,7b0a4513-7625-4329-9d50-cc84fe00178f
+292,Front of Head,1cab701b-d2e7-485f-95b7-c15f8e0169d8
+293,Back of Head,1cab701b-d2e7-485f-95b7-c15f8e0169d8
+294,Jaw,1cab701b-d2e7-485f-95b7-c15f8e0169d8
+295,Back of Head,59ccf04f-22cc-4972-bb74-2862e4bfbbb8
+296,Right Side of Head,59ccf04f-22cc-4972-bb74-2862e4bfbbb8
+297,Neck,59ccf04f-22cc-4972-bb74-2862e4bfbbb8
+298,Right Side of Head,e8a94a1f-66ee-4481-8844-5ab6a067e368
+299,Neck,e8a94a1f-66ee-4481-8844-5ab6a067e368
+300,Back of Head,e8a94a1f-66ee-4481-8844-5ab6a067e368
+301,Front of Head,e8a94a1f-66ee-4481-8844-5ab6a067e368
+303,Front of Head,e699e62a-87c2-40e9-94e3-056029303f20
+304,Dissection,096d402a-5fcd-41dd-b59b-b3089cf06742
+305,Top of Head,cce8c10b-40c8-42f1-8f99-eb2999e5d773
+306,Right Side of Head,4f708355-a9bc-4e51-ad88-41e0387ef4a6
+307,Left Side of Head,a2465591-c1e9-4782-81eb-a93fccc988f4
+308,Back of Head,a2465591-c1e9-4782-81eb-a93fccc988f4
+309,Neck,a2465591-c1e9-4782-81eb-a93fccc988f4
+310,,4045977e-fa86-49ba-82bc-11547e90d42c
+311,None,d4ac1b8e-303f-4b33-8e40-491c9d2ba8d2
+312,Back of Head,0ccae5e4-5fb9-4f8d-9f8c-3c0f8d03a9db
+313,Right Side of Head,0ccae5e4-5fb9-4f8d-9f8c-3c0f8d03a9db
+314,Left Side of Head,0ccae5e4-5fb9-4f8d-9f8c-3c0f8d03a9db
+315,Right Side of Head,5c9631e0-8b59-4c83-9785-97803df9a791
+316,,ee60e40f-1820-4514-8668-85166b6055cf
+317,,f2cbde39-82d5-40fa-a060-297e083eb187
+318,Neck,b7911540-9277-4537-9a89-351ef77e7894
+319,Back of Head,a55fc574-28bd-4fab-af21-7c2d79c9b38d
+320,Top of Head,a55fc574-28bd-4fab-af21-7c2d79c9b38d
+321,Right Side of Head,a55fc574-28bd-4fab-af21-7c2d79c9b38d
+322,Dai,69cbc8ef-4a9a-4ce8-b8af-5996750c50da
+323,Right Side of Head,2ec9bb45-b732-4217-b4b4-8d8c7693a09c
+324,Back of Head,71616081-1ffa-4aa7-8668-d1acd0e4d4c9
+325,Left Side of Head,3a622627-36aa-405a-b28c-2004c6f18bd6
+326,Left Side of Head,f42287e3-92ed-4529-b565-987271674186
+327,Right Side of Head,9ce2d29e-eb7e-46ab-a39c-b8077f727282
+328,Back of Head,9d77635b-3fea-4bbe-877d-aa2e18eb2975
+329,Left Side of Head,9d77635b-3fea-4bbe-877d-aa2e18eb2975
+330,Front of Head,3107363c-1ae4-41c2-8830-74e1ea0b1310
+331,Back of Head,3107363c-1ae4-41c2-8830-74e1ea0b1310
+333,Back of Head,c2c8f9b4-2112-4993-aa60-81d94e78bad2
+334,Front of Head,c2c8f9b4-2112-4993-aa60-81d94e78bad2
+335,Front of Head,11143d57-004e-437f-beaf-df04fe9ecd7d
+336,Front of Head,cf131836-9036-4960-8041-b5797faba57d
+337,Back of Head,cf131836-9036-4960-8041-b5797faba57d
+338,Top of Head,cf131836-9036-4960-8041-b5797faba57d
+339,Back of Head,d9015178-a5a7-4b00-a3a0-3f2af9f0f123
+340,Neck,ee52c4f6-2d5a-4898-af3e-3ef3a18e3206
+341,Left Side of Head,80abde55-2d51-4bdb-877c-7ecb226a9fbc
+342,Probably whole brain involved,80abde55-2d51-4bdb-877c-7ecb226a9fbc
+343,Left Side of Head,0289e3a9-8564-4f64-9b15-00daab6b2970
+344,Neck,0289e3a9-8564-4f64-9b15-00daab6b2970
+346,None,8ebe9780-a2b0-42b9-8254-ebef67eb7758
+347,T-bone car accident concussion,ea2a38c3-ba6e-4604-b707-3147855af518
+348,Left Side of Head,578e816a-a7a9-4b9f-ab6a-7e7e19ec5fbd
+349,Front of Head,7c73f29b-463d-47bc-babf-75523b7226a3
+350,Not hit. contra coup,bd7e1d37-0169-47a1-b0bc-f6f42f4a01e6
+351,Top of Head,15a244a5-4436-494f-8a8f-c04c397ca24f
+352,Back of Head,15a244a5-4436-494f-8a8f-c04c397ca24f
+353,Front of Head,32a9e1f9-0404-4f10-ae1d-326f47fb8381
+354,Left Side of Head,32a9e1f9-0404-4f10-ae1d-326f47fb8381
+355,Top of Head,32a9e1f9-0404-4f10-ae1d-326f47fb8381
+356,Back of Head,32a9e1f9-0404-4f10-ae1d-326f47fb8381
+357,Right Side of Head,32a9e1f9-0404-4f10-ae1d-326f47fb8381
+358,Neck,32a9e1f9-0404-4f10-ae1d-326f47fb8381
+359,Coo counter coi,32a9e1f9-0404-4f10-ae1d-326f47fb8381
+360,Right Side of Head,32c4458e-7cab-41b0-8410-25cdc8c14846
+361,Front of Head,32c4458e-7cab-41b0-8410-25cdc8c14846
+362,Left Side of Head,32c4458e-7cab-41b0-8410-25cdc8c14846
+363,Back of Head,32c4458e-7cab-41b0-8410-25cdc8c14846
+302,All,012bfc75-70c1-4007-ab9e-1f4ee45bd537
+345,Stroke,386e6a15-db2e-48a8-9b2d-89503caa1567
+332,All,c0543979-ca04-4630-8fd5-058d49fc4f38
+257,No,42ce688a-7352-4b16-a586-cbd829ef0de2
+364,Did not get hit in the head,3c501a9c-096c-45e9-a54c-70bd7e1eab2c
+365,Carotid artery,2262c069-909c-475e-819c-c4737a4c3f3b
+366,Front of Head,71599994-64ed-4db4-8b38-1b7cd4ec2024
+367,Back of Head,9882e8ed-4e06-4ebf-82b3-c940d7f679a6
+368,Right Side of Head,9882e8ed-4e06-4ebf-82b3-c940d7f679a6
+369,Left Side of Head,6e6b9b10-868d-4867-b327-fcdeaa2a11fb
+370,Front of Head,6e6b9b10-868d-4867-b327-fcdeaa2a11fb
+371,Right Side of Head,1f863bb8-aeaf-4797-8ccd-d9d6d17aa0fe
+372,Back of Head,1f863bb8-aeaf-4797-8ccd-d9d6d17aa0fe
+373,None,4666436a-c641-41b6-84ad-c2e59830757f
+374,Front of Head,a0b1dca2-15a2-4ae0-80f0-47c1ed78e3be
+375,Front of Head,e7c593f5-c586-4e7e-b884-87ed51313f02
+376,Back of Head,e7c593f5-c586-4e7e-b884-87ed51313f02
+377,Left Side of Head,e7c593f5-c586-4e7e-b884-87ed51313f02
+378,Top of Head,e7c593f5-c586-4e7e-b884-87ed51313f02
+379,Right Side of Head,e7c593f5-c586-4e7e-b884-87ed51313f02
+380,Diffused sheering,e7c593f5-c586-4e7e-b884-87ed51313f02
+381,Right Side of Head,33a5926b-283d-48cd-808e-26b44e70842e
+382,Front of Head,33a5926b-283d-48cd-808e-26b44e70842e
+383,Top of Head,33a5926b-283d-48cd-808e-26b44e70842e
+384,Neck,33a5926b-283d-48cd-808e-26b44e70842e
+385,Left Side of Head,33a5926b-283d-48cd-808e-26b44e70842e
+386,Back of Head,33a5926b-283d-48cd-808e-26b44e70842e
+387,Right Side of Head,75da00ea-a833-49d6-ac6a-37380fc593a0
+388,Back of Head,11c4a639-002f-4309-ba93-07a5cb240c53
+389,Back of Head,8c2a5ee1-f746-4b38-a77a-429bd2f2b416
+390,Back of Head,6ee581b0-fdf7-46f2-b2e6-508e7b8cfbe4
+391,Neck,6ee581b0-fdf7-46f2-b2e6-508e7b8cfbe4
+392,Front of Head,3baf6437-0f53-4685-8278-99d8b3b55692
+393,Left Side of Head,3baf6437-0f53-4685-8278-99d8b3b55692
+394,Left Side of Head,0c28f48b-6504-4f72-9c36-7697305aaf12
+395,Right back of head,0c28f48b-6504-4f72-9c36-7697305aaf12
+396,Right Side of Head,5f307f0d-1049-4ea4-bf59-693a83c81068
+397,Back of Head,5f307f0d-1049-4ea4-bf59-693a83c81068
+398,Jaw line,5f307f0d-1049-4ea4-bf59-693a83c81068
+399,None,52b6267d-6329-4e67-88f2-37c115902d67
+400,Left Side of Head,6a3b019b-c05a-45a8-a31c-81a987f913a8
+401,Front of Head,aed7802e-b86b-4ea5-8519-92ddbcfa3257
+402,Top of Head,aed7802e-b86b-4ea5-8519-92ddbcfa3257
+403,,9de42bfb-b5f4-489c-a139-217b53619246
+404,Right Side of Head,52a5bf74-7b81-496f-8e28-608b6be336a7
+405,Back of Head,3535247d-95ac-4aaf-b3b2-c06aa66e0f9f
+406,Front of Head,128e217d-5a7b-4891-ae5a-6c60b8acf7be
+407,Front of Head,7423a333-5142-4f70-811e-4a41d1ddcae2
+408,Back of Head,7423a333-5142-4f70-811e-4a41d1ddcae2
+409,Neck,7423a333-5142-4f70-811e-4a41d1ddcae2
+410,Back of Head,70c7299d-7823-4903-852c-db1eaac0a527
+411,Neck,70c7299d-7823-4903-852c-db1eaac0a527
+412,Left Side of Head,70c7299d-7823-4903-852c-db1eaac0a527
+413,Front of Head,f4df70f7-b0c1-4595-8d4a-ecf6ca672106
+414,Back of Head,f4df70f7-b0c1-4595-8d4a-ecf6ca672106
+415,Left Side of Head,f4df70f7-b0c1-4595-8d4a-ecf6ca672106
+416,Top of Head,f4df70f7-b0c1-4595-8d4a-ecf6ca672106
+417,Right Side of Head,f4df70f7-b0c1-4595-8d4a-ecf6ca672106
+418,Back of Head,92603af6-5408-4576-9128-beaa31ab7c32
+419,Front of Head,92603af6-5408-4576-9128-beaa31ab7c32
+420,Neck,92603af6-5408-4576-9128-beaa31ab7c32
+421,Left Side of Head,b3d164c7-8dbe-4bf8-8045-016b12168f38
+422,Left Side of Head,90bd051d-c980-448c-9b53-8a088dd8a4de
+423,Back of Head,90bd051d-c980-448c-9b53-8a088dd8a4de
+424,Back of Head,35c892dc-f42e-44fd-8ad4-3e6287421a44
+425,Front of Head,dd96918f-7c5c-472b-8145-6094cc1f2f18
+426,Back of Head,dd96918f-7c5c-472b-8145-6094cc1f2f18
+427,Neck,dd96918f-7c5c-472b-8145-6094cc1f2f18
+428,Back of Head,2bb4475e-7f93-4424-bcff-f29e770f039e
+429,Front of Head,0ad02ef7-bbdc-4071-a3f5-28debc254a83
+430,Back of Head,0ad02ef7-bbdc-4071-a3f5-28debc254a83
+431,Left Side of Head,0ad02ef7-bbdc-4071-a3f5-28debc254a83
+432,Right Side of Head,0ad02ef7-bbdc-4071-a3f5-28debc254a83
+433,Top of Head,0ad02ef7-bbdc-4071-a3f5-28debc254a83
+434,Neck,0ad02ef7-bbdc-4071-a3f5-28debc254a83
+435,Left Side of Head,fd9470f3-fe24-4874-9847-f31528ea2f09
+436,Back of Head,99c3088e-f1ff-4f64-aee0-3a3bbfd03604
+437,Severe shaking of head and torn and stretched axons,378eccb8-3fc1-42cc-8c8f-b24628cb65b7
+438,My head hit everything in the car because seatbelt never worked,25dfd9d0-e606-4a47-a164-f0c8c36c5a42
+439,Left Side of Head,b9670766-e97e-4e56-96b8-42ada2053da6
+440,Whiplash,9d66221c-e437-40c2-9e70-2e634f63cb46
+441,Right Side of Head,2366d3f1-a8b3-4012-b79c-0fa1d25f3ffc
+442,Right Side of Head,0482d393-cd14-444f-a2bd-aaf7506e8e18
+443,Right Side of Head,35da89b6-cac2-41c7-b990-b203ba21bced
+444,Top of Head,35da89b6-cac2-41c7-b990-b203ba21bced
+445,Front of Head,35da89b6-cac2-41c7-b990-b203ba21bced
+446,Back of Head,de4f11c2-3a51-4bbc-b2bd-7cbeca6a0ad1
+447,Right Side of Head,4161cd3d-b6b3-44af-a36f-a5f0866f6261
+448,Front of Head,78e7dfa8-32a2-432f-bd99-9bbf3046a796
+449,Front of Head,33c69c12-2510-42c3-b982-f50bf24f76c7
+450,Back of Head,33c69c12-2510-42c3-b982-f50bf24f76c7
+451,Left Side of Head,33c69c12-2510-42c3-b982-f50bf24f76c7
+452,Top of Head,33c69c12-2510-42c3-b982-f50bf24f76c7
+453,Right Side of Head,33c69c12-2510-42c3-b982-f50bf24f76c7
+454,Whiplash,a277050c-329b-402d-aead-99c2038908dc
+455,,255f8070-9eb3-4822-8033-b93e3b4573bd
+456,,f4a82e34-676b-494e-bcb8-24020bd54e46
+457,Front of Head,e9a74c3e-35ce-4e95-8f9f-2579bcd0ae50
+458,Left Side of Head,e9a74c3e-35ce-4e95-8f9f-2579bcd0ae50
+459,Back of Head,e9a74c3e-35ce-4e95-8f9f-2579bcd0ae50
+460,Neck,e9a74c3e-35ce-4e95-8f9f-2579bcd0ae50
+461,Front of Head,27879d6e-6602-426b-b84c-0f4be93fbafc
+462,Top of Head,27879d6e-6602-426b-b84c-0f4be93fbafc
+463,Right Side of Head,27879d6e-6602-426b-b84c-0f4be93fbafc
+464,Neck,27879d6e-6602-426b-b84c-0f4be93fbafc
+465,Back of Head,af533cd7-e549-4292-abcc-7b6d6ca7a666
+466,None,a1a9e4b2-83a2-4334-8b73-714ebcabd0b7
+467,Back of Head,d5efff9b-a6f7-4c7e-ad25-cbcabfa873fa
+468,Top of Head,d5efff9b-a6f7-4c7e-ad25-cbcabfa873fa
+469,Neck,d5efff9b-a6f7-4c7e-ad25-cbcabfa873fa
+470,Right Side of Head,91b9ace3-f8f8-44c8-a649-fe8561ead429
+471,Back of Head,4bab19eb-8dc4-4e0f-848d-d3cc7bbbf5a4
+472,Front of Head,4bab19eb-8dc4-4e0f-848d-d3cc7bbbf5a4
+473,Right Side of Head,4bab19eb-8dc4-4e0f-848d-d3cc7bbbf5a4
+474,Neck,f8cf0e57-c277-45fd-8173-9a8b9c0b2a40
+475,Right Side of Head,f8cf0e57-c277-45fd-8173-9a8b9c0b2a40
+476,Top of Head,f8cf0e57-c277-45fd-8173-9a8b9c0b2a40
+477,Left Side of Head,f8cf0e57-c277-45fd-8173-9a8b9c0b2a40
+478,Back of Head,f8cf0e57-c277-45fd-8173-9a8b9c0b2a40
+479,Front of Head,f8cf0e57-c277-45fd-8173-9a8b9c0b2a40
+480,Front of Head,d1b38236-e50d-4966-a9a0-9557caddc91f
+481,Back of Head,d1b38236-e50d-4966-a9a0-9557caddc91f
+482,Front of Head,c8690d9d-9f17-4370-816a-01cfc76b9dcd
+483,Back of Head,c8690d9d-9f17-4370-816a-01cfc76b9dcd
+484,Left Side of Head,c8690d9d-9f17-4370-816a-01cfc76b9dcd
+485,Top of Head,c8690d9d-9f17-4370-816a-01cfc76b9dcd
+486,Left Side of Head,7b7030ae-185a-48f1-af61-761ad6a4df34
+487,Front of Head,f3e05d33-04e5-4cf8-8fd6-20858501abb6
+488,Back of Head,7f0bb21d-107b-4336-a9d8-2e011814f8e0
+489,Top of Head,7f0bb21d-107b-4336-a9d8-2e011814f8e0
+490,Right Side of Head,7f0bb21d-107b-4336-a9d8-2e011814f8e0
+491,Neck,7f0bb21d-107b-4336-a9d8-2e011814f8e0
+492,Top of Head,e314556e-df88-468e-8c89-9cf82f7dbe10
+493,Right Side of Head,40ed4dfe-3006-475a-af9f-c5a4fd28f72a
+494,Back of Head,8d75cff8-df9b-43f7-aed8-6866434ec054
+495,Left Side of Head,8d75cff8-df9b-43f7-aed8-6866434ec054
+496,Neck,8d75cff8-df9b-43f7-aed8-6866434ec054
+497,Left Side of Head,c5dcd477-95d5-4803-9413-39dbcc516131
+498,Top of Head,c5dcd477-95d5-4803-9413-39dbcc516131
+499,Neck,edc236de-d5af-4405-bbb3-d8d2489c1661
+500,Front of Head,964d57fe-458b-4539-8923-53f0f69f904e
+501,Right Side of Head,964d57fe-458b-4539-8923-53f0f69f904e
+502,Left Side of Head,964d57fe-458b-4539-8923-53f0f69f904e
+503,Neck,964d57fe-458b-4539-8923-53f0f69f904e
+504,Top of Head,964d57fe-458b-4539-8923-53f0f69f904e
+505,Back of Head,964d57fe-458b-4539-8923-53f0f69f904e
+506,Top of Head,bd7d2304-0f72-4b7f-8021-128002f5b904
+507,Front of Head,bd7d2304-0f72-4b7f-8021-128002f5b904
+508,Front of Head,a472e51b-4056-4d38-be82-45b466336bf1
+509,Back of Head,a472e51b-4056-4d38-be82-45b466336bf1
+510,Neck,a472e51b-4056-4d38-be82-45b466336bf1
+511,Front of Head,dbf9962d-7705-4c66-8c1f-7cf4c67579d4
+512,Front of Head,0b14928e-ebe0-49c3-a862-a6d4a4f77350
+513,Top of Head,0b14928e-ebe0-49c3-a862-a6d4a4f77350
+514,Back of Head,0b14928e-ebe0-49c3-a862-a6d4a4f77350
+515,Right Side of Head,95d9fbc1-85e3-4a46-b144-8eab5d4065bb
+516,Neck,95d9fbc1-85e3-4a46-b144-8eab5d4065bb
+517,Left Side of Head,95d9fbc1-85e3-4a46-b144-8eab5d4065bb
+518,Neck,b6606fad-686f-4aca-83f2-4f7816ec4238
+519,Left Side of Head,c155ae61-b70c-44ed-bb69-4f6c7683ba8d
+520,Top of Head,c155ae61-b70c-44ed-bb69-4f6c7683ba8d
+521,Front of Head,c155ae61-b70c-44ed-bb69-4f6c7683ba8d
+522,Front of Head,1e78c04a-5bb5-424f-b348-1180a7ab7912
+523,Right Side of Head,1e78c04a-5bb5-424f-b348-1180a7ab7912
+524,Back of Head,fbec5b53-5096-4947-87ca-f72589f390a7
+525,Front of Head,fbec5b53-5096-4947-87ca-f72589f390a7
+526,Left Side of Head,fbec5b53-5096-4947-87ca-f72589f390a7
+527,Top of Head,fbec5b53-5096-4947-87ca-f72589f390a7
+528,Front of Head,d0ac9948-eaa2-4ba2-81f6-68b118048a48
+529,Top of Head,d0ac9948-eaa2-4ba2-81f6-68b118048a48
+530,From the back or side,250c8cde-5702-4fd9-9d80-c668573e021a
+531,Front of Head,fd144ab9-be7b-41f8-b052-db894a02ea18
+532,Right Side of Head,fd144ab9-be7b-41f8-b052-db894a02ea18
+533,Neck,fd144ab9-be7b-41f8-b052-db894a02ea18
+534,Front of Head,a450f473-7b91-406e-8503-d7dd474b7aab
+535,Left Side of Head,a450f473-7b91-406e-8503-d7dd474b7aab
+536,Top of Head,a450f473-7b91-406e-8503-d7dd474b7aab
+537,Back of Head,a450f473-7b91-406e-8503-d7dd474b7aab
+538,Right Side of Head,a450f473-7b91-406e-8503-d7dd474b7aab
+539,Left Side of Head,c6cb80ed-5f11-4758-995f-1dc378e0434b
+540,Back of Head,c6cb80ed-5f11-4758-995f-1dc378e0434b
+541,Back of Head,668b0592-5e01-45cc-8a5d-79ffb7f7e43f
+542,Left Side of Head,668b0592-5e01-45cc-8a5d-79ffb7f7e43f
+543,Front of Head,d086857e-4557-4e10-850d-26ed40d845e4
+544,Left Side of Head,d086857e-4557-4e10-850d-26ed40d845e4
+545,Right Side of Head,d086857e-4557-4e10-850d-26ed40d845e4
+546,Neck,d086857e-4557-4e10-850d-26ed40d845e4
+547,Back of Head,d086857e-4557-4e10-850d-26ed40d845e4
+548,Top of Head,d086857e-4557-4e10-850d-26ed40d845e4
+549,,e73b4e3e-078b-4e54-9a7f-2893f3e96329
+550,Front of Head,9b179544-1457-4478-9f5b-e72ba474ba36
+551,Right Side of Head,ea8f2a72-0a28-483a-9f15-232b191b7729
+552,Top of Head,ea8f2a72-0a28-483a-9f15-232b191b7729
+553,Left Side of Head,81323554-04af-4ee5-a1fe-defe688a6062
+554,Top of Head,81323554-04af-4ee5-a1fe-defe688a6062
+555,Left Side of Head,a345f5ff-58c8-4db2-90c4-d7f894d18c61
+556,Neck,9459bc07-72e2-4b46-bec4-5c7a6ffb618e
+557,Back of Head,9459bc07-72e2-4b46-bec4-5c7a6ffb618e
+558,Front of Head,7f3a2928-5ab8-46a2-bad5-eb5bdc81f731
+559,Left Side of Head,431cf410-6005-4a60-b061-9a27181281ae
+560,Top of Head,431cf410-6005-4a60-b061-9a27181281ae
+561,Top of Head,54fba0aa-db82-40c4-bc67-00ec37a59217
+562,Left Side of Head,db9c96bb-eda3-47df-af0d-4cd813fdf223
+563,Front of Head,91b48894-9b6d-46ff-b0fb-124270a72810
+564,Left Side of Head,91b48894-9b6d-46ff-b0fb-124270a72810
+565,Top of Head,91b48894-9b6d-46ff-b0fb-124270a72810
+566,Back of Head,91b48894-9b6d-46ff-b0fb-124270a72810
+567,Back of Head,f9f0884d-64f1-4f87-a1ee-7e5ae1c7cafc
+568,Front of Head,f9f0884d-64f1-4f87-a1ee-7e5ae1c7cafc
+569,Top of Head,f9f0884d-64f1-4f87-a1ee-7e5ae1c7cafc
+570,Left Side of Head,e0c09786-ada8-4367-9d6f-fd9423654087
+571,Front of Head,050612b3-091e-47d8-98e8-785204755252
+572,Left Side of Head,050612b3-091e-47d8-98e8-785204755252
+573,Back of Head,050612b3-091e-47d8-98e8-785204755252
+574,Right Side of Head,050612b3-091e-47d8-98e8-785204755252
+575,Back of Head,f1537c83-7e0e-4519-83a3-eca8f35bd7b2
+576,Back of Head,be0d1307-f2a7-47f0-8610-ac6b557acfb4
+577,Back of Head,5f33f936-d52b-4650-80ac-92d0aca20118
+578,Back left,5f33f936-d52b-4650-80ac-92d0aca20118
+579,Front of Head,92c8809c-5ece-450e-befb-9a33397f5349
+580,Left Side of Head,92c8809c-5ece-450e-befb-9a33397f5349
+581,Neck,92c8809c-5ece-450e-befb-9a33397f5349
+582,Front of Head,e425a8fb-a8c5-4541-bf68-45ea1b0a4b46
+583,Back of Head,e425a8fb-a8c5-4541-bf68-45ea1b0a4b46
+584,Left Side of Head,e425a8fb-a8c5-4541-bf68-45ea1b0a4b46
+586,Other,653e73b7-940c-43b5-95a4-d544fe298da1
+587,Back of Head,e5ed1564-7dba-4c7a-b2d8-30533278e2fc
+588,Front of Head,e5ed1564-7dba-4c7a-b2d8-30533278e2fc
+589,Left Side of Head,e5ed1564-7dba-4c7a-b2d8-30533278e2fc
+590,Top of Head,e5ed1564-7dba-4c7a-b2d8-30533278e2fc
+591,Right Side of Head,e5ed1564-7dba-4c7a-b2d8-30533278e2fc
+592,Neck,e5ed1564-7dba-4c7a-b2d8-30533278e2fc
+593,Left Side of Head,39e62bbe-5808-4470-a17c-6e2ee72a1e2c
+594,Right Side of Head,39e62bbe-5808-4470-a17c-6e2ee72a1e2c
+595,Front of Head,39e62bbe-5808-4470-a17c-6e2ee72a1e2c
+596,Back of Head,39e62bbe-5808-4470-a17c-6e2ee72a1e2c
+597,Top of Head,39e62bbe-5808-4470-a17c-6e2ee72a1e2c
+598,Left Side of Head,39e62bbe-5808-4470-a17c-6e2ee72a1e2c
+599,Right Side of Head,39e62bbe-5808-4470-a17c-6e2ee72a1e2c
+600,Front of Head,39e62bbe-5808-4470-a17c-6e2ee72a1e2c
+601,Back of Head,39e62bbe-5808-4470-a17c-6e2ee72a1e2c
+602,Top of Head,39e62bbe-5808-4470-a17c-6e2ee72a1e2c
+603,Right Side of Head,636f5aa8-6cde-4d57-8078-4c241fd54ac3
+604,Back of Head,636f5aa8-6cde-4d57-8078-4c241fd54ac3
+605,Neck,636f5aa8-6cde-4d57-8078-4c241fd54ac3
+606,Front of Head,597e30ec-53f8-41ae-9c04-632231941346
+607,Damage to frontal lobe,597e30ec-53f8-41ae-9c04-632231941346
+608,Left Side of Head,22359dfe-27ae-4f6d-9076-6a5f14679605
+609,Right Side of Head,6ca0fddb-fbf6-45b9-b02d-1a3dddc4f119
+610,None,6ac498c5-3a8f-4ec6-8b38-e23379a76a8b
+611,Front of Head,37d99602-8786-4a30-93d0-24f64fdcc859
+612,Left Side of Head,37d99602-8786-4a30-93d0-24f64fdcc859
+613,Right Side of Head,37d99602-8786-4a30-93d0-24f64fdcc859
+614,Neck,37d99602-8786-4a30-93d0-24f64fdcc859
+615,Back of Head,37d99602-8786-4a30-93d0-24f64fdcc859
+616,Top of Head,37d99602-8786-4a30-93d0-24f64fdcc859
+617,,3d3a8086-ccad-43de-83cb-ddba3591a8ab
+618,Front of Head,16f151d9-c8a1-4781-9a0f-dda825f53e22
+619,Right Side of Head,fc0b352f-9093-4ede-aa3e-6ef48664846e
+620,Back of Head,48bcf83a-baab-4828-856d-2cf220290a2e
+621,Neck,48bcf83a-baab-4828-856d-2cf220290a2e
+622,Front of Head,48bcf83a-baab-4828-856d-2cf220290a2e
+623,Back of Head,769ea496-5f76-4dba-b5de-b2fbcee950fa
+624,Front of Head,769ea496-5f76-4dba-b5de-b2fbcee950fa
+625,Neck,769ea496-5f76-4dba-b5de-b2fbcee950fa
+626,Back of Head,5746d420-7b21-47bb-9694-dd59ca49cfc5
+627,Left Side of Head,5746d420-7b21-47bb-9694-dd59ca49cfc5
+628,Front and side of head,63e0c161-3a96-4560-9dfc-8ad66bc9408d
+629,Right Side of Head,2534a0a6-727a-46c4-ad5c-4e3c90a48da9
+630,Internal  (surgery),2534a0a6-727a-46c4-ad5c-4e3c90a48da9
+631,Front of Head,282394c3-29b6-42af-b680-5e567a6afe19
+632,Left Side of Head,282394c3-29b6-42af-b680-5e567a6afe19
+633,Top of Head,282394c3-29b6-42af-b680-5e567a6afe19
+634,Front of Head,9ebd72fc-326c-4d0e-90e7-cf1b90e79256
+635,Left Side of Head,9ebd72fc-326c-4d0e-90e7-cf1b90e79256
+636,Neck,9ebd72fc-326c-4d0e-90e7-cf1b90e79256
+637,Top of Head,9ebd72fc-326c-4d0e-90e7-cf1b90e79256
+638,Did not hit head,335d957d-f21e-4585-aad8-3a2e5775e568
+639,,44afd612-7484-4799-b1dc-255fc6322949
+640,Front of Head,686016d5-258c-4059-87c7-79848ac48227
+641,Back of Head,686016d5-258c-4059-87c7-79848ac48227
+642,Left Side of Head,686016d5-258c-4059-87c7-79848ac48227
+643,Right Side of Head,8cc70b4b-010f-4edb-8ee0-2f6eadfbd10f
+644,None,8ab5d6dc-e6a6-4817-8550-cd343a222a25
+645,,fc40a964-6d8c-4599-ba26-eaf4e5e9bb91
+646,Back of Head,8d3e7d0d-1248-4a73-a95e-23081ea51533
+647,Front of Head,d3eec52b-ef04-4a46-93ef-bd684aa5f3a4
+648,,09e5826d-be9b-4765-8e08-fd5b7b5461ca
+649,Front of Head,78cb895c-17f6-4284-8686-2ebedd2843c0
+650,Back of Head,78cb895c-17f6-4284-8686-2ebedd2843c0
+651,Left Side of Head,78cb895c-17f6-4284-8686-2ebedd2843c0
+652,Top of Head,78cb895c-17f6-4284-8686-2ebedd2843c0
+653,Right Side of Head,78cb895c-17f6-4284-8686-2ebedd2843c0
+654,Neck,78cb895c-17f6-4284-8686-2ebedd2843c0
+655,Front of Head,781db12a-2dd0-478a-8614-056e7602727d
+656,Back of Head,781db12a-2dd0-478a-8614-056e7602727d
+657,Left Side of Head,781db12a-2dd0-478a-8614-056e7602727d
+658,Right Side of Head,781db12a-2dd0-478a-8614-056e7602727d
+659,Top of Head,781db12a-2dd0-478a-8614-056e7602727d
+660,Neck,781db12a-2dd0-478a-8614-056e7602727d
+661,Neck,1747ad57-25d5-4e54-8787-ecc970cea582
+662,Back of Head,1747ad57-25d5-4e54-8787-ecc970cea582
+663,Left Side of Head,1747ad57-25d5-4e54-8787-ecc970cea582
+664,Front of Head,d657d846-c438-4ba4-9f5d-3b4a446e31c9
+665,Front of Head,d2bb447e-abab-4a81-9164-64679710d401
+666,Back of Head,d2bb447e-abab-4a81-9164-64679710d401
+667,Left Side of Head,d2bb447e-abab-4a81-9164-64679710d401
+668,Right Side of Head,d2bb447e-abab-4a81-9164-64679710d401
+669,Front of Head,d2bb447e-abab-4a81-9164-64679710d401
+670,Back of Head,d2bb447e-abab-4a81-9164-64679710d401
+671,Left Side of Head,d2bb447e-abab-4a81-9164-64679710d401
+672,Right Side of Head,d2bb447e-abab-4a81-9164-64679710d401
+673,Right Side of Head,2509e8e2-61c1-4db1-8dab-d2df582caec9
+674,Left Side of Head,3b7afa0c-5518-4e2f-aaeb-cd75d5fa484e
+675,Back of Head,3b7afa0c-5518-4e2f-aaeb-cd75d5fa484e
+676,Front of Head,3b7afa0c-5518-4e2f-aaeb-cd75d5fa484e
+677,Right Side of Head,3b7afa0c-5518-4e2f-aaeb-cd75d5fa484e
+678,Top of Head,3b7afa0c-5518-4e2f-aaeb-cd75d5fa484e
+679,Neck,3b7afa0c-5518-4e2f-aaeb-cd75d5fa484e
+680,Left Side of Head,a4d70190-3e77-4f66-9922-ca1d2afd53ac
+681,Left Side of Head,a4d70190-3e77-4f66-9922-ca1d2afd53ac
+682,Right Side of Head,6a1c8dfa-19db-4d55-a2e1-7acb4de46fe0
+683,Front of Head,afba98c0-fef3-4577-8adc-c774c7ee7820
+684,Front of Head,6df295b8-03ac-4016-875d-362ef63639e6
+685,Top of Head,6df295b8-03ac-4016-875d-362ef63639e6
+686,Right Side of Head,6df295b8-03ac-4016-875d-362ef63639e6
+687,Back of Head,8c8fe70a-bb14-48f2-99bb-d9a1f5e35660
+688,Front of Head,6e34125c-39d0-410f-83aa-b8a3e5c7f89c
+689,Back of Head,f4b3dc8f-ba5f-47da-8f1b-61c3928806f4
+690,Back of Head,02cf059d-b76d-4fc0-88e3-08980d388db4
+691,Front of Head,02cf059d-b76d-4fc0-88e3-08980d388db4
+692,,edae5615-0b9e-46d5-aaa1-f34c00e838f2
+693,,38d4158d-fb0b-490f-bf7a-5c9c952d7f5f
+694,,858f5364-8978-496b-b366-b21534ddc15c
+695,None,825fa8e1-23c4-42c1-8deb-b9b63a89dab7
+696,Whiplash,37a44329-a784-448c-a5ca-d9565acad4b9
+697,Front of Head,b928bfe3-9aa9-4a69-8ea7-2813266071ca
+698,Lack of oxygen,5a573049-7742-48b8-b3b5-2b2b1a2fd362
+699,Front of Head,5ec37580-ca08-4950-9ec0-971fee8ccf2a
+700,Back of Head,a2f9ed15-cb83-423c-9e12-e854f370b8aa
+701,Front of Head,a2f9ed15-cb83-423c-9e12-e854f370b8aa
+702,Neck,a2f9ed15-cb83-423c-9e12-e854f370b8aa
+703,,4315b00a-1c46-4798-b6fd-57bbc6816cf5
+704,Top of Head,910e9572-952f-4dfa-a02a-52588a7bdecf
+705,Back of Head,910e9572-952f-4dfa-a02a-52588a7bdecf
+706,Right Side of Head,910e9572-952f-4dfa-a02a-52588a7bdecf
+707,Front of Head,b350449f-0b4a-4cd6-bc16-cb0475070837
+708,Back of Head,b350449f-0b4a-4cd6-bc16-cb0475070837
+709,Right Side of Head,b350449f-0b4a-4cd6-bc16-cb0475070837
+710,Left Side of Head,b350449f-0b4a-4cd6-bc16-cb0475070837
+711,Top of Head,b350449f-0b4a-4cd6-bc16-cb0475070837
+712,None,28fbd761-713e-4e36-8b08-cafed12d4262
+713,Not sure front and side and neck,180ff596-21f1-48f6-b7c9-a152fb2584a1
+714,Whiplash,37a44329-a784-448c-a5ca-d9565acad4b9
+715,Front of Head,878206ea-5dc4-470b-bd20-ca02deed139f
+716,Front of Head,d9e4262d-0506-46d0-a51b-14d63737a1f5
+717,Left Side of Head,d9e4262d-0506-46d0-a51b-14d63737a1f5
+718,Back of Head,9d182abf-1cf9-4689-b98d-b61d6752a6af
+719,Maybe mid,9d182abf-1cf9-4689-b98d-b61d6752a6af
+720,Left Side of Head,837a29de-18d8-4d09-841f-580071f9b155
+721,Neck,837a29de-18d8-4d09-841f-580071f9b155
+722,Front of Head,e99ed2ad-d6a7-4b94-ae1e-b55943a41390
+723,Front of Head,9bbb9762-f00e-4fc2-8e0d-a95211a025bf
+724,Back of Head,9bbb9762-f00e-4fc2-8e0d-a95211a025bf
+725,Left Side of Head,9bbb9762-f00e-4fc2-8e0d-a95211a025bf
+726,Top of Head,9bbb9762-f00e-4fc2-8e0d-a95211a025bf
+727,Right Side of Head,9bbb9762-f00e-4fc2-8e0d-a95211a025bf
+728,Neck,9bbb9762-f00e-4fc2-8e0d-a95211a025bf
+729,,9e39d269-f49d-4a41-a168-e29aa42f1a5a
+730,Back of Head,28eeb86f-60da-46d5-9df7-d1921deb616d
+731,Left Side of Head,3b00dae8-ecfd-429c-9ad5-f9d7285ce7de
+732,Back of Head,60086aff-0b30-43cd-b646-e3975127840e
+733,Left Side of Head,5381e1cc-60a6-43a5-b012-aed5fe525def
+734,Back of Head,5adc5975-8add-47ae-a796-6597d52c7145
+735,Right Side of Head,4acfc58f-0b33-4570-a0ec-0d47bc8b3de9
+736,,b9187a7a-035d-45d1-9bf5-c80b4724f300
+737,,b9187a7a-035d-45d1-9bf5-c80b4724f300
+738,Back of Head,a94da444-1707-467b-b672-dd3b5ce17037
+739,Right Side of Head,161657dd-f33c-435c-81a6-2bd68754cabd
+740,Left Side of Head,eaeca267-50ae-489f-931a-dd7111e7ac41
+741,Right Side of Head,ce31927d-bada-4b38-ba12-54bb7746407e
+742,Back of Head,ce31927d-bada-4b38-ba12-54bb7746407e
+744,Top of Head,d6a8454b-c7ae-43c7-b972-436d5dea1b3c
+745,Front of Head,857ddc90-fe67-4f1f-a33e-674752f5fa5a
+746,Right Side of Head,857ddc90-fe67-4f1f-a33e-674752f5fa5a
+747,Neck,857ddc90-fe67-4f1f-a33e-674752f5fa5a
+748,Front of Head,7f0877be-4531-4c6d-a08e-de56720a8704
+749,Back of Head,08c78b75-b671-4b56-a988-40512461ff36
+750,Front of Head,5c96ba1a-8b2d-49bc-8e8e-b07761948286
+751,Neck,5c96ba1a-8b2d-49bc-8e8e-b07761948286
+752,Back of Head,5c96ba1a-8b2d-49bc-8e8e-b07761948286
+753,Top of Head,5c96ba1a-8b2d-49bc-8e8e-b07761948286
+754,Left Side of Head,5c96ba1a-8b2d-49bc-8e8e-b07761948286
+755,Right Side of Head,5c96ba1a-8b2d-49bc-8e8e-b07761948286
+756,Drowned,eda39327-b38f-41de-a46a-8782787369b7
+758,Front of Head,f3805efe-6915-48b1-961d-bdbe9f0ad401
+759,Back of Head,f3805efe-6915-48b1-961d-bdbe9f0ad401
+760,Left Side of Head,f3805efe-6915-48b1-961d-bdbe9f0ad401
+761,Top of Head,f3805efe-6915-48b1-961d-bdbe9f0ad401
+762,Neck,f3805efe-6915-48b1-961d-bdbe9f0ad401
+763,Right Side of Head,f3805efe-6915-48b1-961d-bdbe9f0ad401
+764,Front of Head,5a461938-9492-4214-9633-a920b4d77c7a
+765,Back of Head,5a461938-9492-4214-9633-a920b4d77c7a
+766,Left Side of Head,5a461938-9492-4214-9633-a920b4d77c7a
+767,Top of Head,5a461938-9492-4214-9633-a920b4d77c7a
+768,Right Side of Head,5a461938-9492-4214-9633-a920b4d77c7a
+769,Neck,5a461938-9492-4214-9633-a920b4d77c7a
+770,Polytrauma,5a461938-9492-4214-9633-a920b4d77c7a
+771,Front of Head,f32d802b-eacc-4988-b778-9f7306ee432f
+772,Right Side of Head,f32d802b-eacc-4988-b778-9f7306ee432f
+773,Left Side of Head,f32d802b-eacc-4988-b778-9f7306ee432f
+774,Top of Head,f32d802b-eacc-4988-b778-9f7306ee432f
+777,It was inside my head,36f86574-892e-4c33-b4e5-52e6395e53ac
+778,Back of Head,cfccb545-3217-4988-b556-ca8d9980f1ab
+779,Left Side of Head,cfccb545-3217-4988-b556-ca8d9980f1ab
+780,Front of Head,cfccb545-3217-4988-b556-ca8d9980f1ab
+781,Top of Head,cfccb545-3217-4988-b556-ca8d9980f1ab
+782,Right Side of Head,cfccb545-3217-4988-b556-ca8d9980f1ab
+783,Neck,cfccb545-3217-4988-b556-ca8d9980f1ab
+784,Back of Head,6ac10c82-ad8a-49de-8bd7-eb8d140da1cc
+785,Right Side of Head,f4fbae3f-3b1c-42b3-bde7-86dccb44a421
+787,,ffef300c-e163-471f-b79e-aeffdeab6715
+788,Front of Head,740edc44-5b14-4ac2-a233-2b08edc0107d
+789,Back of Head,740edc44-5b14-4ac2-a233-2b08edc0107d
+790,Left Side of Head,740edc44-5b14-4ac2-a233-2b08edc0107d
+791,Right Side of Head,740edc44-5b14-4ac2-a233-2b08edc0107d
+792,Left Side of Head,07090be5-41d1-44ba-b62d-2fafeee31cd8
+793,Back of Head,208387fe-704a-44bd-bc90-7f77084fc7af
+794,Front of Head,7cede063-376b-4aa0-8384-ace6678777d0
+795,Back of Head,589863e6-927f-4b73-9d42-445eb17c2bef
+796,Right Side of Head,aa1e4c2a-46bf-4670-9597-50bdda9bce31
+797,,a8bf42f8-30a4-49bd-a759-aef3aca22f31
+798,Neck,655481fc-54d3-41ee-b6e8-69dd8ea43959
+799,Left Side of Head,655481fc-54d3-41ee-b6e8-69dd8ea43959
+800,Right Side of Head,655481fc-54d3-41ee-b6e8-69dd8ea43959
+801,None,75c11952-75a4-4b51-899c-32d25dd38030
+802,Left Side of Head,9b287daf-5449-4219-aa32-b67e01bfda23
+803,Right Side of Head,16aaa531-3bc7-4795-a45a-8c09ac981486
+804,Front of Head,aea103da-fcf1-4a81-8b07-bb476164067e
+805,Left Side of Head,aea103da-fcf1-4a81-8b07-bb476164067e
+806,Neck,aea103da-fcf1-4a81-8b07-bb476164067e
+807,Top of Head,aea103da-fcf1-4a81-8b07-bb476164067e
+808,Right Side of Head,aea103da-fcf1-4a81-8b07-bb476164067e
+809,Front of Head,94a49d34-eac0-48d0-8784-580063bb5b25
+810,Back of Head,94a49d34-eac0-48d0-8784-580063bb5b25
+811,Right Side of Head,94a49d34-eac0-48d0-8784-580063bb5b25
+812,Right Side of Head,321a39cf-4c0e-4e18-b3ec-2ea255997dd0
+813,Top of Head,321a39cf-4c0e-4e18-b3ec-2ea255997dd0
+814,Front of Head,dcbe19a5-9f9e-4c08-825e-5441e876deb5
+815,Back of Head,dcbe19a5-9f9e-4c08-825e-5441e876deb5
+816,Top of Head,dcbe19a5-9f9e-4c08-825e-5441e876deb5
+817,Right Side of Head,dcbe19a5-9f9e-4c08-825e-5441e876deb5
+818,Neck,dcbe19a5-9f9e-4c08-825e-5441e876deb5
+819,Left Side of Head,e5143fe9-c213-4dc4-9a7b-39c6c8f77cfc
+820,Neck,e5143fe9-c213-4dc4-9a7b-39c6c8f77cfc
+821,Top of Head,e5143fe9-c213-4dc4-9a7b-39c6c8f77cfc
+822,Back of Head,e8802967-d3da-4203-b5f8-f330d3a7c48b
+823,Left Side of Head,e6d60987-b384-45f3-aae0-d549b4fd5d63
+824,None,6a7f7ce9-f63e-4651-b941-a25ce116de74
+825,Front of Head,649256da-6307-40cf-ad72-d87109e1e0a0
+826,Back of Head,649256da-6307-40cf-ad72-d87109e1e0a0
+827,Left Side of Head,649256da-6307-40cf-ad72-d87109e1e0a0
+828,Right Side of Head,8e61a655-2a87-48a0-90f9-23f705100b0a
+829,None,764fe00a-2d3a-430c-88c4-f2eea7cdffbb
+830,Front of Head,6318ce15-2258-4d61-b82a-f659bf304fa9
+831,Back of Head,6318ce15-2258-4d61-b82a-f659bf304fa9
+832,Left Side of Head,6318ce15-2258-4d61-b82a-f659bf304fa9
+833,Neck,6318ce15-2258-4d61-b82a-f659bf304fa9
+834,Front of Head,a0e0a3a9-d0e5-48ec-bd06-147de47e58b1
+835,Back of Head,edf0a8ac-88c5-4279-9b09-a5d506902415
+836,Front of Head,edf0a8ac-88c5-4279-9b09-a5d506902415
+837,Left Side of Head,edf0a8ac-88c5-4279-9b09-a5d506902415
+838,Right Side of Head,edf0a8ac-88c5-4279-9b09-a5d506902415
+1955,Back of Head,8d865ebb-480e-418d-a7de-8336c24b933d
+1956,Neck,8d865ebb-480e-418d-a7de-8336c24b933d
+1957,Back of Head,7d8d44d1-7c81-435d-8c23-fac4cca8b843
+775,No,f32d802b-eacc-4988-b778-9f7306ee432f
+776,All,f32d802b-eacc-4988-b778-9f7306ee432f
+786,Stroke,f4fbae3f-3b1c-42b3-bde7-86dccb44a421
+743,No,ce31927d-bada-4b38-ba12-54bb7746407e
+757,All,f3805efe-6915-48b1-961d-bdbe9f0ad401
+77,All,499f1ec8-f1bc-4ed5-ade6-2b342ab58023
+585,No,e425a8fb-a8c5-4541-bf68-45ea1b0a4b46
+1958,Neck,7868e801-e6fd-4297-a68d-2a579ae7d1bb
+1959,Right Side of Head,70796460-d82f-4ab0-a7de-45c8f36e8fec
+1960,Right Side of Head,b4122e19-c880-4395-9748-d76e0efd1cfd
+1961,Right Side of Head,b4122e19-c880-4395-9748-d76e0efd1cfd
+1962,No,5b5fc11c-5e40-4376-a717-4a3bc9e22283
+1963,Neck,2496b187-a321-4fb4-a670-45f89975bf2c
+1964,Left Side of Head,2496b187-a321-4fb4-a670-45f89975bf2c
+1965,Back of Head,2496b187-a321-4fb4-a670-45f89975bf2c
+1966,Back of Head,a6bfeea7-2b37-4692-8963-1960a15a69ab
+1977,Front of Head,314203d7-2d4d-40b0-945b-08b8714bcd85
+1978,Right Side of Head,314203d7-2d4d-40b0-945b-08b8714bcd85
+1979,None,01e21b8e-785a-4efb-b27c-91496f4dc217
+1980,Front of Head,81d56fb7-5883-45b3-934c-ae3d864f5b81
+1981,Right Side of Head,a765de65-ee15-465a-826d-82aeab735b83
+1982,Top of Head,a765de65-ee15-465a-826d-82aeab735b83
+1983,Back of Head,a765de65-ee15-465a-826d-82aeab735b83
+1984,Right Side of Head,3a20f392-71e0-4b80-bb77-412b292ee6a0
+1985,Neck,3a20f392-71e0-4b80-bb77-412b292ee6a0
+1986,As far as i know,3a20f392-71e0-4b80-bb77-412b292ee6a0
+1987,Front of Head,5fce7077-11ba-4fd5-905b-22d7334d09ad
+1988,Back of Head,5fce7077-11ba-4fd5-905b-22d7334d09ad
+1989,Left Side of Head,5fce7077-11ba-4fd5-905b-22d7334d09ad
+1990,Front of Head,6ade859d-339b-4600-a275-0bca86db8609
+1991,Back of Head,6ade859d-339b-4600-a275-0bca86db8609
+1992,Back of Head,e28a3216-aa0d-41df-a867-256f951013cb
+1993,Right Side of Head,e28a3216-aa0d-41df-a867-256f951013cb
+1994,Stroke,3e164733-b68e-4fe8-bae1-ea29c09a62b0
+1995,Other,3e164733-b68e-4fe8-bae1-ea29c09a62b0
+1999,Back of Head,cb896f0b-de85-472a-90cb-435bdcbd0e70
+2000,Top of Head,cb896f0b-de85-472a-90cb-435bdcbd0e70
+2001,Right Side of Head,ec9bfa5c-f05e-49f6-9294-e906201fb989
+2002,Right Side of Head,50676e21-dc55-4eb2-8dd6-6f24ff202cd3
+2003,Back of Head,50676e21-dc55-4eb2-8dd6-6f24ff202cd3
+2004,Back of Head,b9b1507b-0c65-4849-bfa0-c96e51452f80
+2005,Right Side of Head,b9b1507b-0c65-4849-bfa0-c96e51452f80
+2006,Front of Head,f61e3689-e578-48d5-81bd-56baa44ae768
+2007,Top of Head,540d4977-0fc9-4de3-9f71-9957276058f0
+2008,The prefrontal regions of the frontal lobe,2fc2e44a-562a-4557-8fe5-8b5bd5b3734c
+2009,Not an injury,ab7b7228-17e5-4658-87c5-9b8e2b809037
+2011,Front of Head,be244046-f544-4665-a8be-0dea362de099
+2012,Left Side of Head,be244046-f544-4665-a8be-0dea362de099
+2013,Neck,be244046-f544-4665-a8be-0dea362de099
+2014,Back of Head,be244046-f544-4665-a8be-0dea362de099
+2015,Top of Head,be244046-f544-4665-a8be-0dea362de099
+2016,Left Side of Head,be244046-f544-4665-a8be-0dea362de099
+2017,Neck,be244046-f544-4665-a8be-0dea362de099
+2018,Front of Head,be244046-f544-4665-a8be-0dea362de099
+2019,Front of Head,f5fffa0c-0ff5-4927-93c8-1c98a12a1e86
+2020,Right Side of Head,f5fffa0c-0ff5-4927-93c8-1c98a12a1e86
+2021,Front of Head,f5fffa0c-0ff5-4927-93c8-1c98a12a1e86
+2022,Right Side of Head,f5fffa0c-0ff5-4927-93c8-1c98a12a1e86
+2023,Front of Head,f5fffa0c-0ff5-4927-93c8-1c98a12a1e86
+2024,Right Side of Head,f5fffa0c-0ff5-4927-93c8-1c98a12a1e86
+2025,Back of Head,cdcf3e41-9ba2-43a9-99f1-ef44db695317
+2026,Front of Head,7b2c6a9e-7802-477a-b368-887b4f533acf
+2027,Left Side of Head,7b2c6a9e-7802-477a-b368-887b4f533acf
+2028,Right Side of Head,7b2c6a9e-7802-477a-b368-887b4f533acf
+2029,Neck,7b2c6a9e-7802-477a-b368-887b4f533acf
+2031,Left Side of Head,86807151-1996-4b16-9623-d150b7b1fff6
+2032,Front of Head,ed921c90-3d49-4d87-8cf3-b60d3ede64b0
+2033,Front of Head,ce7b4747-6859-4e2e-86af-70c0c91b05ac
+2034,Right Side of Head,3ef59645-3237-4de8-85f7-b6a52733f9d4
+2035,Left Side of Head,3ef59645-3237-4de8-85f7-b6a52733f9d4
+2036,Front of Head,3ef59645-3237-4de8-85f7-b6a52733f9d4
+2037,Left Side of Head,c4a50e0e-fb2d-462f-a505-791647dc4ad2
+2038,Back of Head,c4a50e0e-fb2d-462f-a505-791647dc4ad2
+2039,Back of Head,49be5d1b-dbc7-4039-94ed-de0584fc3b4e
+2040,Back of Head,35a8dbb4-0af7-4b65-b1a1-94c1190f436f
+2041,Right Side of Head,35a8dbb4-0af7-4b65-b1a1-94c1190f436f
+2042,Neck,35a8dbb4-0af7-4b65-b1a1-94c1190f436f
+2043,Front of Head,f2fe3fce-3e43-4335-97c1-9058bb2de468
+2044,Back of Head,f2fe3fce-3e43-4335-97c1-9058bb2de468
+2045,Cerebellum,b0436d81-28e3-40b1-97cc-a70d0a555a88
+2046,Left Side of Head,de21e60d-a00a-4e1e-824e-6de7223ff07e
+2049,Left Side of Head,be526437-8c7d-448b-a464-296adf2134e8
+2050,Right Side of Head,b46f0eb4-e9fc-4b2a-b94e-91b068afec4c
+2051,Back of Head,2938ce13-85ca-417e-b6f8-84c49b782086
+2052,No,05f90529-9663-48b9-adc4-4ac1a185cf67
+2053,Back of Head,59225956-b9b3-4f6b-95e5-e7fb8cea73b8
+2058,Left Side of Head,847783bc-eb7d-4457-bbf7-2fa43d8ef792
+2059,Front of Head,847783bc-eb7d-4457-bbf7-2fa43d8ef792
+2060,Right Side of Head,847783bc-eb7d-4457-bbf7-2fa43d8ef792
+2061,Front of Head,3fa3aad7-b7e3-4e7b-8ec1-3f4169b93b96
+2062,Back of Head,3fa3aad7-b7e3-4e7b-8ec1-3f4169b93b96
+2063,Top of Head,3fa3aad7-b7e3-4e7b-8ec1-3f4169b93b96
+2064,Neck,3fa3aad7-b7e3-4e7b-8ec1-3f4169b93b96
+2065,Front of Head,dd908b91-6e1e-4943-b7f5-62e765360421
+2066,Back of Head,dd908b91-6e1e-4943-b7f5-62e765360421
+2067,Top of Head,dd908b91-6e1e-4943-b7f5-62e765360421
+2068,Right Side of Head,05f6ea09-d27e-40b8-bfc5-5f08a52d08a5
+2069,Back of Head,715838cf-c0cd-4f46-906c-6d95c87dfcc7
+2070,Left Side of Head,715838cf-c0cd-4f46-906c-6d95c87dfcc7
+2075,Back of Head,57a6184f-2d4a-46b0-8c58-8e9a71dfc7cc
+2076,Left Side of Head,57a6184f-2d4a-46b0-8c58-8e9a71dfc7cc
+2077,Craniotomy,57a6184f-2d4a-46b0-8c58-8e9a71dfc7cc
+2079,Front of Head,27084eab-875f-4116-8532-4d139a4e7822
+2080,Back of Head,e4e13ca0-315a-410e-b3e6-59755fe38abd
+2081,Neck,e4e13ca0-315a-410e-b3e6-59755fe38abd
+2083,Right Side of Head,c71e225b-c6d8-40e5-bcaa-71de79f38a8b
+2084,Top of Head,28d91aaa-60bd-4e3b-a2a9-1fb658e58d60
+2085,Right Side of Head,363ed49c-1dfb-4660-80a7-b238f72804e4
+2086,Not hit in the head - internal,49654768-a0c4-4df0-94c6-e4d25b4eda82
+2087,Right Side of Head,9c2aef37-e311-43cb-8d47-8dc3aabbef57
+2088,Back of Head,6db9870d-9dc6-44ea-acf2-f8320f52af85
+2089,Top of Head,760ab8a6-4856-4ef7-b16f-72afef0c5ca2
+2090,Diffuse axonal injury,760ab8a6-4856-4ef7-b16f-72afef0c5ca2
+2091,Front of Head,6185e85c-0935-44a2-ae5f-d0a3c8fc4e9d
+2092,"Back,left, front, right",6185e85c-0935-44a2-ae5f-d0a3c8fc4e9d
+2093,Front of Head,bd60af19-ef5c-453f-926a-35813287c396
+2094,Back of Head,bd60af19-ef5c-453f-926a-35813287c396
+2095,Neck,bd60af19-ef5c-453f-926a-35813287c396
+2096,Neck,743a1ff1-9f60-4feb-aa55-55778a669871
+2097,Front of Head,743a1ff1-9f60-4feb-aa55-55778a669871
+2098,Back of Head,743a1ff1-9f60-4feb-aa55-55778a669871
+2099,Left Side of Head,743a1ff1-9f60-4feb-aa55-55778a669871
+2103,Front of Head,ba038d69-d297-4199-ac72-f5f98ed9d4f2
+2104,"Unsure, loss consciousness",e74d1f49-3db6-4c48-bfc3-5803b4d81a63
+2105,Front of Head,ee43a5af-4709-47c2-b5d7-d254e79e0c2d
+2106,Front of Head,e8e9f889-d7dd-404a-a4c5-a31c45e8d770
+2107,Back of Head,e8e9f889-d7dd-404a-a4c5-a31c45e8d770
+2108,Left Side of Head,e8e9f889-d7dd-404a-a4c5-a31c45e8d770
+2109,Neck,e8e9f889-d7dd-404a-a4c5-a31c45e8d770
+2110,Front of Head,4c658dd5-f82f-4c0b-9348-c9f450314148
+2111,Left Side of Head,4c658dd5-f82f-4c0b-9348-c9f450314148
+2112,Back of Head,ee276909-2719-4f8a-aa7e-4a196597c7bf
+2113,Neck,ee276909-2719-4f8a-aa7e-4a196597c7bf
+2116,Did not hit head,021a9277-15af-4478-a493-8bbcfa384219
+2129,Front of Head,a0b1fc16-35b0-4675-be7a-a01c75a97556
+2130,Back of Head,a0b1fc16-35b0-4675-be7a-a01c75a97556
+2131,Neck,a0b1fc16-35b0-4675-be7a-a01c75a97556
+2132,Neck,2fda3f53-d2be-4454-a161-66f27e4d1d32
+2133,Back of Head,2fda3f53-d2be-4454-a161-66f27e4d1d32
+2134,Back of Head,46c8129c-fcf7-4ba4-bd4d-c4a0e1a9bc4e
+2135,Right Side of Head,e9fb49bb-22ee-4f1a-9df9-26faddd90a69
+2136,Front of Head,e9fb49bb-22ee-4f1a-9df9-26faddd90a69
+2139,Neck,e14edb54-e63e-4de1-82b7-8c6fd66d4256
+2140,Left Side of Head,e14edb54-e63e-4de1-82b7-8c6fd66d4256
+2141,Back of Head,e14edb54-e63e-4de1-82b7-8c6fd66d4256
+2142,Back of Head,7e6010be-8e3a-4c84-8306-3ecf65a354f8
+2143,Right Side of Head,0fc01de3-7acc-4255-926b-19129c2a7d59
+2144,Front of Head,0fc01de3-7acc-4255-926b-19129c2a7d59
+2145,Back of Head,0fc01de3-7acc-4255-926b-19129c2a7d59
+2146,Left Side of Head,0fc01de3-7acc-4255-926b-19129c2a7d59
+2147,Back of Head,81a34e9d-4233-4a65-8803-283b6ed00203
+2148,Front of Head,81a34e9d-4233-4a65-8803-283b6ed00203
+2149,Neck,81a34e9d-4233-4a65-8803-283b6ed00203
+2150,Back of Head,3aeb1794-e286-4436-83ae-dec037a62aa1
+2151,Back of Head,24f4f69b-763a-49f7-b10b-46689397b437
+2152,Front of Head,24f4f69b-763a-49f7-b10b-46689397b437
+2153,Back of Head,bf5cbd14-6b55-4996-8cf5-bf0f4b4ecbf4
+2155,Top of Head,cd9c85ca-5fb0-4ea7-a0f2-dc3a293766e2
+2156,Right Side of Head,cd9c85ca-5fb0-4ea7-a0f2-dc3a293766e2
+2157,Back,cd9c85ca-5fb0-4ea7-a0f2-dc3a293766e2
+2158,Front of Head,d11383d0-843e-4645-b156-11e35034f4a1
+2159,Front of Head,14309f3f-b672-4138-aa74-84da61789817
+2160,Back of Head,14309f3f-b672-4138-aa74-84da61789817
+2161,Neck,14309f3f-b672-4138-aa74-84da61789817
+2162,Back of Head,b4915d04-deb7-4dba-a228-d9692f380522
+2163,Neck,b4915d04-deb7-4dba-a228-d9692f380522
+2164,Right Side of Head,637fbaa8-0942-4d30-8b3c-9d0bbc6f8bf6
+2165,Neck,637fbaa8-0942-4d30-8b3c-9d0bbc6f8bf6
+2166,Top of Head,637fbaa8-0942-4d30-8b3c-9d0bbc6f8bf6
+2168,Left Side of Head,6fbe186c-543b-493c-819b-8adde16e85b3
+2169,Top of Head,6fbe186c-543b-493c-819b-8adde16e85b3
+2170,Front of Head,14a71a6a-feab-48a7-9358-34a29d756f8d
+2171,Back of Head,14a71a6a-feab-48a7-9358-34a29d756f8d
+2172,Left Side of Head,6cb8d846-09e0-455b-9037-e14daee0b8f0
+2173,Forceful downward pressure of neck,01cf90d6-4f6d-4a34-942b-3e43f9645c1f
+2174,None,37ef0a6f-1877-40c7-8bf9-07b831397337
+2177,Front of Head,ea2ce524-e89b-4df1-884b-db9a2aab75fb
+2178,Left Side of Head,ea2ce524-e89b-4df1-884b-db9a2aab75fb
+2179,Front of Head,0b325a51-563e-4c0a-b840-7b71aa4490df
+2180,Left Side of Head,0b325a51-563e-4c0a-b840-7b71aa4490df
+2181,Unknown,828af70d-f036-48c7-bec6-fa6354a04d07
+2182,Front of Head,db0f5740-e503-4afd-9227-58e5a1226038
+2183,Top of Head,b0afa623-f89f-4b9c-97c6-8695abe18bb9
+2184,Left Side of Head,b0afa623-f89f-4b9c-97c6-8695abe18bb9
+2185,Neck,b0afa623-f89f-4b9c-97c6-8695abe18bb9
+2186,Back,b0afa623-f89f-4b9c-97c6-8695abe18bb9
+2187,Back of Head,c23fd579-e694-4926-a674-61f6305b9e97
+2188,Front of Head,ebe225a4-b1a9-44b5-9225-fba42b785822
+2189,Back of Head,ebe225a4-b1a9-44b5-9225-fba42b785822
+2190,Front of Head,0335b765-7448-459f-b665-6e79e8e41218
+2191,Back of Head,0335b765-7448-459f-b665-6e79e8e41218
+2192,Top of Head,0335b765-7448-459f-b665-6e79e8e41218
+2193,None,89d76bcb-9341-44cd-b21c-994545185bba
+2194,Entire brain,bbb29665-455f-4540-b830-71aa390dc449
+2195,No,43035ca3-f178-4e72-973d-4da5be16bb2e
+2196,Whiplash,89572264-c5a1-4ece-804f-e56f977f24a8
+2197,Left Side of Head,c32d29d6-1dbf-46dd-8ae4-4629a4f080fe
+2198,Right Side of Head,c32d29d6-1dbf-46dd-8ae4-4629a4f080fe
+2199,Left Side of Head,ec782675-62c6-45e8-8d3a-a2e1baaf6732
+2200,Top of Head,90e6d89b-ff42-4f0c-a8a7-c23a70b7edc5
+2201,Left Side of Head,90e6d89b-ff42-4f0c-a8a7-c23a70b7edc5
+2202,Neck,90e6d89b-ff42-4f0c-a8a7-c23a70b7edc5
+2203,Left Side of Head,7de21a7a-d489-47a4-8106-794bfca63b7d
+2204,Left Side of Head,1ba40009-06c2-4ef6-912d-89123343015f
+2205,Back of Head,74eeae3e-c15d-4270-9eaa-c57d710c59e7
+2209,Left Side of Head,64615723-b600-409f-a048-f0dd84f74379
+2210,Front of Head,fc893611-e3a7-4a85-a454-653a611ca5f9
+2211,Back of Head,fc893611-e3a7-4a85-a454-653a611ca5f9
+2212,Left Side of Head,fc893611-e3a7-4a85-a454-653a611ca5f9
+2213,Top of Head,fc893611-e3a7-4a85-a454-653a611ca5f9
+2214,Right Side of Head,fc893611-e3a7-4a85-a454-653a611ca5f9
+2215,Bil frontal lobe,fc893611-e3a7-4a85-a454-653a611ca5f9
+2216,Front of Head,e565c22e-f423-4f3f-a3b0-b7002443f2f6
+2217,Back of Head,e565c22e-f423-4f3f-a3b0-b7002443f2f6
+2218,Left Side of Head,e565c22e-f423-4f3f-a3b0-b7002443f2f6
+2219,Right Side of Head,e565c22e-f423-4f3f-a3b0-b7002443f2f6
+2220,Back of Head,94a5f7bb-bdf1-4fd8-ba8e-5a7e34674980
+2221,Front of Head,0bb17641-f393-4f4a-9442-6a7f0ab6ea85
+2222,Back of Head,0bb17641-f393-4f4a-9442-6a7f0ab6ea85
+2223,Right Side of Head,0bb17641-f393-4f4a-9442-6a7f0ab6ea85
+2224,Neck,0bb17641-f393-4f4a-9442-6a7f0ab6ea85
+2225,Back,0bb17641-f393-4f4a-9442-6a7f0ab6ea85
+2226,Top of Head,6d5b04fa-f778-4fb9-a5ea-164115f395aa
+2227,Neck,6d5b04fa-f778-4fb9-a5ea-164115f395aa
+2228,Lack of oxygen,d67f859a-2b82-4f49-bbd3-13f8234f8cb1
+2229,Top of Head,907a8c23-0d6c-44aa-89c6-2ea7be93ce94
+2230,Neck,907a8c23-0d6c-44aa-89c6-2ea7be93ce94
+2231,Back of Head,907a8c23-0d6c-44aa-89c6-2ea7be93ce94
+2232,Front of Head,907a8c23-0d6c-44aa-89c6-2ea7be93ce94
+2233,Right Side of Head,907a8c23-0d6c-44aa-89c6-2ea7be93ce94
+2234,Left Side of Head,6e778353-5e5c-4d50-ad1a-acff6bf68df5
+2235,Top of Head,fb88415f-922e-4e59-ac43-054917fe6d95
+2236,Right Side of Head,fb88415f-922e-4e59-ac43-054917fe6d95
+2237,Left Side of Head,fb88415f-922e-4e59-ac43-054917fe6d95
+2238,Front of Head,fb88415f-922e-4e59-ac43-054917fe6d95
+2239,Back of Head,d964b3fe-5cc3-40bb-b656-e2e6c5dd3cf0
+2240,NULL,d964b3fe-5cc3-40bb-b656-e2e6c5dd3cf0
+2241,Neck,d964b3fe-5cc3-40bb-b656-e2e6c5dd3cf0
+2242,Back,d964b3fe-5cc3-40bb-b656-e2e6c5dd3cf0
+2243,Back of Head,feb1c878-cd59-499f-b29d-ec57cbbd23f6
+2244,Back of Head,c4e012a6-4bb5-43d4-bd4b-5394de44c248
+2245,Back of Head,656c58d9-d994-4603-9af5-45d68236b56a
+2246,Left Side of Head,656c58d9-d994-4603-9af5-45d68236b56a
+2247,Neck,656c58d9-d994-4603-9af5-45d68236b56a
+2248,Right Side of Head,a7a91dcc-377b-462c-89f4-dc776ac667d0
+2249,Left Side of Head,a7a91dcc-377b-462c-89f4-dc776ac667d0
+2250,Front of Head,a7a91dcc-377b-462c-89f4-dc776ac667d0
+2251,Back of Head,a7a91dcc-377b-462c-89f4-dc776ac667d0
+2252,Left Side of Head,fb80556f-9ffa-4298-8414-dd97232e44e5
+2253,Right Side of Head,fb80556f-9ffa-4298-8414-dd97232e44e5
+2254,Front of Head,fb80556f-9ffa-4298-8414-dd97232e44e5
+2255,Left Side of Head,eab091fa-7e8b-4735-96e4-bbb882528665
+2256,Top of Head,eab091fa-7e8b-4735-96e4-bbb882528665
+2258,Front of Head,3a54f104-433b-4b0b-b7c6-33e18349ca70
+2259,Back of Head,3a54f104-433b-4b0b-b7c6-33e18349ca70
+2260,Left Side of Head,3a54f104-433b-4b0b-b7c6-33e18349ca70
+2261,Top of Head,3a54f104-433b-4b0b-b7c6-33e18349ca70
+2262,Right Side of Head,3a54f104-433b-4b0b-b7c6-33e18349ca70
+2263,Neck,3a54f104-433b-4b0b-b7c6-33e18349ca70
+2265,No,8a54414b-a5a8-4511-bc73-8364f5db353e
+2266,Front of Head,8943136a-63d4-401b-a64e-12239178ee4e
+2267,Top of Head,8943136a-63d4-401b-a64e-12239178ee4e
+2268,Right Side of Head,8943136a-63d4-401b-a64e-12239178ee4e
+2269,Neck,8943136a-63d4-401b-a64e-12239178ee4e
+2270,Back of Head,8943136a-63d4-401b-a64e-12239178ee4e
+2271,Left Side of Head,8943136a-63d4-401b-a64e-12239178ee4e
+2272,Left Side of Head,364396bc-c411-4cec-ab1a-6950743e161d
+2273,Lack of oxygen,eeefbf3b-6024-4f99-a604-9213e6dba9c5
+2275,Left Side of Head,8b606bc8-d964-48aa-91a1-93c6621530b8
+2276,Front of Head,0e15e7a0-9036-473d-94a8-0a3a650fb79c
+2277,Back of Head,0e15e7a0-9036-473d-94a8-0a3a650fb79c
+2278,Left Side of Head,0e15e7a0-9036-473d-94a8-0a3a650fb79c
+2279,Top of Head,0e15e7a0-9036-473d-94a8-0a3a650fb79c
+2280,Right Side of Head,0e15e7a0-9036-473d-94a8-0a3a650fb79c
+2281,Neck,0e15e7a0-9036-473d-94a8-0a3a650fb79c
+2284,Right Side of Head,707404c1-e570-4a4c-8886-7667ffe13b84
+2285,Neck,707404c1-e570-4a4c-8886-7667ffe13b84
+2286,Back of Head,707404c1-e570-4a4c-8886-7667ffe13b84
+2287,From a car behind and spun me around,aa21ab55-17e2-479f-883b-e4b6640fca39
+2288,Front of Head,029b2170-658d-4bd2-ae9a-a263ff919424
+2289,Back of Head,029b2170-658d-4bd2-ae9a-a263ff919424
+2290,Back of Head,25b35cbe-9c63-4367-b206-66c039dfaa17
+2291,Back of Head,25b35cbe-9c63-4367-b206-66c039dfaa17
+2292,Back of Head,992ab2a6-043d-4357-9c70-608ce3853363
+2293,Top of Head,992ab2a6-043d-4357-9c70-608ce3853363
+2294,Neck,992ab2a6-043d-4357-9c70-608ce3853363
+2295,Left Side of Head,992ab2a6-043d-4357-9c70-608ce3853363
+2296,Right Side of Head,992ab2a6-043d-4357-9c70-608ce3853363
+2297,Left Side of Head,b72a1f6d-522b-4862-a085-a8581206412d
+2298,Back of Head,a1ebeedf-1028-42f8-9523-5ac226c328c5
+2299,Right Side of Head,5540da01-079d-4621-8b0a-4a1ef3f6fc88
+2300,Left Side of Head,199625c0-d841-4c2c-bb2e-66ef733182ba
+2304,All of head,a993f149-c61e-4598-9aab-65b52c7c4353
+2305,Top of Head,315ce0a5-6ed1-40af-95d9-2401ebab6993
+2315,Back of Head,f62f568f-1504-46cd-85a8-def92bc9ea0a
+2317,Front of Head,dd951c04-aadf-4cb0-af4a-30c545080053
+2318,Neck,dd951c04-aadf-4cb0-af4a-30c545080053
+2319,Back of Head,dd951c04-aadf-4cb0-af4a-30c545080053
+2320,Front of Head,e9e7731a-5fb3-4397-89e5-34a49117ee31
+2321,Left Side of Head,6f1a1823-3feb-47a5-adda-c462f1b05073
+2322,Neck,6f1a1823-3feb-47a5-adda-c462f1b05073
+2323,Front of Head,6f1a1823-3feb-47a5-adda-c462f1b05073
+2324,Back of Head,6f1a1823-3feb-47a5-adda-c462f1b05073
+2325,"Right shouoder & jaw, left frontal pole contrecoup",6f1a1823-3feb-47a5-adda-c462f1b05073
+2327,Top of Head,0006ad41-c2d3-4994-8aab-7a3a107d50aa
+2330,Front of Head,834f7edb-8ec3-4e2c-83fc-b42d6ffb433b
+2333,Front of Head,1e5c1bad-59f5-4f79-9770-a4e968125ddb
+2334,Back of Head,1e5c1bad-59f5-4f79-9770-a4e968125ddb
+2335,Left Side of Head,1e5c1bad-59f5-4f79-9770-a4e968125ddb
+2336,Top of Head,1e5c1bad-59f5-4f79-9770-a4e968125ddb
+2337,Right Side of Head,1e5c1bad-59f5-4f79-9770-a4e968125ddb
+2338,Neck,1e5c1bad-59f5-4f79-9770-a4e968125ddb
+2339,Front of Head,fce53830-6bb5-4736-97a4-ada0d30e3244
+2345,Right Side of Head,2bf909f7-44eb-4233-8668-0e03cf8c5fce
+2346,Back of Head,2bf909f7-44eb-4233-8668-0e03cf8c5fce
+2347,Right Side of Head,2bf909f7-44eb-4233-8668-0e03cf8c5fce
+2348,Back of Head,2bf909f7-44eb-4233-8668-0e03cf8c5fce
+2365,Front of Head,24e33669-e53b-4d93-8ab9-66a1d04139c5
+2366,Left Side of Head,24e33669-e53b-4d93-8ab9-66a1d04139c5
+2367,Neck,24e33669-e53b-4d93-8ab9-66a1d04139c5
+2368,Back of Head,24e33669-e53b-4d93-8ab9-66a1d04139c5
+2369,Right Side of Head,24e33669-e53b-4d93-8ab9-66a1d04139c5
+2370,Full face,24e33669-e53b-4d93-8ab9-66a1d04139c5
+2373,Right Side of Head,48e3862d-d5ee-4f03-80ac-c8c9794fdb0b
+2374,Top of Head,48e3862d-d5ee-4f03-80ac-c8c9794fdb0b
+2375,Neck,48e3862d-d5ee-4f03-80ac-c8c9794fdb0b
+2376,Front of Head,90b514d8-5891-4f58-ad94-1b3f3d46f466
+2377,Neck,90b514d8-5891-4f58-ad94-1b3f3d46f466
+2378,Right Side of Head,90b514d8-5891-4f58-ad94-1b3f3d46f466
+2379,Front of Head,57c077d1-7a7d-4593-8e28-af2d372d8328
+2380,Back of Head,8b9b5783-1fda-4a1d-b2be-98514effe095
+2381,Top of Head,8b9b5783-1fda-4a1d-b2be-98514effe095
+2386,Left Side of Head,24372dce-6a47-419b-9f55-206a7d9cf031
+2387,Left Side of Head,3c919021-0a89-4419-9354-e8cb2a78f071
+2388,Back of Head,3c919021-0a89-4419-9354-e8cb2a78f071
+2389,Front of Head,3c919021-0a89-4419-9354-e8cb2a78f071
+2390,Top of Head,3c919021-0a89-4419-9354-e8cb2a78f071
+2391,Right Side of Head,3c919021-0a89-4419-9354-e8cb2a78f071
+2392,Neck,3c919021-0a89-4419-9354-e8cb2a78f071
+2393,Top of Head,4f5fd924-6627-4a47-86e6-b03f9d923b1e
+2394,Front of Head,4f5fd924-6627-4a47-86e6-b03f9d923b1e
+2395,Back of Head,4f5fd924-6627-4a47-86e6-b03f9d923b1e
+2396,Left Side of Head,4f5fd924-6627-4a47-86e6-b03f9d923b1e
+2397,Right Side of Head,4f5fd924-6627-4a47-86e6-b03f9d923b1e
+2398,"We don't know particularly, but i had a occipital condyle fracture at the base of my neck & staples on the top",4f5fd924-6627-4a47-86e6-b03f9d923b1e
+2412,Front of Head,69fedefa-7447-4b58-8bc7-ef1ee7fbeac9
+2415,No,246fcf12-8b9f-43e3-aaec-968e8409c901
+2416,Neck,6868019a-65e7-49db-9fe3-3a240cbaa709
+2417,Left Side of Head,6868019a-65e7-49db-9fe3-3a240cbaa709
+2418,Front of Head,6868019a-65e7-49db-9fe3-3a240cbaa709
+2419,None,1d6bfafd-9ee3-4d19-a021-04d1a2592892
+2420,Back of Head,d396d329-e40e-4e64-a333-89dc0e42bcf3
+2421,Front of Head,d396d329-e40e-4e64-a333-89dc0e42bcf3
+2422,None,fa92b334-22d1-4722-866b-1ae34351d4f2
+2423,Front of Head,f4d3ebe5-dc25-4852-b0ac-74bfb57d8475
+2424,Neck,f4d3ebe5-dc25-4852-b0ac-74bfb57d8475
+2425,Back of Head,f4d3ebe5-dc25-4852-b0ac-74bfb57d8475
+2426,Left Side of Head,65e806af-2250-4a09-b955-4ff23f877567
+2427,Top of Head,fb784f62-923e-4fde-adab-1c9ccd69581b
+2428,Left Side of Head,fb784f62-923e-4fde-adab-1c9ccd69581b
+2429,Front of Head,fb784f62-923e-4fde-adab-1c9ccd69581b
+2432,Back of Head,9c6384da-8f1e-4d57-a278-92d3d3df8cd9
+2433,Left Side of Head,9c6384da-8f1e-4d57-a278-92d3d3df8cd9
+2434,Right Side of Head,9c6384da-8f1e-4d57-a278-92d3d3df8cd9
+2435,Neck,9c6384da-8f1e-4d57-a278-92d3d3df8cd9
+2436,Front of Head,c875dcbf-4d7f-4752-8ff3-8dadb0b8ef98
+2437,Back of Head,c875dcbf-4d7f-4752-8ff3-8dadb0b8ef98
+2438,Axonial diffusion,8091f9d1-f5aa-49dd-a1e5-61ecf3afc01d
+2440,Back of Head,d0ab7e3c-551f-47cc-9df7-30f769f47be0
+2441,Left Side of Head,35fc5b5b-0edd-4a3d-96ac-e1ab71ca0543
+2447,Other,774acab7-abee-4563-b5da-3ee1507c0846
+2448,Front of Head,74ef6fa2-a4cf-4db9-9489-9eda0a15dc56
+2449,Left Side of Head,74ef6fa2-a4cf-4db9-9489-9eda0a15dc56
+2450,Front of Head,3377005e-d2fd-4082-a005-5aacdd27b3d7
+2454,No,c3bcca6d-a0a2-403a-9e44-f31258a7f6d4
+2455,Back of Head,216d3dc4-c4f8-4c8a-8603-7d7dbf0934bf
+2456,Neck,216d3dc4-c4f8-4c8a-8603-7d7dbf0934bf
+2457,"Didn't hit my head directly, but received a jolt to my whole body.",435ab541-fe3f-4939-8123-01339b31b102
+2459,Front of Head,8665ada6-c0c8-4c32-9405-e9b7a8f80577
+2460,Back of Head,8665ada6-c0c8-4c32-9405-e9b7a8f80577
+2461,Left Side of Head,8665ada6-c0c8-4c32-9405-e9b7a8f80577
+2462,Right Side of Head,bb4a14b3-7607-44e9-b65f-d7d4dec5f521
+2467,Right Side of Head,29a33a41-ceb2-4494-852f-26b7377ca37d
+2468,Front of Head,9041bdd3-cf20-4ea5-a4f2-3f5dd5dd8de2
+2469,Right Side of Head,9041bdd3-cf20-4ea5-a4f2-3f5dd5dd8de2
+2470,Deceleration,2413f6a8-2589-442a-8cd7-07256b8ba5b1
+2477,Top of Head,6a0c34a0-7ba4-4874-84c2-9734118d0c3f
+2483,Left Side of Head,1eaca131-cd7f-4954-a3ce-262cacfa8390
+2484,Front of Head,9bb9fc04-9cc6-415f-a381-ddca289367cf
+2485,Left Side of Head,9bb9fc04-9cc6-415f-a381-ddca289367cf
+2486,They also said that the injury was in the front and back due to the sudden/high impact of the crash,9bb9fc04-9cc6-415f-a381-ddca289367cf
+2487,Back of Head,9bb9fc04-9cc6-415f-a381-ddca289367cf
+2488,Not sure,9aa4a69e-188d-4501-8482-55663ceb99f8
+2489,"I don't remember",f8f04660-4a23-4701-98c1-a1be942abbd7
+2490,Left Side of Head,a788c975-548b-45f7-8f83-36f51c1edd4a
+2491,Neck,a788c975-548b-45f7-8f83-36f51c1edd4a
+2492,Back of Head,a788c975-548b-45f7-8f83-36f51c1edd4a
+2493,Front of Head,a788c975-548b-45f7-8f83-36f51c1edd4a
+2494,Front of Head,a788c975-548b-45f7-8f83-36f51c1edd4a
+2495,Back of Head,a788c975-548b-45f7-8f83-36f51c1edd4a
+2496,Neck,a788c975-548b-45f7-8f83-36f51c1edd4a
+2497,Left Side of Head,a788c975-548b-45f7-8f83-36f51c1edd4a
+2498,NULL,a73c043a-59d2-4ec4-9de1-1b99517bc22d
+2499,Eyelashes,a73c043a-59d2-4ec4-9de1-1b99517bc22d
+2500,Eyelashes,a73c043a-59d2-4ec4-9de1-1b99517bc22d
+2501,Front of Head,a73c043a-59d2-4ec4-9de1-1b99517bc22d
+2502,Back of Head,6508f277-d031-4fbe-95a6-165e8d61e802
+2511,None,66586473-eebe-4ea3-8ba9-d99a9a549007
+2512,None,66586473-eebe-4ea3-8ba9-d99a9a549007
+2513,None,66586473-eebe-4ea3-8ba9-d99a9a549007
+2517,Right Side of Head,e983d07a-716a-471c-ab83-d20192e3e280
+2518,Coup contrecoup injury,e983d07a-716a-471c-ab83-d20192e3e280
+2519,Front of Head,86890771-92d0-49ab-86e6-3dbc50cea083
+2520,Back of Head,615148ca-0ea4-4cca-b576-adb2a682da78
+2521,Back of Head,9baaf909-f6b8-4c12-be0b-5f302184e334
+2524,Not hit,6ffda7cc-03e5-48b6-b70f-1089ba812486
+2526,Left Side of Head,f802ee3a-46cb-406d-97a3-306cc35630da
+2529,Back of Head,7894c45f-3551-42f3-b52b-be6401fde719
+2530,Front of Head,efdb74de-fd5c-4f1f-9702-eadbcadacbbe
+2531,Whiplash,13b679c3-e235-4a04-a2e1-0218db8c7632
+2532,Back of Head,91caaba9-1e82-4a98-aff8-a132951c6d66
+2539,Front of Head,cee5b45d-e6dd-439e-8aee-b22504c7bc01
+2548,Left Side of Head,39932e42-400c-4e93-a11d-d5734ef7e5d6
+2549,Nine,5483f326-f2da-417d-a0be-3d51ce42f1e3
+2550,None,5483f326-f2da-417d-a0be-3d51ce42f1e3
+2551,Front of Head,8c001a5d-87eb-4564-b8a4-de71024596bf
+2552,Top of Head,157ebe88-a9d4-4d54-a523-ddeb1cf6fe50
+2553,Front of Head,157ebe88-a9d4-4d54-a523-ddeb1cf6fe50
+2554,Left Side of Head,e16173f2-ca30-495e-827b-45c1f81ad284
+2555,Jaw,bfd30e57-fa45-4331-88e6-af11a0e750d9
+2556,Left Side of Head,bfd30e57-fa45-4331-88e6-af11a0e750d9
+2557,Neck,bfd30e57-fa45-4331-88e6-af11a0e750d9
+2558,Front of Head,2c881989-3fc5-446e-acca-c2e87e011582
+2559,Front of Head,c97968dc-7d17-484c-889d-98a1d443f0aa
+2560,Back of Head,41542b50-fe41-4ed0-8ba7-872bb3ebb29d
+2568,Right Side of Head,d1fcf905-4064-43d2-a341-aa333f5b0956
+2569,Left Side of Head,e00bce2b-3b08-49a1-a8bd-d4a577222b72
+2570,Front of Head,13dcf012-4944-472d-a993-1ffc75b2bce1
+2571,Back of Head,13dcf012-4944-472d-a993-1ffc75b2bce1
+2572,Top of Head,cbd4c089-a0c8-44ab-a2dd-cce3bd693115
+2573,Left Side of Head,aebdd784-633a-4b91-baaf-e17fed7f5aba
+2575,Compression,632aa253-487e-491c-8ba0-14fa5187594f
+2576,Front of Head,afd38b5b-81f8-4374-b452-9cc073af63c8
+2577,Left Side of Head,7392af30-4d45-4b2a-813b-2a926bb574dd
+2579,"Unsure, i had a helmet on when i fell. i didn’t when i was rescued. they think contra cue from the force of the fall and whiplash",22d8d39a-2b8a-4973-bb42-7fcc3984ffee
+2580,Unsure. i fell with a helmet on when i was rescued it was no longer on. dr thinks contracue from the sudden impact of stopping and whiplash,22d8d39a-2b8a-4973-bb42-7fcc3984ffee
+2581,Front of Head,208e12e3-819b-4518-8fe6-eedbdd4fe492
+2582,None,beb0651f-43d5-47f6-9510-911ea336196f
+2583,Back of Head,1246f71c-8c38-4979-96eb-ac21573f2478
+2584,Front/right temple forehead,2b7866a5-fc44-4818-8c67-4d1f87ee0004
+2585,Back of Head,37174446-79df-4a81-ad13-4868004bb385
+2586,Front of Head,10fe4d42-659f-49b4-b5d2-ba92515b5d87
+2587,Left Side of Head,10fe4d42-659f-49b4-b5d2-ba92515b5d87
+2588,Back of Head,10fe4d42-659f-49b4-b5d2-ba92515b5d87
+2589,Neck,10fe4d42-659f-49b4-b5d2-ba92515b5d87
+2590,Top of Head,71de7056-c555-480d-8faf-6bc353e67d71
+2591,Left Side of Head,71de7056-c555-480d-8faf-6bc353e67d71
+2592,Neck,872af158-f39c-4798-9e47-f9f810d5e96c
+2593,Left Side of Head,872af158-f39c-4798-9e47-f9f810d5e96c
+2594,Left Side of Head,788a7244-d7df-4a1b-bfd0-190129234b41
+2595,Back of Head,5af2b78b-7675-4425-bb18-0da0c3f7b5a2
+2596,Right Side of Head,8ee49344-c803-438e-8a30-bf41c8cae495
+2597,Left Side of Head,08debcca-f651-4b3d-bc23-565bdb893297
+2598,Front of Head,08debcca-f651-4b3d-bc23-565bdb893297
+2599,Back of Head,99f78aa1-23c9-424d-80e5-b2709c5476d6
+2600,Front of Head,58371647-1258-4b5c-9710-a687961ffb7e
+2601,Back of Head,58371647-1258-4b5c-9710-a687961ffb7e
+2602,Front of Head,4bed17f5-3565-460a-aae1-b4ccba41231a
+2603,Back of Head,4bed17f5-3565-460a-aae1-b4ccba41231a
+2604,Right Side of Head,d5ebb383-26c7-488d-a80a-0615bf8e463b
+2605,Whiplash,ab41eac0-fc82-43f4-bcaf-e885d0d8079b
+2606,Right Side of Head,8a1f1124-b3e6-47f8-8adf-bee3851c7060
+2607,Front of Head,d9a51132-1472-40aa-8481-96e81191703d
+2608,Left Side of Head,3282aed5-9243-451e-8bee-8e15bc1a5e16
+2609,Front of Head,f63a958a-5145-4c71-b540-281ee35ecc22
+2610,Back of Head,f63a958a-5145-4c71-b540-281ee35ecc22
+2611,None,f9542179-02e1-4e40-a0cd-12781a630df0
+2612,Back of Head,3f2a3acf-7e57-4042-86a5-1f97b9c1b6f8
+2613,Left Side of Head,3f2a3acf-7e57-4042-86a5-1f97b9c1b6f8
+2614,Right Side of Head,3f2a3acf-7e57-4042-86a5-1f97b9c1b6f8
+2615,Front of Head,3f2a3acf-7e57-4042-86a5-1f97b9c1b6f8
+2616,None,abfbc979-9219-46fa-9fbe-03b4a56c2fb3
+2617,Shaken/whiplash,abfbc979-9219-46fa-9fbe-03b4a56c2fb3
+2618,Back of Head,9462befa-395a-415f-8fed-45e7348b36b4
+2620,"Not sure, lost consciousness",35ed2276-0ba2-4c6d-b1b9-17e909b73785
+2621,Front of Head,36087971-0f5e-46fe-9094-20e766f77c6c
+2622,Back of Head,daec59ff-570f-44cd-9632-07b36e70d5ec
+2624,Back of Head,c93ba28f-a32c-4902-8543-ff962a151c1d
+2625,Neck,74bf027c-d65a-40af-8ef2-e0ae16e2baee
+2626,Right Side of Head,8e8c2b12-1b3f-45dc-ac40-eca7df530c59
+2627,"Frontal lobe, right side",c1069b5d-93f4-4837-939f-1598aa0cb744
+2628,Front of Head,eecb0bec-e7e3-40b1-84b3-0d93c1ae02d1
+2629,Left Side of Head,eecb0bec-e7e3-40b1-84b3-0d93c1ae02d1
+2630,None,06030bc4-1e93-4494-9c6b-2889b990376e
+2631,Back of Head,06030bc4-1e93-4494-9c6b-2889b990376e
+2632,Back of Head,06030bc4-1e93-4494-9c6b-2889b990376e
+2633,Right Side of Head,128dc5c2-dfca-4fa3-93d9-1623fc77f7e8
+2634,Neck,128dc5c2-dfca-4fa3-93d9-1623fc77f7e8
+2635,Back of Head,128dc5c2-dfca-4fa3-93d9-1623fc77f7e8
+2636,Front of Head,d7570d83-28b9-49c9-a7e1-70a0fba5b861
+2637,Right Side of Head,d7570d83-28b9-49c9-a7e1-70a0fba5b861
+2638,Left Side of Head,ea647cb6-021f-4b28-b841-ae0abe9b6bd3
+2639,None,4fe425e4-90f1-45f7-88dc-3587609e2d88
+2640,Rear-ended,4fe425e4-90f1-45f7-88dc-3587609e2d88
+2641,Back of Head,64a9aa3d-ac87-4123-bb50-7397eba0f470
+2642,Back of Head,b0fa4e85-26f2-4cbb-b3bc-5ff4504c9244
+2643,Back of Head,1a521cce-ea39-4d39-9678-5cf7d57c4202
+2644,Front of Head,2cae1141-8baa-4fb2-bb0c-4c2154b4e642
+2645,Back of Head,2d177cda-8e06-4502-85cd-d74a98f5b89c
+2646,Back of Head,0ebe2a42-2437-4967-90b0-b3e70f874f34
+2647,Left Side of Head,0ebe2a42-2437-4967-90b0-b3e70f874f34
+2648,Back of Head,01786d46-2829-42e2-8d50-135b7e212ea3
+2649,Left Side of Head,1a8d0146-bee3-43e6-bcd8-3a0de3d19ff7
+2650,Back of Head,373ac8e2-5436-4b45-b8f8-29af472d7736
+2651,Front of Head,9e4d43cd-080e-4e04-aa01-d6952571f61d
+2652,Top of Head,9e4d43cd-080e-4e04-aa01-d6952571f61d
+2653,Right Side of Head,9e4d43cd-080e-4e04-aa01-d6952571f61d
+2654,Left Side of Head,9e4d43cd-080e-4e04-aa01-d6952571f61d
+2655,Neck,9e4d43cd-080e-4e04-aa01-d6952571f61d
+2656,Left Side of Head,e3242a1e-a2c5-4058-a510-21239fc7e978
+2657,Front of Head,c88d8757-5737-4f76-9baf-d995dc11105e
+2658,Back of Head,c88d8757-5737-4f76-9baf-d995dc11105e
+2659,Left Side of Head,c88d8757-5737-4f76-9baf-d995dc11105e
+2660,Top of Head,c88d8757-5737-4f76-9baf-d995dc11105e
+2661,Right Side of Head,c88d8757-5737-4f76-9baf-d995dc11105e
+2662,Front of Head,54782a16-3f08-467c-81a7-55f9a0c581fa
+2663,Left Side of Head,54782a16-3f08-467c-81a7-55f9a0c581fa
+2664,Neck,54782a16-3f08-467c-81a7-55f9a0c581fa
+2665,Back of Head,f65ac1c7-7b81-4c69-9db0-cc17552e50d4
+2666,Back of Head,a55c843f-73f8-4da7-872c-6afade97ad67
+2667,Right Side of Head,4f5da398-fcb4-437d-96a5-a3826a1514d4
+2668,Top of Head,c19877bf-3100-499f-8209-0ba6122be0e5
+2669,Left Side of Head,c19877bf-3100-499f-8209-0ba6122be0e5
+2670,Left Side of Head,ad64a73c-3a95-496c-b3cf-130a49bf8669
+2671,Top of Head,ad64a73c-3a95-496c-b3cf-130a49bf8669
+2672,N/a,36103a91-7d02-4568-b96b-47950d8de897
+2673,Back of Head,d8f41481-97d5-4634-89c0-49b7966ebb78
+2674,Back of Head,fd220ed4-4fd5-4e33-b219-be6750a2bec3
+2675,"Don't rememebr the injury very well, possible another area of head was hit",fd220ed4-4fd5-4e33-b219-be6750a2bec3
+2676,Left Side of Head,be9f7b34-8c6b-407e-867d-6013c38621e2
+2677,Left Side of Head,c11770ae-b951-4273-b0b9-88a12d6ea6df
+2678,Back of Head,b39be267-dfcd-4598-9993-a1cf49c989f2
+2679,Top of Head,b39be267-dfcd-4598-9993-a1cf49c989f2
+2680,Left Side of Head,b39be267-dfcd-4598-9993-a1cf49c989f2
+2681,Right Side of Head,b39be267-dfcd-4598-9993-a1cf49c989f2
+2682,Neck,b39be267-dfcd-4598-9993-a1cf49c989f2
+2683,None,61e6acc2-2e4f-4576-92de-a20ab76d9483
+2684,None,0c4eb450-84ce-449d-908f-18ca4d633e4b
+2685,Back of Head,a5a04a35-06c6-4c63-a425-cf9e880bf184
+2686,Back of Head,ed7d0cbd-c4a2-451a-8307-ddf6f0d37a30
+2687,Left Side of Head,ed7d0cbd-c4a2-451a-8307-ddf6f0d37a30
+2688,Neck,ed7d0cbd-c4a2-451a-8307-ddf6f0d37a30
+2689,Front of Head,98e42624-9483-4153-b396-279080b6f33f
+2690,Top of Head,0f74fec7-f770-4c7e-a18e-d928803a9a75
+2691,All,483849ad-f99f-4475-a4f2-fd30a7f05874
+2693,Ear,e971e364-784b-4260-9c57-52cc43dae4fb
+2694,Front of Head,e971e364-784b-4260-9c57-52cc43dae4fb
+2695,Back of Head,e971e364-784b-4260-9c57-52cc43dae4fb
+2696,Left Side of Head,e971e364-784b-4260-9c57-52cc43dae4fb
+2697,Top of Head,e971e364-784b-4260-9c57-52cc43dae4fb
+2698,Right Side of Head,e971e364-784b-4260-9c57-52cc43dae4fb
+2699,Neck,e971e364-784b-4260-9c57-52cc43dae4fb
+2700,None,bcdab9bf-896e-422b-a330-2a5b2f12590a
+2701,Front of Head,875c02e1-640d-47c6-9afe-9671d6df4098
+2702,Back of Head,875c02e1-640d-47c6-9afe-9671d6df4098
+2703,Left Side of Head,875c02e1-640d-47c6-9afe-9671d6df4098
+2704,Front of Head,6b639ee4-0a83-42d5-bb61-c2d2a510f16c
+2705,Top of Head,6b639ee4-0a83-42d5-bb61-c2d2a510f16c
+2706,Back of Head,edb558a1-2508-4288-8ef7-9767a83bac55
+2707,Front of Head,3a537b17-74f3-4e07-81c5-20b71a4bc61d
+2708,Back of Head,3a537b17-74f3-4e07-81c5-20b71a4bc61d
+2709,Left Side of Head,3a537b17-74f3-4e07-81c5-20b71a4bc61d
+2710,Right Side of Head,3a537b17-74f3-4e07-81c5-20b71a4bc61d
+2711,Neck,3a537b17-74f3-4e07-81c5-20b71a4bc61d
+2712,Right Side of Head,c285c5d5-ec59-4451-885e-d99fbc81c6f5
+2713,Right Side of Head,7d0cfa86-eaf6-46ee-8551-8cd753203acf
+2714,Front of Head,2383d4d0-271a-4c0a-97d9-cbc681735222
+2715,Back of Head,2383d4d0-271a-4c0a-97d9-cbc681735222
+2716,Left Side of Head,2383d4d0-271a-4c0a-97d9-cbc681735222
+2717,Right Side of Head,a2da1509-e10a-49c5-8280-08cb27b96d05
+2718,Front of Head,77473f8c-ba31-43e4-ad75-f16d0b3836cc
+2719,Left Side of Head,77473f8c-ba31-43e4-ad75-f16d0b3836cc
+2720,Right Side of Head,77473f8c-ba31-43e4-ad75-f16d0b3836cc
+2721,Across forehead,797e5823-291c-4260-a355-5fa15d4631f0
+2722,Front of Head,797e5823-291c-4260-a355-5fa15d4631f0
+2723,Top of Head,e19ecfb3-631d-41cb-827e-904bdfa24482
+2724,All,02706ea0-4f66-4e94-86c1-80b249097c25
+2725,Left Side of Head,f554f870-78dd-49bd-a02b-f5f22f373cc1
+2726,Top of Head,f554f870-78dd-49bd-a02b-f5f22f373cc1
+2727,Right Side of Head,f554f870-78dd-49bd-a02b-f5f22f373cc1
+2728,Neck,f554f870-78dd-49bd-a02b-f5f22f373cc1
+2729,Whiplash,e5c7a60e-29cd-4129-b925-a4d22a539a82
+2730,"Not sure, lost consciousness",b8bee481-ca48-4612-bc5f-01abdad987d0
+2731,"Not sure if head was hit, but whiplash definitely",217ca4c5-4b1c-4934-938e-458b90d35903
+2732,Right Side of Head,b2a49841-7e64-4ff9-b985-d76a016be17d
+2733,Back of Head,b2a49841-7e64-4ff9-b985-d76a016be17d
+2734,Top of Head,b2a49841-7e64-4ff9-b985-d76a016be17d
+2735,Front of Head,b2a49841-7e64-4ff9-b985-d76a016be17d
+2737,Front of Head,51b93d1e-5b98-47a7-8e96-646053fc7d7f
+2738,Back of Head,51b93d1e-5b98-47a7-8e96-646053fc7d7f
+2739,Front of Head,a142c3f4-823c-435d-90c3-71b74f1203a1
+2740,Top of Head,a142c3f4-823c-435d-90c3-71b74f1203a1
+2741,Front of Head,a97c5363-6216-45fa-9894-5f126494d697
+2742,Front of Head,a92021a2-b0a0-4995-8f20-2412f93c4ffd
+2743,Right Side of Head,a92021a2-b0a0-4995-8f20-2412f93c4ffd
+2744,Top of Head,2ca293db-06a0-4e70-9895-54ce27eecd3b
+2745,Right Side of Head,2ca293db-06a0-4e70-9895-54ce27eecd3b
+2746,Front of Head,b0dc61aa-3fc0-40e3-9c7d-770bf12955f1
+2747,Right Side of Head,eaf0a3b8-d04f-41d4-9bd5-431fe53362eb
+2748,Back of Head,2604de19-a08c-4c11-b885-ff06e2a0e83c
+2749,Front of Head,269ce914-1a5c-4294-bb9a-f34e0c8b1e98
+2750,Back of Head,269ce914-1a5c-4294-bb9a-f34e0c8b1e98
+2751,Jaw,269ce914-1a5c-4294-bb9a-f34e0c8b1e98
+2752,Right Side of Head,adcac739-2a8a-4a02-bb20-748377d0eda3
+2753,Right Side of Head,0fd0f246-bf94-4ba8-b824-586439c7bebf
+2754,Back of Head,43c1d84b-cb34-46c8-9e1f-3edcc75fd31e
+2755,Jaw,43c1d84b-cb34-46c8-9e1f-3edcc75fd31e
+2756,Left Side of Head,fed82bcb-d791-4232-b963-da1bc7a2a54c
+2757,Front of Head,f14bbaf0-1f8f-4696-8e9b-6c8ba6578408
+2758,Right Side of Head,f14bbaf0-1f8f-4696-8e9b-6c8ba6578408
+2759,Eye brow,f14bbaf0-1f8f-4696-8e9b-6c8ba6578408
+2760,Front of Head,e08d54e4-c6e7-4217-bb3c-a060a8ab8471
+2761,Front of Head,ba93daab-9e34-4e25-bdd0-2b53ead6fb0e
+2762,Back of Head,ba93daab-9e34-4e25-bdd0-2b53ead6fb0e
+2763,Back of Head,8a5274fa-c319-4283-b2a5-bcfa83f601f6
+2764,Front of Head,833293a9-0f18-4a32-a2f5-19040ae8a1d9
+2765,Jaw,833293a9-0f18-4a32-a2f5-19040ae8a1d9
+2766,Neck,8ac39eae-6ef0-4fb6-ac88-0230e770d55e
+2767,Left Side of Head,8ac39eae-6ef0-4fb6-ac88-0230e770d55e
+2768,Front of Head,5e5bba85-9126-4710-8f9a-0b43dfe652d5
+2769,Jaw,5e5bba85-9126-4710-8f9a-0b43dfe652d5
+2770,Front of Head,e0a4258b-cd0a-44da-8d44-b98fec1cbdfa
+2771,Neck,7682e1ae-c103-4a7b-9ea6-99dc92675fa2
+2772,Front of Head,ca7f5b7c-cc63-4255-93f1-1ad342ec82aa
+2773,Left Side of Head,ca7f5b7c-cc63-4255-93f1-1ad342ec82aa
+2774,Top of Head,ca7f5b7c-cc63-4255-93f1-1ad342ec82aa
+2775,Right Side of Head,ca7f5b7c-cc63-4255-93f1-1ad342ec82aa
+2776,Back of Head,76bf6b8e-d0ec-469b-a47f-409f6d866028
+2777,Front of Head,b5b627e0-47ec-4fcf-81fd-3c4af1123a06
+2778,Top of Head,e9d79077-2ec6-4613-bdf2-73b7417cf6d3
+2779,Right Side of Head,e9d79077-2ec6-4613-bdf2-73b7417cf6d3
+2780,Neck,e9d79077-2ec6-4613-bdf2-73b7417cf6d3
+2781,Front of Head,e2717226-42c8-4f6c-8333-e0f03324f9d4
+2782,Front of Head,cc3862a2-bcb6-4513-b4e7-302b157b3886
+2783,Right Side of Head,cc3862a2-bcb6-4513-b4e7-302b157b3886
+2784,Left Side of Head,4c6ae740-0b1c-42e9-8fa6-4dc16e38a30d
+2785,Front of Head,4c6ae740-0b1c-42e9-8fa6-4dc16e38a30d
+2786,None,140666eb-8bef-4b1d-b6a1-0610751afc30
+2787,NULL,d893dec6-4f36-4cca-85c4-0ef31ba2a09b
+2788,Back of Head,ebd70ae8-fe99-4287-b3ee-f19dbe1ba8df
+2789,Left Side of Head,94e82c26-02ed-4298-ba44-685f64be2acd
+2790,Front of Head,94e82c26-02ed-4298-ba44-685f64be2acd
+2791,Top of Head,584a852e-b25f-4ccf-9302-1e31f3ce48f5
+2792,Back of Head,69e9afda-bd1c-4692-b9ed-f1d381694aec
+2793,Right Side of Head,37e83234-75c9-4a31-9c55-c8f8c80bdb34
+2794,Right side of jaw,37e83234-75c9-4a31-9c55-c8f8c80bdb34
+2795,None,bd352c7a-ad34-427b-aabf-75826bc42d0a
+2796,Left Side of Head,1c773ac8-c542-4676-ae69-15df7995360e
+2797,Top of Head,1c773ac8-c542-4676-ae69-15df7995360e
+2798,Front of Head,110b072a-917e-4946-8303-c6047e192201
+2799,Top of Head,110b072a-917e-4946-8303-c6047e192201
+2800,Back of Head,2b925d90-cf4c-4000-b664-e2f02b0e7b75
+2801,Top of Head,c7285a1a-4b9d-4a18-8958-8f95bd4d68f5
+2802,Not sure,2ce0a635-2c9c-42bc-8816-9c6a9c185ab2
+2803,Left Side of Head,f3254479-3732-4db2-aeab-f336ceaf250c
+2804,Left Side of Head,8aeebfc2-ad33-4c70-ae44-725ef450e6af
+2805,Back of Head,8aeebfc2-ad33-4c70-ae44-725ef450e6af
+2806,Top of Head,8aeebfc2-ad33-4c70-ae44-725ef450e6af
+2807,Back of Head,14b8ee69-f5b6-4d76-8226-88abee61d317
+2808,Left Side of Head,14b8ee69-f5b6-4d76-8226-88abee61d317
+2809,Top of Head,14b8ee69-f5b6-4d76-8226-88abee61d317
+2810,Front of Head,9678c984-c25d-46eb-a012-247ba95e8bc8
+2811,Back of Head,9678c984-c25d-46eb-a012-247ba95e8bc8
+2812,Right Side of Head,be438074-b2ea-4017-8336-6e379a2a5811
+2813,Back of Head,6995ea42-1a9d-4e2f-929f-608b7a5fbd93
+2814,"Not sure, no memory of actual impact",15aecd4f-256d-46af-822f-b89c6d3bfd1e
+2815,Not sure,87ac9927-f4c6-4ade-85c8-8dd90f384b5c
+2816,Front of Head,4252a999-c674-425e-a494-ee44e5a73b63
+2817,Right Side of Head,4252a999-c674-425e-a494-ee44e5a73b63
+2818,Left Side of Head,2775ea05-68fd-446d-9a74-47908f1250e6
+2819,Neck,2775ea05-68fd-446d-9a74-47908f1250e6
+2820,Left jaw,2775ea05-68fd-446d-9a74-47908f1250e6
+2821,Not sure,518e7ae7-42c4-42d3-a706-395c78fb421b
+2822,Front of Head,6d199d9a-6333-4aeb-91f9-c0f35cefa385
+2823,Right Side of Head,6d199d9a-6333-4aeb-91f9-c0f35cefa385
+2824,Front of Head,55d2003a-8664-488f-b075-5902e950ab6f
+2825,Back of Head,55d2003a-8664-488f-b075-5902e950ab6f
+2826,Left Side of Head,55d2003a-8664-488f-b075-5902e950ab6f
+2827,Top of Head,55d2003a-8664-488f-b075-5902e950ab6f
+2828,Right Side of Head,55d2003a-8664-488f-b075-5902e950ab6f
+2830,"Wasn't hit",78f378a2-501a-4350-bc58-4a8fd5ef8b85
+2831,Top of Head,6f5fad28-8895-4866-83e0-182d720552f5
+2832,Left Side of Head,d4022369-67fb-450f-a5a8-a1b5ad469d7b
+2833,Left Side of Head,012eccde-f0b9-4ae2-aebf-3c821c461545
+2834,Left Side of Head,012eccde-f0b9-4ae2-aebf-3c821c461545
+2835,Left Side of Head,012eccde-f0b9-4ae2-aebf-3c821c461545
+2836,Left Side of Head,012eccde-f0b9-4ae2-aebf-3c821c461545
+2837,Back of Head,615c6fe9-a6a6-4485-8d39-091986ec0b94
+2838,Left Side of Head,615c6fe9-a6a6-4485-8d39-091986ec0b94
+2839,Back of Head,49adbadf-dbcb-41f1-aea8-a217d5127bb5
+2840,Back of Head,db480db8-e0d1-46f1-a43e-40a972643de1
+2841,Back of Head,60333fd1-aa74-43b1-8a89-af2fd1d62e27
+2842,Back of Head,60333fd1-aa74-43b1-8a89-af2fd1d62e27
+2843,Front of Head,93c9bfb5-49d2-4a97-baed-99ca7e4a9343
+2844,Right Side of Head,93c9bfb5-49d2-4a97-baed-99ca7e4a9343
+2845,Back of Head,93c9bfb5-49d2-4a97-baed-99ca7e4a9343
+2846,Front of Head,1cea9e54-3949-4077-b34e-729b08d18f71
+2847,Back of Head,1cea9e54-3949-4077-b34e-729b08d18f71
+2848,Right Side of Head,9a828160-691c-4da6-a485-78dfb158c6c8
+2849,I felt my legs not good after going out from a taxi,fbcc66c0-e2d6-4dc3-a6bf-ac248b0a908d
+2850,Right Side of Head,cacfd055-dde6-492a-9c02-b916095955c1
+2851,Back of Head,981a4e13-ae2b-4301-8de8-3fcbd6d6017c
+2852,Right Side of Head,a419b210-7615-40ac-ad05-a9e0a83046af
+2853,Front of Head,cfba5f4c-8266-4e4c-bcf8-36e423ab0e35
+2854,Back of Head,cfba5f4c-8266-4e4c-bcf8-36e423ab0e35
+2855,Left Side of Head,cfba5f4c-8266-4e4c-bcf8-36e423ab0e35
+2856,Right Side of Head,cfba5f4c-8266-4e4c-bcf8-36e423ab0e35
+2857,Front of Head,cfba5f4c-8266-4e4c-bcf8-36e423ab0e35
+2858,Right Side of Head,cfba5f4c-8266-4e4c-bcf8-36e423ab0e35
+2859,Back of Head,cfba5f4c-8266-4e4c-bcf8-36e423ab0e35
+2860,Left Side of Head,cfba5f4c-8266-4e4c-bcf8-36e423ab0e35
+2861,Top of Head,cfba5f4c-8266-4e4c-bcf8-36e423ab0e35
+2862,None,74991513-e252-4757-bfc9-eeee9af114df
+2863,Back of Head,5619d2ce-64f1-403d-ba42-4b5b807c03c9
+2864,Neck,5619d2ce-64f1-403d-ba42-4b5b807c03c9
+2865,Back of Head,9e8a2696-eb9c-467e-8110-1d8144aafa52
+2866,All,c144f079-6e9d-4b76-a03d-13e7d097f17c
+2867,Left Side of Head,ebdfe728-7aff-4911-b089-6d3fb346835d
+2868,Front of Head,8d1c528a-a582-4736-a727-948964a9a4b8
+2869,Back of Head,b68e6946-8b57-4f82-9d0f-472811f8c306
+2870,Front of Head,b68e6946-8b57-4f82-9d0f-472811f8c306
+2871,Top and right side,e1a88b87-9b5a-416f-9d03-f52126b45448
+2872,Back of Head,b38500b1-fb9b-4e88-8d9c-7ec541b8aa49
+2873,Back of Head,c0a536e0-2c3c-450a-92e1-0aeb832bc1c7
+2874,Back of Head,a9c14751-6ba4-40d5-8e49-fcd357127871
+2875,Left Side of Head,c1fd8b92-48c2-4e4c-ad4f-58deab250735
+2876,Right Side of Head,1a0e8cbc-a196-4f07-942a-4067394eb915
+2877,Front of Head,d3ea9032-53d9-4fe4-8f7b-512db20d107e
+2878,Back of Head,d3ea9032-53d9-4fe4-8f7b-512db20d107e
+2879,Left Side of Head,d3ea9032-53d9-4fe4-8f7b-512db20d107e
+2880,Right Side of Head,d3ea9032-53d9-4fe4-8f7b-512db20d107e
+2881,Top of Head,d3ea9032-53d9-4fe4-8f7b-512db20d107e
+2882,Left Side of Head,4dbf8668-4364-4bfe-b7f3-62413ea8d69a
+2883,Front of Head,4dbf8668-4364-4bfe-b7f3-62413ea8d69a
+2884,Front of Head,62e38ed1-73aa-4edc-be97-2ca73df45736
+2885,Back of Head,62e38ed1-73aa-4edc-be97-2ca73df45736
+2886,Left Side of Head,62e38ed1-73aa-4edc-be97-2ca73df45736
+2887,Right Side of Head,62e38ed1-73aa-4edc-be97-2ca73df45736
+2888,Neck,62e38ed1-73aa-4edc-be97-2ca73df45736
+2889,Back of Head,d3194de5-68a9-4025-8528-3f12ba4d33b5
+2890,Front of Head,d3194de5-68a9-4025-8528-3f12ba4d33b5
+2891,Right Side of Head,45a0053f-e972-44b0-81e9-87cae635743f
+2892,Right Side of Head,2e620f5a-1f65-4056-9ea4-9a916a51db4a
+2893,Back of Head,b0eb5911-c865-4ded-b755-322a5e945a48
+2894,Front of Head,f7040618-d08c-40f4-9acd-0cd41ff820b5
+2895,Left orbital fracture,f7040618-d08c-40f4-9acd-0cd41ff820b5
+2896,Back of Head,a9a03ac0-3387-4966-adbf-1a01a32868aa
+2897,Front of Head,0420edaf-8ebd-4cd2-aebb-37f3fe71c4ee
+2898,Face,0420edaf-8ebd-4cd2-aebb-37f3fe71c4ee
+2899,Right Side of Head,6df65e36-ddf6-4202-8795-88cd61d8f266
+2900,Left Side of Head,5260ac94-12d6-4359-b582-d04495351f79
+2901,None,ff7e7e16-d87e-424e-a084-9263e0c04f64
+2902,Left Side of Head,efd7682b-adde-4b6f-b2d7-16f50597c984
+2903,Uncertain-noone else present,7edac5e2-3e53-4933-8e39-9fe71fbc96ae
+2904,Right Side of Head,6d109fd6-5138-4348-b82e-b5cb47d23d24
+2905,Left Side of Head,6d109fd6-5138-4348-b82e-b5cb47d23d24
+2906,Left Side of Head,efd7682b-adde-4b6f-b2d7-16f50597c984
+2907,None,94a70084-155e-4edc-b61f-6b1730a4d6c1
+2908,Front of Head,5ba4b2c1-c304-404e-9f3b-535984a22c61
+2909,Front of Head,56b806e4-ed6c-4d43-a86b-f0a8af234f87
+2910,Back of Head,56b806e4-ed6c-4d43-a86b-f0a8af234f87
+2913,Back of Head,75d70f6a-fa82-4b5a-ada8-73c7d1517e27
+2914,Front of Head,42e26b6c-8848-4b7c-9f42-b89c4e304cbb
+2915,Right Side of Head,42e26b6c-8848-4b7c-9f42-b89c4e304cbb
+2916,Front of Head,42e26b6c-8848-4b7c-9f42-b89c4e304cbb
+2917,Left Side of Head,42e26b6c-8848-4b7c-9f42-b89c4e304cbb
+2918,Front of Head,949a4ac1-9a7b-4580-ae61-7a48076cca7b
+2919,Front of Head,13f76f63-a6b3-4a4c-9b6f-cb975f0e6266
+2920,Left Side of Head,d1efc8a3-1f69-4f37-8604-30d6d717514e
+2921,Left Side of Head,66df4275-7a7d-4f87-bba3-f2131a5c482f
+2922,Left Side of Head,66df4275-7a7d-4f87-bba3-f2131a5c482f
+2924,None,33d74b4f-31f4-400c-8185-72da90b80104
+2925,Left Side of Head,f261f134-f331-4f57-8b08-be0cae434a60
+2926,Left Side of Head,6a759401-df14-423c-aa22-c04db942c27a
+2927,Right Side of Head,4d019a49-1d1b-4c9e-80f5-042242861fdb
+2928,Back of Head,e059ef6f-889d-47d1-abd2-064453e1d013
+2929,Front of Head,8a774233-0b05-4daa-b5ce-766f41d66ba8
+2930,Back of Head,8a774233-0b05-4daa-b5ce-766f41d66ba8
+2931,Front of Head,49ef2072-494e-4def-99f5-c9106baf9f54
+2932,Front of Head,06ffcad1-b7d9-4486-a2bb-57ca771aecc8
+2933,Back of Head,06ffcad1-b7d9-4486-a2bb-57ca771aecc8
+2934,Neck,06ffcad1-b7d9-4486-a2bb-57ca771aecc8
+2935,Front of Head,cf6f1dac-edec-4aed-9aab-c376d790bf69
+2936,Not sure,9226492a-cc5b-48af-a6f7-31462be85b88
+2937,Front of Head,4471257f-7b52-4278-9654-e56cab633e67
+2938,Back of Head,4471257f-7b52-4278-9654-e56cab633e67
+2939,Front of Head,a94aa939-99cd-4807-ae13-0b282b51d0ae
+2940,Right Side of Head,a94aa939-99cd-4807-ae13-0b282b51d0ae
+2941,Left Side of Head,a94aa939-99cd-4807-ae13-0b282b51d0ae
+2942,Back of Head,4d12b13b-8874-42ef-8c02-3410ad2ea4a4
+2943,Back of Head,7294894b-8ca5-4c0d-9470-f3d814dea2ee
+2944,None,3fbeafaf-8511-4b6f-94cd-9b7715b4da2a
+2945,Back of Head,b7f3017c-b4fa-4a6b-849d-efafc527748e
+2946,Right Side of Head,b7386c17-44ee-48bd-8350-8250e56e9750
+2947,Top of Head,b7386c17-44ee-48bd-8350-8250e56e9750
+2948,Chest,b7386c17-44ee-48bd-8350-8250e56e9750
+2949,Back of Head,b7386c17-44ee-48bd-8350-8250e56e9750
+2950,Brain stem,07e854da-09a4-41df-83c2-1109ba812f7f
+2951,Back of Head,b69c902c-e1d7-4fe6-b56a-237fb1aa8d87
+2952,Neck,b69c902c-e1d7-4fe6-b56a-237fb1aa8d87
+2953,Back of Head,022242f1-bcae-4230-9b5d-e03b1e3e25fa
+2954,Front of Head,b6cd5c6a-345e-4c9c-bdeb-ed30dd410cba
+2955,Right Side of Head,b6cd5c6a-345e-4c9c-bdeb-ed30dd410cba
+2956,Back of Head,b6cd5c6a-345e-4c9c-bdeb-ed30dd410cba
+2957,Front of Head,54202dea-5109-4ccb-8a5f-3e601827fbcb
+2958,Back of Head,54202dea-5109-4ccb-8a5f-3e601827fbcb
+2959,Right Side of Head,54202dea-5109-4ccb-8a5f-3e601827fbcb
+2960,Back,54202dea-5109-4ccb-8a5f-3e601827fbcb
+2961,Top of Head,bafd2e33-1a8e-45d3-9a57-9bbffb33fce6
+2962,Right Side of Head,15be236a-e821-42c1-b71d-423cdff27778
+2963,Top of Head,ba9732ce-07a0-4dd6-be95-61a679bff5cf
+2964,Front of Head,c4b4e3f2-c831-4868-a96d-e319a129aa32
+2965,Neck,fd6392ce-544f-4248-bf6a-9d9e454c8dfd
+2966,Back of Head,1b00f3d0-fe4c-41b1-ac77-698914234da3
+2967,Front of Head,2fa99c01-0e61-4f8a-be96-610c410e6dfe
+2968,Front of Head,7f87cff4-467a-4f39-bdb8-6ceb81113c1e
+2969,Front of Head,641f2a4d-57cd-4c2b-b4f7-3f2cb5a20227
+2970,Back of Head,641f2a4d-57cd-4c2b-b4f7-3f2cb5a20227
+2971,Jaw,b9c204d7-fab4-4078-a534-2cdf1638174c
+2972,Left Side of Head,03da306d-9c5d-438f-8aa6-910eb27a9ede
+2973,Top of Head,621755a3-0d47-4a45-9913-4865e679f725
+2974,Left Side of Head,799cea08-69f7-4c43-ab7f-6b5b8d02c727
+2975,Front of Head,799cea08-69f7-4c43-ab7f-6b5b8d02c727
+2976,Front of Head,7dfbfc3f-875c-4ab3-a47b-16078b41e581
+2977,Back of Head,7dfbfc3f-875c-4ab3-a47b-16078b41e581
+2978,Left Side of Head,c3aa3b64-2789-4abe-9da5-ea3760ee83cc
+2979,Left Side of Head,5f9b43fb-5206-4798-b2b5-d48924f41848
+2980,Top of Head,5f9b43fb-5206-4798-b2b5-d48924f41848
+2981,Back of Head,f6a02ab0-947d-4eae-b318-db111a523643
+2982,Neck,f6a02ab0-947d-4eae-b318-db111a523643
+2983,Right Side of Head,f6a02ab0-947d-4eae-b318-db111a523643
+2984,Left Side of Head,e451f98f-6d09-4a71-96d9-6c22fd00eb28
+2985,Left Side of Head,4794c053-aa1e-48c0-abdb-6d0891d49e1d
+2986,Back of Head,4a8842e1-136f-40e0-a43f-28f49c2cf0ac
+2987,Left Side of Head,3108631b-48f5-464d-b511-27ad9bd5b2ac
+2988,Left Side of Head,679a1879-009e-45e3-b160-ff27b27decbd
+2989,Left temple,679a1879-009e-45e3-b160-ff27b27decbd
+2990,Left Side of Head,679a1879-009e-45e3-b160-ff27b27decbd
+2991,Left temple,679a1879-009e-45e3-b160-ff27b27decbd
+2992,Front of Head,acf46811-b261-44b7-886e-5f12e3ac3db6
+2993,Right Side of Head,acf46811-b261-44b7-886e-5f12e3ac3db6
+2994,Right Side of Head,a628f5d4-b9f2-47c1-b427-4b77b4ef5bab
+2995,None,85951fce-37d6-4454-a562-b3e5b127c149
+2996,Neck,85951fce-37d6-4454-a562-b3e5b127c149
+2997,Front of Head,3b63eb57-f763-4938-a759-7d9603e23ec7
+2998,Back of Head,3b63eb57-f763-4938-a759-7d9603e23ec7
+2999,Left Side of Head,3b63eb57-f763-4938-a759-7d9603e23ec7
+3000,Right Side of Head,3b63eb57-f763-4938-a759-7d9603e23ec7
+3001,Back of Head,defb1b99-337e-400a-b335-3a9e960134be
+3002,Back of Head,e8c384f8-cfa1-463f-bb56-38c04ce92c6e
+3003,Neck,b5e09c55-c0a8-4225-a0a3-c839c3a3b422
+3004,Back of Head,b5e09c55-c0a8-4225-a0a3-c839c3a3b422
+3005,None,d2827b0c-cbe4-40d1-b76c-3f19c71e5714
+3006,Front of Head,f289be73-b370-45f6-a684-14f2690880f5
+3007,Back of Head,f289be73-b370-45f6-a684-14f2690880f5
+3008,Left Side of Head,f289be73-b370-45f6-a684-14f2690880f5
+3009,Top of Head,f289be73-b370-45f6-a684-14f2690880f5
+3010,Right Side of Head,f289be73-b370-45f6-a684-14f2690880f5
+3011,Neck,f289be73-b370-45f6-a684-14f2690880f5
+3012,Front of Head,1b0755ec-e30c-4477-8e62-c1330829316a
+3013,Back of Head,1b0755ec-e30c-4477-8e62-c1330829316a
+3014,Left Side of Head,1b0755ec-e30c-4477-8e62-c1330829316a
+3015,Top of Head,1b0755ec-e30c-4477-8e62-c1330829316a
+3016,Right Side of Head,1b0755ec-e30c-4477-8e62-c1330829316a
+3017,Neck,1b0755ec-e30c-4477-8e62-c1330829316a
+3018,None,0b67fc19-aa94-4ea1-a7b3-859a9db3ed2d
+3019,Front of Head,d8998c98-9234-46a5-bfac-0ebd5b014b3b
+3020,Left Side of Head,d8998c98-9234-46a5-bfac-0ebd5b014b3b
+3021,Right Side of Head,d8998c98-9234-46a5-bfac-0ebd5b014b3b
+3022,Back of Head,d8998c98-9234-46a5-bfac-0ebd5b014b3b
+3023,Top of Head,d8998c98-9234-46a5-bfac-0ebd5b014b3b
+3024,Left Side of Head,d7cba469-8fde-4266-a8f4-f363e699fa36
+3025,Left Side of Head,318c9f66-3daa-4632-9c5c-77aac0fcc547
+3026,Left Side of Head,ec7ecc7e-10c0-4dad-aaae-bf650877ab62
+3027,Top of Head,4a941b7f-fcb0-4046-bc28-660967cf48e1
+3028,Back of Head,4a941b7f-fcb0-4046-bc28-660967cf48e1
+3029,Front of Head,231bf375-ddc4-4606-9ef7-269e157a7407
+3030,Left Side of Head,188430d7-d7a4-44b4-a674-071206e83288
+3031,Right Side of Head,188430d7-d7a4-44b4-a674-071206e83288
+3032,Top of Head,b8eb7f16-5597-41a1-b078-681fc69bbf0a
+3033,Right Side of Head,a6311472-5651-446d-9469-43fc2f25b810
+3034,Front of Head,995ef1e6-c792-4aa8-8e4c-027f5d501668
+3035,Right forehead,995ef1e6-c792-4aa8-8e4c-027f5d501668
+3036,Left Side of Head,bb8e0677-ddc8-49dd-be08-ab6f10ad43f3
+3037,Back of Head,65ae42c6-d9e9-43ae-9712-66bbf6c2c721
+3038,Front of Head,cf71ad81-c381-415c-bc27-d9e0c3e27a2c
+3039,Front of Head,302187ca-65e4-4682-bf03-058751831e7c
+3040,Right Side of Head,d21b7875-f2b3-4af5-adbe-6198a6f64d00
+3041,Back of Head,d6480b39-a2f2-4f64-be58-b5a5f1c038e9
+3042,Front of Head,be20b7c3-5cf3-4206-b9dc-d18e6b68e570
+3043,Back of Head,d7dab327-47d7-49d5-b7dd-6b0936d2fbc4
+3044,Neck,d7dab327-47d7-49d5-b7dd-6b0936d2fbc4
+3045,Left Side of Head,d7dab327-47d7-49d5-b7dd-6b0936d2fbc4
+3046,Back of Head,837f53b0-4286-4dd3-bfc2-3c564aa12d2a
+3047,Front of Head,837f53b0-4286-4dd3-bfc2-3c564aa12d2a
+3048,Right Side of Head,395edf68-a6ee-45d6-9e60-60df3c259d70
+3049,Front of Head,ceb5fb74-32a2-4cd6-ad33-80fb7bbb4278
+3050,Back of Head,2d9bb971-6f84-41ae-9888-b274881ab256
+3051,Right Side of Head,65549a28-8212-4c75-975e-ec3f998e1776
+3052,Neck,3dfacd3c-de4f-42ed-bf1e-1c8c49bf593f
+3053,Left Side of Head,3dfacd3c-de4f-42ed-bf1e-1c8c49bf593f
+3054,Right Side of Head,3dfacd3c-de4f-42ed-bf1e-1c8c49bf593f
+3055,Front of Head,4b6198e9-cafa-43e1-a827-368df8897999
+3056,Back of Head,4b6198e9-cafa-43e1-a827-368df8897999
+3057,Left Side of Head,4b6198e9-cafa-43e1-a827-368df8897999
+3058,Right Side of Head,4b6198e9-cafa-43e1-a827-368df8897999
+3059,Front of Head,4b6198e9-cafa-43e1-a827-368df8897999
+3060,Back of Head,4b6198e9-cafa-43e1-a827-368df8897999
+3061,Top of Head,4b6198e9-cafa-43e1-a827-368df8897999
+3062,Left Side of Head,4b6198e9-cafa-43e1-a827-368df8897999
+3063,Right Side of Head,4b6198e9-cafa-43e1-a827-368df8897999
+3064,Whiplash,dc266e07-f23b-4df4-9d23-00a04f7b00de
+3065,None,bf4781db-677d-424b-b172-4b4ae31fb480
+3066,Right Side of Head,7191ba91-2cd5-4815-a418-ffd383296e28
+3067,Top of Head,4d559454-1c36-4b6c-a70a-6bf9e1cf23c0
+3068,Unknown,7f103eff-3f50-48fd-8742-f67471ff9105
+3069,Left Side of Head,976de419-14f3-4415-adc3-56078b9caeb3
+3070,Back of Head,976de419-14f3-4415-adc3-56078b9caeb3
+3071,Front of Head,089c9a64-6088-4722-aa0c-3ea978deec1a
+3072,Left Side of Head,089c9a64-6088-4722-aa0c-3ea978deec1a
+3073,Left Side of Head,67c20844-8151-485d-b58a-bcece11c169d
+3074,Back of Head,67c20844-8151-485d-b58a-bcece11c169d
+3075,Right Side of Head,67c20844-8151-485d-b58a-bcece11c169d
+3076,Back of Head,5b245411-9820-4915-a9d1-623183fe58de
+3077,Front of Head,790a1414-f2b2-4320-ab27-3c399a6f19a3
+3078,Top of Head,2c046eac-9a9a-4983-b7fc-82a656c0e757
+3079,Back of Head,2c046eac-9a9a-4983-b7fc-82a656c0e757
+3080,Right Side of Head,2c046eac-9a9a-4983-b7fc-82a656c0e757
+3081,Shoulder,2c046eac-9a9a-4983-b7fc-82a656c0e757
+3082,Right Side of Head,24a7a44f-216e-4135-9716-85bb8a75ca37
+3083,Left Side of Head,24a7a44f-216e-4135-9716-85bb8a75ca37
+3084,Front of Head,24a7a44f-216e-4135-9716-85bb8a75ca37
+3085,Left Side of Head,ba904efc-5176-43f2-9fd6-3a4c76109afd
+3086,Front of Head,6f6d842b-1fb9-48dd-b713-5ec27598911a
+3087,Front of Head,e4146d00-4271-4070-ad65-1741b24a2fff
+3088,Back of Head,e4146d00-4271-4070-ad65-1741b24a2fff
+3089,Front of Head,1a3e1649-940e-4fc4-b0fc-289a5a6fa9ae
+3090,Back of Head,1a3e1649-940e-4fc4-b0fc-289a5a6fa9ae
+3091,Top of Head,9410967c-3f99-4fa9-b5d5-9e2d36b20251
+3092,Top of Head,d28df237-1031-4231-a76b-46b4597fad28
+3093,Front of Head,d28df237-1031-4231-a76b-46b4597fad28
+3094,Left Side of Head,d28df237-1031-4231-a76b-46b4597fad28
+3095,None,22884dd0-ccab-4988-88ae-225e23780b92
+3096,Front of Head,e7d21f6e-f2ea-4874-ba6e-bdb421003a8f
+3097,Neck,e7d21f6e-f2ea-4874-ba6e-bdb421003a8f
+3098,Left Side of Head,0e1c7633-38f1-43a9-80ba-01fc228003f6
+3099,Neck,0e1c7633-38f1-43a9-80ba-01fc228003f6
+3100,Front of Head,0e1c7633-38f1-43a9-80ba-01fc228003f6
+3101,Right Side of Head,2f5a30e2-e0c5-4b34-8428-05ba3926c6ae
+3102,Neck,2f5a30e2-e0c5-4b34-8428-05ba3926c6ae
+3103,Back of Head,fec6b9d0-e6ca-4264-aa9c-e992822ea3a9
+3104,Back of Head,28441201-d16e-40a1-b9d1-ea2959b5495b
+3105,Top of Head,28441201-d16e-40a1-b9d1-ea2959b5495b
+3106,Right Side of Head,28441201-d16e-40a1-b9d1-ea2959b5495b
+3107,Back of Head,18e6063e-8661-4d01-b21e-5d59c942426b
+3108,Neck,18e6063e-8661-4d01-b21e-5d59c942426b
+3109,Left Side of Head,02b72dc4-3645-4f19-be5a-989e9147544e
+3110,Left Side of Head,34c3f810-f811-48ea-8227-9f65713da02b
+3111,Top of Head,34c3f810-f811-48ea-8227-9f65713da02b
+3112,Back of Head,a48184e3-7f53-4775-a658-193bef78513f
+3113,Front of Head,a48184e3-7f53-4775-a658-193bef78513f
+3114,Neck,a48184e3-7f53-4775-a658-193bef78513f
+3115,None,abfd7821-f34a-41ce-a07d-4d0bc3436c55
+3116,Left Side of Head,934ff2dd-792c-436a-899c-f7ded653e58d
+3117,Right Side of Head,8b798974-2d6b-4d99-95c9-2fd7d0954e44
+3118,None,61f56309-18ff-4c52-87a1-2b43f47c6ee8
+3119,Front/left,21c4850b-67d7-413e-b635-1f76a175cdb6

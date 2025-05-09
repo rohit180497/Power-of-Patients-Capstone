@@ -1,0 +1,200 @@
+id,therapies,category
+18,Vision Therapy,NULL
+19,Ddddd,NULL
+20,Another newline,NULL
+21,Testing other,NULL
+22,"Neurosurgery, coiling",NULL
+23,Medicine,NULL
+24,Hyperbaric,NULL
+11,Acupuncture,Alternative
+14,Pain Management,Alternative
+13,Massage Therapy,Alternative
+108,Hypnotherapy,NULL
+25,Functional Neurology,Chiropractic
+109,Acupressure,NULL
+26,Upper Cervical,Chiropractic
+27,Regular Chiropractic Care,Chiropractic
+28,Developmental Vision Therapy,Vision
+29,Telehealth Vision Therapy,Vision
+30,Syntonics,Vision
+16,Occupational Therapy,Applied
+15,Physical Therapy,Applied
+17,Speech Language Therapy,Applied
+38,Nutritional Support,Endocrine
+39,Prescriptive Medicines,Endocrine
+110,Bowen,NULL
+12,Chiropractic / Functional Neurology,
+37,Psychiatry,Mental Health
+36,Counselling,Mental Health
+35,Therapy for PTSD/Trauma,Mental Health
+34,Psychology,Mental Health
+33,Cognitive Behavioral Therapy,Mental Health
+31,Virtual Therapy,Vision
+32,Music Therapy,Applied
+40,None,NULL
+41,Xbcvb,NULL
+42,Botox,NULL
+43,Cranial/sacral,NULL
+44,Dry needling,NULL
+45,Vestibular therapy,NULL
+46,"Opthomologist(bieberdorf) prisms in lenses, updated lenses for prisms and slight vision change after stroke",NULL
+47,Osteopath,NULL
+48,Naturopath,NULL
+49,Sleep study,NULL
+50,Concussion physiotherapy,NULL
+51,Boston,NULL
+52,Vancouver,NULL
+53,Florida,NULL
+54,Toronto,NULL
+55,Unsure if what rype,NULL
+56,Nucca,NULL
+57,Neurologist,NULL
+58,Strabismus surgery 7/98,NULL
+59,Neurologist ,Mental Health
+60,Naturopathic medicine,NULL
+61,Supplements,NULL
+62,Craniosacral,NULL
+63,Recreational therapy,NULL
+64,Iso,NULL
+65,Neuropsychologist,NULL
+66,Vision therapy,NULL
+67,Saccral cranial massage,NULL
+68,Hyperbaric oxygen therapy,NULL
+69,Manual therapy,NULL
+70,Regular eye dr,NULL
+71,"Cognitive therapy, meditation",NULL
+72,Referral by neurologist pending,NULL
+73,Corective lenses,NULL
+74,Beyond scope of care,NULL
+75,Chiropractor,NULL
+76,Occupational therapists trained to work with abi patients,NULL
+77,Social worker,NULL
+78,Started doing meditation,NULL
+79,Advise from doctors,NULL
+80,"Z'x'c",NULL
+81,Csrvical spine chiropractor,NULL
+82,Eye movement,NULL
+83,Physical therapy,NULL
+84,Working with pcp,NULL
+85,Chiro,NULL
+86,Meditation,NULL
+87,Interactive metronome,NULL
+88,Emdr,NULL
+89,Vibration plate,NULL
+90,Talk,NULL
+91,Craniosacral therapy,NULL
+92,Just a test account,NULL
+93,"Ot,pt & speech",NULL
+94,Speech therapy,NULL
+96,Radio frequency ablation,NULL
+95,Battlefield acupuncture,NULL
+97,Stellate ganglion block,NULL
+98,Therapist,NULL
+99,Save a warrior,NULL
+100,Millennium health,NULL
+101,Rest,NULL
+102,"Dbt, emdr, eft",NULL
+103,Prism glasses,NULL
+104,Prism in glasses,NULL
+105,Vestibular speech,NULL
+106,Speech,NULL
+107,Self awareness management,NULL
+111,Self-hypnosis,NULL
+112,Ayurveda,NULL
+113,Neurosurgeon,NULL
+114,Pcp,NULL
+115,"Double vision, or blurred vision",NULL
+116,"I'm heading for my 5th spine surgery, but i do believe in chiro for care",NULL
+117,Not sure,NULL
+118,Light lens therapy might be the first one above,NULL
+119,Osteopathy,NULL
+120,Cranio sacral,NULL
+121,Movement therapy,NULL
+122,Epidural injections in back,NULL
+123,Ot and pt,NULL
+124,Water therapy,NULL
+125,Opthamology,NULL
+126,"Vision therapy, vestibular pt, psychotherapy",NULL
+127,Lens neuro feedback,NULL
+128,Ophthalmologist,NULL
+129,Occupational therapy,NULL
+130,Group public speaking,NULL
+131,Yoga retreat to meet dr. amen,NULL
+132,Equestrian,NULL
+133,Dbt and emdr,NULL
+134,Cannabis,NULL
+135,Vision,NULL
+136,Optometrist specialist,NULL
+137,Reiki,NULL
+138,Pemf,NULL
+139,Ortho surgeon,NULL
+140,Recovery,NULL
+141,Nutrition and exercise therapy,NULL
+142,Md - facial surgery for fracture,NULL
+143,Neuro sensory motor therapy,NULL
+144,Functional eye movements,NULL
+145,Aba,NULL
+146,Neuro sendory motor system,NULL
+147,Class iv laser,NULL
+148,Visual motor intergration,NULL
+149,Visual motor integrating system,NULL
+150,Neurology,NULL
+151,Floar therapy,NULL
+152,Cranial sacral,NULL
+153,Cranial sacral therapy,NULL
+154,Float therapy,NULL
+155,Vitamins and supplementation,NULL
+156,Visual motor intergrating,NULL
+158,Counseling,NULL
+157,Chiropractic,NULL
+159,Neuro,NULL
+160,Ot,NULL
+161,Pt,NULL
+162,Vitamins and supplements,NULL
+163,Saw pcp/urgent care,NULL
+165,Hbot,NULL
+164,Detox supplements and shakes,NULL
+166,Iv therapies,NULL
+167,Neuro rehab,NULL
+168,Movement/dance,NULL
+169,Herbal tea,NULL
+170,Yoga nidra,NULL
+171,Yoga therapy,NULL
+172,Low back,NULL
+173,Craniopathy,NULL
+174,Feldenkrais,NULL
+175,Art therapy,NULL
+176,Unsure what type of chiropractic was used,NULL
+177,Manejo de dolor,NULL
+178,Terapia física,NULL
+179,Terapia del habla y lenguaje,NULL
+180,Ninguno,NULL
+181,Terapia ocupacional,NULL
+182,Consejería,NULL
+183,Psicología,NULL
+184,Neurólogo,NULL
+185,Psiquiatría,NULL
+186,Aqua therapy,NULL
+187,Acupuntura,NULL
+188,Terapia de masaje,NULL
+189,"Ozone, methylene blue, supplements",NULL
+190,Optometrist,NULL
+191,Cognitive therapy,NULL
+192,Adhd therapy,NULL
+193,Yoga,NULL
+194,Terapia cognitiva conductual,NULL
+195,Vestibular,NULL
+196,Md with background in brain injury,NULL
+197,Eye muscle surgery,NULL
+198,Prism,NULL
+199,None yet,NULL
+200,Concussion. therapy,NULL
+201,Dance,NULL
+202,Theraputic massage,NULL
+203,Acupressure mat - lying down,NULL
+204,Acupressure mat - standing,NULL
+205,Breath work,NULL
+206,Journaling,NULL
+207,Singing,NULL
+208,"Hyperbaric oxygen chamber, red light therapy,",NULL
+209,Exercise,NULL
