@@ -20,7 +20,8 @@ select top 10 * from patient_info where patient_id in ('a19d709f-1440-4cd0-9175-
 
 select top 10 * from registered_sdoh
 
-select top 10 * from therapies_list
+select count(*) as cnt from goals
+group by patient_id order by cnt desc
 
 select  id, first_goal from goals where first_goal is not null
 
