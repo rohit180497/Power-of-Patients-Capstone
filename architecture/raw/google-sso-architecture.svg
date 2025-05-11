@@ -1,0 +1,203 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f9fafc" rx="8" ry="8"/>
+  
+  <!-- Title -->
+  <text x="600" y="50" font-family="Arial" font-size="28" font-weight="bold" text-anchor="middle" fill="#1a365d">Medical AI Assistant with Google SSO Authentication</text>
+  
+  <!-- Google SSO Flow Section -->
+  <rect x="100" y="80" width="1000" height="220" rx="12" ry="12" fill="#e6fffa" stroke="#b2f5ea" stroke-width="1" opacity="0.5"/>
+  <text x="150" y="105" font-family="Arial" font-size="16" font-weight="bold" fill="#4a5568">GOOGLE SSO AUTHENTICATION FLOW</text>
+  
+  <!-- Application & API Layer -->
+  <rect x="100" y="310" width="1000" height="180" rx="12" ry="12" fill="#ebf4ff" stroke="#c3dafe" stroke-width="1" opacity="0.5"/>
+  <text x="150" y="335" font-family="Arial" font-size="16" font-weight="bold" fill="#4a5568">APPLICATION & API LAYER</text>
+  
+  <!-- Agent System Layer -->
+  <rect x="100" y="500" width="1000" height="220" rx="12" ry="12" fill="#faf5ff" stroke="#e9d8fd" stroke-width="1" opacity="0.5"/>
+  <text x="150" y="525" font-family="Arial" font-size="16" font-weight="bold" fill="#4a5568">AGENT SYSTEM WITH ROLE-BASED ACCESS</text>
+  
+  <!-- Google Identity Platform -->
+  <rect x="150" y="130" width="180" height="70" rx="10" ry="10" fill="#ffffff" stroke="#4285f4" stroke-width="2"/>
+  <text x="240" y="170" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#4285f4">Google Identity</text>
+  <text x="240" y="190" font-family="Arial" font-size="12" text-anchor="middle" fill="#4285f4">OAuth 2.0 Provider</text>
+  
+  <!-- Google Colors Logo -->
+  <circle cx="170" cy="165" r="15" fill="#4285f4"/>
+  <circle cx="195" cy="165" r="15" fill="#ea4335"/>
+  <circle cx="220" cy="165" r="15" fill="#fbbc05"/>
+  <circle cx="245" cy="165" r="15" fill="#34a853"/>
+  
+  <!-- User Browser -->
+  <rect x="150" y="230" width="180" height="50" rx="10" ry="10" fill="#90cdf4" stroke="#4299e1" stroke-width="2"/>
+  <text x="240" y="260" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#2c5282">User Browser</text>
+  
+  <!-- Backend Auth Service -->
+  <rect x="400" y="130" width="200" height="150" rx="10" ry="10" fill="#fbd38d" stroke="#ed8936" stroke-width="2"/>
+  <text x="500" y="160" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#9c4221">Auth Service</text>
+  
+  <!-- Auth Service Components -->
+  <rect x="420" y="175" width="160" height="35" rx="5" ry="5" fill="#fffaf0" stroke="#f6ad55" stroke-width="1"/>
+  <text x="500" y="198" font-family="Arial" font-size="14" text-anchor="middle" fill="#9c4221">Google OAuth Client</text>
+  
+  <rect x="420" y="220" width="160" height="35" rx="5" ry="5" fill="#fffaf0" stroke="#f6ad55" stroke-width="1"/>
+  <text x="500" y="243" font-family="Arial" font-size="14" text-anchor="middle" fill="#9c4221">JWT Token Issuer</text>
+  
+  <!-- User DB -->
+  <rect x="670" y="130" width="160" height="70" rx="10" ry="10" fill="#b2f5ea" stroke="#38b2ac" stroke-width="2"/>
+  <text x="750" y="170" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#234e52">User Database</text>
+  
+  <!-- Role Service -->
+  <rect x="670" y="210" width="160" height="70" rx="10" ry="10" fill="#bee3f8" stroke="#3182ce" stroke-width="2"/>
+  <text x="750" y="250" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#2a4365">Role Assignment</text>
+  
+  <!-- Auth Flow Arrows -->
+  <path d="M240,230 L240,200" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="260" y="215" font-family="Arial" font-size="12" text-anchor="start" fill="#4a5568">1. Login Request</text>
+  
+  <path d="M330,165 L400,165" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="340" y="155" font-family="Arial" font-size="12" text-anchor="start" fill="#4a5568">2. Redirect to Google</text>
+  
+  <path d="M400,185 L330,185" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="340" y="205" font-family="Arial" font-size="12" text-anchor="start" fill="#4a5568">3. Auth Code</text>
+  
+  <path d="M600,165 L670,165" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="610" y="155" font-family="Arial" font-size="12" text-anchor="start" fill="#4a5568">4. Get/Create User</text>
+  
+  <path d="M600,245 L670,245" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="610" y="265" font-family="Arial" font-size="12" text-anchor="start" fill="#4a5568">5. Get User Role</text>
+  
+  <path d="M750,210 L750,200" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- JWT Token -->
+  <rect x="880" y="160" width="170" height="100" rx="10" ry="10" fill="#fed7d7" stroke="#fc8181" stroke-width="2"/>
+  <text x="965" y="190" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#742a2a">JWT Token</text>
+  <text x="965" y="215" font-family="Arial" font-size="12" text-anchor="middle" fill="#742a2a">Header: alg, typ</text>
+  <text x="965" y="235" font-family="Arial" font-size="12" text-anchor="middle" fill="#742a2a">Payload: sub, role, exp</text>
+  <text x="965" y="255" font-family="Arial" font-size="12" text-anchor="middle" fill="#742a2a">Signature</text>
+  
+  <path d="M600,200 Q750,280 880,200" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="720" y="300" font-family="Arial" font-size="12" text-anchor="middle" fill="#4a5568">6. Issue JWT with role</text>
+  
+  <!-- Frontend Application -->
+  <rect x="150" y="350" width="220" height="120" rx="10" ry="10" fill="#90cdf4" stroke="#4299e1" stroke-width="2"/>
+  <text x="260" y="380" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#2c5282">Frontend Application</text>
+  
+  <!-- Frontend Components -->
+  <rect x="170" y="400" width="80" height="50" rx="5" ry="5" fill="#e6f0ff" stroke="#63b3ed" stroke-width="1"/>
+  <text x="210" y="430" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c5282">Doctor UI</text>
+  
+  <rect x="270" y="400" width="80" height="50" rx="5" ry="5" fill="#e6f0ff" stroke="#63b3ed" stroke-width="1"/>
+  <text x="310" y="430" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c5282">Patient UI</text>
+  
+  <!-- API Gateway -->
+  <rect x="440" y="350" width="220" height="120" rx="10" ry="10" fill="#9ae6b4" stroke="#48bb78" stroke-width="2"/>
+  <text x="550" y="380" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#276749">API Gateway</text>
+  
+  <!-- API Components -->
+  <rect x="460" y="400" width="180" height="50" rx="5" ry="5" fill="#e6ffea" stroke="#68d391" stroke-width="1"/>
+  <text x="550" y="430" font-family="Arial" font-size="12" text-anchor="middle" fill="#276749">JWT Validator Middleware</text>
+  
+  <!-- API to Frontend -->
+  <path d="M440,410 L370,410" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M370,430 L440,430" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Token Store in Frontend -->
+  <path d="M880,260 Q600,320 260,320" fill="none" stroke="#fc8181" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="550" y="305" font-family="Arial" font-size="12" text-anchor="middle" fill="#fc8181">7. Store Token in Browser</text>
+  
+  <!-- Token to API -->
+  <path d="M260,350 Q400,330 510,350" fill="none" stroke="#fc8181" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="5,3"/>
+  <text x="380" y="330" font-family="Arial" font-size="12" text-anchor="middle" fill="#fc8181">8. Send with Requests</text>
+  
+  <!-- API Database -->
+  <rect x="730" y="350" width="220" height="120" rx="10" ry="10" fill="#d6bcfa" stroke="#9f7aea" stroke-width="2"/>
+  <text x="840" y="380" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#553c9a">API Data Layer</text>
+  
+  <!-- Data Components -->
+  <rect x="750" y="400" width="80" height="50" rx="5" ry="5" fill="#f3ebff" stroke="#b794f4" stroke-width="1"/>
+  <text x="790" y="430" font-family="Arial" font-size="12" text-anchor="middle" fill="#553c9a">Patient DB</text>
+  
+  <rect x="850" y="400" width="80" height="50" rx="5" ry="5" fill="#f3ebff" stroke="#b794f4" stroke-width="1"/>
+  <text x="890" y="430" font-family="Arial" font-size="12" text-anchor="middle" fill="#553c9a">Medical DB</text>
+  
+  <!-- API to DB -->
+  <path d="M660,410 L730,410" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M730,430 L660,430" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Function Orchestrator -->
+  <rect x="280" y="540" width="250" height="70" rx="10" ry="10" fill="#81e6d9" stroke="#38b2ac" stroke-width="2"/>
+  <text x="405" y="580" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#234e52">Function Orchestrator</text>
+  
+  <!-- Role-based Functions -->
+  <rect x="150" y="630" width="150" height="70" rx="10" ry="10" fill="#faf089" stroke="#ecc94b" stroke-width="2"/>
+  <text x="225" y="660" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#744210">Doctor Functions</text>
+  <text x="225" y="680" font-family="Arial" font-size="12" text-anchor="middle" fill="#744210">Multi-patient Access</text>
+  
+  <rect x="330" y="630" width="150" height="70" rx="10" ry="10" fill="#faf089" stroke="#ecc94b" stroke-width="2"/>
+  <text x="405" y="660" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#744210">Shared Functions</text>
+  <text x="405" y="680" font-family="Arial" font-size="12" text-anchor="middle" fill="#744210">Medical Knowledge</text>
+  
+  <rect x="510" y="630" width="150" height="70" rx="10" ry="10" fill="#faf089" stroke="#ecc94b" stroke-width="2"/>
+  <text x="585" y="660" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#744210">Patient Functions</text>
+  <text x="585" y="680" font-family="Arial" font-size="12" text-anchor="middle" fill="#744210">Single-patient Access</text>
+  
+  <!-- Patient DB Access Control -->
+  <rect x="700" y="540" width="250" height="70" rx="10" ry="10" fill="#fc8181" stroke="#f56565" stroke-width="2"/>
+  <text x="825" y="580" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#742a2a">Access Control Enforcer</text>
+  
+  <!-- DB Access Control Rules -->
+  <rect x="700" y="630" width="250" height="70" rx="10" ry="10" fill="#fbd38d" stroke="#ed8936" stroke-width="2"/>
+  <text x="825" y="655" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#744210">Access Rules</text>
+  <text x="825" y="675" font-family="Arial" font-size="12" text-anchor="middle" fill="#744210">Doctor: All Patients</text>
+  <text x="825" y="695" font-family="Arial" font-size="12" text-anchor="middle" fill="#744210">Patient: Only Self</text>
+  
+  <!-- Connect Backend to Function Orchestrator -->
+  <path d="M550,470 Q450,500 405,540" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Connect Orchestrator to Functions -->
+  <path d="M350,610 L225,630" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M405,610 L405,630" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M460,610 L585,630" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Connect Functions to Access Control -->
+  <path d="M300,630 Q530,570 700,575" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M585,630 Q650,600 700,575" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Connect Access Control to Rules -->
+  <path d="M825,610 L825,630" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Connect Access Control to DB -->
+  <path d="M825,540 Q825,480 840,470" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- JWT Token flow to API Gateway -->
+  <path d="M965,260 Q965,305 550,470" fill="none" stroke="#fc8181" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="5,3"/>
+  <text x="800" y="350" font-family="Arial" font-size="12" text-anchor="middle" fill="#fc8181">9. Validate & Extract Role</text>
+  
+  <!-- User Context flow to Orchestrator -->
+  <path d="M550,470 Q650,510 825,510 Q900,510 900,430" fill="none" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="5,3"/>
+  
+  <!-- Arrow definitions -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4a5568"/>
+    </marker>
+  </defs>
+  
+  <!-- Zoom-in JWT Token Structure -->
+  <rect x="1030" y="150" width="120" height="180" rx="5" ry="5" fill="#fff5f5" stroke="#e53e3e" stroke-width="1"/>
+  <text x="1090" y="170" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#e53e3e">JWT Contents</text>
+  
+  <rect x="1040" y="180" width="100" height="40" rx="3" ry="3" fill="#fff" stroke="#fc8181" stroke-width="1"/>
+  <text x="1090" y="195" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle" fill="#742a2a">Header</text>
+  <text x="1090" y="210" font-family="Arial" font-size="9" text-anchor="middle" fill="#742a2a">alg: "HS256"</text>
+  
+  <rect x="1040" y="230" width="100" height="70" rx="3" ry="3" fill="#fff" stroke="#fc8181" stroke-width="1"/>
+  <text x="1090" y="245" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle" fill="#742a2a">Payload</text>
+  <text x="1090" y="260" font-family="Arial" font-size="9" text-anchor="middle" fill="#742a2a">sub: "user@gmail.com"</text>
+  <text x="1090" y="275" font-family="Arial" font-size="9" text-anchor="middle" fill="#742a2a">role: "doctor"</text>
+  <text x="1090" y="290" font-family="Arial" font-size="9" text-anchor="middle" fill="#742a2a">exp: 1620000000</text>
+  
+  <rect x="1040" y="310" width="100" height="15" rx="3" ry="3" fill="#fff" stroke="#fc8181" stroke-width="1"/>
+  <text x="1090" y="321" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle" fill="#742a2a">Signature</text>
+</svg>

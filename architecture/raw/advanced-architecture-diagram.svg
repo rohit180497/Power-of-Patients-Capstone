@@ -1,0 +1,199 @@
+<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#f8f9fa" rx="8" ry="8"/>
+  
+  <!-- Title -->
+  <text x="600" y="40" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" fill="#333">Advanced Medical AI Assistant Architecture</text>
+  
+  <!-- Doctor Interface -->
+  <rect x="50" y="80" width="200" height="100" rx="10" ry="10" fill="#9bbdf9" stroke="#4285f4" stroke-width="2"/>
+  <text x="150" y="130" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Doctor Interface</text>
+  <text x="150" y="155" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Web/Mobile App</text>
+  
+  <!-- New: Multimodal Input Processing -->
+  <rect x="130" y="220" width="200" height="80" rx="10" ry="10" fill="#f8bbd0" stroke="#ec407a" stroke-width="2"/>
+  <text x="230" y="255" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">Multimodal Input</text>
+  <text x="230" y="280" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Text + Image Processing</text>
+  
+  <!-- Arrow from Doctor to Multimodal -->
+  <line x1="150" y1="180" x2="200" y2="220" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Orchestrator as Function Caller -->
+  <rect x="350" y="80" width="230" height="100" rx="10" ry="10" fill="#c9e4ca" stroke="#43a047" stroke-width="2"/>
+  <text x="465" y="115" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Function Orchestrator</text>
+  <text x="465" y="140" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">LangGraph + Function Calling</text>
+  <text x="465" y="160" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Dynamic Tool Selection</text>
+  
+  <!-- Arrow from Multimodal to Orchestrator -->
+  <line x1="250" y1="220" x2="390" y2="180" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrow from Doctor to Orchestrator -->
+  <line x1="250" y1="130" x2="350" y2="130" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Function Tools Toolbox -->
+  <rect x="50" y="350" width="180" height="230" rx="10" ry="10" fill="#e0f7fa" stroke="#26c6da" stroke-width="2"/>
+  <text x="140" y="380" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Function Tools</text>
+  
+  <!-- Individual tools -->
+  <rect x="70" y="400" width="140" height="30" rx="5" ry="5" fill="#b2ebf2" stroke="#00bcd4" stroke-width="1"/>
+  <text x="140" y="420" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">search_medical_kb()</text>
+  
+  <rect x="70" y="440" width="140" height="30" rx="5" ry="5" fill="#b2ebf2" stroke="#00bcd4" stroke-width="1"/>
+  <text x="140" y="460" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">query_patient_data()</text>
+  
+  <rect x="70" y="480" width="140" height="30" rx="5" ry="5" fill="#b2ebf2" stroke="#00bcd4" stroke-width="1"/>
+  <text x="140" y="500" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">analyze_medical_image()</text>
+  
+  <rect x="70" y="520" width="140" height="30" rx="5" ry="5" fill="#b2ebf2" stroke="#00bcd4" stroke-width="1"/>
+  <text x="140" y="540" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">med_literature_search()</text>
+  
+  <!-- Arrow from Tools to Orchestrator -->
+  <line x1="140" y1="350" x2="390" y2="180" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Agent nodes with new functionality -->
+  <!-- Research Agent -->
+  <rect x="350" y="350" width="200" height="140" rx="10" ry="10" fill="#ffcccb" stroke="#e57373" stroke-width="2"/>
+  <text x="450" y="380" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Research Agent</text>
+  <text x="450" y="405" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">LangChain + CRAG</text>
+  <text x="450" y="425" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Web Search Tools</text>
+  <rect x="370" y="440" width="160" height="30" rx="5" ry="5" fill="#ffebee" stroke="#ef9a9a" stroke-width="1"/>
+  <text x="450" y="460" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Evidence Analyzer</text>
+  
+  <!-- Patient Data Agent with RAG -->
+  <rect x="600" y="350" width="200" height="140" rx="10" ry="10" fill="#b3e5fc" stroke="#29b6f6" stroke-width="2"/>
+  <text x="700" y="380" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Patient Data Agent</text>
+  <text x="700" y="405" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Pandas/SQL + RAG</text>
+  <text x="700" y="425" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Patient Record Analysis</text>
+  <rect x="620" y="440" width="160" height="30" rx="5" ry="5" fill="#e1f5fe" stroke="#81d4fa" stroke-width="1"/>
+  <text x="700" y="460" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Trend Detection</text>
+  
+  <!-- Medical Knowledge Agent -->
+  <rect x="850" y="350" width="200" height="140" rx="10" ry="10" fill="#fff9c4" stroke="#ffee58" stroke-width="2"/>
+  <text x="950" y="380" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Medical Knowledge</text>
+  <text x="950" y="405" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">ChromaDB Function API</text>
+  <text x="950" y="425" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Semantic Search</text>
+  <rect x="870" y="440" width="160" height="30" rx="5" ry="5" fill="#fffde7" stroke="#fff59d" stroke-width="1"/>
+  <text x="950" y="460" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Dynamic Filters</text>
+  
+  <!-- NEW: Clinical Reasoning Engine -->
+  <rect x="600" y="200" width="230" height="100" rx="10" ry="10" fill="#c8e6c9" stroke="#66bb6a" stroke-width="2"/>
+  <text x="715" y="235" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Clinical Reasoning Engine</text>
+  <text x="715" y="260" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Differential Diagnosis</text>
+  <text x="715" y="280" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Treatment Recommendation</text>
+  
+  <!-- Conversation Manager -->
+  <rect x="650" y="80" width="230" height="100" rx="10" ry="10" fill="#e1bee7" stroke="#9c27b0" stroke-width="2"/>
+  <text x="765" y="115" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Conversation Manager</text>
+  <text x="765" y="140" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Chain-of-Thought Memory</text>
+  <text x="765" y="160" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Hierarchical Summarization</text>
+  
+  <!-- Advanced Memory Systems -->
+  <rect x="450" y="550" width="280" height="150" rx="10" ry="10" fill="#d1c4e9" stroke="#673ab7" stroke-width="2"/>
+  <text x="590" y="580" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Advanced Memory Systems</text>
+  
+  <!-- Memory components -->
+  <rect x="470" y="600" width="110" height="80" rx="5" ry="5" fill="#ede7f6" stroke="#7e57c2" stroke-width="1"/>
+  <text x="525" y="625" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">Semantic Cache</text>
+  <text x="525" y="645" font-family="Arial" font-size="12" text-anchor="middle" fill="#555">CRAG + Redis</text>
+  <text x="525" y="665" font-family="Arial" font-size="12" text-anchor="middle" fill="#555">Retrieval Caching</text>
+  
+  <rect x="600" y="600" width="110" height="80" rx="5" ry="5" fill="#ede7f6" stroke="#7e57c2" stroke-width="1"/>
+  <text x="655" y="625" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">Vector Memory</text>
+  <text x="655" y="645" font-family="Arial" font-size="12" text-anchor="middle" fill="#555">Long-term Context</text>
+  <text x="655" y="665" font-family="Arial" font-size="12" text-anchor="middle" fill="#555">Key Insights</text>
+  
+  <!-- Databases -->
+  <rect x="200" y="600" width="180" height="100" rx="10" ry="10" fill="#bbdefb" stroke="#2196f3" stroke-width="2"/>
+  <text x="290" y="635" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Patient Database</text>
+  <text x="290" y="660" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Tabular + Time Series</text>
+  <text x="290" y="680" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Medical History</text>
+  
+  <rect x="800" y="550" width="180" height="100" rx="10" ry="10" fill="#dcedc8" stroke="#8bc34a" stroke-width="2"/>
+  <text x="890" y="585" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Hybrid Knowledge DB</text>
+  <text x="890" y="610" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">ChromaDB + Graph DB</text>
+  <text x="890" y="630" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Medical Knowledge Graph</text>
+  
+  <!-- Feedback System -->
+  <rect x="800" y="680" width="200" height="100" rx="10" ry="10" fill="#ffccbc" stroke="#ff7043" stroke-width="2"/>
+  <text x="900" y="715" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Feedback System</text>
+  <text x="900" y="740" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">User Rating + Reinforcement</text>
+  <text x="900" y="760" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Continuous Learning</text>
+  
+  <!-- NEW: Interactive Visualization Engine -->
+  <rect x="450" y="730" width="260" height="100" rx="10" ry="10" fill="#bbdefb" stroke="#2196f3" stroke-width="2"/>
+  <text x="580" y="765" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Interactive Visualization</text>
+  <text x="580" y="790" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Patient Data Trends</text>
+  <text x="580" y="810" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Treatment Response Charts</text>
+  
+  <!-- LLM Foundation -->
+  <rect x="50" y="730" width="350" height="100" rx="10" ry="10" fill="#cfd8dc" stroke="#607d8b" stroke-width="2"/>
+  <text x="225" y="765" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Open Source LLM Foundation</text>
+  <text x="225" y="790" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">LLaMA 3/Mistral/Mixtral</text>
+  <text x="225" y="810" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Fine-tuned on Medical Data</text>
+  
+  <!-- Arrows from Orchestrator to Agents -->
+  <line x1="450" y1="180" x2="450" y2="350" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="480" y1="180" x2="700" y2="350" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="510" y1="180" x2="900" y2="350" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrows to Clinical Reasoning Engine -->
+  <line x1="520" y1="120" x2="600" y2="220" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="550" y1="350" x2="620" y2="300" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="700" y1="350" x2="700" y2="300" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="900" y1="350" x2="800" y2="300" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Connection between Orchestrator and Conversation Manager -->
+  <line x1="580" y1="130" x2="650" y2="130" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Connection between Clinical Reasoning and Conversation Manager -->
+  <line x1="715" y1="200" x2="715" y2="180" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrows from Agents to Memory -->
+  <line x1="450" y1="490" x2="450" y2="520" stroke="#666" stroke-width="2"/>
+  <line x1="450" y1="520" x2="590" y2="520" stroke="#666" stroke-width="2"/>
+  <line x1="590" y1="520" x2="590" y2="550" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <line x1="700" y1="490" x2="700" y2="520" stroke="#666" stroke-width="2"/>
+  <line x1="700" y1="520" x2="590" y2="520" stroke="#666" stroke-width="2"/>
+  
+  <line x1="900" y1="490" x2="900" y2="520" stroke="#666" stroke-width="2"/>
+  <line x1="900" y1="520" x2="590" y2="520" stroke="#666" stroke-width="2"/>
+  
+  <!-- Arrows from Memory to Visualization -->
+  <line x1="590" y1="700" x2="590" y2="730" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrows from Memory to Feedback -->
+  <line x1="730" y1="625" x2="800" y2="725" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Other connections -->
+  <line x1="890" y1="650" x2="890" y2="680" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="800" y1="730" x2="710" y2="730" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrow from LLM to other components -->
+  <line x1="225" y1="730" x2="225" y2="600" stroke="#666" stroke-width="2"/>
+  <line x1="225" y1="600" x2="450" y2="600" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrow definitions -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+  
+  <!-- Legend -->
+  <rect x="950" y="130" width="200" height="180" rx="10" ry="10" fill="#ffffff" stroke="#999999" stroke-width="2"/>
+  <text x="1050" y="160" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">Legend</text>
+  
+  <!-- Legend items -->
+  <rect x="970" y="180" width="20" height="20" fill="#c9e4ca" stroke="#43a047" stroke-width="1"/>
+  <text x="1050" y="195" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Function Components</text>
+  
+  <rect x="970" y="210" width="20" height="20" fill="#ffcccb" stroke="#e57373" stroke-width="1"/>
+  <text x="1050" y="225" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Agent Systems</text>
+  
+  <rect x="970" y="240" width="20" height="20" fill="#d1c4e9" stroke="#673ab7" stroke-width="1"/>
+  <text x="1050" y="255" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Memory Systems</text>
+  
+  <rect x="970" y="270" width="20" height="20" fill="#e0f7fa" stroke="#26c6da" stroke-width="1"/>
+  <text x="1050" y="285" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">Function Tools</text>
+</svg>
