@@ -138,32 +138,62 @@ def process_json_files(directory, output_directory=None):
     
     print("Processing complete")
 
-def process_all_articles(directory):
+def process_all_articles(articles_directory, save_directory=None):
     """
-    Process individual article files and then create a simplified all_articles.json.
+    Process individual article files and then create a simplified all_articles.json
+    with sequential 4-digit IDs starting from 1001.
     """
+    if save_directory is None:
+        save_directory = articles_directory
+    
     # Find all simplified article files
     all_articles = []
     
-    for filename in os.listdir(directory):
+    for filename in os.listdir(articles_directory):
         if filename.startswith('simplified_article_') and filename.endswith('.json'):
             try:
-                with open(os.path.join(directory, filename), 'r', encoding='utf-8') as f:
+                with open(os.path.join(articles_directory, filename), 'r', encoding='utf-8') as f:
                     article = json.load(f)
                     all_articles.append(article)
             except Exception as e:
                 print(f"Error loading {filename}: {e}")
     
-    # Sort articles by title
+    # Sort articles by title for consistent ordering
     all_articles.sort(key=lambda x: x.get('title', ''))
     
+    # Add sequential IDs
+    start_id = 1001
+    for i, article in enumerate(all_articles):
+        # Generate a 4-digit ID
+        article_id = str(start_id + i)
+        
+        # Add ID as the first field in the article
+        article_with_id = {
+            'id': article_id,
+            'url': article.get('url', ''),
+            'title': article.get('title', ''),
+            'date': article.get('date', ''),
+            'author': article.get('author', ''),
+            'read_time': article.get('read_time', ''),
+            'content': article.get('content', '')
+        }
+        
+        # Replace the article with the version including ID
+        all_articles[i] = article_with_id
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(save_directory, exist_ok=True)
+    
     # Save to all_articles.json
-    output_file = os.path.join(directory, 'simplified_all_articles.json')
+    output_file = os.path.join(save_directory, 'simplified_all_articles.json')
     
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(all_articles, f, indent=2)
     
     print(f"Created simplified_all_articles.json with {len(all_articles)} articles")
+    print(f"Added sequential IDs from {start_id} to {start_id + len(all_articles) - 1}")
+    
+    return all_articles
 
 if __name__ == "__main__":
     # Set the directory path to your articles
@@ -173,8 +203,9 @@ if __name__ == "__main__":
     # articles_directory = "D:/workspace/git_projects/Power_Capstone/power_of_patients_data"
     
     # Process all individual article files
-    process_json_files(articles_directory)
+    # process_json_files(articles_directory)
     
     # Create a combined all_articles.json from the individual simplified files
-    processed_directory = "power_of_patients_data"
-    process_all_articles(processed_directory)
+    processed_directory = "power_of_patients_data/processed"
+    save_directory = "power_of_patients_data"
+    process_all_articles(processed_directory, save_directory)
