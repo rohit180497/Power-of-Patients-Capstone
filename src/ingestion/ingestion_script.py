@@ -7,6 +7,8 @@ from tqdm import tqdm
 import pinecone
 import logging
 from dotenv import load_dotenv
+from pinecone import Pinecone, ServerlessSpec
+
 # Import LlamaIndex components
 from llama_index.core.schema import Document
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
@@ -215,36 +217,12 @@ def setup_embedding_model(model_name: str = DEFAULT_EMBEDDING_MODEL) -> BaseEmbe
     logger.info(f"Using embedding model: {model_name} with dimension {dimension}")
     return embed_model, dimension
 
-# def initialize_pinecone(api_key: str, environment: str, index_name: str, dimension: int) -> Any:
-#     """Initialize Pinecone index."""
-#     pinecone.init(api_key=api_key, environment=environment)
-    
-#     # Check if index exists, create if not
-#     if index_name not in pinecone.list_indexes():
-#         logger.info(f"Creating new Pinecone index: {index_name} with dimension {dimension}")
-#         pinecone.create_index(
-#             name=index_name,
-#             dimension=dimension,
-#             metric="cosine",
-#             metadata_config={
-#                 "indexed": ["article_id", "title", "author", "date", "categories"]
-#             }
-#         )
-#     else:
-#         logger.info(f"Using existing Pinecone index: {index_name}")
-    
-#     # Connect to the index
-#     index = pinecone.Index(index_name)
-#     return index
 
 def initialize_pinecone(api_key: str, environment: str, index_name: str, dimension: int) -> Any:
     """
     Initialize Pinecone index using the new Pinecone class
     """
-    try:
-        # Import Pinecone with new approach
-        from pinecone import Pinecone, ServerlessSpec
-        
+    try:        
         # Create Pinecone client instance
         pc = Pinecone(api_key=api_key)
         

@@ -146,7 +146,7 @@ class TBIOptimizedSemanticSplitter(NodeParser):
                     embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
                 except ImportError:
                     raise ImportError(
-                        "No embedding model found. Please install llama-index-embeddings-openai "
+                        "No embedding model found. Please install llama-index-embeddings-openai"
                         "or llama-index-embeddings-huggingface"
                     )
 
