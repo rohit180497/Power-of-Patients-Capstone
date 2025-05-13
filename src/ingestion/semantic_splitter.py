@@ -554,3 +554,4 @@ class TBIOptimizedSemanticSplitter(NodeParser):
                     chunks.append(combined_text)
 
         return chunks
+    

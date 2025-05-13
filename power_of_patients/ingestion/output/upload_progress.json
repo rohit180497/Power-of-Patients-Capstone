@@ -1,0 +1,88 @@
+{
+  "total_nodes": 1589,
+  "completed_nodes": 1589,
+  "start_time": 1747113576.7661684,
+  "last_update": 1747113605.0091858,
+  "batch_details": [
+    {
+      "batch": 1,
+      "size": 100,
+      "duration": 2.228593111038208
+    },
+    {
+      "batch": 2,
+      "size": 100,
+      "duration": 1.5394725799560547
+    },
+    {
+      "batch": 3,
+      "size": 100,
+      "duration": 1.6350178718566895
+    },
+    {
+      "batch": 4,
+      "size": 100,
+      "duration": 1.2197437286376953
+    },
+    {
+      "batch": 5,
+      "size": 100,
+      "duration": 1.4323937892913818
+    },
+    {
+      "batch": 6,
+      "size": 100,
+      "duration": 1.3270728588104248
+    },
+    {
+      "batch": 7,
+      "size": 100,
+      "duration": 1.4449796676635742
+    },
+    {
+      "batch": 8,
+      "size": 100,
+      "duration": 1.1290087699890137
+    },
+    {
+      "batch": 9,
+      "size": 100,
+      "duration": 1.3422808647155762
+    },
+    {
+      "batch": 10,
+      "size": 100,
+      "duration": 1.0449275970458984
+    },
+    {
+      "batch": 11,
+      "size": 100,
+      "duration": 1.2037556171417236
+    },
+    {
+      "batch": 12,
+      "size": 100,
+      "duration": 1.2325842380523682
+    },
+    {
+      "batch": 13,
+      "size": 100,
+      "duration": 1.0121819972991943
+    },
+    {
+      "batch": 14,
+      "size": 100,
+      "duration": 0.9113259315490723
+    },
+    {
+      "batch": 15,
+      "size": 100,
+      "duration": 0.9338054656982422
+    },
+    {
+      "batch": 16,
+      "size": 89,
+      "duration": 0.9259450435638428
+    }
+  ]
+}
