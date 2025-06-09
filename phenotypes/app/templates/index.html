@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TBI Assessment & Clustering Prediction</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-content {
+            text-align: center;
+            flex: 1;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+            border-radius: 10px;
+            background: white;
+            padding: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .logo {
+                height: 60px;
+            }
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .section-title i {
+            color: #4facfe;
+            font-size: 1.8em;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title .completion-indicator {
+            margin-left: auto;
+            color: #28a745;
+            font-size: 1.2em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .section-title .completion-indicator.show {
+            opacity: 1;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 6px;
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 3px;
+        }
+
+        .section.error {
+            border: 2px solid #ffebee;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            background: rgba(255, 238, 238, 0.3);
+            /* Ensure section stays visible */
+            display: block !important;
+            visibility: visible !important;
+        }
+
+        .validation-error {
+            background: #fee;
+            color: #c33;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #c33;
+            display: none;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .validation-error.show {
+            display: block !important;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: #4facfe;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.2);
+        }
+
+        .card.selected {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border-color: #4facfe;
+        }
+
+        .card h3 {
+            font-size: 1em;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-field label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-field input, .form-field textarea, .form-field select {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-field input:focus, .form-field textarea:focus, .form-field select:focus {
+            outline: none;
+            border-color: #4facfe;
+        }
+
+        .gender-options {
+            display: flex;
+            gap: 15px;
+        }
+
+        .gender-card {
+            flex: 1;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .gender-card:hover {
+            border-color: #4facfe;
+            transform: translateY(-2px);
+        }
+
+        .gender-card.selected {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border-color: #4facfe;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 40px auto 0;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results {
+            display: none;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+        }
+
+        .results.show {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Ensure all sections stay visible */
+        .section {
+            display: block !important;
+            visibility: visible !important;
+        }
+
+        .result-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .result-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .result-box h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .result-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #4facfe;
+            margin-bottom: 10px;
+        }
+
+        .result-description {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4facfe;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #fee;
+            color: #c33;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 10px;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .input-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="static/pop-logo.png" alt="Power of Patients" class="logo">
+            <div class="header-content">
+                <h1><i class="fas fa-brain"></i> TBI Assessment & Risk Analysis</h1>
+                <p>Comprehensive Traumatic Brain Injury Assessment & Clustering Prediction</p>
+            </div>
+            <div style="width: 200px;"></div> <!-- Spacer for balance -->
+        </div>
+
+        <div class="form-container">
+            <!-- Progress Bar -->
+            <div style="margin-bottom: 30px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <h3 style="color: #333; margin: 0;">Assessment Progress</h3>
+                    <span id="progress-text" style="color: #666; font-weight: 600;">0 of 6 sections completed</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <form id="tbiForm">
+                <!-- Personal Information - MOVED TO FIRST -->
+                <div class="section" id="section-personal">
+                    <h2 class="section-title">
+                        <i class="fas fa-id-card"></i>
+                        Personal Information
+                        <span class="completion-indicator" id="complete-personal">
+                            <i class="fas fa-check-circle"></i>
+                        </span>
+                    </h2>
+                    <div class="validation-error" id="error-personal">
+                        <i class="fas fa-exclamation-triangle"></i> Please fill in both your date of birth and the TBI incident date.
+                    </div>
+                    <div class="input-group">
+                        <div class="form-field">
+                            <label for="dob">Date of Birth:</label>
+                            <input type="date" id="dob" name="dob" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="tbi_date">TBI Incident Date:</label>
+                            <input type="date" id="tbi_date" name="tbi_date" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gender - MOVED TO SECOND -->
+                <div class="section" id="section-gender">
+                    <h2 class="section-title">
+                        <i class="fas fa-venus-mars"></i>
+                        Gender
+                        <span class="completion-indicator" id="complete-gender">
+                            <i class="fas fa-check-circle"></i>
+                        </span>
+                    </h2>
+                    <div class="validation-error" id="error-gender">
+                        <i class="fas fa-exclamation-triangle"></i> Please select your gender.
+                    </div>
+                    <div class="gender-options">
+                        <div class="gender-card" data-gender="male">
+                            <h3><i class="fas fa-mars"></i> Male</h3>
+                        </div>
+                        <div class="gender-card" data-gender="female">
+                            <h3><i class="fas fa-venus"></i> Female</h3>
+                        </div>
+                        <div class="gender-card" data-gender="other">
+                            <h3><i class="fas fa-genderless"></i> Other</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Head Hit Locations -->
+                <div class="section" id="section-headhit">
+                    <h2 class="section-title">
+                        <i class="fas fa-brain"></i>
+                        Head Hit Locations
+                        <span class="completion-indicator" id="complete-headhit">
+                            <i class="fas fa-check-circle"></i>
+                        </span>
+                    </h2>
+                    <p style="margin-bottom: 20px; color: #666;">Select all locations where the head was impacted:</p>
+                    <div class="validation-error" id="error-headhit">
+                        <i class="fas fa-exclamation-triangle"></i> Please select at least one head impact location.
+                    </div>
+                    <div class="card-grid">
+                        <div class="card" data-field="headhit_Neck">
+                            <h3>Neck</h3>
+                            <p>Neck area impact</p>
+                        </div>
+                        <div class="card" data-field="headhit_Top_Of_Head">
+                            <h3>Top of Head</h3>
+                            <p>Crown area</p>
+                        </div>
+                        <div class="card" data-field="headhit_Left_Side_Of_Head">
+                            <h3>Left Side</h3>
+                            <p>Left temple/side</p>
+                        </div>
+                        <div class="card" data-field="headhit_Right_Side_Of_Head">
+                            <h3>Right Side</h3>
+                            <p>Right temple/side</p>
+                        </div>
+                        <div class="card" data-field="headhit_Front_Of_Head">
+                            <h3>Front of Head</h3>
+                            <p>Forehead area</p>
+                        </div>
+                        <div class="card" data-field="headhit_Back_Of_Head">
+                            <h3>Back of Head</h3>
+                            <p>Occipital area</p>
+                        </div>
+                        <div class="card" data-field="headhit_All">
+                            <h3>Multiple Areas</h3>
+                            <p>All over impact</p>
+                        </div>
+                        <div class="card" data-field="headhit_Whiplash">
+                            <h3>Whiplash</h3>
+                            <p>Neck whiplash motion</p>
+                        </div>
+                        <div class="card" data-field="headhit_Not_Sure">
+                            <h3>Not Sure</h3>
+                            <p>Uncertain location</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Immediate Symptoms -->
+                <div class="section" id="section-symptoms">
+                    <h2 class="section-title">
+                        <i class="fas fa-stethoscope"></i>
+                        Immediate Symptoms
+                        <span class="completion-indicator" id="complete-symptoms">
+                            <i class="fas fa-check-circle"></i>
+                        </span>
+                    </h2>
+                    <p style="margin-bottom: 20px; color: #666;">Select all symptoms experienced immediately after the incident:</p>
+                    <div class="validation-error" id="error-symptoms">
+                        <i class="fas fa-exclamation-triangle"></i> Please select at least one immediate symptom you experienced.
+                    </div>
+                    <div class="card-grid">
+                        <div class="card" data-field="imm_symp_light_sensitivity">
+                            <h3>Light Sensitivity</h3>
+                            <p>Photophobia</p>
+                        </div>
+                        <div class="card" data-field="imm_symp_headache">
+                            <h3>Headache</h3>
+                            <p>Head pain</p>
+                        </div>
+                        <div class="card" data-field="imm_symp_dazed_or_vacant_stare">
+                            <h3>Dazed/Vacant Stare</h3>
+                            <p>Blank expression</p>
+                        </div>
+                        <div class="card" data-field="imm_symp_dizziness">
+                            <h3>Dizziness</h3>
+                            <p>Feeling lightheaded</p>
+                        </div>
+                        <div class="card" data-field="imm_symp_disorientation">
+                            <h3>Disorientation</h3>
+                            <p>Confusion about surroundings</p>
+                        </div>
+                        <div class="card" data-field="imm_symp_nausea">
+                            <h3>Nausea</h3>
+                            <p>Feeling sick</p>
+                        </div>
+                        <div class="card" data-field="imm_symp_confusion">
+                            <h3>Confusion</h3>
+                            <p>Mental fogginess</p>
+                        </div>
+                        <div class="card" data-field="imm_symp_incoherent_speech">
+                            <h3>Incoherent Speech</h3>
+                            <p>Difficulty speaking clearly</p>
+                        </div>
+                        <div class="card" data-field="imm_symp_memory_loss">
+                            <h3>Memory Loss</h3>
+                            <p>Amnesia</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Description -->
+                <div class="section" id="section-event">
+                    <h2 class="section-title">
+                        <i class="fas fa-clipboard-list"></i>
+                        Event Description
+                        <span class="completion-indicator" id="complete-event">
+                            <i class="fas fa-check-circle"></i>
+                        </span>
+                    </h2>
+                    <div class="validation-error" id="error-event">
+                        <i class="fas fa-exclamation-triangle"></i> Please provide a description of what happened during the incident.
+                    </div>
+                    <div class="form-field">
+                        <label for="event_description">Describe what happened during the incident:</label>
+                        <textarea id="event_description" name="event_description" rows="4" 
+                                placeholder="Please provide details about how the injury occurred (e.g., car accident, fall, sports injury, etc.)"></textarea>
+                    </div>
+                </div>
+
+                <!-- Injury From -->
+                <div class="section" id="section-injury">
+                    <h2 class="section-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Injury Cause
+                        <span class="completion-indicator" id="complete-injury">
+                            <i class="fas fa-check-circle"></i>
+                        </span>
+                    </h2>
+                    <p style="margin-bottom: 20px; color: #666;">Select all applicable causes of the injury:</p>
+                    <div class="validation-error" id="error-injury">
+                        <i class="fas fa-exclamation-triangle"></i> Please select at least one cause of the injury.
+                    </div>
+                    <div class="card-grid">
+                        <div class="card" data-field="injury_from_Accident">
+                            <h3>Accident</h3>
+                            <p>General accident</p>
+                        </div>
+                        <div class="card" data-field="injury_from_Fall">
+                            <h3>Fall</h3>
+                            <p>Falling incident</p>
+                        </div>
+                        <div class="card" data-field="injury_from_Collision">
+                            <h3>Collision</h3>
+                            <p>Impact with object/person</p>
+                        </div>
+                        <div class="card" data-field="injury_from_Sports">
+                            <h3>Sports</h3>
+                            <p>Sports-related</p>
+                        </div>
+                        <div class="card" data-field="injury_from_Assault">
+                            <h3>Assault</h3>
+                            <p>Physical assault</p>
+                        </div>
+                        <div class="card" data-field="injury_from_Stroke">
+                            <h3>Stroke</h3>
+                            <p>Cerebrovascular accident</p>
+                        </div>
+                        <div class="card" data-field="injury_from_Surgery">
+                            <h3>Surgery</h3>
+                            <p>Surgical complication</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-calculator"></i> Calculate TBI Assessment
+                </button>
+            </form>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Processing your assessment...</p>
+            </div>
+
+            <div class="error" id="error">
+                <strong>Error:</strong> <span id="error-message"></span>
+            </div>
+
+            <div class="results" id="results">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #333;">
+                    <i class="fas fa-chart-bar"></i> Assessment Results
+                </h2>
+                <div class="result-boxes">
+                    <div class="result-box">
+                        <h3><i class="fas fa-tachometer-alt"></i> IISS Score</h3>
+                        <div class="result-value" id="iiss-score">--</div>
+                        <p class="result-description">Injury Severity Score based on your symptoms and incident details</p>
+                    </div>
+                    <div class="result-box">
+                        <h3><i class="fas fa-layer-group"></i> Patient Cluster</h3>
+                        <div class="result-value" id="cluster">--</div>
+                        <p class="result-description">Risk group classification for treatment planning</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form data storage
+        let formData = {};
+        let selectedGender = '';
+
+        // Initialize form interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle card selections
+            document.querySelectorAll('.card[data-field]').forEach(card => {
+                card.addEventListener('click', function() {
+                    const field = this.dataset.field;
+                    this.classList.toggle('selected');
+                    formData[field] = this.classList.contains('selected') ? 1 : 0;
+                    
+                    // Clear validation errors when user makes selections
+                    clearValidationErrors();
+                });
+            });
+
+            // Handle gender selection
+            document.querySelectorAll('.gender-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove selection from all gender cards
+                    document.querySelectorAll('.gender-card').forEach(c => c.classList.remove('selected'));
+                    // Add selection to clicked card
+                    this.classList.add('selected');
+                    selectedGender = this.dataset.gender;
+                    
+                    // Clear gender validation error
+                    document.getElementById('error-gender').classList.remove('show');
+                    document.getElementById('section-gender').classList.remove('error');
+                    
+                    updateProgress();
+                });
+            });
+
+            // Handle form input changes
+            document.getElementById('event_description').addEventListener('input', function() {
+                if (this.value.trim()) {
+                    document.getElementById('error-event').classList.remove('show');
+                    document.getElementById('section-event').classList.remove('error');
+                }
+                updateProgress();
+            });
+
+            document.getElementById('dob').addEventListener('change', function() {
+                if (this.value && document.getElementById('tbi_date').value) {
+                    document.getElementById('error-personal').classList.remove('show');
+                    document.getElementById('section-personal').classList.remove('error');
+                }
+                updateProgress();
+            });
+
+            document.getElementById('tbi_date').addEventListener('change', function() {
+                if (this.value && document.getElementById('dob').value) {
+                    document.getElementById('error-personal').classList.remove('show');
+                    document.getElementById('section-personal').classList.remove('error');
+                }
+                updateProgress();
+            });
+
+            // Handle form submission
+            document.getElementById('tbiForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitForm();
+            });
+        });
+
+        function updateProgress() {
+            let completedSections = 0;
+            const totalSections = 6;
+
+            // Check head hit locations
+            const headHitSelected = Object.keys(formData).some(key => 
+                key.startsWith('headhit_') && formData[key] === 1
+            );
+            if (headHitSelected) {
+                document.getElementById('complete-headhit').classList.add('show');
+                completedSections++;
+            } else {
+                document.getElementById('complete-headhit').classList.remove('show');
+            }
+
+            // Check immediate symptoms
+            const symptomsSelected = Object.keys(formData).some(key => 
+                key.startsWith('imm_symp_') && formData[key] === 1
+            );
+            if (symptomsSelected) {
+                document.getElementById('complete-symptoms').classList.add('show');
+                completedSections++;
+            } else {
+                document.getElementById('complete-symptoms').classList.remove('show');
+            }
+
+            // Check event description
+            const eventDescription = document.getElementById('event_description').value.trim();
+            if (eventDescription) {
+                document.getElementById('complete-event').classList.add('show');
+                completedSections++;
+            } else {
+                document.getElementById('complete-event').classList.remove('show');
+            }
+
+            // Check injury cause
+            const injurySelected = Object.keys(formData).some(key => 
+                key.startsWith('injury_from_') && formData[key] === 1
+            );
+            if (injurySelected) {
+                document.getElementById('complete-injury').classList.add('show');
+                completedSections++;
+            } else {
+                document.getElementById('complete-injury').classList.remove('show');
+            }
+
+            // Check personal information
+            const dob = document.getElementById('dob').value;
+            const tbiDate = document.getElementById('tbi_date').value;
+            if (dob && tbiDate) {
+                document.getElementById('complete-personal').classList.add('show');
+                completedSections++;
+            } else {
+                document.getElementById('complete-personal').classList.remove('show');
+            }
+
+            // Check gender
+            if (selectedGender) {
+                document.getElementById('complete-gender').classList.add('show');
+                completedSections++;
+            } else {
+                document.getElementById('complete-gender').classList.remove('show');
+            }
+
+            // Update progress bar
+            const progressPercent = (completedSections / totalSections) * 100;
+            document.getElementById('progress-fill').style.width = progressPercent + '%';
+            document.getElementById('progress-text').textContent = 
+                `${completedSections} of ${totalSections} sections completed`;
+        }
+
+        function clearValidationErrors() {
+            // This function can be called when user starts making selections
+            // to progressively clear validation errors
+            updateProgress();
+        }
+
+        function validateForm() {
+            let isValid = true;
+            const errors = [];
+
+            // Clear previous errors
+            document.querySelectorAll('.validation-error').forEach(error => {
+                error.classList.remove('show');
+            });
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('error');
+            });
+
+            // Validate head hit locations
+            const headHitSelected = Object.keys(formData).some(key => 
+                key.startsWith('headhit_') && formData[key] === 1
+            );
+            if (!headHitSelected) {
+                document.getElementById('error-headhit').classList.add('show');
+                document.getElementById('section-headhit').classList.add('error');
+                errors.push('Head hit locations');
+                isValid = false;
+            }
+
+            // Validate immediate symptoms
+            const symptomsSelected = Object.keys(formData).some(key => 
+                key.startsWith('imm_symp_') && formData[key] === 1
+            );
+            if (!symptomsSelected) {
+                document.getElementById('error-symptoms').classList.add('show');
+                document.getElementById('section-symptoms').classList.add('error');
+                errors.push('Immediate symptoms');
+                isValid = false;
+            }
+
+            // Validate event description
+            const eventDescription = document.getElementById('event_description').value.trim();
+            if (!eventDescription) {
+                document.getElementById('error-event').classList.add('show');
+                document.getElementById('section-event').classList.add('error');
+                errors.push('Event description');
+                isValid = false;
+            }
+
+            // Validate injury cause
+            const injurySelected = Object.keys(formData).some(key => 
+                key.startsWith('injury_from_') && formData[key] === 1
+            );
+            if (!injurySelected) {
+                document.getElementById('error-injury').classList.add('show');
+                document.getElementById('section-injury').classList.add('error');
+                errors.push('Injury cause');
+                isValid = false;
+            }
+
+            // Validate personal information
+            const dob = document.getElementById('dob').value;
+            const tbiDate = document.getElementById('tbi_date').value;
+            if (!dob || !tbiDate) {
+                document.getElementById('error-personal').classList.add('show');
+                document.getElementById('section-personal').classList.add('error');
+                errors.push('Personal information');
+                isValid = false;
+            }
+
+            // Validate gender
+            if (!selectedGender) {
+                document.getElementById('error-gender').classList.add('show');
+                document.getElementById('section-gender').classList.add('error');
+                errors.push('Gender selection');
+                isValid = false;
+            }
+
+            // Validate TBI date is after birth date
+            if (dob && tbiDate) {
+                const birthDate = new Date(dob);
+                const incidentDate = new Date(tbiDate);
+                if (incidentDate <= birthDate) {
+                    document.getElementById('error-personal').innerHTML = 
+                        '<i class="fas fa-exclamation-triangle"></i> TBI incident date must be after your date of birth.';
+                    document.getElementById('error-personal').classList.add('show');
+                    document.getElementById('section-personal').classList.add('error');
+                    isValid = false;
+                }
+            }
+
+            // Show summary error if multiple sections are incomplete
+            if (errors.length > 1) {
+                showError(`Please complete the following sections: ${errors.join(', ')}`);
+            } else if (errors.length === 1) {
+                // Scroll to the first error section
+                const errorSection = document.querySelector('.section.error');
+                if (errorSection) {
+                    errorSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+
+            return isValid;
+        }
+
+        function submitForm() {
+            // Validate form first
+            if (!validateForm()) {
+                return;
+            }
+
+            // Collect form data
+            const dob = document.getElementById('dob').value;
+            const tbiDate = document.getElementById('tbi_date').value;
+            const eventDescription = document.getElementById('event_description').value;
+
+            // Prepare data for submission
+            const submitData = {
+                ...formData,
+                dob: dob,
+                tbi_date: tbiDate,
+                event_description: eventDescription,
+                gender: selectedGender
+            };
+
+            // Show loading
+            showLoading();
+
+            // Submit to backend
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(submitData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading();
+                if (data.success) {
+                    showResults(data.iiss_score, data.cluster);
+                } else {
+                    showError(data.error || 'An error occurred during prediction.');
+                }
+            })
+            .catch(error => {
+                hideLoading();
+                showError('Network error: ' + error.message);
+            });
+        }
+
+        function showLoading() {
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('results').classList.remove('show');
+            document.getElementById('error').classList.remove('show');
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').classList.remove('show');
+        }
+
+        function showResults(iissScore, cluster) {
+            document.getElementById('iiss-score').textContent = iissScore.toFixed(2);
+            document.getElementById('cluster').textContent = cluster;
+            document.getElementById('results').classList.add('show');
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showError(message) {
+            document.getElementById('error-message').textContent = message;
+            document.getElementById('error').classList.add('show');
+        }
+    </script>
+</body>
+</html>

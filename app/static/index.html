@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power of Patients - Patient Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 500px;
+        }
+
+        .login-left {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .login-right {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .logo-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .sallie-avatar {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .sallie-avatar img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .sallie-intro {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .form-title {
+            font-size: 1.8rem;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-subtitle {
+            color: #6b7280;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            text-align: center;
+            padding: 0.5rem;
+            background: #fef2f2;
+            border-radius: 6px;
+            border-left: 4px solid #ef4444;
+            display: none;
+        }
+
+        .success-message {
+            color: #059669;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            text-align: center;
+            padding: 0.5rem;
+            background: #f0fdf4;
+            border-radius: 6px;
+            border-left: 4px solid #059669;
+            display: none;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .forgot-password a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .button-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .login-container {
+                grid-template-columns: 1fr;
+                margin: 1rem;
+                max-width: 400px;
+            }
+
+            .login-left {
+                padding: 2rem;
+            }
+
+            .login-right {
+                padding: 2rem;
+            }
+
+            .sallie-avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .sallie-avatar img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        /* Healthcare trust indicators */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .shield-icon, .lock-icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Left Side - Branding & Sallie -->
+        <div class="login-left">
+            <div class="logo">Power of Patients</div>
+            <div class="logo-subtitle">Empowering Your Healthcare Journey</div>
+            
+            <div class="sallie-avatar">
+                <!-- Placeholder for Sallie's dog image -->
+                <svg width="100" height="100" viewBox="0 0 200 200" style="fill: #3b82f6;">
+                    <circle cx="100" cy="100" r="90" fill="#f3f4f6"/>
+                    <!-- Simplified dog face -->
+                    <ellipse cx="100" cy="120" rx="60" ry="50" fill="#6b7280"/>
+                    <ellipse cx="80" cy="110" rx="15" ry="20" fill="#4b5563"/>
+                    <ellipse cx="120" cy="110" rx="15" ry="20" fill="#4b5563"/>
+                    <circle cx="75" cy="105" r="8" fill="#1f2937"/>
+                    <circle cx="125" cy="105" r="8" fill="#1f2937"/>
+                    <circle cx="77" cy="102" r="3" fill="white"/>
+                    <circle cx="127" cy="102" r="3" fill="white"/>
+                    <ellipse cx="100" cy="125" rx="8" ry="6" fill="#1f2937"/>
+                    <path d="M 90 135 Q 100 145 110 135" stroke="#1f2937" stroke-width="3" fill="none"/>
+                    <ellipse cx="100" cy="140" rx="15" ry="8" fill="#ef4444" opacity="0.8"/>
+                </svg>
+            </div>
+            
+            <div class="sallie-intro">
+                Meet Sallie, your AI healthcare assistant ready to help with your medical questions and TBI support.
+            </div>
+
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <svg class="shield-icon" viewBox="0 0 24 24">
+                        <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V10.5C15.4,10.9 16,11.4 16,12.5V16.5C16,17.4 15.4,18 14.5,18H9.5C8.6,18 8,17.4 8,16.5V12.5C8,11.4 8.6,10.9 9.2,10.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V10.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                    </svg>
+                    HIPAA Secure
+                </div>
+                <div class="trust-badge">
+                    <svg class="lock-icon" viewBox="0 0 24 24">
+                        <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
+                    </svg>
+                    Encrypted
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Login Form -->
+        <div class="login-right">
+            <div class="form-title">Welcome Back</div>
+            <div class="form-subtitle">Sign in to access your healthcare assistant</div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input" 
+                        placeholder="Enter your email address"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-input" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" id="loginButton" class="login-button">
+                    <div class="button-content">
+                        <div class="loading-spinner"></div>
+                        <span id="buttonText">Sign In to Chat with Sallie</span>
+                    </div>
+                </button>
+
+                <div id="errorMessage" class="error-message"></div>
+                <div id="successMessage" class="success-message"></div>
+            </form>
+
+            <div class="forgot-password">
+                <a href="#" onclick="alert('Please contact support for password reset.')">Forgot your password?</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Login form handling
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginButton = document.getElementById('loginButton');
+            const buttonText = document.getElementById('buttonText');
+            const loadingSpinner = document.querySelector('.loading-spinner');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Reset messages
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            
+            // Show loading state
+            loginButton.disabled = true;
+            loadingSpinner.style.display = 'block';
+            buttonText.textContent = 'Signing In...';
+            
+            try {
+                // Call authentication API
+                const response = await fetch('/api/authenticate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Authentication successful
+                    successMessage.textContent = `Welcome! Redirecting to chat with Sallie...`;
+                    successMessage.style.display = 'block';
+                    
+                    // Store patient info
+                    sessionStorage.setItem('patient_id', result.patient_id);
+                    sessionStorage.setItem('patient_email', result.email);
+                    sessionStorage.setItem('authenticated', 'true');
+                    
+                    // Redirect to chat interface after short delay
+                    setTimeout(() => {
+                        window.location.href = 'chat.html';
+                    }, 1500);
+                    
+                } else {
+                    // Authentication failed
+                    errorMessage.textContent = result.message || 'Invalid email or password. Please try again.';
+                    errorMessage.style.display = 'block';
+                }
+                
+            } catch (error) {
+                console.error('Authentication error:', error);
+                errorMessage.textContent = 'Unable to connect to authentication service. Please try again.';
+                errorMessage.style.display = 'block';
+            } finally {
+                // Reset loading state
+                loginButton.disabled = false;
+                loadingSpinner.style.display = 'none';
+                buttonText.textContent = 'Sign In to Chat with Sallie';
+            }
+        });
+
+        // Input validation and styling
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+
+        // Demo credentials helper (remove in production)
+        document.addEventListener('keydown', function(e) {
+            // Press Ctrl+D to fill demo credentials (for testing)
+            if (e.ctrlKey && e.key === 'd') {
+                e.preventDefault();
+                document.getElementById('email').value = 'demo@powerofpatients.com';
+                document.getElementById('password').value = 'demo123';
+                alert('Demo credentials filled. This is for testing only.');
+            }
+        });
+    </script>
+</body>
+</html>

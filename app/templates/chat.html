@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Sallie - Power of Patients</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .assistant-avatar {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .assistant-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-info h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .header-info p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .logout-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .background-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+            width: 300px;
+            height: 300px;
+        }
+
+        .background-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .message {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            animation: fadeIn 0.3s ease-out;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.2s ease;
+        }
+
+        .message:hover {
+            transform: translateX(2px);
+        }
+
+        .message:last-child {
+            margin-bottom: 12px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .message:first-child {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .assistant-avatar-chat {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .assistant-avatar-chat img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-avatar-chat {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .message-content {
+            flex: 1;
+        }
+
+        .message-header {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .assistant-message .message-header {
+            color: #2563eb;
+        }
+
+        .user-message .message-header {
+            color: #4338ca;
+        }
+
+        .message-text {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            line-height: 1.7;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 15px;
+            color: #1f2937;
+        }
+
+        .message-text p {
+            margin: 0 0 14px 0;
+            line-height: 1.7;
+        }
+
+        .message-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .message-text strong {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .message-text em {
+            font-style: italic;
+            color: #4b5563;
+        }
+
+        /* Better spacing for readability */
+        .message-text ul,
+        .message-text ol {
+            margin: 12px 0 12px 24px;
+            padding-left: 20px;
+        }
+
+        .message-text li {
+            margin-bottom: 8px;
+            line-height: 1.7;
+        }
+
+        .message-text li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Highlight important information */
+        .message-text .highlight {
+            background-color: #fef3c7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* Code or technical terms */
+        .message-text code {
+            background-color: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+        }
+
+        .user-message .message-text {
+            background: #e0e7ff;
+            color: #1e1b4b;
+        }
+
+        .assistant-message .message-text {
+            max-width: 100%;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+        }
+
+        .message-text strong {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .message-text em {
+            font-style: italic;
+            color: #475569;
+        }
+
+        /* Section breaks for topic changes */
+        .message-text .section-break {
+            height: 1px;
+            background: #e5e7eb;
+            margin: 20px 0;
+        }
+
+        /* Emphasis for important health information */
+        .message-text .important {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+
+        /* Question prompts from Sallie */
+        .message-text .question {
+            color: #2563eb;
+            font-weight: 500;
+            display: inline;
+        }
+
+        /* List styling */
+        .message-text ul,
+        .message-text ol {
+            margin: 8px 0 8px 20px;
+            padding-left: 20px;
+        }
+
+        .message-text li {
+            margin-bottom: 4px;
+            line-height: 1.6;
+        }
+
+        .input-container {
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 20px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-form {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            gap: 12px;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .message-input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .send-button:active {
+            transform: translateY(0);
+        }
+
+        .send-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 4px;
+            padding: 12px 16px;
+            background: #f3f4f6;
+            border-radius: 12px;
+            width: fit-content;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #9ca3af;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mascot-dog {
+                width: 60px;
+                height: 60px;
+                bottom: 80px;
+                right: 10px;
+                padding: 8px;
+            }
+
+            .sallie-corner {
+                width: 45px;
+                height: 45px;
+                bottom: 140px;
+                left: 10px;
+            }
+
+            .mascot-tooltip {
+                position: absolute;
+                bottom: 100%;
+                right: 0;
+                background: #1f2937;
+                color: white;
+                padding: 8px 12px;
+                border-radius: 8px;
+                font-size: 14px;
+                white-space: nowrap;
+                margin-bottom: 10px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                pointer-events: none;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                font-weight: 500;
+                z-index: 101;
+            }
+
+            .mascot-tooltip::after {
+                content: '';
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-top: 8px solid #1f2937;
+            }
+
+            .mascot-dog:hover .mascot-tooltip {
+                opacity: 1;
+            }
+        }
+
+        .connection-error {
+            background: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        /* Ensure mascot is visible on all backgrounds */
+        .mascot-dog {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            z-index: 100;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            animation: mascotBounce 1s ease-out forwards;
+            background: white;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 30px rgba(59, 130, 246, 0.2);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .mascot-dog:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3), 0 0 45px rgba(59, 130, 246, 0.5);
+            border-color: rgba(59, 130, 246, 0.5);
+            opacity: 1 !important;
+        }
+
+        .mascot-dog img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        /* Tooltip for mascot */
+        .mascot-tooltip {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            background: #1f2937;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            white-space: nowrap;
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            font-weight: 500;
+            z-index: 101;
+        }
+
+        .mascot-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #1f2937;
+        }
+
+        /* .mascot-dog:hover .mascot-tooltip {
+            opacity: 1;
+        } */
+
+        /* Pulse animation for mascot */
+        @keyframes mascotPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 30px rgba(59, 130, 246, 0.2);
+                border-color: rgba(59, 130, 246, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25), 0 0 40px rgba(59, 130, 246, 0.4);
+                border-color: rgba(59, 130, 246, 0.5);
+            }
+        }
+
+        .mascot-dog.pulse {
+            animation: mascotPulse 2s ease-in-out infinite;
+            transition: none;
+        }
+
+        /* Initial bounce animation */
+        @keyframes mascotBounce {
+            0% {
+                transform: translateY(100px) scale(0.8);
+                opacity: 0;
+            }
+            60% {
+                transform: translateY(-20px) scale(1);
+                opacity: 1;
+            }
+            80% {
+                transform: translateY(10px) scale(1);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .mascot-dog {
+            animation: mascotBounce 1s ease-out;
+        }
+
+        .sallie-corner {
+            position: fixed;
+            bottom: 100px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            z-index: 50;
+            opacity: 0.9;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 5px;
+        }
+
+        .sallie-corner:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .sallie-corner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <div class="assistant-avatar">
+                <img src="/static/sallie.gif" alt="Sallie" onerror="this.style.display='none'; this.parentElement.innerHTML='👩‍⚕️';">
+            </div>
+            <div class="header-info">
+                <h2>Sallie</h2>
+                <p>Your Healthcare Assistant</p>
+            </div>
+        </div>
+        <button class="logout-button" onclick="logout()">Sign Out</button>
+    </div>
+
+    <div class="connection-error" id="connectionError">
+        Connection lost. Please refresh the page.
+    </div>
+
+    <div class="background-logo">
+        <img src="/static/pop-logo.png" alt="Power of Patients">
+    </div>
+
+    <div class="chat-container" id="chatContainer">
+        <!-- Messages will be added here dynamically -->
+    </div>
+
+    <div class="mascot-dog" onclick="showRandomTip()" >
+        <div class="mascot-tooltip" id="tooltip">💡 Click me for health tips!</div>
+        <img src="/static/sallie.gif" alt="Sallie Mascot">
+    </div>
+    
+
+    <div class="input-container">
+        <form class="input-form" id="messageForm">
+            <input 
+                type="text" 
+                class="message-input" 
+                id="messageInput" 
+                placeholder="Type your message to Sallie..."
+                autocomplete="off"
+            >
+            <button type="submit" class="send-button" id="sendButton">
+                <span>Send</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z"/>
+                </svg>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Check authentication
+        if (!sessionStorage.getItem('authenticated')) {
+            window.location.href = '/';
+        }
+
+        // Check user type - redirect researchers to their interface
+        const userType = sessionStorage.getItem('user_type');
+        if (userType === 'researcher') {
+            window.location.href = '/researcher_chat.html';
+        }
+
+        const patientId = sessionStorage.getItem('patient_id');
+        const patientEmail = sessionStorage.getItem('patient_email');
+        const chatContainer = document.getElementById('chatContainer');
+        const messageForm = document.getElementById('messageForm');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+        const connectionError = document.getElementById('connectionError');
+
+        // Add message to chat with better formatting
+        
+        // Replace the addMessage function with this corrected version
+        // Replace the addMessage function with this corrected version
+        function addMessage(text, isUser = false, senderName = null) {
+            // Ensure typing indicator is removed before adding message
+            if (!isUser) {
+                hideTypingIndicator();
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = isUser ? 'message user-message' : 'message assistant-message';
+            
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = isUser ? 'message-avatar user-avatar-chat' : 'message-avatar assistant-avatar-chat';
+            
+            if (isUser) {
+                avatarDiv.textContent = '👤';
+            } else {
+                const avatarImg = document.createElement('img');
+                avatarImg.src = '/static/sallie.gif';
+                avatarImg.alt = 'Sallie';
+                avatarImg.style.width = '100%';
+                avatarImg.style.height = '100%';
+                avatarImg.style.objectFit = 'cover';
+                avatarImg.onerror = function() {
+                    this.parentElement.innerHTML = '👩‍⚕️';
+                };
+                avatarDiv.appendChild(avatarImg);
+            }
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'message-header';
+            
+            // Add name
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = senderName || (isUser ? 'You' : 'Sallie');
+            headerDiv.appendChild(nameSpan);
+            
+            // Add timestamp
+            const timeSpan = document.createElement('span');
+            timeSpan.style.fontSize = '12px';
+            timeSpan.style.color = '#9ca3af';
+            timeSpan.style.fontWeight = '400';
+            const now = new Date();
+            timeSpan.textContent = ' • ' + now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+            headerDiv.appendChild(timeSpan);
+            
+            const textDiv = document.createElement('div');
+            textDiv.className = 'message-text';
+            
+            // Clean text and fix malformed HTML tags
+            let cleanText = text;
+            
+            // Fix malformed HTML tags that are causing display issues
+            cleanText = cleanText
+                .replace(/(\s|^)em>/g, '$1<em>')  // Fix malformed <em> tags
+                .replace(/(\s|^)strong>/g, '$1<strong>'); // Fix malformed <strong> tags
+            
+            // Format text for better readability
+            if (!isUser && cleanText.length > 100) {
+                // Process the text to add proper formatting
+                let formattedText = cleanText;
+                
+                // Replace multiple spaces with single space
+                formattedText = formattedText.replace(/\s+/g, ' ').trim();
+                
+                // Split into sentences more intelligently - avoid splitting abbreviations and URLs
+                // Replace abbreviations temporarily, split sentences, then restore
+                let tempText = formattedText
+                    .replace(/\bU\.S\./g, 'U_S_')
+                    .replace(/\bwww\./g, 'www_')
+                    .replace(/\b[A-Z]\./g, (match) => match.replace('.', '_'))
+                    .replace(/\d+\.\d+/g, (match) => match.replace('.', '_')); // Handle decimal numbers
+                
+                // Now split on sentences (period followed by space and capital letter)
+                const sentences = tempText.match(/[^.!?]*[.!?]+(?=\s+[A-Z]|$)/g) || [tempText];
+                
+                // Restore abbreviations in each sentence
+                const restoredSentences = sentences.map(sentence => 
+                    sentence.replace(/U_S_/g, 'U.S.')
+                        .replace(/www_/g, 'www.')
+                        .replace(/([A-Z])_/g, '$1.')
+                        .replace(/(\d+)_(\d+)/g, '$1.$2')
+                );
+                let processedText = '';
+                let currentParagraph = '';
+                
+                restoredSentences.forEach((sentence, index) => {
+                    const trimmedSentence = sentence.trim();
+                    
+                    // Check for natural paragraph breaks
+                    if (trimmedSentence.match(/^(However|Furthermore|Additionally|Moreover|First|Second|Third|Finally|In conclusion|For example|Therefore)/i) ||
+                        (currentParagraph.length > 200 && index > 0)) {
+                        if (currentParagraph) {
+                            processedText += currentParagraph.trim() + '\n\n';
+                            currentParagraph = '';
+                        }
+                    }
+                    
+                    currentParagraph += trimmedSentence + ' ';
+                    
+                    // Force paragraph break after 3 sentences or at the end
+                    if ((currentParagraph.match(/[.!?]/g) || []).length >= 3 || index === restoredSentences.length - 1) {
+                        processedText += currentParagraph.trim() + (index < restoredSentences.length - 1 ? '\n\n' : '');
+                        currentParagraph = '';
+                    }
+                });
+                
+                cleanText = processedText.trim();
+            }
+            
+            // Handle different text patterns
+            const paragraphs = cleanText.split(/\n\n+/);
+            
+            paragraphs.forEach((para, index) => {
+                if (para.trim()) {
+                    const p = document.createElement('p');
+                    
+                    // Check for Medical Disclaimer - add separator and special styling
+                    if (para.includes('Medical Disclaimer') || para.includes('**Medical Disclaimer**')) {
+                        // Add separator line before disclaimer
+                        const separator = document.createElement('div');
+                        separator.className = 'section-break';
+                        separator.style.height = '1px';
+                        separator.style.background = '#e5e7eb';
+                        separator.style.margin = '20px 0';
+                        textDiv.appendChild(separator);
+                        
+                        // Style the disclaimer
+                        p.style.fontSize = '13px';
+                        p.style.color = '#64748b';
+                        p.style.fontStyle = 'italic';
+                        p.style.marginTop = '16px';
+                        p.style.paddingTop = '12px';
+                    }
+                    
+                    // Process markdown and HTML formatting
+                    let formattedPara = para
+                        .replace(/\*\*\*(.*?)\*\*\*/g, '<strong>$1</strong>') // Handle triple asterisks
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/\*(.*?)\*/g, '<em>$1</em>');
+                    
+                    // Handle bullet points - more precise detection
+                    if (para.trim().match(/^[•\-]\s/) || 
+                        para.trim().match(/^\*{1,3}\s*\*{1,3}[A-Z]/) || 
+                        para.trim().match(/^•\s*\*{1,3}/)) {
+                        formattedPara = '• ' + formattedPara.replace(/^[•\-\*]+\s*/, '');
+                        p.style.marginLeft = '20px';
+                        p.style.listStyleType = 'none';
+                    }
+                    
+                    // Handle numbered lists
+                    const numberMatch = para.trim().match(/^(\d+)\./);
+                    if (numberMatch) {
+                        p.style.marginLeft = '20px';
+                    }
+                    
+                    // Set innerHTML to allow HTML formatting
+                    p.innerHTML = formattedPara;
+                    textDiv.appendChild(p);
+                }
+            });
+            
+            // If no paragraphs were created, just set the text with HTML formatting
+            if (textDiv.children.length === 0) {
+                // Process the text for HTML formatting
+                let processedText = cleanText
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>');
+                
+                textDiv.innerHTML = processedText;
+            }
+            
+            contentDiv.appendChild(headerDiv);
+            contentDiv.appendChild(textDiv);
+            
+            messageDiv.appendChild(avatarDiv);
+            messageDiv.appendChild(contentDiv);
+            
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Add typing indicator
+        function showTypingIndicator() {
+            hideTypingIndicator();
+            
+            setTimeout(() => {
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'message assistant-message';
+                typingDiv.id = 'typingIndicator';
+                
+                const avatarDiv = document.createElement('div');
+                avatarDiv.className = 'message-avatar assistant-avatar-chat';
+                
+                const avatarImg = document.createElement('img');
+                avatarImg.src = '/static/sallie.gif';
+                avatarImg.alt = 'Sallie';
+                avatarImg.style.width = '100%';
+                avatarImg.style.height = '100%';
+                avatarImg.style.objectFit = 'cover';
+                avatarImg.onerror = function() {
+                    this.parentElement.innerHTML = '👩‍⚕️';
+                };
+                avatarDiv.appendChild(avatarImg);
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'message-content';
+                
+                // Add "Sallie is typing..." header
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'message-header';
+                headerDiv.style.color = '#2563eb';
+                headerDiv.innerHTML = '<span>Sallie is thinking...</span>';
+                
+                const indicatorDiv = document.createElement('div');
+                indicatorDiv.className = 'typing-indicator';
+                indicatorDiv.style.display = 'flex';
+                indicatorDiv.style.background = '#f0f9ff';
+                indicatorDiv.style.border = '1px solid #bfdbfe';
+                indicatorDiv.style.padding = '16px 20px';
+                indicatorDiv.style.borderRadius = '12px';
+                indicatorDiv.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+                
+                const typingText = document.createElement('span');
+                typingText.textContent = 'Sallie is analyzing your question';
+                typingText.style.color = '#1e40af';
+                typingText.style.marginRight = '12px';
+                typingText.style.fontSize = '14px';
+                indicatorDiv.appendChild(typingText);
+                
+                for (let i = 0; i < 3; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'typing-dot';
+                    dot.style.background = '#2563eb';
+                    indicatorDiv.appendChild(dot);
+                }
+                
+                contentDiv.appendChild(headerDiv);
+                contentDiv.appendChild(indicatorDiv);
+                typingDiv.appendChild(avatarDiv);
+                typingDiv.appendChild(contentDiv);
+                
+                chatContainer.appendChild(typingDiv);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+                
+                // Disable input while loading
+                messageInput.disabled = true;
+                messageInput.placeholder = 'Sallie is responding...';
+            }, 50);
+        }
+
+        function hideTypingIndicator() {
+            const indicators = document.querySelectorAll('#typingIndicator');
+            indicators.forEach(indicator => {
+                if (indicator) {
+                    indicator.remove();
+                }
+            });
+            
+            const allMessages = document.querySelectorAll('.message');
+            allMessages.forEach(msg => {
+                if (msg.querySelector('.typing-indicator')) {
+                    msg.remove();
+                }
+            });
+            
+            // Re-enable input
+            messageInput.disabled = false;
+            messageInput.placeholder = 'Type your message to Sallie...';
+        }
+
+        // Send message
+        async function sendMessage(message) {
+            let typingTimeout = null;
+            
+            try {
+                sendButton.disabled = true;
+                
+                // Only show typing indicator for actual messages, not initial connection
+                if (message !== 'INITIAL_CONNECTION') {
+                    showTypingIndicator();
+                    // Auto-remove typing indicator after 10 seconds
+                    typingTimeout = setTimeout(() => {
+                        hideTypingIndicator();
+                    }, 10000);
+                }
+                
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        patient_id: patientId,
+                        message: message,
+                        user_type: 'patient'  // Explicitly set as patient
+                    })
+                });
+                
+                const data = await response.json();
+                
+                // Clear timeout and hide typing indicator before showing response
+                if (typingTimeout) {
+                    clearTimeout(typingTimeout);
+                }
+                
+                // Small delay to ensure smooth transition
+                await new Promise(resolve => setTimeout(resolve, 100));
+                hideTypingIndicator();
+                
+                if (data.success) {
+                    // Another small delay before adding message
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    addMessage(data.response, false, data.agent_used === 'ReAct' ? 'Sallie (Advanced)' : 'Sallie');
+                } else {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    addMessage('I apologize, but I encountered an error. Please try again.', false);
+                    console.error('Chat error:', data.error);
+                }
+            } catch (error) {
+                // Clear timeout and hide typing indicator on error
+                if (typingTimeout) {
+                    clearTimeout(typingTimeout);
+                }
+                
+                // Small delay to ensure smooth transition
+                await new Promise(resolve => setTimeout(resolve, 100));
+                hideTypingIndicator();
+                
+                console.error('Network error:', error);
+                connectionError.style.display = 'block';
+                
+                await new Promise(resolve => setTimeout(resolve, 100));
+                addMessage('Connection error. Please check your internet and try again.', false);
+            } finally {
+                sendButton.disabled = false;
+                messageInput.focus();
+            }
+        }
+
+        // Handle form submission
+        messageForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const message = messageInput.value.trim();
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, true);
+            
+            // Clear input
+            messageInput.value = '';
+            
+            // Send to backend
+            await sendMessage(message);
+        });
+
+        // Logout function
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = '/';
+        }
+
+        // Show random health tip when mascot is clicked
+        function showRandomTip() {
+            const tips = [
+                "Remember to stay hydrated! Drink at least 8 glasses of water daily.",
+                "Gentle yoga or stretching can improve balance and reduce tension.",
+                "Wearing sunglasses can help if you’re experiencing light sensitivity.",
+                "Maintain a regular sleep schedule to support brain healing.",
+                "Take breaks from your screen every 20 minutes to rest your eyes.",
+                "A 10-minute walk can boost your mood and energy levels!",
+                "Deep breathing exercises can help reduce stress and anxiety.",
+                "Getting 7-9 hours of sleep is crucial for your health.",
+                "Eating a balanced diet with fruits and vegetables supports brain health.",
+                "Regular exercise can help improve cognitive function after a TBI.",
+                "Keep a symptom journal to track your recovery progress.",
+                "Limit alcohol consumption as it can interfere with brain healing.",
+                "Create a consistent daily routine to help with memory and organization."
+            ];
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            addMessage(randomTip, false, 'Sallie\'s Health Tip 💡');
+            
+            // Stop the pulse animation after first click
+            const mascot = document.querySelector('.mascot-dog');
+            if (mascot) {
+                mascot.classList.remove('pulse');
+                // Restore transition after removing pulse
+                setTimeout(() => {
+                    mascot.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease';
+                }, 100);
+            }
+        }
+
+        // Initial connection - get welcome message
+        window.addEventListener('load', async () => {
+            // Show typing indicator for initial connection
+            showTypingIndicator();
+            
+            // Send initial connection message
+            try {
+                await sendMessage('INITIAL_CONNECTION');
+            } finally {
+                // Ensure typing indicator is removed
+                hideTypingIndicator();
+            }
+            
+            messageInput.focus();
+            
+            // Start pulse animation after bounce completes
+            setTimeout(() => {
+                const mascot = document.querySelector('.mascot-dog');
+                if (mascot) {
+                    mascot.classList.add('pulse');
+                }
+            }, 1200);
+            
+            // Show mascot tooltip briefly after page load
+            // setTimeout(() => {
+            //     const tooltip = document.querySelector('.mascot-tooltip');
+            //     if (tooltip) {
+            //         tooltip.style.opacity = '1';
+            //         tooltip.style.transform = 'translateX(-50%) translateY(-5px)';
+            //         setTimeout(() => {
+            //             tooltip.style.opacity = '0';
+            //             tooltip.style.transform = 'translateX(-50%)';
+            //         }, 3000);
+            //     }
+            // }, 2000);
+        });
+
+        // Focus on input
+        messageInput.focus();
+        
+        // Clean up any stray typing indicators periodically
+        setInterval(() => {
+            // Only clean up if we're not actively waiting for a response
+            if (!sendButton.disabled) {
+                const indicators = document.querySelectorAll('.typing-indicator');
+                if (indicators.length > 0) {
+                    hideTypingIndicator();
+                }
+            }
+        }, 5000);
+        
+        // Remove typing indicator on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                hideTypingIndicator();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -5,8 +5,11 @@ __pycache__/
 
 # C extensions
 *.so
+/app/.env
 .env
+/CDC_TBI_Resources
 /data
+/phenotypes/data
 # Distribution / packaging
 .Python
 build/

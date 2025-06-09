@@ -1,0 +1,256 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0" version="27.0.9">
+  <diagram name="Page-1" id="VZJaprB8WFMVu6S44Zhk">
+    <mxGraphModel dx="819" dy="533" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-1" value="Patient" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-2" value="Researcher" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-4" value="User Query related to TBI or medical&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-5" value="Yes/No" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="320" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-6" value="If related to TBI or Medical QnA" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="460" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-7" value="TBI/ Medical" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="550" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-8" value="Knowledge Base Agent" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="690" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-9" value="MedPalm Agent" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="570" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-10" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-4" target="UrurkWIkp2Eu1U4GWpJR-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="350" y="470" as="sourcePoint" />
+            <mxPoint x="400" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-11" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-5" target="UrurkWIkp2Eu1U4GWpJR-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="350" y="470" as="sourcePoint" />
+            <mxPoint x="400" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-12" value="Yes" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="220" y="408" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-13" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-5" target="UrurkWIkp2Eu1U4GWpJR-21">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="358.0000000000001" as="sourcePoint" />
+            <mxPoint x="300" y="358" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="360" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-14" value="No" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="270" y="328" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-15" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="220" y="630" as="sourcePoint" />
+            <mxPoint x="220" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-16" value="TBI" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="220" y="638" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-17" value="" style="endArrow=classic;html=1;rounded=0;exitX=-0.023;exitY=0.071;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-18">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="220" y="500" as="sourcePoint" />
+            <mxPoint x="220" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-18" value="Yes" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="220" y="508" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-19" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-7" target="UrurkWIkp2Eu1U4GWpJR-9">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="540" as="sourcePoint" />
+            <mxPoint x="211" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-20" value="Medical" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="130" y="560" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-21" value="Default Prompt (I am a medical chatbot)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-22" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-21" target="UrurkWIkp2Eu1U4GWpJR-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="470" y="218" as="sourcePoint" />
+            <mxPoint x="479" y="118" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="360" y="115" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-23" value="LLM (User query + Response + memory)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-24" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.627;entryY=1.035;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-9" target="UrurkWIkp2Eu1U4GWpJR-23">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="40" y="320" as="sourcePoint" />
+            <mxPoint x="90" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-25" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.627;entryY=1.035;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-8">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="10" y="772.9629855685764" as="sourcePoint" />
+            <mxPoint x="10" y="270" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="10" y="720" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-26" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.416;entryY=0.029;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="UrurkWIkp2Eu1U4GWpJR-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="160" as="sourcePoint" />
+            <mxPoint x="260" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-27" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="UrurkWIkp2Eu1U4GWpJR-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="50" y="210" as="sourcePoint" />
+            <mxPoint x="100" y="160" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="50" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-28" value="Final Response" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="25" y="98" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-29" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-2" target="UrurkWIkp2Eu1U4GWpJR-30">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="650" y="390" as="sourcePoint" />
+            <mxPoint x="735.0000000000002" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-30" value="TBI data related (table schema) or general medical query" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620.0000000000002" y="230" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-31" value="Yes/ No" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="328" width="60" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-32" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-31" target="UrurkWIkp2Eu1U4GWpJR-48">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="510" y="327.17" as="sourcePoint" />
+            <mxPoint x="470" y="353" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="520" y="353" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-33" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="UrurkWIkp2Eu1U4GWpJR-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="330" y="590" as="sourcePoint" />
+            <mxPoint x="410" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-34" value="Patient-data (Based on patient ID)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="565" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-36" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-30" target="UrurkWIkp2Eu1U4GWpJR-31">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="740" y="350" as="sourcePoint" />
+            <mxPoint x="800" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-37" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="680" y="380" as="sourcePoint" />
+            <mxPoint x="680" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-38" value="General Medical/ TBI patient data Query" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="430" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-39" value="Yes/ No" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="528" width="60" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-40" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-39">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="740" y="530" as="sourcePoint" />
+            <mxPoint x="790" y="553" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-41" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="UrurkWIkp2Eu1U4GWpJR-39">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="680" y="490" as="sourcePoint" />
+            <mxPoint x="800" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-42" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="680" y="580" as="sourcePoint" />
+            <mxPoint x="680" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-43" value="Pandas Agent" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="630" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-44" value="TBI Pateint" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="600" y="585" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-45" value="Medical Q" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="700" y="518" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-46" value="MedPalm Agent" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="790" y="530" width="90" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-47" value="LLM (User query + Response + memory)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="230" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-48" value="Default Prompt (I am a medical chatbot)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-49" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=-0.03;entryY=0.652;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-48" target="UrurkWIkp2Eu1U4GWpJR-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="620" y="123" as="sourcePoint" />
+            <mxPoint x="490" y="40" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="520" y="150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-50" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-43" target="UrurkWIkp2Eu1U4GWpJR-47">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1160" y="870" as="sourcePoint" />
+            <mxPoint x="1000" y="420" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="890" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-51" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.43;exitY=-0.069;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-46" target="UrurkWIkp2Eu1U4GWpJR-47">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="730" y="520" as="sourcePoint" />
+            <mxPoint x="780" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-53" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.421;exitY=-0.038;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="UrurkWIkp2Eu1U4GWpJR-47" target="UrurkWIkp2Eu1U4GWpJR-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="850" y="220" as="sourcePoint" />
+            <mxPoint x="1060" y="160" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="850" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UrurkWIkp2Eu1U4GWpJR-54" value="Final Response" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="760" y="115" width="110" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

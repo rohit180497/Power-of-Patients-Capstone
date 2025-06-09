@@ -1,0 +1,1332 @@
+{
+  "test_info": {
+    "total_questions": 24,
+    "index_name": "us-cdc-tbi",
+    "embedding_model": "BAAI/bge-base-en-v1.5",
+    "embedding_dimension": 768,
+    "llm_provider": "gemini",
+    "run_date": "2025-05-23T18:49:22.499106"
+  },
+  "results": [
+    {
+      "question": "What is a traumatic brain injury and what causes it?",
+      "answer": "A traumatic brain injury (TBI) is caused by a bump, blow, or jolt to the head, or a penetrating head injury that disrupts normal brain function. It can also occur from a blow to the body that causes the head and brain to move quickly back and forth (Sources 1, 2, 3, 4, 5, 6, 7, 8). This fast movement can cause the brain to bounce around or twist in the skull, creating chemical changes in the brain, and sometimes stretching and damaging brain cells (Sources 2, 6, 7, 8).\n\nKey points to consider:\n\n*   **Concussion as a TBI:** A concussion is a type of TBI (Sources 1, 2, 5, 6, 7, 8). Doctors may describe a concussion as a \"mild\" brain injury because concussions are usually not life-threatening. Even so, their effects can be serious (Source 1).\n*   **Mechanism of Injury:** TBIs can result from a direct blow to the head or from a hit to the body that causes the head to move rapidly (Sources 1, 2, 5, 6, 7, 8).\n*   **Impact on the Brain:** The rapid movement of the head can cause the brain to bounce or twist within the skull, leading to chemical changes and potential damage to brain cells (Sources 2, 6, 7, 8).\n*   **TBI as a Public Health Concern:** TBI is a preventable injury that results in death and disability for thousands of people each year and remains a serious public health concern (Sources 3, 4). In 2017, TBIs were identified in 25% of all injury-related deaths in the United States (Sources 3, 4).\n*   **Sports-Related TBI:** Football has the highest number of sports-related concussions and other traumatic brain injuries among youth (Source 5).\n\nIf you suspect a TBI, it is important to seek medical attention.\n",
+      "sources": [
+        {
+          "file_name": "Resources_for_Health_Care_Providers_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "Unknown",
+          "relevance_score": 0.771,
+          "url": null,
+          "title": "How You May Feel After a Concussion"
+        },
+        {
+          "file_name": "HEADS_UP_to_High_School_Sports_Online_Concussion_Training_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.755,
+          "url": null,
+          "title": "INFORMATION SHEET"
+        },
+        {
+          "file_name": "Publications_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.753,
+          "url": null,
+          "title": "SURVEILLANCE"
+        },
+        {
+          "file_name": "TBI_Data_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.753,
+          "url": null,
+          "title": "SURVEILLANCE"
+        },
+        {
+          "file_name": "Comparing_Head_Impacts_in_Youth_Tackle_and_Flag_Football_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "Unknown",
+          "relevance_score": 0.737,
+          "url": null,
+          "title": "WHAT PARENTS"
+        },
+        {
+          "file_name": "What_to_do_After_a_Concussion_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.732,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Responding_to_a_Sports-related_Concussion_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.732,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Concussion_Basics_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.732,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.771,
+        "generated_at": "2025-05-23T18:47:40.295120",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "How common are traumatic brain injuries in the United States?",
+      "answer": "Traumatic brain injury (TBI) is a significant public health concern in the United States, resulting in death and disability for thousands of people each year. TBI is caused by a bump, blow, or jolt to the head or a penetrating head injury that disrupts normal brain function.\n\n**Key Statistics on TBI in the United States:**\n\n*   **TBI-related deaths:** In 2017, TBIs were identified in 25% of all injury-related deaths in the United States, accounting for approximately 61,000 deaths.\n*   **Emergency department visits, hospitalizations, and deaths:** Annually, there are approximately 1.4 million TBI-related emergency department (ED) visits, 275,000 hospitalizations, and 52,000 deaths.\n*   **TBI-related deaths as a proportion of all injury-related deaths:** TBI-related deaths represent approximately one-third of all injury-related deaths.\n\n**Leading Causes of TBI:**\n\n*   Falls (35%)\n*   Motor vehicle-related injuries (17%)\n*   Struck by/blow to the head from or against an object (e.g., workplace or sports-related injuries) (16.5%)\n*   Assaults (10%)\n\n**Populations at Higher Risk:**\n\n*   Males\n*   American Indians/Alaska Natives\n\n**Important Considerations:**\n\n*   The provided data primarily focuses on TBI-related deaths and may not fully represent the overall incidence of TBIs, including milder cases.\n*   Some estimates suggest that a significant proportion of individuals who sustain a TBI do not seek medical care, which could affect the accuracy of surveillance data.\n*   Suicide surpassed motor vehicle crashes as the leading category of TBI-related deaths during 2009–2011 and through 2015–2017.\n\n**Recommendation:**\n\nIf you suspect you or someone you know has sustained a traumatic brain injury, it is crucial to seek medical attention promptly for proper evaluation and management.\n",
+      "sources": [
+        {
+          "file_name": "Publications_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.767,
+          "url": null,
+          "title": "SURVEILLANCE"
+        },
+        {
+          "file_name": "TBI_Data_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.767,
+          "url": null,
+          "title": "SURVEILLANCE"
+        },
+        {
+          "file_name": "Surveillance_for_Traumatic_Brain_Injury--Related_Deaths_---_United_States_1997--2007_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.764,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Traumatic_Brain_InjuryRelated_Deaths_by_RaceEthnicity_Sex_Intent_and_Mechanism_of_Injury_Unit_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.762,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.767,
+        "generated_at": "2025-05-23T18:47:44.216907",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What are the main types and severity levels of TBI?",
+      "answer": "Based on the CDC sources provided, here's information about the types and severity levels of Traumatic Brain Injury (TBI):\n\n**Types of TBI:**\n\n*   The provided documents do not explicitly list different *types* of TBI (e.g., diffuse axonal injury, contusion). However, they do classify TBI based on the *mechanism of injury* (cause). Examples include:\n    *   Falls (Source 6)\n    *   Motor vehicle crashes (Source 4)\n    *   Contact sports-related injuries (Source 7)\n    *   Intentional injuries (homicides, suicides) and unintentional injuries (Source 3)\n\n**Severity Levels of TBI:**\n\n*   The documents do not explicitly define severity levels (mild, moderate, severe).\n\n**Important Considerations:**\n\n*   **ICD Codes:** The CDC uses the International Classification of Diseases (ICD) coding system to identify TBI cases in surveillance and reporting. Both ICD-9 and ICD-10 codes are referenced. (Sources 4, 5, 8)\n*   **Data Collection:** TBI data is collected from various sources, including death certificates (Source 5) and hospital records (Source 4).\n*   **Populations Affected:** The provided documents include data on TBI-related deaths and hospitalizations across different age groups, sexes, and racial/ethnic groups. (Sources 4, 6, 8)\n\n**Limitations:**\n\n*   The provided documents focus primarily on surveillance data related to TBI-related deaths and hospitalizations. They do not offer detailed clinical classifications of TBI types or severity.\n\n**Recommendation:**\n\n*   For detailed information on TBI types and severity levels, it is essential to consult with healthcare professionals or refer to comprehensive clinical guidelines on TBI management.\n",
+      "sources": [
+        {
+          "file_name": "Surveillance_for_Traumatic_Brain_Injury--Related_Deaths_---_United_States_1997--2007_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.717,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Differences_in_State_Traumatic_Brain_InjuryRelated_Deaths_by_Principal_Mechanism_of_Injury_Intent_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.705,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Incidence_of_Nonfatal_Traumatic_Brain_InjuryRelated_Hospitalizations_United_States_2018_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.704,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Trends_in_Emergency_Department_Visits_for_Contact_SportsRelated_Traumatic_Brain_Injuries_Among_Chil_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.691,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.717,
+        "generated_at": "2025-05-23T18:47:48.299869",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What are the signs and symptoms of a concussion?",
+      "answer": "A concussion is a type of traumatic brain injury (TBI) caused by a bump, blow, or jolt to the head or body that causes the head and brain to move quickly back and forth (Source 2, 5, 6, 7, 8). Concussions can also occur from a fall or a blow to the body that causes the head and brain to move quickly back and forth (Source 2). Doctors may describe a concussion as a “mild” brain injury because concussions are usually not life-threatening; even so, their effects can be serious (Source 2).\n\n**Signs and Symptoms of a Concussion:**\n\nConcussion signs and symptoms are part of the normal healing process (Source 2). Some concussion symptoms may appear right away, while other symptoms may not appear for hours or days after the injury (Source 2, 5, 6, 7, 8). Symptoms generally improve over time, and most people with a concussion feel better within a couple of weeks (Source 2, 5, 6, 7, 8).\n\nHere are some symptoms you may have after a concussion (Source 1):\n\n*   **Thinking/Remembering:**\n    *   Difficulty thinking clearly (Source 1)\n    *   Feeling slowed down (Source 1)\n    *   Difficulty concentrating (Source 1)\n    *   Difficulty remembering new information (Source 1)\n*   **Physical:**\n    *   Headache (Source 1, 3)\n    *   Fuzzy or blurry vision (Source 1, 3)\n    *   Nausea or vomiting (early on) (Source 1)\n    *   Dizziness (Source 1, 3)\n    *   Balance problems (Source 1)\n    *   Feeling tired, having no energy (Source 1)\n    *   Sensitivity to noise or light (Source 1)\n*   **Emotional:**\n    *   Irritability (Source 1)\n    *   Sadness (Source 1)\n    *   More emotional (Source 1)\n    *   Nervousness or anxiety (Source 1)\n*   **Sleep:**\n    *   Sleeps less than usual (Source 1)\n    *   Sleeps more than usual (Source 1)\n    *   Trouble falling asleep (Source 1)\n\n**Danger Signs:**\n\nExamples of TBI danger signs may include the inability to stay awake, seizures, unusual behavior, or increased confusion (Source 3).\n\n**Important Considerations:**\n\n*   Parents, guardians, school professionals, and coaches are not expected to diagnose a TBI. Only a health care provider can diagnose a TBI (Source 3).\n*   It is important to observe the student for signs and symptoms of TBI and danger signs for a minimum of 30 minutes (Source 3).\n*   Concussion signs and symptoms often show up soon after the injury, but some symptoms may not show up for hours or days (Source 4, 5, 6, 7, 8).\n*   A child’s or teen’s return to school and sports should be a gradual process that is carefully managed and monitored by a healthcare provider (Source 4).\n\nIf you suspect a concussion, it is crucial to consult with a healthcare provider for proper diagnosis and management (Source 3, 4). More information on concussion, as well as tips to help you feel better, can be found at www.cdc.gov/TraumaticBrainInjury (Source 1).\n",
+      "sources": [
+        {
+          "file_name": "Resources_for_Health_Care_Providers_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "Unknown",
+          "relevance_score": 0.861,
+          "url": null,
+          "title": "How You May Feel After a Concussion"
+        },
+        {
+          "file_name": "HEADS_UP_Guidelines_and_Recommendations_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.776,
+          "url": null,
+          "title": "Get Your School Prepared to"
+        },
+        {
+          "file_name": "HEADS_UP_to_High_School_Sports_Online_Concussion_Training_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.761,
+          "url": null,
+          "title": "INFORMATION SHEET"
+        },
+        {
+          "file_name": "Responding_to_a_Sports-related_Concussion_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.76,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "What_to_do_After_a_Concussion_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.76,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Concussion_Basics_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.76,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Signs_and_Symptoms_of_Concussion_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.76,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.861,
+        "generated_at": "2025-05-23T18:47:53.538829",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "How is traumatic brain injury diagnosed in emergency departments?",
+      "answer": "Based on the CDC resources provided, here's how traumatic brain injury (TBI) is addressed in emergency departments:\n\n**Initial Assessment and Recognition:**\n\n*   **Observation:** Emergency departments (EDs) will observe patients for signs and symptoms of TBI. Common symptoms include headache, dizziness, or blurry vision. Danger signs include the inability to stay awake, seizures, unusual behavior, or increased confusion (Source 1).\n*   **History and Risk Factors:** Clinicians may conduct a history to identify risk factors for poor prognosis (Source 6).\n\n**Diagnostic Procedures:**\n\n*   **Clinical Decision Rules:** EDs may use validated clinical decision rules to predict the risk of more severe injuries (Source 6).\n*   **Imaging:** Routine imaging (CT & MRI) is generally discouraged in cases of mild TBI (mTBI) (Sources 3, 6).\n\n**Specific Considerations for Mild TBI (mTBI) / Concussion:**\n\n*   **Validated Scales:** Assessment of symptoms using validated scales is recommended. Cognitive and balance testing may also be considered (Source 6).\n*   **Key Recommendations:** The American College of Emergency Physicians updated their clinical policy in 2023 to provide recommendations on the care of adult patients with mTBI seen in an emergency department. Key recommendations in the Policy focus on imaging, patient education, and follow up care (Source 3).\n\n**Important Considerations:**\n\n*   **Sports and Recreation-Related TBIs:** A significant number of TBI-related ED visits are linked to sports and recreation activities (Sources 4, 5, 7).\n*   **Children and Adolescents:** Younger individuals are at increased risk for TBIs with increased severity and prolonged recovery (Source 4).\n*   **Bicycle-Related TBIs:** Bicycling leads to a high number of sport and recreation–related emergency department (ED) visits for traumatic brain injuries (TBIs) in the United States (Source 5).\n\n**General Recommendations:**\n\n*   **Consult a Healthcare Provider:** Questions about diagnosis and treatment for TBI should be directed to a healthcare provider (Source 2). Parents, guardians, school professionals, and coaches are not expected to diagnose a TBI. Only a health care provider can diagnose a TBI (Source 1).\n*   **Patient Education:** Provide information about warning signs, typical recovery course, and how to prevent further injury (Source 6).\n\n**Limitations:**\n\nThe provided information focuses primarily on initial assessment and management in the ED setting, particularly for mild TBI. It does not detail the full spectrum of diagnostic tools and procedures that may be used for more severe TBI cases.\n",
+      "sources": [
+        {
+          "file_name": "HEADS_UP_Guidelines_and_Recommendations_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.769,
+          "url": null,
+          "title": "Get Your School Prepared to"
+        },
+        {
+          "file_name": "Mild_TBI_Management_Guideline_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.715,
+          "url": null,
+          "title": "Key Recommendations for the Care of Adult"
+        },
+        {
+          "file_name": "Nonfatal_Traumatic_Brain_Injuries_Related_to_Sports_and_Recreation_Activities_Among_Persons_Aged_19_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.711,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Emergency_Department_Visits_for_Bicycle-Related_Traumatic_Brain_Injuries_Among_Children_and_Adults__20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.71,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Clinical_Guidance_for_Pediatric_Mild_TBI_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.707,
+          "url": null,
+          "title": "For healthcare providers treating children 18 years of age and younger"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.769,
+        "generated_at": "2025-05-23T18:47:58.129571",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What are the danger signs after a head injury that require immediate medical attention?",
+      "answer": "After a head injury, it's crucial to watch for danger signs that indicate a more serious brain injury and require immediate medical attention. According to the CDC, you should call 9-1-1 if the person develops any of the following:\n\n*   **Headache that gets worse and does not go away** (Sources 4, 5, 6, 7, 8)\n*   **Loss of consciousness (passing out)**, even briefly (Sources 3, 4, 5, 6, 7, 8)\n*   **Drowsiness or inability to wake up** (Sources 4, 5, 6, 7, 8)\n*   **Convulsions or seizures (shaking or twitching)** (Sources 3, 4, 5, 6, 7, 8)\n*   **Significant nausea or repeated vomiting** (Sources 3, 4, 5, 6, 7, 8)\n*   **Slurred speech, weakness, numbness, or decreased coordination** (Sources 4, 5, 6, 7, 8)\n*   **Unusual behavior, increased confusion, restlessness, or agitation** (Sources 1, 3, 4, 5, 6, 7, 8)\n\nIt's important to note that even a brief loss of consciousness should be taken seriously (Source 3). Concussion signs and symptoms may appear soon after the injury, but sometimes they may not show up for hours or days (Source 3).\n\nParents, guardians, school professionals, and coaches are not expected to diagnose a TBI. Only a health care provider can diagnose a TBI (Source 1). If TBI signs or symptoms are present, the student may return to class (Source 2). Parents and guardians may visit the Centers for Disease Control and Prevention’s Where to Get Help webpage to get information on finding medical care for their child (Source 1).\n",
+      "sources": [
+        {
+          "file_name": "HEADS_UP_Guidelines_and_Recommendations_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.766,
+          "url": null,
+          "title": "Get Your School Prepared to"
+        },
+        {
+          "file_name": "HEADS_UP_to_High_School_Sports_Online_Concussion_Training_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.735,
+          "url": null,
+          "title": "INFORMATION SHEET"
+        },
+        {
+          "file_name": "Responding_to_a_Sports-related_Concussion_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.729,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Health_Care_Provider_Resources_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.729,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "What_to_do_After_a_Concussion_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.729,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Concussion_Basics_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.729,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Signs_and_Symptoms_of_Concussion_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.729,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.766,
+        "generated_at": "2025-05-23T18:48:01.886371",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What are the recommended treatments for mild traumatic brain injury?",
+      "answer": "Based on the CDC resources provided, here's what is known about the recommended treatments for mild traumatic brain injury (mTBI), also known as concussion:\n\n**Key Recommendations:**\n\n*   **Imaging:** Routine imaging (CT & MRI) is generally *not* recommended for mTBI. (Source 1)\n\n*   **Return to Activity:**\n    *   Gradually return to regular (non-strenuous) activities. (Sources 2, 3, 4, 5, 6)\n    *   Reduce daytime naps, or return to a regular daytime nap schedule (as appropriate for their age). (Sources 2, 3, 4, 5, 6)\n    *   Take breaks if concussion symptoms worsen. (Sources 2, 3, 4, 5, 6)\n    *   When symptoms are mild and nearly gone, return to most regular activities. Encourage outside time, such as taking a walk or short bike ride and playground time. (Sources 2, 3, 4, 5, 6)\n    *   If you notice any changes or a return of symptoms, be sure to contact your child’s doctor. (Sources 2, 3, 4, 5, 6)\n    *   Return to a regular school schedule. (Sources 2, 3, 4, 5, 6)\n\n*   **General Recovery Strategies:**\n    *   Avoid activities that can put you at risk for another injury to your head and brain. (Source 7)\n    *   Stay connected to friends and loved ones and talk with them about how you are feeling. (Source 7)\n    *   Ask your doctor about medications that are safe to take during recovery to help with symptoms (for example, ibuprofen or acetaminophen for headaches). (Source 7)\n    *   Limit screen time and loud music before bed, sleep in a dark room, and keep to a fixed bedtime and wake-up schedule. (Source 7)\n\n*   **Monitoring and Follow-up:**\n    *   If symptoms do not get worse during an activity, then that activity is OK. If symptoms get worse, you should cut back on that activity. (Source 7)\n    *   If you do not think you are getting better or your symptoms are getting worse, tell your doctor. Your doctor may refer you to a specialist. (Source 7)\n\n**Important Considerations:**\n\n*   The information provided is not a substitute for medical or professional care. (Source 7)\n*   Questions about diagnosis and treatment for a concussion should be directed to your healthcare provider. (Source 7)\n\n**Additional Context:**\n\n*   mTBI, commonly called concussion, affects millions of Americans each year and can lead to short- or long-term problems. (Source 1)\n*   To minimize TBI in sports and recreation activities, prevention strategies should be implemented, including practicing skills, strength and conditioning, and sportsmanship, and using protective equipment (e.g. , bicycle helmets). (Source 8)\n\n**Disclaimer:** This information is based solely on the provided CDC resources. For specific medical advice and treatment plans, it is essential to consult with a qualified healthcare professional.\n",
+      "sources": [
+        {
+          "file_name": "Mild_TBI_Management_Guideline_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.735,
+          "url": null,
+          "title": "Key Recommendations for the Care of Adult"
+        },
+        {
+          "file_name": "Health_Care_Provider_Resources_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.707,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "What_to_do_After_a_Concussion_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.707,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Signs_and_Symptoms_of_Concussion_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.707,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Concussion_Basics_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.707,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Responding_to_a_Sports-related_Concussion_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.707,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Resources_for_Health_Care_Providers_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "Unknown",
+          "relevance_score": 0.696,
+          "url": null,
+          "title": "How You May Feel After a Concussion"
+        },
+        {
+          "file_name": "Nonfatal_Traumatic_Brain_Injuries_Related_to_Sports_and_Recreation_Activities_Among_Persons_Aged_19_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.694,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.735,
+        "generated_at": "2025-05-23T18:48:06.715002",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "How long does recovery from a concussion typically take?",
+      "answer": "Generally, most people with a concussion feel better within a couple of weeks, as concussion symptoms improve over time as part of the normal healing process (Sources 3, 5, 6, 7, 8). However, recovery time can vary (Source 4). Some individuals may experience symptoms for months or longer (Source 4). Recovery may be slower among older adults, young children, and teens, as well as people who have had a concussion in the past (Source 2).\n\nReturning to regular activities is a gradual process that should only occur as symptoms improve (Source 2). A return to sports and physical activity protocol typically takes a minimum of 24 hours for each step (Source 1).\n\nIt's important to note that concussion affects each child and teen differently (Source 4). If you have concerns about your concussion recovery, it is important to consult with a healthcare professional (Sources 5, 6, 7, 8).\n",
+      "sources": [
+        {
+          "file_name": "HEADS_UP_Guidelines_and_Recommendations_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.796,
+          "url": null,
+          "title": "Get Your School Prepared to"
+        },
+        {
+          "file_name": "Resources_for_Health_Care_Providers_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "Unknown",
+          "relevance_score": 0.793,
+          "url": null,
+          "title": "How You May Feel After a Concussion"
+        },
+        {
+          "file_name": "HEADS_UP_to_High_School_Sports_Online_Concussion_Training_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.768,
+          "url": null,
+          "title": "INFORMATION SHEET"
+        },
+        {
+          "file_name": "What_to_do_After_a_Concussion_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.733,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Signs_and_Symptoms_of_Concussion_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.733,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Health_Care_Provider_Resources_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.733,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Concussion_Basics_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.733,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.796,
+        "generated_at": "2025-05-23T18:48:09.479904",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What rehabilitation services are available for TBI patients?",
+      "answer": "Based on the CDC resources provided, here's information on rehabilitation services available for TBI patients:\n\n**School Support Services:**\n\n*   **Formal Support:** Schools can provide formal support services, especially if symptoms persist for 4 weeks or longer. (Source 5, 6)\n    *   **Individualized Education Plan (IEP):** For students with disabilities affecting their educational performance. (Source 2)\n    *   **504 Plan:** For students needing assistance to participate fully in school due to persistent symptoms. (Source 2)\n*   **Academic Adjustments:** Schools can provide academic adjustments based on the student's symptoms. (Source 6) Examples include:\n    *   Allowing sunglasses inside or outside if bothered by light. (Source 8)\n    *   Providing a quiet place if the student feels overwhelmed. (Source 8)\n*   **TBI Management Team:** Schools can identify a TBI management team or case manager to manage the student’s recovery. (Source 6)\n*   **Stepwise Return to School Protocol:** Implementing a stepwise return-to-school protocol is recommended, adapted to the student’s unique needs and symptoms. (Source 6, 8) Most students may not need adjustments after 3-4 weeks. (Source 8)\n*   **Emotional Support Plan:** Develop an emotional support plan. (Source 8)\n\n**Returning to Sports and Physical Activities:**\n\n*   **Healthcare Provider Approval:** A student should only return to sports and physical activities with written approval from their healthcare provider. (Source 2)\n*   **Stepwise Progression:** Return to sports and activities should involve a stepwise progression. (Source 2, 6)\n    *   **Step 1:** Back to regular activities with healthcare provider approval. (Source 2)\n    *   **Step 2:** Light aerobic activity to increase heart rate. (Source 2)\n\n**General Recommendations:**\n\n*   **TBI Management Plan:** Schools or districts can use a TBI management plan to identify possible TBIs and help students return to school, sports, and activities safely. (Source 5)\n*   **Recovery:** Recovery happens when a student can do all regular activities without TBI-related symptoms. (Source 7)\n*   **Consult Healthcare Provider:** Questions about diagnosis and treatment for TBI should be directed to the student’s healthcare provider. (Source 4)\n\n**Important Considerations:**\n\n*   The chance of getting a TBI is greatest during school sports, PE class, and playground time, but TBIs also occur outside of school. (Source 5)\n*   Knowing the signs and symptoms of TBI and responding appropriately is crucial. (Source 3)\n*   Return to activity should only occur after evaluation and clearance by a healthcare provider. (Source 3)\n\n**Additional Resources:**\n\n*   Brain Injury Association of America (BIAA): biausa.org (Source 1)\n*   U.S. Brain Injury Alliance: usbia.org (Source 1)\n\n**Disclaimer:** This information is based on the provided CDC sources and is not a substitute for professional medical advice. Always consult with a qualified healthcare provider for diagnosis and treatment of TBI.\n",
+      "sources": [
+        {
+          "file_name": "Health_Disparities_in_TBI_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.729,
+          "url": null,
+          "title": "Understanding Health"
+        },
+        {
+          "file_name": "HEADS_UP_Guidelines_and_Recommendations_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.705,
+          "url": null,
+          "title": "Get Your School Prepared to"
+        },
+        {
+          "file_name": "Nonfatal_Traumatic_Brain_Injuries_Related_to_Sports_and_Recreation_Activities_Among_Persons_Aged_19_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.67,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.729,
+        "generated_at": "2025-05-23T18:48:14.499470",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "How can traumatic brain injuries be prevented?",
+      "answer": "Traumatic brain injuries (TBIs) can be prevented through a variety of strategies targeting different causes and populations. The CDC emphasizes a multi-pronged approach involving programmatic, environmental, behavioral, and policy interventions. Here's a breakdown of prevention methods based on the provided CDC sources:\n\n**1. Motor Vehicle Safety:**\n\n*   **Seatbelt Use:** Always wear a seat belt when driving or riding in a motor vehicle.\n*   **Child Safety Seats:** Ensure children are properly buckled in age- and size-appropriate car seats, booster seats, and seat belts.\n*   **Graduated Driver Licensing Systems:** Support graduated driver licensing systems for adolescents and young adults to build driving skills (lane merging, passing, maintaining safe distance) and limit driving under high-risk conditions.\n*   **Helmet Use:** Motorcyclists and bicyclists should consistently wear helmets to reduce the likelihood of TBI during a crash.\n\n**2. Sports and Recreation Safety:**\n\n*   **Protective Equipment:** Use appropriate protective equipment (e.g., bicycle helmets) that fits correctly, is well-maintained, and used consistently.\n*   **Coaching and Technique:** Emphasize safe practices and proper technique through appropriate sport-specific skills coaching.\n*   **Rule Adherence:** Adhere to rules of play with good sportsmanship and strict officiating to limit player-to-player contact and reduce the risk of collisions, especially in contact and limited-contact sports.\n*   **Strength and Conditioning:** Pay attention to strength and conditioning.\n*   **Early Recognition and Removal from Play:** Participants suspected of having a TBI should be immediately removed from play and not allowed to return the same day. They should only return after evaluation and clearance by a healthcare provider experienced in TBI diagnosis and management.\n*   **Heads Up Initiative:** The CDC's Heads Up initiative provides concussion and mild TBI education to healthcare providers, coaches, athletic trainers, school nurses, teachers, counselors, parents, and student-athletes to promote prevention, recognition, and appropriate responses to TBI.\n\n**3. Fall Prevention:**\n\n*   The CDC’s Stopping Elderly Accidents, Deaths, and Injuries (STEADI) initiative supports healthcare providers in screening for fall risk, assessing modifiable risk factors, and intervening to reduce risk by updating patients’ personalized fall prevention plans.\n*   **Home Safety:** Install window guards to prevent young children from falling out of open windows. Use safety gates at the top and bottom of stairs when young children are around.\n\n**4. Environmental Modifications:**\n\n*   **Road Safety:** Build or improve roads with a focus on pedestrian and bicycling safety (e.g., adding physically protected bicycle lanes and intersections).\n*   **Traffic Law Compliance:** Increase compliance with traffic laws (e.g., reducing distracted driving) and increase active bicycle lighting.\n\n**Important Considerations:**\n\n*   **Concussions:** Bicycle helmets are not designed to prevent concussions, which occur due to brain movement inside the skull. A broader approach is needed.\n*   **Return to Play:** Returning to play after a TBI is a critical decision due to the increased risk of repeat concussion and long-term consequences.\n*   **Age-Related Risks:** TBI rates are higher among those aged 10-19 years, possibly due to increased participation in higher-risk activities. Males aged 10-19 years most often sustain TBIs while playing football or bicycling, whereas females sustain TBIs most often while playing soccer or basketball, or while bicycling.\n\n**Disclaimer:** This information is based on the provided CDC sources and is not a substitute for professional medical advice. Consult with a healthcare professional for diagnosis and treatment of TBI.\n",
+      "sources": [
+        {
+          "file_name": "Emergency_Department_Visits_for_Bicycle-Related_Traumatic_Brain_Injuries_Among_Children_and_Adults__20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.752,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Incidence_of_Nonfatal_Traumatic_Brain_InjuryRelated_Hospitalizations_United_States_2018_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.725,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Emergency_Department_Visits_for_Sports-_and_Recreation-Related_Traumatic_Brain_Injuries_Among_Childr_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.718,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Health_Disparities_in_TBI_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.71,
+          "url": null,
+          "title": "Understanding Health"
+        },
+        {
+          "file_name": "Nonfatal_Traumatic_Brain_Injuries_Related_to_Sports_and_Recreation_Activities_Among_Persons_Aged_19_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.71,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.752,
+        "generated_at": "2025-05-23T18:48:20.446705",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What safety measures are recommended for sports-related concussion prevention?",
+      "answer": "Based on the CDC resources provided, here are the recommended safety measures for sports-related concussion prevention:\n\n**Primary Prevention Strategies:** These strategies aim to reduce the risk of concussion occurring in the first place.\n\n*   **Protective Equipment:**\n    *   Use appropriate protective equipment, such as bicycle helmets, that fit correctly, are well-maintained, and used consistently.\n    *   It's important to note that while bicycle helmets reduce head injuries, they are not specifically designed to prevent concussions.\n*   **Coaching and Technique:**\n    *   Coach appropriate sport-specific skills with an emphasis on safe practices and proper technique.\n    *   Teach and enforce fair play, safety, and sportsmanship.\n*   **Rule Adherence and Officiating:**\n    *   Adhere to rules of play with good sportsmanship and strict officiating.\n    *   Rule changes that reduce the risk of collisions are critical to preventing TBI in contact and limited-contact sports.\n*   **Strength and Conditioning:**\n    *   Pay attention to strength and conditioning.\n*   **Limiting Player-to-Player Contact:**\n    *   Limiting player-to-player contact in sports is crucial for TBI prevention.\n*   **Safe Practice vs. Scrimmages:**\n    *   Programs can promote safety by dedicating more time to safe practice versus scrimmages and full-speed drills.\n\n**Secondary Prevention Strategies:** These strategies focus on minimizing the impact of a concussion after it has occurred.\n\n*   **Recognition and Removal from Play:**\n    *   Increase awareness of the signs and symptoms of TBI.\n    *   Participants suspected of having a TBI should be removed from play immediately.\n    *   Never return to play the same day after a suspected TBI.\n*   **Medical Evaluation and Clearance:**\n    *   Allow return to play only after evaluation and clearance by a healthcare provider experienced in diagnosing and managing TBI.\n*   **Emergency Action Plans:**\n    *   Ensure emergency planning and medical care, particularly during competition.\n    *   Adhere to protocols for safe return-to-play after a concussion.\n\n**Additional Considerations:**\n\n*   **Education:** Expand programs, policies, and practices tailored to specific audiences (students, parents, coaches, teachers, and healthcare providers) to ensure they know how to prevent, recognize, and manage concussions.\n*   **Communication:** Talk to children about the dangers of hitting another child in the head, using a helmet to collide with another child, or trying to injure another child.\n*   **Environmental Strategies:** Consider building or improving roads with a focus on pedestrian and bicycling safety (e.g., adding physically protected bicycle lanes and intersections).\n\n**Important Note:** Return to play is a critical decision, especially for children and adolescents, due to the increased risk of repeat concussion and long-term consequences. Always consult with healthcare professionals experienced in TBI management for diagnosis, treatment, and return-to-play decisions.\n",
+      "sources": [
+        {
+          "file_name": "Traumatic_Brain_and_Spinal_Cord_Fatalities_Among_High_School_and_College_Football_Players_United_S_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.793,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Emergency_Department_Visits_for_Sports-_and_Recreation-Related_Traumatic_Brain_Injuries_Among_Childr_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.791,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Nonfatal_Traumatic_Brain_Injuries_Related_to_Sports_and_Recreation_Activities_Among_Persons_Aged_19_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.783,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Self-Reported_Concussions_from_Playing_a_Sport_or_Being_Physically_Active_Among_High_School_Students_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.767,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Comparing_Head_Impacts_in_Youth_Tackle_and_Flag_Football_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "Unknown",
+          "relevance_score": 0.764,
+          "url": null,
+          "title": "WHAT PARENTS"
+        },
+        {
+          "file_name": "Emergency_Department_Visits_for_Bicycle-Related_Traumatic_Brain_Injuries_Among_Children_and_Adults__20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.758,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.793,
+        "generated_at": "2025-05-23T18:48:25.555306",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What helmet safety guidelines exist for preventing TBI?",
+      "answer": "Based on the CDC resources provided, here are helmet safety guidelines and related information relevant to preventing Traumatic Brain Injury (TBI):\n\n**1. Importance of Helmets in Specific Activities:**\n\n*   **Bicycling:** Helmets are recommended to reduce head injuries in bicycle-related incidents (Source 2, 3, 6, 8).\n*   **Motorcycling:** Properly and consistently wearing a helmet can reduce the likelihood of TBI during a motorcycle crash (Source 3). A study in California showed that implementing a universal helmet use law increased helmet use and reduced motorcyclist deaths (Source 4).\n*   **Sports and Recreation:** Using protective equipment like a bicycle helmet that is appropriate for the activity, fits correctly, is well-maintained, and used consistently is a primary prevention strategy (Source 2).\n\n**2. Limitations of Helmets:**\n\n*   **Concussions:** Bicycle helmets are not specifically designed to prevent concussions, which result from brain movement inside the skull due to linear and rotational forces (Source 1).\n\n**3. Comprehensive Prevention Strategies:**\n\n*   A multi-pronged approach is recommended to reduce injuries and deaths, including programmatic, environmental, behavioral, and policy interventions, not solely focused on bicycle helmets (Source 1).\n*   Examples of strategies include improving roads for pedestrian and bicycling safety, increasing compliance with traffic laws, and increasing active bicycle lighting (Source 1).\n*   For sports and recreation, primary prevention strategies include coaching appropriate sport-specific skills with an emphasis on safe practices and proper technique, adhering to rules of play with good sportsmanship and strict officiating, and attention to strength and conditioning (Source 2).\n\n**4. Additional Safety Measures:**\n\n*   **Motor Vehicle Safety:** Proper restraint use (seatbelts, car seats, and booster seats) is a proven strategy for reducing motor vehicle occupant injuries, including TBIs (Source 3). Graduated driving licensing systems for adolescent and young adult drivers can also help prevent TBIs (Source 3).\n\n**5. Return to Play After Suspected TBI:**\n\n*   Participants suspected of having a TBI should be removed from play, never returned to play the same day, and allowed to return only after evaluation and clearance by a healthcare provider experienced in diagnosing and managing TBI (Source 2).\n\n**Important Considerations:**\n\n*   The information suggests that while helmets are beneficial in preventing certain types of head injuries, they are not a complete solution for preventing all TBIs, particularly concussions.\n*   A comprehensive approach involving multiple strategies is necessary for effective TBI prevention.\n*   For diagnosis and management of TBI, always consult with qualified healthcare professionals (Source 2).\n",
+      "sources": [
+        {
+          "file_name": "Emergency_Department_Visits_for_Bicycle-Related_Traumatic_Brain_Injuries_Among_Children_and_Adults__20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.75,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Nonfatal_Traumatic_Brain_Injuries_Related_to_Sports_and_Recreation_Activities_Among_Persons_Aged_19_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.73,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Incidence_of_Nonfatal_Traumatic_Brain_InjuryRelated_Hospitalizations_United_States_2018_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.718,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Surveillance_for_Traumatic_Brain_Injury--Related_Deaths_---_United_States_1997--2007_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.713,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "HEADS_UP_Resources_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.712,
+          "url": null,
+          "title": "Did you know that"
+        },
+        {
+          "file_name": "Emergency_Department_Visits_for_Sports-_and_Recreation-Related_Traumatic_Brain_Injuries_Among_Childr_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.71,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Self-Reported_Concussions_from_Playing_a_Sport_or_Being_Physically_Active_Among_High_School_Students_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.708,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.75,
+        "generated_at": "2025-05-23T18:48:30.059048",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "How does TBI affect children differently than adults?",
+      "answer": "Traumatic brain injuries (TBIs) can affect children differently than adults due to physiological factors such as a child’s developing nervous system and thinner cranial bones, which may place them at increased risk for TBI (Source 7).\n\nHere's a breakdown of how TBI affects children based on the provided CDC sources:\n\n**1. Incidence and Causes:**\n\n*   Children from birth to 17 years accounted for approximately 4.1% of TBI-related deaths during both 2018 and 2019 (Source 4, 5).\n*   Sports and recreation-related TBIs (SRR-TBIs) are a significant concern in children (Source 7).\n*   Common causes of SRR-TBIs in children vary by age and sex:\n    *   Among males aged <5 years and 5–9 years, playground activities accounted for the most ED visits (Source 6).\n    *   Among all females aged 0–17 years, playground activities, basketball, and soccer were the most common causes of SRR-TBI ED visits (Source 6).\n*   For persons aged 10–19 years, males sustained TBIs most often while playing football or bicycling, whereas females sustained TBIs most often while playing soccer or basketball, or while bicycling (Source 2).\n*   Rates of sports and recreation–related TBI visits were higher among persons aged 10–19 years than among younger persons (Source 2). This might be associated with age-related increases in participation in higher-risk activities (e.g., competitive contact sports) (Source 2).\n\n**2. Trends in Emergency Department (ED) Visits:**\n\n*   The rate of ED visits for bicycle-related TBIs decreased by approximately one half among children and adolescents aged ≤17 years (Source 1).\n*   The decline in annual percentage change from 2013 to 2018 differed by age group: declines of 8%, 5%, and 8% among children aged 5–9, 10–14, and 15–17 years, respectively (Source 8).\n\n**3. Severity and Outcomes:**\n\n*   A TBI can lead to emotional, physiologic, and cognitive sequelae in children (Source 7).\n\n**4. Prevention:**\n\n*   Brain Injury Awareness Month is an opportunity to encourage broader implementation of evidence-based practices to reduce pediatric TBIs and their sequelae (Source 7).\n\n**Important Considerations:**\n\n*   The information provided focuses on specific age groups and mechanisms of injury.\n*   For comprehensive medical advice, diagnosis, and treatment, consult with qualified healthcare professionals.\n",
+      "sources": [
+        {
+          "file_name": "Emergency_Department_Visits_for_Bicycle-Related_Traumatic_Brain_Injuries_Among_Children_and_Adults__20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.76,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Nonfatal_Traumatic_Brain_Injuries_Related_to_Sports_and_Recreation_Activities_Among_Persons_Aged_19_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.752,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Incidence_of_Nonfatal_Traumatic_Brain_InjuryRelated_Hospitalizations_United_States_2018_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.743,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "TBI_Data_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.734,
+          "url": null,
+          "title": "SURVEILLANCE"
+        },
+        {
+          "file_name": "Publications_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.734,
+          "url": null,
+          "title": "SURVEILLANCE"
+        },
+        {
+          "file_name": "Emergency_Department_Visits_for_Sports-_and_Recreation-Related_Traumatic_Brain_Injuries_Among_Childr_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.731,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Trends_in_Emergency_Department_Visits_for_Contact_SportsRelated_Traumatic_Brain_Injuries_Among_Chil_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.729,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.76,
+        "generated_at": "2025-05-23T18:48:34.466140",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What are the risks of repeated concussions in sports?",
+      "answer": "The CDC information provided indicates that repeated concussions in sports pose significant risks, particularly for children and adolescents. Here's a breakdown of those risks:\n\n**Main Points:**\n\n*   **Increased Risk of Subsequent Concussion:** Athletes who return to play too soon after a concussion, while the brain is still healing, have a greater chance of experiencing another concussion (Source 3).\n*   **Worsened Symptoms and Prolonged Recovery:** Continuing to play with a concussion can worsen symptoms (Source 4). Younger individuals are at increased risk for TBIs with increased severity and prolonged recovery (Source 8).\n*   **Second Impact Syndrome:** A repeat concussion that occurs before a first concussion has properly healed can lead to second impact syndrome, a condition causing rapid and severe brain swelling, which can be fatal (Source 5).\n*   **Potential Long-Term Effects:** A repeat concussion that occurs while the brain is still healing from the first injury can be very serious, and can affect a child or teen for a lifetime (Source 3).\n*   **Football Concussion Risk:** Football has the highest number of sports-related concussions and other traumatic brain injuries among youth (Source 1).\n\n**Supporting Details and Context:**\n\n*   **Repetitive Head Impacts:** Experiencing repetitive head impacts may be harmful to the brain of a young athlete, but more research is needed to fully understand the effects (Source 2).\n*   **Tackling in Football:** A significant percentage (63%) of concussions in high school football result from tackling (Source 1).\n*   **Importance of Reporting Symptoms:** It is crucial for athletes to report any concussion symptoms they experience (Source 7).\n*   **Fatalities:** Among high school football fatalities, a significant number of deaths from brain injuries occurred in players who had sustained a concussion within 4 weeks of the event (Source 5).\n*   **Helmets:** Helmets are not currently designed to prevent concussions (Source 2).\n\n**Recommendations and Prevention:**\n\n*   **Education and Awareness:** Increase awareness of the signs and symptoms of TBI (Source 6).\n*   **Proper Assessment and Return-to-Play Protocols:** Ensure proper assessment and safe return to play following a concussion (Source 5).\n*   **Consult Healthcare Professionals:** Discuss the risks of concussion and other serious brain injuries with your child or teen, and talk about what to do if they have a concussion or other serious brain injury (Source 3).\n\n**Important Note:**\n\nThe information provided here is based solely on the provided CDC sources. For diagnosis, treatment, and personalized medical advice, it is essential to consult with qualified healthcare professionals.\n",
+      "sources": [
+        {
+          "file_name": "Comparing_Head_Impacts_in_Youth_Tackle_and_Flag_Football_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "Unknown",
+          "relevance_score": 0.79,
+          "url": null,
+          "title": "WHAT PARENTS"
+        },
+        {
+          "file_name": "HEADS_UP_to_High_School_Sports_Online_Concussion_Training_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.773,
+          "url": null,
+          "title": "INFORMATION SHEET"
+        },
+        {
+          "file_name": "Self-Reported_Concussions_from_Playing_a_Sport_or_Being_Physically_Active_Among_High_School_Students_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.771,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Traumatic_Brain_and_Spinal_Cord_Fatalities_Among_High_School_and_College_Football_Players_United_S_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.755,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Nonfatal_Traumatic_Brain_Injuries_Related_to_Sports_and_Recreation_Activities_Among_Persons_Aged_19_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.746,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.79,
+        "generated_at": "2025-05-23T18:48:38.954452",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "How does TBI impact older adults and what are the unique considerations?",
+      "answer": "Traumatic Brain Injury (TBI) significantly impacts older adults, presenting unique considerations:\n\n**Increased Risk and Incidence:**\n\n*   Older adults, particularly those aged 75 years and older, have the highest rates of TBI-related hospitalizations.\n*   Older age is a major risk factor for TBI.\n\n**Mechanism of Injury:**\n\n*   Falls are the leading cause of TBI-related hospitalizations in older adults.\n*   The rate of fall-related TBI deaths increased by 17% during 2008-2017, with the largest increases among persons aged ≥75 years.\n\n**Underlying Health Conditions and Medications:**\n\n*   Hospitalizations among older adults can be complicated by underlying medical conditions such as hypertension, diabetes mellitus, or coronary heart disease.\n*   Many older adults receive aspirin and anticoagulant therapies, which increase the likelihood of intracranial hemorrhage and further complications from TBIs.\n\n**Potential Consequences:**\n\n*   Following a TBI, older adults may perform worse on measured cognitive abilities (e.g., naming and vocabulary) compared to older adults without a history of TBI.\n\n**Recommendations:**\n\n*   Healthcare providers should evaluate older adult patients for signs and symptoms of TBI if they have fallen or had a fall-related injury, such as a hip fracture.\n\nIt's important to note that this information is based solely on the provided CDC sources. For diagnosis and treatment of TBI, always consult with qualified healthcare professionals.\n",
+      "sources": [
+        {
+          "file_name": "Health_Disparities_in_TBI_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.742,
+          "url": null,
+          "title": "Understanding Health"
+        },
+        {
+          "file_name": "Incidence_of_Nonfatal_Traumatic_Brain_InjuryRelated_Hospitalizations_United_States_2018_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.733,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Surveillance_for_Traumatic_Brain_Injury--Related_Deaths_---_United_States_1997--2007_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.732,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Deaths_from_Fall-Related_Traumatic_Brain_Injury_United_States_20082017_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.726,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.742,
+        "generated_at": "2025-05-23T18:48:42.040284",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What are the leading causes of TBI-related deaths in the United States?",
+      "answer": "Based on the CDC sources provided, here's information on the leading causes of TBI-related deaths in the United States:\n\n**Key Findings:**\n\n*   **Suicide:** Suicide was identified as a leading cause of TBI-related deaths, accounting for 35.5% of such deaths (Sources 1, 2, 3). TBI-related death rates attributable to suicide were highest among people ≥75 years (12.2 per 100,000). Among persons 15 to 74 years of age, TBI-related suicide death rates ranged from 6.5 to 8.7 per 100,000 (Sources 1, 2).\n*   **Firearm-Related Events, Motor Vehicle-Related Events, and Falls (1997-2007):** During 1997–2007, firearm-related events (34.8%), motor vehicle–related events (31.4%), and fall-related events (16.7%) were the leading causes of TBI-related death (Source 4).\n*   **Motor Vehicle Crashes:** In 2017, suicide surpassed motor vehicle crashes as the leading category of TBI-related deaths during 2009–2011 and through 2015–2017 (Source 3). Unintentional motor vehicle crashes were the most common cause of TBI-related deaths among Hispanics from 2000–2002 to 2006–2008 (Source 8).\n*   **Other Mechanisms:** Falls (35%), motor vehicle–related injuries (17%), and a strike or blow to the head from or against an object (e.g., workplace or sports-related injuries [16.5%], assaults [10%], and other and unknown causes [21%] (Source 5).\n\n**Important Considerations:**\n\n*   **Time Period Variation:** The leading causes of TBI-related deaths have shifted over time. For example, suicide surpassed motor vehicle crashes as the leading cause between 2009-2017 (Source 3).\n*   **Data Limitations:** The specificity of conclusions that can be drawn regarding primary causes of TBI-related deaths is limited due to the broad categorization of the principal mechanisms of injury (Sources 1, 2).\n*   **Demographic Factors:** TBI-related death rates vary by sex, age group, and race/ethnicity (Sources 4, 6). Males and American Indians/Alaska Natives experienced the highest rates of TBI-related death (Source 3).\n*   **Surveillance Data:** Accurate, timely, and comprehensive surveillance data are necessary to better understand and prevent TBI-related deaths in the United States (Source 6).\n\n**Recommendations:**\n\n*   Given the significant role of suicide in TBI-related deaths, a comprehensive public health approach to suicide prevention is needed (Sources 1, 2).\n*   Public health practitioners and partners should use CDC multiple-cause-of-death public-use data files to monitor the incidence of TBI-related deaths and assist in the development, implementation, and evaluation of programs and policies to reduce and prevent TBI-related deaths in the United States (Source 6).\n\n**Disclaimer:** This information is based solely on the provided CDC sources. Consult with qualified healthcare professionals for medical advice and treatment.\n",
+      "sources": [
+        {
+          "file_name": "TBI_Data_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.867,
+          "url": null,
+          "title": "SURVEILLANCE"
+        },
+        {
+          "file_name": "Publications_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.867,
+          "url": null,
+          "title": "SURVEILLANCE"
+        },
+        {
+          "file_name": "Traumatic_Brain_InjuryRelated_Deaths_by_RaceEthnicity_Sex_Intent_and_Mechanism_of_Injury_Unit_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.847,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Surveillance_for_Traumatic_Brain_Injury--Related_Deaths_---_United_States_1997--2007_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.838,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.867,
+        "generated_at": "2025-05-23T18:48:47.208320",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "How has the incidence of sports-related TBI changed over time?",
+      "answer": "The incidence of sports-related Traumatic Brain Injuries (TBIs) has changed over time, particularly among children and adolescents. Here's a summary of the trends based on the CDC information provided:\n\n**Overall Trends in Emergency Department (ED) Visits:**\n\n*   **Increase followed by a decline:** From 2001 to 2018, there was an initial increase in the rate of sports- and recreation-related (SRR) TBI ED visits among children (aged ≤17 years). However, after more than a decade of increasing rates, a significant decline was observed from 2012 to 2018.\n*   **Magnitude of decline:** The rate of SRR-TBI ED visits per 100,000 population aged ≤17 years declined by 27% from 2012 (411.1) to 2018 (298.8).\n\n**Contact Sports vs. Non-Contact Sports:**\n\n*   **Contact sports decline:** The rate of contact sports-related TBI ED visits declined by 32% from 2012 to 2018.\n*   **Non-contact sports:** The provided information does not indicate a significant decline in the rates of SRR-TBI ED visits for non-football, non-contact activities.\n\n**Football-Related TBIs:**\n\n*   **Significant reduction:** The decline in contact sports-related TBI ED visits was primarily driven by a 39% decline in football-related SRR-TBIs during 2013–2018.\n*   **Possible Contributing Factors:** This decline might be associated with implementation of contact and tackling restrictions and decreased participation in tackle football programs.\n\n**Other Contact Sports:**\n\n*   TBI-ED visits for basketball and soccer, the other two leading contact sports, did not decline significantly from 2001-2018.\n\n**Age-Related Trends:**\n\n*   The rate of contact sports-related TBI ED visits among children aged 10–14 and 15–17 years increased from 2001 to 2012, then declined from 2012 to 2018.\n*   The pattern among children aged 5–9 years was similar: rates increased from 2001 to 2013 and then declined from 2013 to 2018.\n\n**Important Considerations:**\n\n*   **Increased Awareness:** Increased awareness of TBI may have contributed to the increasing number of ED visits for TBI.\n*   **Prevention Strategies:** Prevention strategies should be implemented to minimize TBI in sports and recreation activities, including practicing skills, strength and conditioning, and sportsmanship, and using protective equipment (e.g., bicycle helmets).\n*   **Limitations:** Studies on SRR-TBI prevention strategies for other contact sports (e.g., soccer and basketball) are limited.\n\n**Recommendations:**\n\n*   **Consult Healthcare Professionals:** If you suspect a TBI, it is crucial to seek prompt medical attention for diagnosis and management.\n*   **Prevention:** Implement and reinforce sports-specific injury prevention strategies.\n",
+      "sources": [
+        {
+          "file_name": "Emergency_Department_Visits_for_Sports-_and_Recreation-Related_Traumatic_Brain_Injuries_Among_Childr_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.806,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Nonfatal_Traumatic_Brain_Injuries_Related_to_Sports_and_Recreation_Activities_Among_Persons_Aged_19_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.797,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Trends_in_Emergency_Department_Visits_for_Contact_SportsRelated_Traumatic_Brain_Injuries_Among_Chil_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.795,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.806,
+        "generated_at": "2025-05-23T18:48:52.086814",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What demographic groups are at highest risk for traumatic brain injury?",
+      "answer": "Based on the CDC resources provided, the following demographic groups are at higher risk for traumatic brain injury (TBI):\n\n**1. Older Adults:**\n\n*   People aged 75 years and older have the highest numbers and rates of TBI-related hospitalizations.\n*   Most TBI-related hospitalizations in older adults are due to falls.\n*   Fall-related death rates were highest among adults aged ≥75 years (29.8 per 100,000 population).\n\n**2. Males:**\n\n*   Males are more likely than females to sustain a TBI.\n*   The rate of TBI deaths was three times higher among males (28.8 per 100,000 population) than among females (9.1 per 100,000 population).\n\n**3. American Indian or Alaska Native Persons:**\n\n*   American Indian or Alaska Native, Non-Hispanic persons had the highest average annual age-adjusted rate of TBI-related deaths (24.5 per 100,000 population in 2018 and 23.1 in 2019) when compared to other racial and ethnic groups.\n*   Among males, rates were highest among non-Hispanic American Indian/Alaska Natives (41.3 per 100,000 population).\n\n**4. Geographic Regions:**\n\n*   Age-adjusted rates of TBI-related deaths were highest among persons residing in the South (19.0 in 2018 and 18.9 in 2019), followed by persons residing in the Midwest (18.0 in 2018 and 17.7 in 2019), West (16.4 in 2018 and 16.5 in 2019), and Northeast (12.8 in 2018 and 12.3 in 2019).\n\n**Important Considerations:**\n\n*   The information provided focuses on TBI-related hospitalizations and deaths.\n*   Unintentional falls and motor vehicle crashes were common mechanisms of nonfatal TBI-related injury.\n*   Firearm-, motor-vehicle–, and fall-related TBIs were the leading causes of TBI-related death.\n*   Firearm-related death rates were highest among persons aged 15–34 years (8.5 per 100,000 population) and ≥75 years (10.5).\n*   Motor vehicle–related death rates were highest among those aged 15–24 years (11.9 per 100,000 population).\n\n**Recommendation:**\n\nIf you have concerns about TBI risk factors or suspect a TBI, it is essential to consult with healthcare professionals for proper evaluation and guidance.\n",
+      "sources": [
+        {
+          "file_name": "Health_Disparities_in_TBI_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.761,
+          "url": null,
+          "title": "Understanding Health"
+        },
+        {
+          "file_name": "Incidence_of_Nonfatal_Traumatic_Brain_InjuryRelated_Hospitalizations_United_States_2018_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.757,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Publications_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.756,
+          "url": null,
+          "title": "SURVEILLANCE"
+        },
+        {
+          "file_name": "TBI_Data_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.756,
+          "url": null,
+          "title": "SURVEILLANCE"
+        },
+        {
+          "file_name": "Surveillance_for_Traumatic_Brain_Injury--Related_Deaths_---_United_States_1997--2007_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.751,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.761,
+        "generated_at": "2025-05-23T18:48:56.477082",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "When is it safe to return to sports after a concussion?",
+      "answer": "Returning to sports after a concussion is a step-by-step process that should be guided by a healthcare professional. Here's what the CDC resources say about returning to sports and recreational activities after a concussion:\n\n**Key Recommendations:**\n\n*   **Consult a Doctor:** Always ask a doctor for written instructions about when it is safe to return to sports and recreational activities (Sources 2, 3, 4, 5, 6).\n*   **Individualized Approach:** The return-to-sports process should be individualized and monitored by a healthcare provider.\n*   **Gradual Return:** With the doctor's approval, a gradual return to sports process may begin (Sources 7, 8).\n*   **Minimum 24-Hour Steps:** Each step in a return to sports and physical activity protocol typically takes a minimum of 24 hours (Source 1).\n*   **Symptom-Free Recovery:** Recovery from a concussion is when you are able to do all of your regular activities without experiencing any concussion symptoms (Sources 7, 8).\n*   **Do Not Return if Symptomatic:** You should not return to sports and recreational activities if you are still experiencing symptoms (Sources 2, 3, 4, 5, 6).\n\n**Important Considerations:**\n\n*   **Written Instructions:** Obtain written instructions from a doctor regarding the safe return to sports (Sources 2, 3, 4, 5, 6). Share this information with your coach and athletic trainer, if available (Sources 7, 8).\n\n**Additional Support:**\n\n*   For most people, only short-term changes or support services are needed as they recover from a concussion (Sources 2, 3, 4, 5, 6).\n*   If symptoms persist, talk with your doctor about formal support services they recommend (Sources 2, 3, 4, 5, 6).\n\n**Disclaimer:** This information is based on CDC resources and is not a substitute for professional medical advice. Always consult with a qualified healthcare provider for diagnosis and treatment of concussion and to determine when it is safe to return to sports.\n",
+      "sources": [
+        {
+          "file_name": "HEADS_UP_Guidelines_and_Recommendations_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.794,
+          "url": null,
+          "title": "Get Your School Prepared to"
+        },
+        {
+          "file_name": "Health_Care_Provider_Resources_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.784,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Concussion_Basics_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.784,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "What_to_do_After_a_Concussion_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.784,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Signs_and_Symptoms_of_Concussion_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.784,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Responding_to_a_Sports-related_Concussion_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.784,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.794,
+        "generated_at": "2025-05-23T18:49:00.469626",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What are the CDC recommendations for return to school after TBI?",
+      "answer": "Based on the CDC's HEADS UP program, here are recommendations for return to school after a Traumatic Brain Injury (TBI) or concussion:\n\n**Key Recommendations:**\n\n*   **No Healthcare Provider Approval Needed for Initial Return:** Students do not need approval from a healthcare provider to return to school after a TBI. However, a stepwise return-to-school protocol is recommended (Source 5).\n*   **Stepwise Return to School:** Implement a stepwise return-to-school protocol, adapting it to the student’s unique needs and symptoms (Source 2, 3).\n*   **TBI Management Team:** A school TBI management team or case manager should manage the student’s symptoms and academic progress (Source 2, 5).\n*   **Academic Adjustments:** Provide academic adjustments based on the student’s symptoms (Source 2). Most students will not need these after 3 to 4 weeks (Source 3).\n*   **Formal Support Services:** Offer formal school support services if the student experiences TBI symptoms for 4 weeks or longer (Source 2).\n*   **Written Instructions:** Ask the student's doctor for written instructions about when the student can safely return to school (Source 6, 7, 8).\n\n**Return to School Protocol Details:**\n\n*   **Step 1 (Example):** The student can do schoolwork and light physical activity, like walking, even if they experience symptoms (Source 3).\n\n**Academic Adjustments Examples:**\n\n*   Rest breaks (Source 6, 7, 8).\n*   Fewer hours at school (Source 6, 7, 8).\n*   More time to take tests or complete tasks (Source 6, 7, 8).\n*   Less screen time and time spent reading and writing (Source 6, 7, 8).\n*   Allowing students to wear sunglasses or sit in a less bright area if bothered by light (Source 3).\n*   Develop an emotional support plan (Source 3).\n*   Locate a quiet place for the student if they feel overwhelmed (Source 3).\n\n**Formal School Support Services:**\n\n*   **Individualized Education Plan (IEP):** For students with disabilities affecting educational performance (Source 4).\n*   **504 Plan:** For students with persistent symptoms needing assistance to participate fully in school (Source 4).\n\n**Important Considerations:**\n\n*   **Sports and Physical Activities:** Students cannot participate in sports or physical activities during PE or playground time until the school receives written approval from their healthcare provider (Source 5). A stepwise return to sports and physical activity protocol should be followed (Source 2, 4).\n*   **Non-Physical Activities:** Students can participate in non-physical activities during sports practices and games, PE class, and playground time, such as keeping score or cheering (Source 5).\n\n**Resources:**\n\n*   CDC’s “Returning to School After a Concussion” and “Helping Students Recover From a Concussion: Classroom Tips for Teachers” handouts provide more examples of academic adjustments (Source 3). These resources are available at https://www.cdc.gov/HEADSUP (Source 1).\n\n**Disclaimer:** This information is based on the provided CDC sources and is not a substitute for professional medical advice. Always consult with a qualified healthcare provider for diagnosis and treatment of TBI.\n",
+      "sources": [
+        {
+          "file_name": "Emergency_Department_Visits_for_Sports-_and_Recreation-Related_Traumatic_Brain_Injuries_Among_Childr_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.775,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "HEADS_UP_Guidelines_and_Recommendations_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.764,
+          "url": null,
+          "title": "Get Your School Prepared to"
+        },
+        {
+          "file_name": "Signs_and_Symptoms_of_Concussion_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.744,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "What_to_do_After_a_Concussion_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.744,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Concussion_Basics_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.744,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.775,
+        "generated_at": "2025-05-23T18:49:05.944256",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What workplace accommodations might be needed after a brain injury?",
+      "answer": "After a traumatic brain injury (TBI), individuals may require workplace accommodations to support their recovery. It's important to consult with a healthcare provider for specific guidance. Here's what the CDC resources suggest regarding workplace accommodations:\n\n**General Recommendations:**\n\n*   **Short-term Changes:** For most people, only short-term changes or support services are needed as they recover from a concussion (Source 5, 6, 7, 8).\n*   **Doctor's Instructions:** Obtain written instructions from a doctor regarding when it is safe to return to work and other activities (Source 5, 6, 7, 8).\n*   **Employer Support:** Ask the doctor for written instructions about support services that may be available at your workplace (Source 5, 6, 7, 8).\n*   **Reporting Work-Related Injuries:** If the injury was work-related, report it to the employer and their workers’ compensation office (Source 5, 6, 7, 8).\n\n**Types of Accommodations:**\n\n*   **Rest Breaks:** Taking frequent rest breaks (Source 5, 6, 7, 8).\n*   **Reduced Hours:** Working fewer hours (Source 5, 6, 7, 8).\n*   **Extended Time:** Receiving more time to complete tasks (Source 5, 6, 7, 8).\n*   **Reduced Screen Time:** Limiting screen time and time spent reading and writing (Source 5, 6, 7, 8).\n\n**Important Considerations:**\n\n*   The need for workplace accommodations and their duration will vary based on individual symptoms and recovery progress.\n*   It is important to have ongoing communication with healthcare providers and employers to ensure appropriate support and adjustments.\n\n",
+      "sources": [
+        {
+          "file_name": "HEADS_UP_Guidelines_and_Recommendations_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.705,
+          "url": null,
+          "title": "Get Your School Prepared to"
+        },
+        {
+          "file_name": "Health_Disparities_in_TBI_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.699,
+          "url": null,
+          "title": "Understanding Health"
+        },
+        {
+          "file_name": "Responding_to_a_Sports-related_Concussion_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.675,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "What_to_do_After_a_Concussion_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.675,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Signs_and_Symptoms_of_Concussion_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.675,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        },
+        {
+          "file_name": "Health_Care_Provider_Resources_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.675,
+          "url": null,
+          "title": "Your Child’s Concussion"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.705,
+        "generated_at": "2025-05-23T18:49:09.483365",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What are the potential long-term effects of traumatic brain injury?",
+      "answer": "Based on the CDC resources provided, here's what is known about the potential long-term effects of traumatic brain injury (TBI):\n\n**Main Points:**\n\n*   **Disability:** TBI can lead to long-term disabilities affecting physical and mental functions.\n*   **Quality of Life:** These disabilities can reduce the quality of life for affected individuals.\n*   **Socioeconomic Impact:** Long-term TBI-related disability results in prolonged medical, social, and economic effects on society.\n*   **Prevalence:** Approximately 3.2–5.3 million persons (1.1%–1.7% of the U.S. population) live with long-term disabilities resulting from brain injuries.\n*   **Changes in Brain Function:** TBIs, including concussions, can lead to short- or long-term changes in a child’s brain.\n*   **Impact on School Participation:** These changes are linked to a variety of symptoms that affect thinking, learning, behavior, and emotions during recovery, all critical to school participation.\n\n**Supporting Details:**\n\n*   Long-term disabilities can include the loss of physical or mental functions, such as fine motor skills.\n*   TBI is a serious public health concern, resulting in death and disability for thousands of people each year.\n*   TBIs were identified in 25% of all injury-related deaths that occurred during 2017 in the United States.\n\n**Important Considerations:**\n\n*   The information provided focuses on the impact of TBI on disability, quality of life, and socioeconomic factors.\n*   For students who sustain a TBI, a school nurse, athletic trainer, or other designated school professional trained in TBI identification and management may notify the student’s parents or guardians of the possible TBI.\n*   Increased awareness of TBI risks from sports and recreation, employing proper technique and protective equipment, and quickly responding to injuries, the incidence, severity, and long-term negative health effects of TBIs among children and adolescents can be reduced.\n\n**Recommendation:**\n\nIt is important to consult with healthcare professionals for comprehensive information on the long-term effects of TBI and appropriate management strategies.\n",
+      "sources": [
+        {
+          "file_name": "Surveillance_for_Traumatic_Brain_Injury--Related_Deaths_---_United_States_1997--2007_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.761,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "HEADS_UP_Guidelines_and_Recommendations_20250523.pdf",
+          "document_type": "Clinical Guideline",
+          "publication_year": "Unknown",
+          "relevance_score": 0.719,
+          "url": null,
+          "title": "Get Your School Prepared to"
+        },
+        {
+          "file_name": "Nonfatal_Traumatic_Brain_Injuries_Related_to_Sports_and_Recreation_Activities_Among_Persons_Aged_19_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.693,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Publications_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.689,
+          "url": null,
+          "title": "SURVEILLANCE"
+        },
+        {
+          "file_name": "TBI_Data_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.689,
+          "url": null,
+          "title": "SURVEILLANCE"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.761,
+        "generated_at": "2025-05-23T18:49:13.261758",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "How does TBI increase the risk of other health conditions?",
+      "answer": "Based on the CDC sources provided, here's how TBI can increase the risk of other health conditions:\n\nThe provided documents primarily focus on the epidemiology, surveillance, and prevention of TBI, particularly in sports and recreation, and among specific populations. They do not directly detail how TBI increases the risk of other specific health conditions. However, the documents do highlight several factors related to TBI that could indirectly contribute to increased health risks:\n\n1.  **Disparities in Access to Care:**\n    *   Racial and ethnic minority groups, people in rural areas, and those with lower incomes or who are uninsured may have less access to TBI care and rehabilitation (Source 7). This lack of access can lead to poorer health outcomes following a TBI.\n    *   Specifically, Non-Hispanic Black and Hispanic patients are less likely to receive follow-up care and rehabilitation compared to non-Hispanic White patients (Source 7).\n\n2.  **Risk Factors for TBI:**\n    *   Certain factors, such as motor vehicle crashes and substance use, are associated with a higher chance of sustaining a TBI (Source 7). These factors themselves can contribute to other health problems.\n\n3.  **Importance of Early Diagnosis and Management:**\n    *   Increased awareness of TBI is important for early diagnosis (Source 2). Continuing to play with a concussion might worsen symptoms and increase the risk for a second concussion (Source 6).\n\n4.  **Populations at Higher Risk:**\n    *   Older adults have the highest numbers and rates of TBI-related hospitalizations and deaths, often due to falls (Source 1).\n    *   Among persons aged 10–19 years, males sustained TBIs most often while playing football or bicycling, whereas females sustained TBIs most often while playing soccer or basketball, or while bicycling (Source 2).\n\n**Limitations:**\n\nThe provided CDC sources do not offer comprehensive information on the specific long-term health conditions that may arise as a direct consequence of TBI.\n\n**Recommendation:**\n\nFor detailed information on how TBI increases the risk of specific health conditions, and for appropriate medical advice, it is essential to consult with healthcare professionals.\n",
+      "sources": [
+        {
+          "file_name": "Health_Disparities_in_TBI_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "20",
+          "relevance_score": 0.729,
+          "url": null,
+          "title": "Understanding Health"
+        },
+        {
+          "file_name": "Nonfatal_Traumatic_Brain_Injuries_Related_to_Sports_and_Recreation_Activities_Among_Persons_Aged_19_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.724,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Surveillance_for_Traumatic_Brain_Injury--Related_Deaths_---_United_States_1997--2007_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.713,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Self-Reported_Concussions_from_Playing_a_Sport_or_Being_Physically_Active_Among_High_School_Students_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.711,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.729,
+        "generated_at": "2025-05-23T18:49:17.269823",
+        "embedding_dimension": 768
+      }
+    },
+    {
+      "question": "What is chronic traumatic encephalopathy and how is it related to repeated head injuries?",
+      "answer": "Based on the provided CDC resources, I can provide information related to head injuries and their potential long-term consequences, but the documents do not directly define or explain \"chronic traumatic encephalopathy\" (CTE). However, the documents do discuss the risks associated with repetitive head impacts and traumatic brain injuries (TBIs), which are relevant to your question.\n\nHere's what I can infer from the provided documents:\n\n*   **Repetitive Head Impacts:** A \"repetitive head impact\" is defined as receiving more than one bump, blow, or jolt to the head while playing a sport (Source 1).\n*   **Concussion and TBI Risks:** The documents emphasize that concussions are a type of TBI (Source 1). They also highlight the risks associated with multiple TBIs, such as increased severity of future TBIs and increased risk for depression and dementia (Source 5).\n*   **Vulnerable Populations:** Children and adolescents are identified as being at increased risk for TBIs with increased severity and prolonged recovery compared to adults (Sources 4, 6, 8). This is attributed to factors such as their developing nervous systems and thinner cranial bones (Source 6).\n*   **Importance of Prevention and Early Diagnosis:** The CDC's HEADS UP initiative aims to promote the prevention, recognition, and appropriate responses to TBI (Source 5). Early diagnosis is important for optimal recovery and to reduce or avoid significant long-term effects (Source 5).\n*   **Sports-Related TBIs:** Football has the highest number of sports-related concussions and other TBIs among youth (Source 1). Tackling accounts for a significant percentage of concussions in high school football (Source 1).\n\n**In summary,** while the provided documents do not explicitly define CTE, they do address the risks of repetitive head impacts and multiple TBIs, which are factors often associated with CTE. The documents also emphasize the importance of preventing head injuries, especially in young athletes, and ensuring proper management of concussions to minimize potential long-term consequences.\n\n**Recommendation:** For a comprehensive definition of chronic traumatic encephalopathy (CTE), its specific causes, diagnostic criteria, and long-term implications, please consult with qualified healthcare professionals or refer to dedicated resources on CTE.\n",
+      "sources": [
+        {
+          "file_name": "Comparing_Head_Impacts_in_Youth_Tackle_and_Flag_Football_20250523.pdf",
+          "document_type": "Research Publication",
+          "publication_year": "Unknown",
+          "relevance_score": 0.704,
+          "url": null,
+          "title": "WHAT PARENTS"
+        },
+        {
+          "file_name": "Emergency_Department_Visits_for_Sports-_and_Recreation-Related_Traumatic_Brain_Injuries_Among_Childr_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.688,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "Nonfatal_Traumatic_Brain_Injuries_Related_to_Sports_and_Recreation_Activities_Among_Persons_Aged_19_20250523.pdf",
+          "document_type": "MMWR Article",
+          "publication_year": "20",
+          "relevance_score": 0.681,
+          "url": null,
+          "title": "Morbidity and Mortality Weekly Report"
+        },
+        {
+          "file_name": "HEADS_UP_to_High_School_Sports_Online_Concussion_Training_20250523.pdf",
+          "document_type": "HEADS UP Resource",
+          "publication_year": "Unknown",
+          "relevance_score": 0.666,
+          "url": null,
+          "title": "INFORMATION SHEET"
+        }
+      ],
+      "retrieval_stats": {
+        "contexts_retrieved": 8,
+        "top_relevance_score": 0.704,
+        "generated_at": "2025-05-23T18:49:21.485560",
+        "embedding_dimension": 768
+      }
+    }
+  ]
+}

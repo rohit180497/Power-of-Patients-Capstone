@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Sallie - Power of Patients</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .chat-header {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .sallie-avatar-small {
+            width: 45px;
+            height: 45px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .sallie-avatar-small svg {
+            width: 35px;
+            height: 35px;
+        }
+
+        .header-info h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-info p {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .patient-info {
+            text-align: right;
+            font-size: 0.875rem;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Chat Container */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+            background: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Messages Area */
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+        }
+
+        .message {
+            display: flex;
+            gap: 1rem;
+            max-width: 80%;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message.sallie {
+            align-self: flex-start;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .message.sallie .message-avatar {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .message-content {
+            background: white;
+            padding: 1rem 1.25rem;
+            border-radius: 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .message.sallie .message-content {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border: 1px solid #bfdbfe;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 1px solid #86efac;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+
+        .message.sallie .message-time {
+            text-align: left;
+        }
+
+        /* Welcome message special styling */
+        .welcome-message {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .welcome-message::before {
+            content: "🎉";
+            margin-right: 0.5rem;
+        }
+
+        /* Medical disclaimer styling */
+        .medical-disclaimer {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #7f1d1d;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border-left: 4px solid #ef4444;
+        }
+
+        /* Input Area */
+        .input-container {
+            padding: 1.5rem 2rem;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .message-input {
+            flex: 1;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            font-family: inherit;
+            resize: none;
+            min-height: 50px;
+            max-height: 120px;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 0.875rem 1.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .send-button:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
+        }
+
+        .send-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #3b82f6;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Status indicators */
+        .status-indicator {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            text-align: center;
+            margin: 1rem;
+        }
+
+        .status-info {
+            background: #eff6ff;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+
+        .status-error {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .chat-header {
+                padding: 1rem;
+            }
+
+            .header-right .patient-info {
+                display: none;
+            }
+
+            .messages-container {
+                padding: 1rem;
+            }
+
+            .message {
+                max-width: 90%;
+            }
+
+            .input-container {
+                padding: 1rem;
+            }
+
+            .message-input {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="chat-header">
+        <div class="header-left">
+            <div class="sallie-avatar-small">
+                <svg viewBox="0 0 200 200" style="fill: #3b82f6;">
+                    <circle cx="100" cy="100" r="90" fill="#f3f4f6"/>
+                    <!-- Sallie dog face -->
+                    <ellipse cx="100" cy="120" rx="60" ry="50" fill="#6b7280"/>
+                    <ellipse cx="80" cy="110" rx="15" ry="20" fill="#4b5563"/>
+                    <ellipse cx="120" cy="110" rx="15" ry="20" fill="#4b5563"/>
+                    <circle cx="75" cy="105" r="8" fill="#1f2937"/>
+                    <circle cx="125" cy="105" r="8" fill="#1f2937"/>
+                    <circle cx="77" cy="102" r="3" fill="white"/>
+                    <circle cx="127" cy="102" r="3" fill="white"/>
+                    <ellipse cx="100" cy="125" rx="8" ry="6" fill="#1f2937"/>
+                    <path d="M 90 135 Q 100 145 110 135" stroke="#1f2937" stroke-width="3" fill="none"/>
+                    <ellipse cx="100" cy="140" rx="15" ry="8" fill="#ef4444" opacity="0.8"/>
+                </svg>
+            </div>
+            <div class="header-info">
+                <h1>Sallie - Your Healthcare Assistant</h1>
+                <p>Powered by Power of Patients</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="patient-info">
+                <div id="patientName">Welcome, Patient</div>
+                <div id="patientEmail" style="opacity: 0.8;"></div>
+            </div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <!-- Messages Area -->
+        <div class="messages-container" id="messagesContainer">
+            <!-- Messages will be added here dynamically -->
+        </div>
+
+        <!-- Typing Indicator -->
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="sallie-avatar-small">
+                <svg viewBox="0 0 200 200" style="fill: #3b82f6;">
+                    <circle cx="100" cy="100" r="90" fill="#f3f4f6"/>
+                    <ellipse cx="100" cy="120" rx="60" ry="50" fill="#6b7280"/>
+                    <ellipse cx="80" cy="110" rx="15" ry="20" fill="#4b5563"/>
+                    <ellipse cx="120" cy="110" rx="15" ry="20" fill="#4b5563"/>
+                    <circle cx="75" cy="105" r="8" fill="#1f2937"/>
+                    <circle cx="125" cy="105" r="8" fill="#1f2937"/>
+                    <circle cx="77" cy="102" r="3" fill="white"/>
+                    <circle cx="127" cy="102" r="3" fill="white"/>
+                    <ellipse cx="100" cy="125" rx="8" ry="6" fill="#1f2937"/>
+                    <path d="M 90 135 Q 100 145 110 135" stroke="#1f2937" stroke-width="3" fill="none"/>
+                    <ellipse cx="100" cy="140" rx="15" ry="8" fill="#ef4444" opacity="0.8"/>
+                </svg>
+            </div>
+            <div>
+                <div style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.25rem;">Sallie is typing...</div>
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-container">
+            <div class="input-wrapper">
+                <textarea 
+                    id="messageInput" 
+                    class="message-input" 
+                    placeholder="Ask Sallie about your health, TBI information, or any medical questions..."
+                    rows="1"
+                ></textarea>
+                <button id="sendButton" class="send-button">
+                    <div class="loading-spinner"></div>
+                    <span>Send</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let patientId = null;
+        let isWaitingForResponse = false;
+
+        // Initialize chat
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            if (!sessionStorage.getItem('authenticated')) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Get patient info
+            patientId = sessionStorage.getItem('patient_id');
+            const patientEmail = sessionStorage.getItem('patient_email');
+
+            // Update header
+            document.getElementById('patientEmail').textContent = patientEmail;
+
+            // Initialize chat
+            initializeChat();
+        });
+
+        // Initialize chat and get welcome message
+        async function initializeChat() {
+            try {
+                // Send initial connection to get welcome message
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        patient_id: patientId,
+                        message: 'INITIAL_CONNECTION'
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Display welcome message
+                    addMessage('sallie', result.response, true, result.is_welcome_message);
+                    
+                    // Update patient name in header
+                    if (result.patient_name) {
+                        document.getElementById('patientName').textContent = `Welcome, ${result.patient_name}!`;
+                    }
+                } else {
+                    addStatusMessage('Error initializing chat. Please refresh the page.', 'error');
+                }
+            } catch (error) {
+                console.error('Error initializing chat:', error);
+                addStatusMessage('Unable to connect to Sallie. Please check your connection.', 'error');
+            }
+        }
+
+        // Send message
+        async function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (!message || isWaitingForResponse) {
+                return;
+            }
+
+            // Add user message to chat
+            addMessage('user', message);
+            messageInput.value = '';
+            adjustTextareaHeight();
+            
+            // Show typing indicator
+            showTypingIndicator();
+            isWaitingForResponse = true;
+            updateSendButton(true);
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        patient_id: patientId,
+                        message: message
+                    })
+                });
+
+                const result = await response.json();
+                
+                // Hide typing indicator
+                hideTypingIndicator();
+                
+                if (result.success) {
+                    // Add Sallie's response
+                    addMessage('sallie', result.response, result.medical_disclaimer_added);
+                    
+                    // Show paraphrasing if available
+                    if (result.paraphrased_query && result.paraphrased_query !== message) {
+                        addStatusMessage(
+                            `Query enhanced: "${message}" → "${result.paraphrased_query}"`, 
+                            'info'
+                        );
+                    }
+                } else {
+                    addMessage('sallie', result.response || 'Sorry, I encountered an error. Please try again.');
+                }
+                
+            } catch (error) {
+                console.error('Error sending message:', error);
+                hideTypingIndicator();
+                addMessage('sallie', 'I\'m having trouble connecting right now. Please try again in a moment.');
+            } finally {
+                isWaitingForResponse = false;
+                updateSendButton(false);
+                messageInput.focus();
+            }
+        }
+
+        // Add message to chat
+        function addMessage(sender, content, hasDisclaimer = false, isWelcome = false) {
+            const messagesContainer = document.getElementById('messagesContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+
+            if (sender === 'sallie') {
+                avatar.innerHTML = `
+                    <svg width="32" height="32" viewBox="0 0 200 200" style="fill: white;">
+                        <ellipse cx="100" cy="120" rx="40" ry="35" fill="white"/>
+                        <ellipse cx="85" cy="110" rx="10" ry="15" fill="white"/>
+                        <ellipse cx="115" cy="110" rx="10" ry="15" fill="white"/>
+                        <circle cx="82" cy="108" r="5" fill="#1f2937"/>
+                        <circle cx="118" cy="108" r="5" fill="#1f2937"/>
+                        <circle cx="83" cy="106" r="2" fill="white"/>
+                        <circle cx="119" cy="106" r="2" fill="white"/>
+                        <ellipse cx="100" cy="120" rx="5" ry="4" fill="#1f2937"/>
+                        <path d="M 93 128 Q 100 135 107 128" stroke="#1f2937" stroke-width="2" fill="none"/>
+                        <ellipse cx="100" cy="132" rx="8" ry="4" fill="#ef4444" opacity="0.6"/>
+                    </svg>
+                `;
+            } else {
+                const patientName = document.getElementById('patientName').textContent.replace('Welcome, ', '').replace('!', '');
+                avatar.textContent = patientName.charAt(0).toUpperCase();
+            }
+
+            const messageContent = document.createElement('div');
+            messageContent.className = `message-content ${isWelcome ? 'welcome-message' : ''}`;
+            
+            // Format message content
+            const formattedContent = formatMessageContent(content);
+            messageContent.innerHTML = formattedContent;
+
+            // Add disclaimer if present
+            if (hasDisclaimer && content.includes('⚠️')) {
+                const parts = content.split('⚠️');
+                messageContent.innerHTML = formatMessageContent(parts[0]);
+                
+                if (parts[1]) {
+                    const disclaimer = document.createElement('div');
+                    disclaimer.className = 'medical-disclaimer';
+                    disclaimer.innerHTML = '⚠️' + formatMessageContent(parts[1]);
+                    messageContent.appendChild(disclaimer);
+                }
+            }
+
+            const messageTime = document.createElement('div');
+            messageTime.className = 'message-time';
+            messageTime.textContent = new Date().toLocaleTimeString();
+
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(messageContent);
+            messageContent.appendChild(messageTime);
+            
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        // Format message content
+        function formatMessageContent(content) {
+            return content
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>')
+                .replace(/•/g, '•');
+        }
+
+        // Add status message
+        function addStatusMessage(content, type = 'info') {
+            const messagesContainer = document.getElementById('messagesContainer');
+            const statusDiv = document.createElement('div');
+            statusDiv.className = `status-indicator status-${type}`;
+            statusDiv.textContent = content;
+            messagesContainer.appendChild(statusDiv);
+            scrollToBottom();
+        }
+
+        // Show/hide typing indicator
+        function showTypingIndicator() {
+            document.getElementById('typingIndicator').style.display = 'flex';
+            scrollToBottom();
+        }
+
+        function hideTypingIndicator() {
+            document.getElementById('typingIndicator').style.display = 'none';
+        }
+
+        // Update send button state
+        function updateSendButton(loading) {
+            const sendButton = document.getElementById('sendButton');
+            const spinner = sendButton.querySelector('.loading-spinner');
+            const text = sendButton.querySelector('span');
+            
+            sendButton.disabled = loading;
+            spinner.style.display = loading ? 'block' : 'none';
+            text.textContent = loading ? 'Sending...' : 'Send';
+        }
+
+        // Auto-resize textarea
+        function adjustTextareaHeight() {
+            const textarea = document.getElementById('messageInput');
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
+
+        // Scroll to bottom
+        function scrollToBottom() {
+            const messagesContainer = document.getElementById('messagesContainer');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Event listeners
+        document.getElementById('sendButton').addEventListener('click', sendMessage);
+
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        document.getElementById('messageInput').addEventListener('input', adjustTextareaHeight);
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Prevent back button after login
+        window.history.pushState(null, null, window.location.href);
+        window.addEventListener('popstate', function () {
+            window.history.pushState(null, null, window.location.href);
+        });
+    </script>
+</body>
+</html>

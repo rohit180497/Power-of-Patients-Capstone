@@ -1,0 +1,8 @@
+{
+  "total_pdfs_found": 31,
+  "successfully_processed": 31,
+  "total_chunks_created": 1344,
+  "embedding_model": "BAAI/bge-base-en-v1.5",
+  "chunk_size": 512,
+  "processing_date": "2025-05-23T17:08:10.100420"
+}
