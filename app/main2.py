@@ -11,7 +11,7 @@ print(os.getcwd())
 # Import our custom modules
 from patient_auth_sys import PatientAuthenticator
 from researcher_auth import ResearcherAuthenticator
-from patient_agent import ProfessionalPatientAgent
+from patient_agent_old import ProfessionalPatientAgent
 from researcheragent import ProfessionalResearcherAgent
 
 # Configure logging

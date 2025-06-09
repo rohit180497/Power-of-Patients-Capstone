@@ -5,11 +5,13 @@ import asyncio
 import psycopg2
 import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
-from typing import Dict, Optional, Any, List
+from typing import Dict, Optional, Any, List, Tuple
 from dotenv import load_dotenv
 from datetime import datetime
 from collections import deque
 from dataclasses import dataclass
+from enum import Enum
+import concurrent.futures
 
 # Import your existing specialized agents
 from src.medpalm.medical_assistant import MedPalmAgent
@@ -17,53 +19,84 @@ from src.retrieval.cdcretrieval import CDCTBIRetriever
 
 logger = logging.getLogger(__name__)
 
+class QueryIntent(Enum):
+    """Standardized query intents"""
+    CRISIS = "crisis"
+    TBI_RELATED = "tbi_related" 
+    MEDICAL_GENERAL = "medical_general"
+    PATIENT_SELF_INQUIRY = "patient_self_inquiry"
+    CONTINUATION = "continuation"
+    GENERAL_CONVERSATION = "general_conversation"
+
+class UrgencyLevel(Enum):
+    """Standardized urgency levels"""
+    EMERGENCY = "emergency"
+    HIGH = "high"
+    MEDIUM = "medium"
+    LOW = "low"
+
 @dataclass
 class QueryAnalysis:
-    """Structured analysis of user query with LLM insights"""
+    """Comprehensive query analysis structure"""
     original_query: str
-    paraphrased_query: str
-    intent: str
+    normalized_query: str
+    intent: QueryIntent
     confidence: float
-    is_continuation: bool
-    needs_patient_context: bool
+    urgency: UrgencyLevel
     is_medical: bool
-    urgency_level: str
-    requires_guardrail_check: bool
+    requires_multi_agent: bool
+    context_needed: bool
     reasoning: str
+    medical_entities: List[str]
+
+@dataclass
+class AgentResponse:
+    """Standardized agent response structure"""
+    agent_name: str
+    response: str
+    confidence: float
+    source_quality: str
+    processing_time: float
+    error: Optional[str] = None
 
 @dataclass
 class ConversationMemory:
-    """Structured conversation memory for context management"""
+    """Enhanced conversation memory"""
     exchanges: deque
     current_patient_id: str
     patient_context: str
-    last_agent_used: str
-    pending_followup: Optional[str]
+    session_start: datetime
     
-    def add_exchange(self, query: str, response: str, agent_used: str):
+    def __post_init__(self):
+        if not hasattr(self, 'session_start'):
+            self.session_start = datetime.now()
+    
+    def add_exchange(self, query: str, response: str, intent: str, agents_used: List[str]):
+        """Add exchange with metadata"""
         self.exchanges.append({
             "timestamp": datetime.now().isoformat(),
             "query": query,
             "response": response,
-            "agent": agent_used
+            "intent": intent,
+            "agents_used": agents_used
         })
-        self.last_agent_used = agent_used
     
-    def get_recent_context(self, num_exchanges: int = 3) -> str:
-        """Get formatted recent conversation context"""
+    def get_context(self, max_exchanges: int = 3) -> str:
+        """Get formatted conversation context"""
         if not self.exchanges:
-            return ""
+            return "No previous conversation."
         
-        recent = list(self.exchanges)[-num_exchanges:]
-        context_parts = []
-        for exchange in recent:
-            context_parts.append(f"Patient: {exchange['query']}")
-            context_parts.append(f"Assistant: {exchange['response'][:150]}...")
+        recent = list(self.exchanges)[-max_exchanges:]
+        context_parts = ["=== Recent Conversation ==="]
+        
+        for i, exchange in enumerate(recent, 1):
+            context_parts.append(f"{i}. Patient: {exchange['query']}")
+            context_parts.append(f"   Assistant: {exchange['response'][:200]}{'...' if len(exchange['response']) > 200 else ''}")
         
         return "\n".join(context_parts)
 
-class LLMGuardrailAgent:
-    """Intelligent LLM-powered guardrail system with memory awareness"""
+class IntelligentQueryClassifier:
+    """Advanced LLM-based query classifier"""
     
     def __init__(self, gemini_model):
         self.model = gemini_model
@@ -73,153 +106,71 @@ class LLMGuardrailAgent:
             HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
             HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
         }
-    
-    async def analyze_query_safety(self, query: str, conversation_context: str = "") -> Dict[str, Any]:
-        """Analyze query safety with conversation context"""
         
-        json_template = """{
-    "allow": true/false,
-    "confidence": 0.0-1.0,
-    "category": "medical_query|patient_self_inquiry|continuation|non_medical|harmful",
-    "redirect_message": "message if blocked",
-    "reasoning": "detailed explanation"
-}"""
-
-        guardrail_prompt = f"""
-You are a healthcare AI guardrail system. Analyze if this query should be processed by medical AI agents.
+        # Medical entity patterns for enhanced classification
+        self.tbi_indicators = [
+            "traumatic brain injury", "tbi", "concussion", "head injury", "brain damage",
+            "post-concussion syndrome", "mild traumatic brain injury", "mtbi", 
+            "closed head injury", "brain trauma", "head trauma", "cognitive symptoms",
+            "memory problems after injury", "confusion after head hit", "dizziness after accident"
+        ]
+    
+    async def classify_query(self, query: str, conversation_context: str = "") -> QueryAnalysis:
+        """Comprehensive query classification using LLM"""
+        
+        classification_prompt = f"""
+You are an expert medical query classifier for a healthcare AI system. Analyze this patient query with high precision.
 
 CONVERSATION CONTEXT:
 {conversation_context}
 
-CURRENT QUERY: "{query}"
+PATIENT QUERY: "{query}"
 
-GUIDELINES:
-✅ ALLOW - Medical questions, TBI inquiries, health concerns, patient self-inquiries, platform questions
-✅ ALLOW - Follow-up questions related to previous medical discussions
-✅ ALLOW - Requests for patient's own medical information
-✅ ALLOW - Continuation responses (yes/no/maybe) to medical questions
+CLASSIFICATION TASK:
+Determine the query's intent, medical relevance, and routing requirements.
 
-❌ BLOCK - Requests for illegal activities, harmful content, non-medical personal advice
-❌ BLOCK - Questions completely unrelated to health/medical topics
-❌ BLOCK - Requests that could harm patient safety
+TBI-RELATED INDICATORS:
+- Traumatic brain injury, TBI, concussion, head injury, brain trauma
+- Post-concussion symptoms: headaches, dizziness, memory issues, confusion
+- Cognitive problems after head injury
+- Brain damage, closed head injury, mild TBI (mTBI)
+- Sports-related head injuries, car accident brain injuries
+- Recovery from head trauma, TBI rehabilitation
 
-ANALYSIS REQUIRED:
-1. Is this query healthcare-related (directly or through conversation context)?
-2. Is this a continuation of a medical conversation?
-3. Is this requesting patient's own medical information?
-4. Could answering this query cause harm?
-5. Should this be redirected to healthcare professionals?
+INTENT CATEGORIES:
+1. "crisis" - Suicide ideation, severe mental health emergency, immediate danger
+2. "tbi_related" - Any TBI, concussion, brain injury, or related symptoms/questions
+3. "medical_general" - Other medical conditions, medications, treatments, health concerns
+4. "patient_self_inquiry" - Patient asking about their own medical records/information
+5. "continuation" - Follow-up responses (yes/no), clarifications to previous medical discussion
+6. "general_conversation" - Greetings, thanks, non-medical conversation
+
+URGENCY LEVELS:
+- "emergency" - Immediate medical attention needed, crisis situations
+- "high" - Serious symptoms, significant health concerns requiring prompt attention
+- "medium" - Important health questions, symptom inquiries, medical guidance needed
+- "low" - General information, follow-ups, non-urgent medical questions
+
+ANALYSIS REQUIREMENTS:
+1. Normalize the query (clear, explicit version)
+2. Identify medical entities and TBI-related terms
+3. Determine if multiple agents should process this query
+4. Assess urgency and medical relevance
+5. Consider conversation context for continuations
 
 Respond in JSON format:
-{json_template}
-
-JSON Response:"""
-
-        try:
-            loop = asyncio.get_event_loop()
-            response = await loop.run_in_executor(
-                None,
-                lambda: self.model.generate_content(
-                    guardrail_prompt,
-                    safety_settings=self.safety_settings
-                )
-            )
-            
-            # Parse JSON response
-            result_text = response.text.strip()
-            if result_text.startswith('```json'):
-                result_text = result_text[7:-3]
-            elif result_text.startswith('```'):
-                result_text = result_text[3:-3]
-            
-            try:
-                result = json.loads(result_text)
-                return {
-                    "allow": result.get("allow", True),
-                    "confidence": result.get("confidence", 0.5),
-                    "category": result.get("category", "unknown"),
-                    "redirect_message": result.get("redirect_message", ""),
-                    "reasoning": result.get("reasoning", "")
-                }
-            except json.JSONDecodeError:
-                logger.warning(f"Failed to parse guardrail JSON response: {result_text}")
-                return {"allow": True, "confidence": 0.3, "category": "parse_error", "redirect_message": "", "reasoning": "Failed to parse response"}
-        
-        except Exception as e:
-            logger.error(f"Guardrail analysis failed: {e}")
-            return {"allow": True, "confidence": 0.1, "category": "error", "redirect_message": "", "reasoning": "Guardrail system error"}
-
-class LLMQueryAnalyzer:
-    """Intelligent query analysis using LLM with conversation memory"""
-    
-    def __init__(self, gemini_model):
-        self.model = gemini_model
-        self.safety_settings = {
-            HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-            HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-            HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-            HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-        }
-    
-    async def analyze_query(self, query: str, memory: ConversationMemory) -> QueryAnalysis:
-        """Comprehensive query analysis with memory context"""
-        
-        # Get conversation context
-        conversation_context = memory.get_recent_context(3)
-        patient_name = "the patient"
-        
-        # Extract patient name if available
-        if memory.patient_context:
-            try:
-                if "first_name" in memory.patient_context:
-                    # Simple extraction - you might want to improve this
-                    for line in memory.patient_context.split('\n'):
-                        if 'Name:' in line:
-                            patient_name = line.split('Name:')[1].strip()
-                            break
-            except:
-                pass
-        
-        json_template = """{
-    "paraphrased_query": "clear, explicit version of the query",
-    "intent": "primary intent from options above",
+{{
+    "normalized_query": "clear, explicit version addressing pronouns and context",
+    "intent": "one of the 6 intents above",
     "confidence": 0.0-1.0,
-    "is_continuation": true/false,
-    "needs_patient_context": true/false,
+    "urgency": "emergency/high/medium/low", 
     "is_medical": true/false,
-    "urgency_level": "emergency/high/medium/low",
-    "requires_guardrail_check": true/false,
-    "reasoning": "detailed explanation of analysis decisions",
-    "agent_routing": "which agent should handle this: crisis|medical|tbi|patient_info|general"
-}"""
-
-        analysis_prompt = f"""
-You are an advanced healthcare query analyzer. Analyze this query in context of the ongoing conversation.
-
-PATIENT NAME: {patient_name}
-CONVERSATION CONTEXT:
-{conversation_context}
-
-ORIGINAL QUERY: "{query}"
-
-ANALYSIS TASKS:
-1. **QUERY PARAPHRASING**: Rewrite the query to be explicit and clear, resolving pronouns and references using conversation context
-2. **INTENT CLASSIFICATION**: Determine the primary intent
-3. **CONTEXT ANALYSIS**: Assess what context and information is needed
-4. **ROUTING DECISION**: Determine which agent should handle this
-
-INTENT OPTIONS:
-- "crisis" - Mental health emergency, suicide ideation, immediate danger
-- "medical_general" - General medical questions, medications, treatments
-- "tbi_specific" - TBI, concussion, brain injury questions
-- "patient_self_inquiry" - Patient asking about their own medical information
-- "continuation" - Following up on previous conversation (yes/no/clarification)
-- "general_conversation" - Greetings, thanks, platform questions
-
-URGENCY LEVELS: "emergency", "high", "medium", "low"
-
-Respond in JSON format:
-{json_template}
+    "requires_multi_agent": true/false,
+    "context_needed": true/false,
+    "reasoning": "detailed explanation of classification decisions",
+    "medical_entities": ["list", "of", "medical", "terms", "found"],
+    "tbi_related": true/false
+}}
 
 JSON Response:"""
 
@@ -228,79 +179,376 @@ JSON Response:"""
             response = await loop.run_in_executor(
                 None,
                 lambda: self.model.generate_content(
-                    analysis_prompt,
+                    classification_prompt,
                     safety_settings=self.safety_settings
                 )
             )
             
-            # Parse JSON response
             result_text = response.text.strip()
+            # Clean JSON response
             if result_text.startswith('```json'):
                 result_text = result_text[7:-3]
             elif result_text.startswith('```'):
                 result_text = result_text[3:-3]
             
-            try:
-                result = json.loads(result_text)
-                
-                return QueryAnalysis(
-                    original_query=query,
-                    paraphrased_query=result.get("paraphrased_query", query),
-                    intent=result.get("intent", "general_conversation"),
-                    confidence=result.get("confidence", 0.5),
-                    is_continuation=result.get("is_continuation", False),
-                    needs_patient_context=result.get("needs_patient_context", False),
-                    is_medical=result.get("is_medical", False),
-                    urgency_level=result.get("urgency_level", "low"),
-                    requires_guardrail_check=result.get("requires_guardrail_check", True),
-                    reasoning=result.get("reasoning", "No reasoning provided")
-                )
-                
-            except json.JSONDecodeError:
-                logger.warning(f"Failed to parse analysis JSON: {result_text}")
-                # Fallback analysis
-                return self._fallback_analysis(query)
-        
+            result = json.loads(result_text)
+            
+            # Map string intent to enum
+            intent_mapping = {
+                "crisis": QueryIntent.CRISIS,
+                "tbi_related": QueryIntent.TBI_RELATED,
+                "medical_general": QueryIntent.MEDICAL_GENERAL,
+                "patient_self_inquiry": QueryIntent.PATIENT_SELF_INQUIRY,
+                "continuation": QueryIntent.CONTINUATION,
+                "general_conversation": QueryIntent.GENERAL_CONVERSATION
+            }
+            
+            urgency_mapping = {
+                "emergency": UrgencyLevel.EMERGENCY,
+                "high": UrgencyLevel.HIGH,
+                "medium": UrgencyLevel.MEDIUM,
+                "low": UrgencyLevel.LOW
+            }
+            
+            return QueryAnalysis(
+                original_query=query,
+                normalized_query=result.get("normalized_query", query),
+                intent=intent_mapping.get(result.get("intent"), QueryIntent.GENERAL_CONVERSATION),
+                confidence=result.get("confidence", 0.5),
+                urgency=urgency_mapping.get(result.get("urgency"), UrgencyLevel.LOW),
+                is_medical=result.get("is_medical", False),
+                requires_multi_agent=result.get("requires_multi_agent", False),
+                context_needed=result.get("context_needed", False),
+                reasoning=result.get("reasoning", ""),
+                medical_entities=result.get("medical_entities", [])
+            )
+            
         except Exception as e:
-            logger.error(f"Query analysis failed: {e}")
-            return self._fallback_analysis(query)
+            logger.error(f"Query classification failed: {e}")
+            return self._fallback_classification(query)
     
-    def _fallback_analysis(self, query: str) -> QueryAnalysis:
-        """Simple fallback analysis when LLM fails"""
-        
+    def _fallback_classification(self, query: str) -> QueryAnalysis:
+        """Fallback classification when LLM fails"""
         query_lower = query.lower()
         
         # Emergency detection
-        if any(word in query_lower for word in ['suicide', 'kill myself', 'emergency', 'crisis']):
-            intent = "crisis"
-            urgency = "emergency"
-        elif any(word in query_lower for word in ['tbi', 'concussion', 'brain injury']):
-            intent = "tbi_specific"
-            urgency = "medium"
-        elif any(word in query_lower for word in ['my', 'mine', 'about me']):
-            intent = "patient_self_inquiry"
-            urgency = "medium"
+        if any(term in query_lower for term in ['suicide', 'kill myself', 'emergency', 'crisis']):
+            intent = QueryIntent.CRISIS
+            urgency = UrgencyLevel.EMERGENCY
+        elif any(term in query_lower for term in self.tbi_indicators):
+            intent = QueryIntent.TBI_RELATED
+            urgency = UrgencyLevel.MEDIUM
+        elif any(term in query_lower for term in ['my', 'mine', 'about me', 'my records']):
+            intent = QueryIntent.PATIENT_SELF_INQUIRY
+            urgency = UrgencyLevel.MEDIUM
         else:
-            intent = "general_conversation"
-            urgency = "low"
+            intent = QueryIntent.GENERAL_CONVERSATION
+            urgency = UrgencyLevel.LOW
         
         return QueryAnalysis(
             original_query=query,
-            paraphrased_query=query,
+            normalized_query=query,
             intent=intent,
             confidence=0.3,
-            is_continuation=False,
-            needs_patient_context=(intent == "patient_self_inquiry"),
-            is_medical=(intent in ["medical_general", "tbi_specific", "crisis"]),
-            urgency_level=urgency,
-            requires_guardrail_check=True,
-            reasoning="Fallback analysis due to LLM error"
+            urgency=urgency,
+            is_medical=(intent in [QueryIntent.TBI_RELATED, QueryIntent.MEDICAL_GENERAL, QueryIntent.CRISIS]),
+            requires_multi_agent=(intent == QueryIntent.TBI_RELATED),
+            context_needed=(intent == QueryIntent.PATIENT_SELF_INQUIRY),
+            reasoning="Fallback classification due to LLM error",
+            medical_entities=[]
         )
 
-class ProfessionalPatientAgent:
-    """
-    Enhanced Professional Patient Agent with LLM-powered intelligence
-    """
+class MultiAgentOrchestrator:
+    """Orchestrates multiple agents for comprehensive responses"""
+    
+    def __init__(self, medical_agent, tbi_agent):
+        self.medical_agent = medical_agent
+        self.tbi_agent = tbi_agent
+        self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=3)
+    
+    async def process_with_multiple_agents(self, query: str, analysis: QueryAnalysis) -> List[AgentResponse]:
+        """Process query with multiple agents in parallel"""
+        tasks = []
+        
+        # Always include medical agent for medical queries
+        if analysis.is_medical and self.medical_agent:
+            tasks.append(self._process_with_medical_agent(query))
+        
+        # Include TBI agent for TBI-related queries
+        if analysis.intent == QueryIntent.TBI_RELATED and self.tbi_agent:
+            tasks.append(self._process_with_tbi_agent(query))
+        
+        if not tasks:
+            return []
+        
+        # Execute agents in parallel
+        responses = await asyncio.gather(*tasks, return_exceptions=True)
+        
+        # Filter successful responses
+        valid_responses = []
+        for response in responses:
+            if not isinstance(response, Exception):
+                valid_responses.append(response)
+        
+        return valid_responses
+    
+    async def _process_with_medical_agent(self, query: str) -> AgentResponse:
+        """Process with medical agent"""
+        start_time = datetime.now()
+        try:
+            loop = asyncio.get_event_loop()
+            response = await loop.run_in_executor(
+                self.executor,
+                lambda: self.medical_agent.process_query(query)
+            )
+            
+            processing_time = (datetime.now() - start_time).total_seconds()
+            
+            return AgentResponse(
+                agent_name="Medical Agent (MedPalm)",
+                response=response,
+                confidence=0.85,
+                source_quality="high",
+                processing_time=processing_time
+            )
+            
+        except Exception as e:
+            processing_time = (datetime.now() - start_time).total_seconds()
+            return AgentResponse(
+                agent_name="Medical Agent (MedPalm)",
+                response="",
+                confidence=0.0,
+                source_quality="error",
+                processing_time=processing_time,
+                error=str(e)
+            )
+    
+    async def _process_with_tbi_agent(self, query: str) -> AgentResponse:
+        """Process with TBI agent"""
+        start_time = datetime.now()
+        try:
+            loop = asyncio.get_event_loop()
+            result = await loop.run_in_executor(
+                self.executor,
+                lambda: self.tbi_agent.ask_question(query, top_k=8)
+            )
+            
+            processing_time = (datetime.now() - start_time).total_seconds()
+            
+            return AgentResponse(
+                agent_name="TBI Specialist",
+                response=result['answer'],
+                confidence=0.75,
+                source_quality="medium",
+                processing_time=processing_time
+            )
+            
+        except Exception as e:
+            processing_time = (datetime.now() - start_time).total_seconds()
+            return AgentResponse(
+                agent_name="TBI Specialist",
+                response="",
+                confidence=0.0,
+                source_quality="error",
+                processing_time=processing_time,
+                error=str(e)
+            )
+
+class IntelligentResponseSynthesizer:
+    """Synthesizes multiple agent responses into comprehensive answers"""
+    
+    def __init__(self, gemini_model):
+        self.model = gemini_model
+        self.safety_settings = {
+            HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+            HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+            HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
+            HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+        }
+    
+    async def synthesize_response(
+        self, 
+        query: str, 
+        analysis: QueryAnalysis, 
+        agent_responses: List[AgentResponse],
+        patient_context: str = "",
+        conversation_context: str = ""
+    ) -> str:
+        """Synthesize comprehensive response from multiple agents"""
+        
+        # Handle crisis situations immediately
+        if analysis.intent == QueryIntent.CRISIS:
+            return self._get_crisis_response()
+        
+        # If no agent responses, provide fallback
+        if not agent_responses:
+            return self._get_fallback_response(query, analysis)
+        
+        # Filter successful responses
+        valid_responses = [r for r in agent_responses if not r.error]
+        if not valid_responses:
+            return self._get_error_response()
+        
+        # Build synthesis prompt
+        synthesis_prompt = self._build_synthesis_prompt(
+            query, analysis, valid_responses, patient_context, conversation_context
+        )
+        
+        try:
+            loop = asyncio.get_event_loop()
+            response = await loop.run_in_executor(
+                None,
+                lambda: self.model.generate_content(
+                    synthesis_prompt,
+                    safety_settings=self.safety_settings
+                )
+            )
+            
+            final_response = response.text.strip()
+            
+            # Add medical disclaimer for medical queries
+            if analysis.is_medical:
+                final_response = self._add_medical_disclaimer(final_response)
+            
+            return final_response
+            
+        except Exception as e:
+            logger.error(f"Response synthesis failed: {e}")
+            # Return best available response
+            best_response = max(valid_responses, key=lambda r: r.confidence)
+            return self._add_medical_disclaimer(best_response.response) if analysis.is_medical else best_response.response
+    
+    def _build_synthesis_prompt(
+        self, 
+        query: str, 
+        analysis: QueryAnalysis, 
+        responses: List[AgentResponse],
+        patient_context: str,
+        conversation_context: str
+    ) -> str:
+        """Build comprehensive synthesis prompt"""
+        
+        # Prepare agent responses section
+        agent_sections = []
+        for i, response in enumerate(responses, 1):
+            quality_indicator = "🔹" if response.source_quality == "high" else "🔸" if response.source_quality == "medium" else "🔺"
+            agent_sections.append(f"""
+{quality_indicator} **{response.agent_name}** (Confidence: {response.confidence:.2f})
+Response: {response.response}
+Processing Time: {response.processing_time:.2f}s
+""")
+        
+        synthesis_prompt = f"""
+You are Sallie, a professional and empathetic healthcare assistant created by Power of Patients. Synthesize the following agent responses into a comprehensive, helpful answer for the patient.
+
+PATIENT QUERY: "{query}"
+NORMALIZED QUERY: "{analysis.normalized_query}"
+QUERY INTENT: {analysis.intent.value}
+URGENCY LEVEL: {analysis.urgency.value}
+MEDICAL ENTITIES: {', '.join(analysis.medical_entities) if analysis.medical_entities else 'None identified'}
+
+{conversation_context}
+
+PATIENT MEDICAL CONTEXT:
+{patient_context if patient_context else 'Patient context not available for this response.'}
+
+SPECIALIST AGENT RESPONSES:
+{''.join(agent_sections)}
+
+SYNTHESIS GUIDELINES:
+1. **Comprehensive Coverage**: Combine insights from all agents to provide complete information
+2. **Patient-Centric**: Write for patients, not medical professionals - use clear, understandable language
+3. **Empathetic Tone**: Be supportive and understanding, especially for health concerns
+4. **Structured Information**: Organize information logically (symptoms, causes, treatments, next steps)
+5. **Actionable Guidance**: Provide clear next steps and recommendations
+6. **Source Integration**: Seamlessly blend information without saying "Agent X said..."
+7. **Completeness**: Address all aspects of the patient's question thoroughly
+
+SPECIFIC INSTRUCTIONS FOR TBI QUERIES:
+- Provide detailed information about symptoms, causes, and management
+- Include both immediate and long-term considerations
+- Mention different types of TBI (mild, moderate, severe)
+- Discuss recovery timelines and rehabilitation
+- Address common concerns patients have
+
+RESPONSE STRUCTURE:
+1. Direct answer to the question
+2. Detailed explanation with examples
+3. What to expect/look for
+4. When to seek medical care
+5. Supportive closing with offer to help further
+
+Generate a comprehensive, patient-friendly response that synthesizes ALL available information:"""
+
+        return synthesis_prompt
+    
+    def _get_crisis_response(self) -> str:
+        """Crisis response for mental health emergencies"""
+        return """
+🚨 **I'm very concerned about what you're sharing with me. Your life has value and there are people who want to help you right now.**
+
+**IMMEDIATE HELP AVAILABLE 24/7:**
+• **National Suicide Prevention Lifeline: 988** (US)
+• **Crisis Text Line: Text HOME to 741741**
+• **International: befrienders.org**
+
+**Please reach out immediately to:**
+• Emergency services (911) if in immediate danger
+• Your healthcare provider or psychiatrist
+• A trusted friend or family member
+• Local hospital emergency department
+• Local crisis intervention center
+
+**You are not alone.** Professional counselors are standing by 24/7 to provide support and help you work through these feelings safely.
+
+Is there someone you can call right now? I can help you find local mental health resources if you'd like.
+
+**Remember: This crisis will pass, and there are effective treatments and support available.**
+"""
+    
+    def _get_fallback_response(self, query: str, analysis: QueryAnalysis) -> str:
+        """Fallback response when no agents are available"""
+        if analysis.intent == QueryIntent.TBI_RELATED:
+            return f"""I understand you're asking about {analysis.normalized_query}. This is an important health concern that deserves comprehensive information.
+
+While I'm experiencing some technical difficulties accessing my medical databases right now, I strongly recommend:
+
+**Immediate Steps:**
+• Consult with your healthcare provider or neurologist
+• If this is about recent head trauma, consider emergency care
+• Keep track of any symptoms you're experiencing
+
+**For TBI-related concerns:**
+• Contact a neurologist or brain injury specialist
+• Reach out to brain injury support organizations
+• Consider neuropsychological evaluation if symptoms persist
+
+I apologize that I can't provide the detailed information you deserve right now. Your health concerns are important, and professional medical guidance would be most appropriate for TBI-related questions."""
+
+        return f"I understand you're asking about {analysis.normalized_query}. While I'm having some technical difficulties right now, I recommend consulting with your healthcare provider for proper guidance on this matter."
+    
+    def _get_error_response(self) -> str:
+        """Response when all agents fail"""
+        return """I apologize, but I'm experiencing technical difficulties accessing my medical information systems right now. 
+
+For your health concerns, I recommend:
+• Consulting directly with your healthcare provider
+• Contacting your doctor's office
+• Using telehealth services if available
+• Visiting urgent care for non-emergency concerns
+
+Your health questions are important and deserve proper attention from medical professionals."""
+    
+    def _add_medical_disclaimer(self, response: str) -> str:
+        """Add appropriate medical disclaimer"""
+        disclaimer = """
+
+⚠️ **Medical Disclaimer:** I am an AI assistant providing general health information for educational purposes only. This information should not replace professional medical consultation. Please consult with your healthcare provider, doctor, or qualified medical professional for personalized medical advice, proper diagnosis, and treatment options specific to your condition."""
+        
+        return response + disclaimer
+
+class EnhancedProfessionalPatientAgent:
+    """Enhanced Professional Patient Agent with intelligent multi-agent architecture"""
     
     def __init__(self, gemini_api_key: str = None, pinecone_api_key: str = None):
         """Initialize the Enhanced Patient Agent"""
@@ -314,70 +562,71 @@ class ProfessionalPatientAgent:
         # Database connection
         self.db_connection = None
         
-        # Conversation Memory
+        # Enhanced conversation memory
         self.memory = ConversationMemory(
-            exchanges=deque(maxlen=20),  # Keep last 20 exchanges
+            exchanges=deque(maxlen=20),
             current_patient_id="",
-            patient_context="",
-            last_agent_used="",
-            pending_followup=None
+            patient_context=""
         )
         
         # Patient data
         self.current_patient_data = {}
         self.welcomed_patients = set()
         
-        # Initialize LLM and components
-        self._initialize_llm_components()
+        # Initialize core components
+        self._initialize_core_components()
         self._initialize_specialized_agents()
         
-        logger.info("Enhanced Professional Patient Agent initialized")
+        logger.info("✅ Enhanced Professional Patient Agent initialized with multi-agent architecture")
     
-    def _initialize_llm_components(self):
-        """Initialize LLM-powered components"""
+    def _initialize_core_components(self):
+        """Initialize core LLM components"""
         try:
-            if self.gemini_api_key:
-                genai.configure(api_key=self.gemini_api_key)
-                self.gemini_model = genai.GenerativeModel('gemini-2.0-flash')
-                
-                # Initialize LLM-powered components
-                self.query_analyzer = LLMQueryAnalyzer(self.gemini_model)
-                self.guardrail_agent = LLMGuardrailAgent(self.gemini_model)
-                
-                logger.info("LLM components initialized successfully")
-            else:
-                logger.error("Gemini API key not provided")
+            if not self.gemini_api_key:
                 raise ValueError("Gemini API key required")
-                
+            
+            genai.configure(api_key=self.gemini_api_key)
+            self.gemini_model = genai.GenerativeModel('gemini-2.0-flash')
+            
+            # Initialize intelligent components
+            self.query_classifier = IntelligentQueryClassifier(self.gemini_model)
+            self.response_synthesizer = IntelligentResponseSynthesizer(self.gemini_model)
+            
+            logger.info("✅ Core LLM components initialized")
+            
         except Exception as e:
-            logger.error(f"Failed to initialize LLM components: {e}")
+            logger.error(f"Failed to initialize core components: {e}")
             raise
     
     def _initialize_specialized_agents(self):
-        """Initialize specialized medical agents"""
+        """Initialize and validate specialized agents"""
+        # Initialize Medical Agent
         try:
-            # Initialize MedPalm Agent
             self.medical_agent = MedPalmAgent(api_key=self.gemini_api_key)
-            logger.info("MedPalm Agent initialized")
+            logger.info("✅ Medical Agent (MedPalm) initialized")
         except Exception as e:
-            logger.warning(f"MedPalm Agent not available: {e}")
+            logger.warning(f"⚠️ Medical Agent not available: {e}")
             self.medical_agent = None
         
+        # Initialize TBI Agent
         try:
-            # Initialize TBI Retrieval Agent
-            self.retrieval_agent = CDCTBIRetriever(
+            self.tbi_agent = CDCTBIRetriever(
                 pinecone_api_key=self.pinecone_api_key,
                 index_name=os.getenv("PINECONE_INDEX2_NAME"),
                 embedding_model=os.getenv("EMBEDDING_MODEL"),
                 llm_provider="gemini"
             )
-            logger.info("TBI Retrieval Agent initialized")
+            logger.info("✅ TBI Specialist Agent initialized")
         except Exception as e:
-            logger.warning(f"TBI Retrieval Agent not available: {e}")
-            self.retrieval_agent = None
+            logger.warning(f"⚠️ TBI Specialist Agent not available: {e}")
+            self.tbi_agent = None
+        
+        # Initialize Multi-Agent Orchestrator
+        self.orchestrator = MultiAgentOrchestrator(self.medical_agent, self.tbi_agent)
+        logger.info("✅ Multi-Agent Orchestrator initialized")
     
     async def connect_to_database(self, db_config: Dict[str, str] = None) -> bool:
-        """Connect to database with improved error handling"""
+        """Connect to database with enhanced error handling"""
         try:
             if db_config is None:
                 db_config = {
@@ -400,17 +649,16 @@ class ProfessionalPatientAgent:
                 None, lambda: psycopg2.connect(**db_config)
             )
             
-            logger.info("Database connected successfully")
+            logger.info("✅ Database connected successfully")
             return True
             
         except Exception as e:
-            logger.exception(f"Database connection failed: {e}")
+            logger.exception(f"❌ Database connection failed: {e}")
             return False
     
     async def load_patient_data(self, patient_id: str) -> bool:
-        """Load comprehensive patient data"""
+        """Load comprehensive patient data with better error handling"""
         try:
-            # Check and reconnect database if needed
             if not self._check_db_connection():
                 if not await self.connect_to_database():
                     return False
@@ -443,22 +691,22 @@ class ProfessionalPatientAgent:
             patient_data = await loop.run_in_executor(None, execute_query)
             
             if not patient_data:
-                logger.error(f"Patient not found: {patient_id}")
+                logger.error(f"❌ Patient not found: {patient_id}")
                 return False
             
             self.current_patient_data = patient_data
             self.memory.current_patient_id = patient_id
-            self.memory.patient_context = self._build_patient_context(patient_data)
+            self.memory.patient_context = self._build_comprehensive_patient_context(patient_data)
             
-            logger.info(f"Patient data loaded: {patient_id}")
+            logger.info(f"✅ Patient data loaded: {patient_id}")
             return True
             
         except Exception as e:
-            logger.exception(f"Error loading patient data: {e}")
+            logger.exception(f"❌ Error loading patient data: {e}")
             return False
     
     def _check_db_connection(self) -> bool:
-        """Check if database connection is alive"""
+        """Check database connection health"""
         try:
             if self.db_connection:
                 cursor = self.db_connection.cursor()
@@ -469,41 +717,54 @@ class ProfessionalPatientAgent:
             return False
         return False
     
-    def _build_patient_context(self, patient_data: Dict) -> str:
-        """Build structured patient context"""
+    def _build_comprehensive_patient_context(self, patient_data: Dict) -> str:
+        """Build detailed patient context for better AI responses"""
         context_parts = [
-            "=== PATIENT INFORMATION ===",
+            "=== PATIENT PROFILE ===",
             f"Patient ID: {patient_data.get('patient_id', 'N/A')}",
             f"Name: {patient_data.get('first_name', 'N/A')}",
             f"Age: {patient_data.get('age', 'N/A')}",
             f"Location: {patient_data.get('city', 'N/A')}, {patient_data.get('country', 'N/A')}",
             f"Patient Type: {patient_data.get('patient_type', 'N/A')}",
+            f"Registration Date: {patient_data.get('registered_at', 'N/A')}",
             "",
-            "=== TBI HISTORY ===",
-            f"Previous TBI: {patient_data.get('has_tbi_before', 'N/A')}",
-            f"Total TBI Count: {patient_data.get('total_tbi', 'N/A')}",
-            f"Incident Date: {patient_data.get('tbi_incident_date', 'N/A')}",
+            "=== TBI/INJURY HISTORY ===",
+            f"Has Previous TBI: {patient_data.get('has_tbi_before', 'N/A')}",
+            f"Total TBI Incidents: {patient_data.get('total_tbi', 'N/A')}",
+            f"Most Recent Incident: {patient_data.get('tbi_incident_date', 'N/A')}",
             f"Injury Source: {patient_data.get('injury_from', 'N/A')}",
-            f"Head Hit Location: {patient_data.get('head_hit_location', 'N/A')}",
+            f"Head Impact Location: {patient_data.get('head_hit_location', 'N/A')}",
             f"Event Description: {patient_data.get('describe_event', 'N/A')}",
             "",
-            "=== SYMPTOMS ===",
-            f"Immediate Symptoms: {patient_data.get('immediate_symptoms_resulting', 'N/A')}",
-            f"Worst Symptoms: {patient_data.get('worst_symptoms', 'N/A')}"
+            "=== SYMPTOM PROFILE ===",
+            f"Immediate Post-Injury Symptoms: {patient_data.get('immediate_symptoms_resulting', 'N/A')}",
+            f"Most Severe Symptoms: {patient_data.get('worst_symptoms', 'N/A')}"
         ]
         
-        # Add JSON data if available
-        for json_field in ['symptom_json', 'sdoh_json', 'therapy_json']:
-            if patient_data.get(json_field):
+        # Process JSON fields with better error handling
+        json_fields = {
+            'symptom_json': 'Current Symptoms',
+            'sdoh_json': 'Social Determinants of Health',
+            'therapy_json': 'Therapy/Treatment History'
+        }
+        
+        for field, title in json_fields.items():
+            if patient_data.get(field):
                 try:
-                    json_data = json.loads(patient_data[json_field]) if isinstance(patient_data[json_field], str) else patient_data[json_field]
-                    context_parts.append(f"{json_field.replace('_', ' ').title()}: {json.dumps(json_data, indent=2)}")
-                except:
-                    context_parts.append(f"{json_field.replace('_', ' ').title()}: {patient_data[json_field]}")
+                    json_data = json.loads(patient_data[field]) if isinstance(patient_data[field], str) else patient_data[field]
+                    context_parts.append(f"\n=== {title.upper()} ===")
+                    if isinstance(json_data, dict):
+                        for key, value in json_data.items():
+                            context_parts.append(f"{key}: {value}")
+                    else:
+                        context_parts.append(str(json_data))
+                except Exception as e:
+                    context_parts.append(f"\n=== {title.upper()} ===")
+                    context_parts.append(f"Raw data: {patient_data[field]}")
         
         return "\n".join(context_parts)
     
-    def _generate_welcome_message(self, patient_name: str) -> str:
+    def _generate_personalized_welcome(self, patient_name: str) -> str:
         """Generate personalized welcome message"""
         current_hour = datetime.now().hour
         
@@ -518,479 +779,222 @@ class ProfessionalPatientAgent:
         
         return f"""Hello {patient_name}, {greeting}! 
 
-I'm Sallie, a professional and empathetic healthcare assistant created by Power of Patients. I'm here to help you with your medical questions, TBI information, and healthcare guidance.
+I'm Sallie, your professional healthcare assistant created by Power of Patients. I'm here to provide you with comprehensive, personalized support for your medical questions and health concerns.
 
-How can I assist you with your health concerns today?"""
-    
-    async def _handle_crisis_query(self, analysis: QueryAnalysis) -> str:
-        """Handle mental health crisis with immediate support"""
-        return """
-🚨 I'm very concerned about what you're sharing with me. Your life has value and there are people who want to help you.
+I have access to your medical profile and can help you with:
+• **TBI and concussion information** - symptoms, recovery, management
+• **General medical guidance** - conditions, treatments, medications
+• **Your personal health questions** - based on your medical history
+• **Healthcare navigation** - finding resources and next steps
 
-**IMMEDIATE HELP:**
-• National Suicide Prevention Lifeline: 988 (US)
-• Crisis Text Line: Text HOME to 741741
-• International: befrienders.org
-
-**Please reach out to:**
-• Emergency services (911) if in immediate danger
-• Your healthcare provider
-• A trusted friend or family member
-• Local crisis center
-
-You don't have to go through this alone. Professional counselors are available 24/7 to provide support and help you work through these feelings.
-
-Is there someone you can call right now? Would you like help finding local mental health resources?
-"""
-    
-    async def _handle_medical_query(self, analysis: QueryAnalysis) -> Dict[str, Any]:
-        """Handle general medical queries"""
-        try:
-            if self.medical_agent:
-                loop = asyncio.get_event_loop()
-                response = await loop.run_in_executor(
-                    None, lambda: self.medical_agent.process_query(analysis.paraphrased_query)
-                )
-                return {
-                    "response": response,
-                    "agent_used": "Medical Agent"
-                }
-            else:
-                return {
-                    "response": f"I understand you're asking about {analysis.paraphrased_query}. While I don't have access to the full medical database right now, I recommend consulting with your healthcare provider for specific medical advice.",
-                    "agent_used": "Medical Agent (Limited)"
-                }
-        except Exception as e:
-            logger.error(f"Medical agent error: {e}")
-            return {
-                "response": "I'm experiencing technical difficulties accessing medical information. Please consult your healthcare provider.",
-                "agent_used": "Medical Agent (Error)"
-            }
-    
-    async def _handle_tbi_query(self, analysis: QueryAnalysis) -> Dict[str, Any]:
-        """Handle TBI-specific queries with fallback to MedPalm"""
-        primary_response = ""
-        fallback_used = False
-        
-        try:
-            # Try TBI Retrieval Agent first
-            if self.retrieval_agent:
-                loop = asyncio.get_event_loop()
-                result = await loop.run_in_executor(
-                    None, lambda: self.retrieval_agent.ask_question(analysis.paraphrased_query, top_k=8)
-                )
-                primary_response = result['answer']
-                
-                # Check if response is insufficient (too short, generic, or indicates lack of info)
-                insufficient_indicators = [
-                    "I don't have specific information",
-                    "limited information",
-                    "not available in my database",
-                    "recommend checking other sources",
-                    len(primary_response.strip()) < 100,
-                    "difficult with the information I currently have"
-                ]
-                
-                is_insufficient = any(indicator in primary_response.lower() if isinstance(indicator, str) 
-                                    else indicator for indicator in insufficient_indicators)
-                
-                if is_insufficient:
-                    logger.info("TBI response insufficient, activating MedPalm fallback...")
-                    # Fallback to MedPalm for better TBI information
-                    if self.medical_agent:
-                        try:
-                            fallback_response = await loop.run_in_executor(
-                                None, lambda: self.medical_agent.process_query(analysis.paraphrased_query)
-                            )
-                            primary_response = fallback_response
-                            fallback_used = True
-                            logger.info("✅ MedPalm fallback successful - better response generated")
-                        except Exception as e:
-                            logger.error(f"❌ MedPalm fallback failed: {e}")
-                            # Keep original TBI response if fallback fails
-                
-            else:
-                # If no TBI agent, go directly to MedPalm
-                if self.medical_agent:
-                    loop = asyncio.get_event_loop()
-                    primary_response = await loop.run_in_executor(
-                        None, lambda: self.medical_agent.process_query(analysis.paraphrased_query)
-                    )
-                    fallback_used = True
-                else:
-                    primary_response = f"I understand you're asking about TBI: {analysis.paraphrased_query}. While I don't have access to the TBI database right now, I recommend consulting with your neurologist or healthcare provider."
-            
-        except Exception as e:
-            logger.error(f"TBI query handling error: {e}")
-            primary_response = "I'm experiencing technical difficulties accessing TBI information. Please consult your healthcare provider."
-        
-        return {
-            "response": primary_response,
-            "fallback_used": fallback_used,
-            "agent_used": "MedPalm (Fallback)" if fallback_used else "TBI Specialist"
-        }
-    
-    async def _handle_patient_self_inquiry(self, analysis: QueryAnalysis) -> str:
-        """Handle patient asking about their own information"""
-        if not self.current_patient_data:
-            return "I don't have access to your medical records right now. Please verify your patient ID."
-        
-        patient_name = self.current_patient_data.get('first_name', 'there')
-        
-        # Create a comprehensive response about their information
-        basic_info_response = f"I have your medical information here, {patient_name}. Let me share what I know about your case based on your profile."
-        
-        return basic_info_response
-    
-    async def _generate_contextual_response(self, agent_result: Dict[str, Any], analysis: QueryAnalysis) -> str:
-        """Generate final contextual response using LLM with strict context control"""
-        
-        # For crisis situations, return immediately
-        if analysis.intent == "crisis":
-            return agent_result["response"]
-        
-        # Get conversation context with explicit memory state
-        conversation_history = self.memory.get_recent_context(3)
-        has_conversation_history = len(self.memory.exchanges) > 0
-        patient_context = self.memory.patient_context if analysis.needs_patient_context else ""
-        patient_name = self.current_patient_data.get('first_name', 'there')
-        
-        # Medical disclaimer
-        medical_disclaimer = ""
-        if analysis.is_medical:
-            medical_disclaimer = """
-
-⚠️ **Medical Disclaimer:** I am an AI assistant providing general health information for educational purposes only. This information should not replace professional medical consultation. Please consult with your healthcare provider, doctor, or qualified medical professional for personalized medical advice, proper diagnosis, and treatment options specific to your condition."""
-        
-        # Build context-aware prompt with strict memory controls
-        response_prompt = f"""
-You are Sallie, a professional healthcare assistant created by Power of Patients. Generate a natural, helpful response to the patient's current query.
-
-CRITICAL MEMORY RULES:
-- CONVERSATION HISTORY EXISTS: {'YES' if has_conversation_history else 'NO'}
-- If NO conversation history exists, DO NOT reference previous discussions
-- If YES, only reference if directly relevant to current query
-- NEVER say "as I mentioned before" or "as we discussed" unless you can see it in the conversation history below
-
-PATIENT INFORMATION:
-- Name: {patient_name}
-- Current Query: "{analysis.original_query}"
-- Paraphrased Query: "{analysis.paraphrased_query}"
-- Intent: {analysis.intent}
-
-{'CONVERSATION HISTORY (Recent exchanges):' if has_conversation_history else 'CONVERSATION HISTORY: None (This is our first interaction)'}
-{conversation_history if has_conversation_history else 'No previous conversation exists.'}
-
-SPECIALIST AGENT RESPONSE:
-Agent Used: {agent_result.get('agent_used', 'Unknown')}
-Response: {agent_result['response']}
-
-{'PATIENT MEDICAL CONTEXT:' if analysis.needs_patient_context else ''}
-{patient_context if analysis.needs_patient_context else ''}
-
-RESPONSE GUIDELINES:
-1. Address the patient by name ({patient_name}) when appropriate
-2. Provide a helpful, empathetic response to their CURRENT query
-3. Build upon the specialist agent's response with context and patient care
-4. If patient has medical history relevant to the query, mention it supportively
-5. ONLY reference previous conversations if they exist in the history above
-6. For medical topics, emphasize consulting healthcare providers
-7. End with an appropriate follow-up question or offer of help
-8. Keep response natural and conversational
-9. DO NOT fabricate or assume previous conversations that aren't shown above
-
-STRICT CONTEXT RULES:
-- If conversation history shows NO previous exchanges, treat this as a fresh conversation
-- Only reference "earlier" or "before" if you can see it in the conversation history
-- When in doubt, focus on the current query without referencing past discussions
-
-Generate a natural, contextual response:"""
-
-        try:
-            loop = asyncio.get_event_loop()
-            response = await loop.run_in_executor(
-                None,
-                lambda: self.gemini_model.generate_content(
-                    response_prompt,
-                    safety_settings={
-                        HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-                        HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-                        HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-                        HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-                    }
-                )
-            )
-            
-            final_response = response.text.strip() + medical_disclaimer
-            return final_response
-            
-        except Exception as e:
-            logger.error(f"Error generating contextual response: {e}")
-            # Fallback to agent response with disclaimer
-            return agent_result["response"] + medical_disclaimer
+How can I help you with your health concerns today?"""
     
     async def process_query(self, query: str, patient_id: str) -> Dict[str, Any]:
         """
-        Main query processing with LLM-powered intelligence
+        Enhanced query processing with intelligent multi-agent architecture
         """
         start_time = datetime.now()
         
         try:
-            # Load patient data if needed
+            # Step 1: Ensure patient data is loaded
             if (not self.current_patient_data or 
                 self.current_patient_data.get('patient_id') != patient_id):
-
-                self.reset_session_for_patient(patient_id)
                 
-                if not await self.load_patient_data(patient_id):
-                    return {
-                        "success": False,
-                        "error": f"Could not load patient data for {patient_id}",
-                        "response": "I'm sorry, I couldn't access your medical records. Please verify your patient ID.",
-                        "processing_time": (datetime.now() - start_time).total_seconds()
-                    }
+                await self._handle_patient_session_setup(patient_id)
                 
-                is_fresh_session = len(self.memory.exchanges) == 0
+                if not self.current_patient_data:
+                    return self._create_error_response(
+                        f"Could not load patient data for {patient_id}",
+                        "I'm sorry, I couldn't access your medical records. Please verify your patient ID.",
+                        start_time
+                    )
                 
-                # Send welcome message for new patients
-                if patient_id not in self.welcomed_patients or is_fresh_session:
-                    patient_name = self.current_patient_data.get('first_name', 'there')
-                    welcome_message = self._generate_welcome_message(patient_name)
-                    self.welcomed_patients.add(patient_id)
-                    
-                    # Add to memory
-                    self.memory.add_exchange("Initial connection", welcome_message, "Welcome Service")
-                    
-                    return {
-                        "success": True,
-                        "patient_id": patient_id,
-                        "patient_name": patient_name,
-                        "query": "Initial connection",
-                        "intent_classified": "welcome_message",
-                        "agent_used": "Welcome Service",
-                        "response": welcome_message,
-                        "processing_time": (datetime.now() - start_time).total_seconds(),
-                        "is_welcome_message": True
-                    }
+                # Send welcome for new sessions
+                if patient_id not in self.welcomed_patients:
+                    return self._create_welcome_response(patient_id, start_time)
             
-            # Step 1: Analyze query with LLM intelligence
-            logger.info(f"Analyzing query: {query[:50]}...")
-            analysis = await self.query_analyzer.analyze_query(query, self.memory)
+            # Step 2: Intelligent Query Classification
+            logger.info(f"🧠 Classifying query: {query[:50]}...")
+            conversation_context = self.memory.get_context(3)
+            analysis = await self.query_classifier.classify_query(query, conversation_context)
             
-            # Step 2: Guardrail check if required
-            if analysis.requires_guardrail_check:
-                conversation_context = self.memory.get_recent_context(3)
-                guardrail_result = await self.guardrail_agent.analyze_query_safety(
-                    analysis.paraphrased_query, conversation_context
-                )
-                
-                if not guardrail_result["allow"]:
-                    # Query blocked by guardrail
-                    processing_time = (datetime.now() - start_time).total_seconds()
-                    
-                    # Add to memory
-                    self.memory.add_exchange(query, guardrail_result["redirect_message"], "Guardrail Agent")
-                    
-                    return {
-                        "success": True,
-                        "patient_id": patient_id,
-                        "patient_name": self.current_patient_data.get('first_name', 'Unknown'),
-                        "query": query,
-                        "paraphrased_query": analysis.paraphrased_query,
-                        "intent_classified": "non_medical_redirect",
-                        "agent_used": "Guardrail Agent",
-                        "response": guardrail_result["redirect_message"],
-                        "processing_time": processing_time,
-                        "guardrail_blocked": True,
-                        "guardrail_category": guardrail_result["category"]
-                    }
+            logger.info(f"🎯 Classified as: {analysis.intent.value} (confidence: {analysis.confidence:.2f})")
             
-            # Step 3: Route to appropriate agent based on analysis
-            logger.info(f"Routing query with intent: {analysis.intent}")
+            # Step 3: Multi-Agent Processing
+            agent_responses = []
+            if analysis.is_medical:
+                logger.info(f"🚀 Processing with multiple agents...")
+                agent_responses = await self.orchestrator.process_with_multiple_agents(query, analysis)
+                logger.info(f"📊 Received {len(agent_responses)} agent responses")
             
-            agent_result = {}
+            # Step 4: Intelligent Response Synthesis
+            logger.info(f"🔄 Synthesizing comprehensive response...")
+            patient_context = self.memory.patient_context if analysis.context_needed else ""
             
-            if analysis.intent == "crisis":
-                crisis_response = await self._handle_crisis_query(analysis)
-                agent_result = {"response": crisis_response, "agent_used": "Crisis Support"}
-            elif analysis.intent == "medical_general":
-                agent_result = await self._handle_medical_query(analysis)
-            elif analysis.intent == "tbi_specific":
-                agent_result = await self._handle_tbi_query(analysis)
-            elif analysis.intent == "patient_self_inquiry":
-                self_inquiry_response = await self._handle_patient_self_inquiry(analysis)
-                agent_result = {"response": self_inquiry_response, "agent_used": "Patient Information"}
-            else:
-                # General conversation
-                general_response = f"I understand you're asking: {analysis.paraphrased_query}. How can I assist you with your health concerns?"
-                agent_result = {"response": general_response, "agent_used": "General Conversation"}
+            final_response = await self.response_synthesizer.synthesize_response(
+                query, analysis, agent_responses, patient_context, conversation_context
+            )
             
-            # Step 4: Generate final contextual response
-            final_response = await self._generate_contextual_response(agent_result, analysis)
-            
-            # Step 5: Update conversation memory
-            self.memory.add_exchange(query, final_response, agent_result["agent_used"])
+            # Step 5: Update Memory
+            agents_used = [r.agent_name for r in agent_responses] if agent_responses else ["General Assistant"]
+            self.memory.add_exchange(query, final_response, analysis.intent.value, agents_used)
             
             processing_time = (datetime.now() - start_time).total_seconds()
             
-            logger.info(f"Query processed successfully in {processing_time:.2f}s")
+            logger.info(f"✅ Query processed successfully in {processing_time:.2f}s")
             
             return {
                 "success": True,
                 "patient_id": patient_id,
                 "patient_name": self.current_patient_data.get('first_name', 'Unknown'),
                 "query": query,
-                "paraphrased_query": analysis.paraphrased_query if analysis.paraphrased_query != query else None,
-                "intent_classified": analysis.intent,
-                "agent_used": agent_result["agent_used"],
+                "normalized_query": analysis.normalized_query if analysis.normalized_query != query else None,
+                "intent_classified": analysis.intent.value,
+                "urgency_level": analysis.urgency.value,
+                "agents_used": agents_used,
                 "response": final_response,
                 "processing_time": processing_time,
                 "confidence": analysis.confidence,
-                "urgency_level": analysis.urgency_level,
-                "analysis_reasoning": analysis.reasoning,
-                "fallback_used": agent_result.get("fallback_used", False)
+                "medical_entities": analysis.medical_entities,
+                "multi_agent_used": len(agent_responses) > 1
             }
             
         except Exception as e:
-            logger.exception(f"Error processing query: {e}")
-            processing_time = (datetime.now() - start_time).total_seconds()
-            
-            return {
-                "success": False,
-                "error": str(e),
-                "response": "I encountered an error processing your request. Please try again.",
-                "processing_time": processing_time
-            }
+            logger.exception(f"❌ Error processing query: {e}")
+            return self._create_error_response(str(e), "I encountered an error processing your request. Please try again.", start_time)
     
-    def get_session_summary(self) -> Dict[str, Any]:
-        """Get comprehensive session summary"""
+    async def _handle_patient_session_setup(self, patient_id: str):
+        """Handle patient session setup and data loading"""
+        logger.info(f"🔄 Setting up session for patient: {patient_id}")
+        
+        # Reset memory for new patient
+        if self.memory.current_patient_id != patient_id:
+            self.memory.exchanges.clear()
+            self.welcomed_patients.discard(patient_id)
+        
+        # Load patient data
+        await self.load_patient_data(patient_id)
+    
+    def _create_welcome_response(self, patient_id: str, start_time: datetime) -> Dict[str, Any]:
+        """Create welcome response for new sessions"""
+        patient_name = self.current_patient_data.get('first_name', 'there')
+        welcome_message = self._generate_personalized_welcome(patient_name)
+        self.welcomed_patients.add(patient_id)
+        
+        # Add to memory
+        self.memory.add_exchange("Session started", welcome_message, "welcome", ["Welcome Service"])
+        
+        processing_time = (datetime.now() - start_time).total_seconds()
+        
+        return {
+            "success": True,
+            "patient_id": patient_id,
+            "patient_name": patient_name,
+            "query": "Session started",
+            "intent_classified": "welcome_message",
+            "agents_used": ["Welcome Service"],
+            "response": welcome_message,
+            "processing_time": processing_time,
+            "is_welcome_message": True
+        }
+    
+    def _create_error_response(self, error: str, response: str, start_time: datetime) -> Dict[str, Any]:
+        """Create standardized error response"""
+        processing_time = (datetime.now() - start_time).total_seconds()
+        
+        return {
+            "success": False,
+            "error": error,
+            "response": response,
+            "processing_time": processing_time
+        }
+    
+    def get_comprehensive_session_summary(self) -> Dict[str, Any]:
+        """Get detailed session summary with analytics"""
+        if not self.memory.exchanges:
+            return {
+                "current_patient": {
+                    "id": self.memory.current_patient_id,
+                    "name": self.current_patient_data.get('first_name', 'Unknown')
+                },
+                "session_status": "No conversation yet",
+                "conversation_length": 0
+            }
+        
+        # Analyze conversation patterns
+        intents = [exchange.get('intent', 'unknown') for exchange in self.memory.exchanges]
+        agents = []
+        for exchange in self.memory.exchanges:
+            agents.extend(exchange.get('agents_used', []))
+        
         return {
             "current_patient": {
                 "id": self.memory.current_patient_id,
                 "name": self.current_patient_data.get('first_name', 'Unknown')
             },
+            "session_duration": str(datetime.now() - self.memory.session_start),
             "conversation_length": len(self.memory.exchanges),
+            "intent_distribution": {intent: intents.count(intent) for intent in set(intents)},
+            "agents_used": list(set(agents)),
             "recent_exchanges": list(self.memory.exchanges)[-3:],
-            "last_agent_used": self.memory.last_agent_used,
-            "pending_followup": self.memory.pending_followup,
             "memory_usage": f"{len(self.memory.exchanges)}/20"
         }
     
     def clear_session(self):
-        """Clear session data comprehensively"""
+        """Clear session with proper cleanup"""
         try:
-            # Clear conversation memory
+            patient_id = self.memory.current_patient_id
+            
+            # Clear memory
             self.memory.exchanges.clear()
-            self.memory.last_agent_used = ""
-            self.memory.pending_followup = None
-            
-            # Reset patient context but keep the ID for potential reload
-            current_patient_id = self.memory.current_patient_id
             self.memory.patient_context = ""
+            self.memory.session_start = datetime.now()
             
-            # Clear welcomed patients to force fresh greetings
+            # Reset welcome status
             self.welcomed_patients.clear()
             
-            # Clear current patient data to force reload
+            # Clear patient data
             self.current_patient_data = {}
             
-            logger.info(f"✅ Session cleared completely (Patient ID: {current_patient_id})")
+            logger.info(f"✅ Session cleared completely (Patient: {patient_id})")
             
         except Exception as e:
-            logger.error(f"Error clearing session: {e}")
-
-    def force_fresh_session(self, patient_id: str):
-        """Force a completely fresh session for a patient"""
-        logger.info(f"Forcing fresh session for patient: {patient_id}")
-        
-        # Clear all memory
-        self.memory.exchanges.clear()
-        self.memory.current_patient_id = patient_id
-        self.memory.patient_context = ""
-        self.memory.last_agent_used = ""
-        self.memory.pending_followup = None
-        
-        # Remove from welcomed patients
-        self.welcomed_patients.discard(patient_id)
-        
-        # Clear current patient data to force reload
-        self.current_patient_data = {}
-        
-        logger.info(f"✅ Fresh session initialized for patient: {patient_id}")
-
-    def reset_session_for_patient(self, patient_id: str):
-        """Reset session data when switching/reloading patient"""
-        logger.info(f"Resetting session for patient: {patient_id}")
-        
-        # Clear conversation memory
-        self.memory.exchanges.clear()
-        self.memory.last_agent_used = ""
-        self.memory.pending_followup = None
-        
-        # Reset welcome status for fresh greeting
-        self.welcomed_patients.discard(patient_id)
-        
-        # Clear current patient data to force reload
-        if self.current_patient_data.get('patient_id') != patient_id:
-            self.current_patient_data = {}
-        
-        logger.info(f"✅ Session reset for patient: {patient_id}")
+            logger.error(f"❌ Error clearing session: {e}")
 
 
-    async def clear_conversation_history(self, patient_id: str):
-        """Clear conversation history for a specific patient"""
-        try:
-            logger.info(f"Clearing conversation history for patient: {patient_id}")
-            
-            # Clear memory if it's for the current patient
-            if self.memory.current_patient_id == patient_id:
-                self.memory.exchanges.clear()
-                self.memory.last_agent_used = ""
-                self.memory.pending_followup = None
-                # Don't clear patient_context as it's medical data, not conversation
-            
-            # Remove from welcomed patients so they get a fresh welcome
-            self.welcomed_patients.discard(patient_id)
-            
-            logger.info(f"✅ Conversation history cleared for patient: {patient_id}")
-            
-        except Exception as e:
-            logger.error(f"Error clearing conversation history for {patient_id}: {e}")
-
-        
-# Terminal Testing Interface
-async def terminal_interface():
-    """Enhanced terminal interface for testing"""
-    print("=" * 80)
-    print("🏥 ENHANCED PROFESSIONAL PATIENT AGENT - TERMINAL INTERFACE")
-    print("=" * 80)
+# Enhanced Terminal Interface for Testing
+async def enhanced_terminal_interface():
+    """Enhanced terminal interface with better UX"""
+    print("=" * 100)
+    print("🏥 ENHANCED PROFESSIONAL PATIENT AGENT - INTELLIGENT MULTI-AGENT SYSTEM")
+    print("=" * 100)
     
     # Initialize agent
-    print("Initializing Enhanced Patient Agent...")
-    agent = ProfessionalPatientAgent()
+    print("🚀 Initializing Enhanced Patient Agent...")
+    agent = EnhancedProfessionalPatientAgent()
     
     # Connect to database
-    print("Connecting to database...")
+    print("🔌 Connecting to database...")
     if not await agent.connect_to_database():
         print("❌ Failed to connect to database")
         return
     
     print("✅ Enhanced Patient Agent initialized successfully!")
-    print("\n💡 Features:")
-    print("   • LLM-powered query analysis and paraphrasing")
-    print("   • Intelligent guardrail system with context awareness")
-    print("   • Smart conversation memory management") 
-    print("   • Advanced intent classification")
-    print("   • Contextual response generation")
+    print("\n🎯 **KEY FEATURES:**")
+    print("   • **Intelligent Query Classification** - Advanced LLM-based intent recognition")
+    print("   • **Multi-Agent Processing** - TBI queries use both TBI + Medical agents in parallel")
+    print("   • **Response Synthesis** - LLM combines multiple agent responses comprehensively")
+    print("   • **Patient-Centric Design** - Responses optimized for patient understanding")
+    print("   • **Enhanced Context Awareness** - Sophisticated conversation memory")
     
-    print("\n📋 Commands:")
-    print("   • Enter queries naturally - the agent will analyze and route intelligently")
+    print("\n📋 **COMMANDS:**")
+    print("   • Just type your health questions naturally!")
     print("   • 'switch <patient_id>' - Change patient")
-    print("   • 'summary' - View session summary")
-    print("   • 'analyze <query>' - See detailed query analysis")
+    print("   • 'summary' - View detailed session analytics")
+    print("   • 'test tbi' - Test TBI multi-agent processing")
     print("   • 'clear' - Clear session")
     print("   • 'quit' - Exit")
-    print("-" * 80)
+    print("=" * 100)
     
     current_patient_id = None
     
@@ -998,19 +1002,19 @@ async def terminal_interface():
         try:
             # Get patient ID if not set
             if not current_patient_id:
-                current_patient_id = input("\nEnter Patient ID: ").strip()
+                current_patient_id = input("\n🆔 Enter Patient ID: ").strip()
                 if not current_patient_id:
                     continue
             
             # Get user input
-            user_input = input(f"\n[Patient {current_patient_id}] Query: ").strip()
+            user_input = input(f"\n[Patient {current_patient_id}] 💬 Your Question: ").strip()
             
             if not user_input:
                 continue
             
             # Handle commands
             if user_input.lower() == 'quit':
-                print("👋 Goodbye!")
+                print("\n👋 Thank you for using the Enhanced Patient Agent!")
                 break
             elif user_input.lower().startswith('switch '):
                 new_patient_id = user_input[7:].strip()
@@ -1019,59 +1023,51 @@ async def terminal_interface():
                     print(f"🔄 Switched to patient: {current_patient_id}")
                 continue
             elif user_input.lower() == 'summary':
-                summary = agent.get_session_summary()
-                print("\n📊 SESSION SUMMARY:")
+                summary = agent.get_comprehensive_session_summary()
+                print("\n📊 **SESSION ANALYTICS:**")
                 print(json.dumps(summary, indent=2, default=str))
                 continue
-            elif user_input.lower().startswith('analyze '):
-                analyze_query = user_input[8:].strip()
-                if analyze_query:
-                    print("🔍 Analyzing query...")
-                    analysis = await agent.query_analyzer.analyze_query(analyze_query, agent.memory)
-                    print(f"\n🧠 QUERY ANALYSIS:")
-                    print(f"   Original: {analysis.original_query}")
-                    print(f"   Paraphrased: {analysis.paraphrased_query}")
-                    print(f"   Intent: {analysis.intent} (confidence: {analysis.confidence:.2f})")
-                    print(f"   Is Medical: {analysis.is_medical}")
-                    print(f"   Needs Context: {analysis.needs_patient_context}")
-                    print(f"   Urgency: {analysis.urgency_level}")
-                    print(f"   Reasoning: {analysis.reasoning}")
-                continue
+            elif user_input.lower() == 'test tbi':
+                user_input = "What are the major symptoms of traumatic brain injury and how should I manage them?"
+                print(f"🧪 Testing TBI multi-agent processing with: {user_input}")
             elif user_input.lower() == 'clear':
                 agent.clear_session()
                 print("✅ Session cleared")
                 continue
             
-            # Process query
-            print("🤖 Processing query...")
+            # Process query with timing
+            print(f"🤖 Processing query with intelligent multi-agent system...")
+            start_time = datetime.now()
+            
             result = await agent.process_query(user_input, current_patient_id)
             
             if result["success"]:
-                print(f"\n💬 Sallie: {result['response']}")
+                print(f"\n💬 **Sallie:** {result['response']}")
                 
-                # Show analysis details
-                print(f"\n📊 Analysis:")
-                print(f"   Intent: {result['intent_classified']}")
-                print(f"   Agent: {result['agent_used']}")
-                if result.get('fallback_used'):
-                    print(f"   🔄 Fallback: TBI → MedPalm used")
-                print(f"   Time: {result['processing_time']:.2f}s")
-                if result.get('paraphrased_query'):
-                    print(f"   Paraphrased: '{result['paraphrased_query']}'")
-                if result.get('confidence'):
-                    print(f"   Confidence: {result['confidence']:.2f}")
-                if result.get('urgency_level'):
-                    print(f"   Urgency: {result['urgency_level']}")
+                # Show detailed analytics
+                print(f"\n📊 **PROCESSING ANALYTICS:**")
+                print(f"   🎯 Intent: {result['intent_classified']}")
+                print(f"   🚀 Agents Used: {', '.join(result['agents_used'])}")
+                print(f"   ⚡ Processing Time: {result['processing_time']:.2f}s")
+                print(f"   🎚️ Confidence: {result['confidence']:.2f}")
+                print(f"   🚨 Urgency: {result['urgency_level']}")
+                
+                if result.get('normalized_query'):
+                    print(f"   🔄 Normalized: '{result['normalized_query']}'")
+                if result.get('medical_entities'):
+                    print(f"   🏥 Medical Entities: {', '.join(result['medical_entities'])}")
+                if result.get('multi_agent_used'):
+                    print(f"   🤝 Multi-Agent Synthesis: ✅")
                 
             else:
-                print(f"\n❌ Error: {result['error']}")
-                print(f"Response: {result['response']}")
+                print(f"\n❌ **Error:** {result['error']}")
+                print(f"**Response:** {result['response']}")
                 
         except KeyboardInterrupt:
             print("\n\n👋 Goodbye!")
             break
         except Exception as e:
-            print(f"\n❌ Error: {e}")
+            print(f"\n❌ Unexpected error: {e}")
 
 if __name__ == "__main__":
     logging.basicConfig(
@@ -1079,4 +1075,4 @@ if __name__ == "__main__":
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
     
-    asyncio.run(terminal_interface())
+    asyncio.run(enhanced_terminal_interface())
