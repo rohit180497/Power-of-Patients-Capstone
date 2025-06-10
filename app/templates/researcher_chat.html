@@ -1016,8 +1016,59 @@
             return text;
         }
 
-        // IMPROVED FUNCTION: Add visualization with adaptive sizing
+        // IMPROVED FUNCTION: Add visualization with validation before rendering
         function addVisualization(vizHtml) {
+            // First, validate the visualization content
+            if (!vizHtml || 
+                typeof vizHtml !== 'string' || 
+                vizHtml.includes('${') || 
+                vizHtml.includes('$vizContent') || 
+                vizHtml.includes('$data.visualization_html')) {
+                
+                console.log("Invalid visualization content detected");
+                // Add a simple error message instead of visualization container
+                addMessage('Sorry, unable to create visualization at the moment.', false, 'Sallie');
+                return;
+            }
+
+            // Create a temporary container to test the visualization
+            const testContainer = document.createElement('div');
+            testContainer.style.display = 'none';
+            document.body.appendChild(testContainer);
+            
+            let vizSuccess = false;
+            
+            try {
+                // Try to set the content and see if it causes any immediate errors
+                testContainer.innerHTML = vizHtml;
+                
+                // Check if the content has meaningful visualization elements
+                const hasCanvas = testContainer.querySelector('canvas');
+                const hasSvg = testContainer.querySelector('svg');
+                const hasPlotly = testContainer.querySelector('.plotly') || 
+                                testContainer.querySelector('.js-plotly-plot');
+                const hasIframe = testContainer.querySelector('iframe');
+                const hasChartContainer = testContainer.querySelector('[id*="chart"], [class*="chart"], [id*="plot"], [class*="plot"]');
+                
+                // If we have any visualization elements, consider it potentially valid
+                if (hasCanvas || hasSvg || hasPlotly || hasIframe || hasChartContainer) {
+                    vizSuccess = true;
+                }
+            } catch (error) {
+                console.error("Error testing visualization:", error);
+            } finally {
+                // Clean up test container
+                document.body.removeChild(testContainer);
+            }
+            
+            // If validation failed, show simple error message
+            if (!vizSuccess) {
+                console.log("No valid visualization elements found");
+                addMessage('Sorry, unable to create visualization at the moment.', false, 'Sallie');
+                return;
+            }
+            
+            // If we get here, proceed with creating the actual visualization
             const vizDiv = document.createElement('div');
             vizDiv.className = 'message assistant-message';
             
@@ -1058,120 +1109,109 @@
             const vizContainer = document.createElement('div');
             vizContainer.className = 'visualization-container';
             
-            // Add fullscreen button
-            const fullscreenBtn = document.createElement('button');
-            fullscreenBtn.className = 'visualization-fullscreen-btn';
-            fullscreenBtn.innerHTML = '⛶ Fullscreen';
-            fullscreenBtn.onclick = function() {
-                vizContainer.classList.toggle('fullscreen');
-                fullscreenBtn.innerHTML = vizContainer.classList.contains('fullscreen') ? '✕ Exit' : '⛶ Fullscreen';
-                
-                // Trigger resize event for chart libraries
-                window.dispatchEvent(new Event('resize'));
-            };
-            vizContainer.appendChild(fullscreenBtn);
-            
-            // Create a loading indicator
-            const loadingDiv = document.createElement('div');
-            loadingDiv.className = 'visualization-loading';
-            loadingDiv.innerHTML = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#3B82F6" opacity="0.3"/><path d="M12 4V8" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/></path></svg><span>Loading visualization...</span>';
-            vizContainer.appendChild(loadingDiv);
-            
-            // Create content wrapper with adaptive sizing
+            // Create content wrapper
             const vizContentWrapper = document.createElement('div');
             vizContentWrapper.className = 'visualization-content';
             
-            // Check for template strings or invalid content
-            if (typeof vizHtml === 'string' && 
-                (vizHtml.includes('${') || 
-                 vizHtml.includes('$vizContent') || 
-                 vizHtml.includes('$data.visualization_html'))) {
-                
-                console.log("Detected template string variables in visualization HTML");
-                loadingDiv.innerHTML = '<div class="visualization-error">Visualization could not be rendered due to template error.</div>';
-                vizContainer.appendChild(vizContentWrapper);
-            } else {
-                // Set the content
-                vizContentWrapper.innerHTML = vizHtml;
-                vizContainer.appendChild(vizContentWrapper);
-                
-                // Initialize visualization with improved error handling
-                setTimeout(() => {
-                    try {
-                        // Auto-detect and handle different chart libraries
-                        const hasCanvas = vizContentWrapper.querySelector('canvas');
-                        const hasSvg = vizContentWrapper.querySelector('svg');
-                        const hasPlotly = vizContentWrapper.querySelector('.plotly') || 
-                                        vizContentWrapper.querySelector('.js-plotly-plot');
-                        const hasIframe = vizContentWrapper.querySelector('iframe');
+            // Set the content
+            vizContentWrapper.innerHTML = vizHtml;
+            vizContainer.appendChild(vizContentWrapper);
+            
+            // Add error handler for script execution
+            let scriptError = false;
+            
+            // Initialize visualization with error tracking
+            setTimeout(() => {
+                try {
+                    // Execute any scripts
+                    const scripts = vizContentWrapper.querySelectorAll('script');
+                    scripts.forEach(oldScript => {
+                        const newScript = document.createElement('script');
                         
-                        // Apply appropriate sizing based on content type
+                        // Copy attributes
+                        Array.from(oldScript.attributes).forEach(attr => {
+                            newScript.setAttribute(attr.name, attr.value);
+                        });
+                        
+                        // Add error handling to script
+                        newScript.textContent = `
+                            try {
+                                ${oldScript.textContent}
+                            } catch (error) {
+                                console.error("Visualization script error:", error);
+                                window.__vizScriptError = true;
+                            }
+                        `;
+                        
+                        // Replace the old script with the new one
+                        oldScript.parentNode.replaceChild(newScript, oldScript);
+                    });
+                    
+                    // Check if script execution caused errors
+                    setTimeout(() => {
+                        if (window.__vizScriptError) {
+                            scriptError = true;
+                            delete window.__vizScriptError;
+                            
+                            // Remove the visualization container
+                            if (vizDiv.parentNode) {
+                                vizDiv.remove();
+                            }
+                            
+                            // Show simple error message
+                            addMessage('Sorry, unable to render visualization at the moment.', false, 'Sallie');
+                            return;
+                        }
+                        
+                        // If we get here, visualization is successful
+                        // Auto-resize handling
+                        const hasCanvas = vizContentWrapper.querySelector('canvas');
+                        const hasPlotly = vizContentWrapper.querySelector('.plotly, .js-plotly-plot');
+                        
                         if (hasCanvas) {
-                            // Chart.js or similar canvas-based charts
                             const canvas = vizContentWrapper.querySelector('canvas');
                             if (canvas) {
                                 canvas.style.maxWidth = '100%';
-                                canvas.style.height = 'auto';
+                                canvas.style.height = 'auto%';
                             }
                         }
                         
-                        if (hasPlotly) {
-                            // Handle Plotly charts
+                        if (hasPlotly && window.Plotly) {
                             const plotlyDiv = vizContentWrapper.querySelector('.plotly, .js-plotly-plot');
-                            if (plotlyDiv && window.Plotly) {
-                                // Trigger Plotly resize
+                            if (plotlyDiv) {
                                 window.Plotly.Plots.resize(plotlyDiv);
                             }
                         }
                         
-                        // Execute any scripts
-                        const scripts = vizContentWrapper.querySelectorAll('script');
-                        scripts.forEach(oldScript => {
-                            const newScript = document.createElement('script');
-                            
-                            // Copy attributes
-                            Array.from(oldScript.attributes).forEach(attr => {
-                                newScript.setAttribute(attr.name, attr.value);
-                            });
-                            
-                            // Wrap script content to catch errors
-                            newScript.textContent = `
-                                try {
-                                    ${oldScript.textContent}
-                                } catch (error) {
-                                    console.error("Visualization script error:", error);
-                                }
-                            `;
-                            
-                            // Replace the old script with the new one
-                            oldScript.parentNode.replaceChild(newScript, oldScript);
-                        });
-                        
-                        // Remove loading indicator after successful load
-                        loadingDiv.style.display = 'none';
-                        
                         // Adjust container height based on content
-                        setTimeout(() => {
-                            const contentHeight = vizContentWrapper.scrollHeight;
-                            if (contentHeight > 200) {
-                                vizContainer.style.minHeight = contentHeight + 40 + 'px';
-                            }
-                        }, 100);
+                        const contentHeight = vizContentWrapper.scrollHeight;
+                        if (contentHeight > 200) {
+                            vizContainer.style.minHeight = contentHeight + 50 + 'px';
+                        }
                         
-                        console.log("Visualization initialized successfully");
-                    } catch (err) {
-                        console.error("Error executing visualization scripts:", err);
-                        loadingDiv.innerHTML = '<div class="visualization-error">Error rendering visualization: ' + err.message + '</div>';
+                        console.log("Visualization rendered successfully");
+                    }, 100);
+                    
+                } catch (err) {
+                    console.error("Error executing visualization scripts:", err);
+                    
+                    // Remove the visualization container
+                    if (vizDiv.parentNode) {
+                        vizDiv.remove();
                     }
-                }, 500);
-            }
+                    
+                    // Show simple error message
+                    addMessage('Sorry, unable to render visualization at the moment.', false, 'Sallie');
+                    return;
+                }
+            }, 100);
             
             // Add the visualization to the message
             contentDiv.appendChild(vizContainer);
             vizDiv.appendChild(avatarDiv);
             vizDiv.appendChild(contentDiv);
             
-            // Add to chat
+            // Add to chat - but it might be removed if error occurs
             chatContainer.appendChild(vizDiv);
             chatContainer.scrollTop = chatContainer.scrollHeight;
             

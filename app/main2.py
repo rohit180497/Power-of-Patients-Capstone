@@ -11,7 +11,7 @@ print(os.getcwd())
 # Import our custom modules
 from patient_auth_sys import PatientAuthenticator
 from researcher_auth import ResearcherAuthenticator
-from patient_agent_old import ProfessionalPatientAgent
+from patient_agent import EnhancedProfessionalPatientAgent  # Updated import
 from researcheragent import ProfessionalResearcherAgent
 
 # Configure logging
@@ -29,7 +29,7 @@ CORS(app)  # Enable CORS for all routes
 # Initialize our systems
 patient_authenticator = PatientAuthenticator()
 researcher_authenticator = ResearcherAuthenticator()
-patient_agent = ProfessionalPatientAgent()
+patient_agent = EnhancedProfessionalPatientAgent()  # Updated to use enhanced agent
 researcher_agent = ProfessionalResearcherAgent()
 
 # Store for active sessions (in production, use Redis or database)
@@ -48,7 +48,7 @@ class PowerOfPatientsApp:
         self.patient_agent = patient_agent
         self.researcher_agent = researcher_agent
         self.setup_routes()
-        logger.info("Power of Patients Application initialized with dual user support")
+        logger.info("Power of Patients Application initialized with dual user support and enhanced patient agent")
     
     async def initialize_connections(self):
         """Initialize database connections for all systems"""
@@ -153,55 +153,53 @@ class PowerOfPatientsApp:
         def api_logout():
             return asyncio.run(self.handle_logout())
 
-        # And add this method to your PowerOfPatientsApp class:
-
-        async def handle_logout(self):
-            """Handle user logout and cleanup connections"""
+    async def handle_logout(self):
+        """Handle user logout and cleanup connections"""
+        try:
+            # Get session ID from request if available
+            data = request.get_json() or {}
+            user_id = data.get('patient_id') or data.get('user_id')
+            user_type = data.get('user_type', 'unknown')
+            
+            logger.info(f"Logout request from {user_type} {user_id}")
+            
+            # Remove from active sessions if being tracked
+            for session_id, session_data in list(active_sessions.items()):
+                if session_data.get('user_id') == user_id:
+                    del active_sessions[session_id]
+                    logger.info(f"Removed session for {user_id}")
+                    break
             try:
-                # Get session ID from request if available
-                data = request.get_json() or {}
-                user_id = data.get('patient_id') or data.get('user_id')
-                user_type = data.get('user_type', 'unknown')
-                
-                logger.info(f"Logout request from {user_type} {user_id}")
-                
-                # Remove from active sessions if being tracked
-                for session_id, session_data in list(active_sessions.items()):
-                    if session_data.get('user_id') == user_id:
-                        del active_sessions[session_id]
-                        logger.info(f"Removed session for {user_id}")
-                        break
-                try:
-                    if user_type == 'researcher':
-                        # Clear researcher agent memory if it has the method
-                        if hasattr(self.researcher_agent, 'clear_conversation_history'):
-                            await self.researcher_agent.clear_conversation_history(user_id)
-                        else:
-                            logger.info("Researcher agent doesn't have clear_conversation_history method")
+                if user_type == 'researcher':
+                    # Clear researcher agent memory if it has the method
+                    if hasattr(self.researcher_agent, 'clear_conversation_history'):
+                        await self.researcher_agent.clear_conversation_history(user_id)
                     else:
-                        # Clear patient agent memory
-                        await self.patient_agent.clear_conversation_history(user_id)
-                        
-                    logger.info(f"✅ Cleared conversation memory for {user_type} {user_id}")
+                        logger.info("Researcher agent doesn't have clear_conversation_history method")
+                else:
+                    # Clear patient agent memory
+                    await self.patient_agent.clear_conversation_history(user_id)
                     
-                except Exception as memory_error:
-                    logger.error(f"Error clearing memory for {user_id}: {memory_error}")
-                    # Don't fail the logout if memory clearing fails
+                logger.info(f"✅ Cleared conversation memory for {user_type} {user_id}")
                 
-                return jsonify({
-                    "success": True,
-                    "message": "Logged out successfully"
-                })
-                # Don't close connections here - we'll manage them with ensure_connection
-                # when the user tries to log in again
-                    
-            except Exception as e:
-                logger.exception(f"Error in logout: {e}")
-                return jsonify({
-                    "success": False,
-                    "error": str(e),
-                    "message": "Error during logout"
-                }), 500
+            except Exception as memory_error:
+                logger.error(f"Error clearing memory for {user_id}: {memory_error}")
+                # Don't fail the logout if memory clearing fails
+            
+            return jsonify({
+                "success": True,
+                "message": "Logged out successfully"
+            })
+            # Don't close connections here - we'll manage them with ensure_connection
+            # when the user tries to log in again
+                
+        except Exception as e:
+            logger.exception(f"Error in logout: {e}")
+            return jsonify({
+                "success": False,
+                "error": str(e),
+                "message": "Error during logout"
+            }), 500
     
     async def handle_authentication(self):
         """Handle authentication - check patient first, then researcher"""
@@ -339,18 +337,33 @@ class PowerOfPatientsApp:
                     return jsonify(result)
             
             else:
-                # Handle patient queries (default)
+                # Handle patient queries (default) - UPDATED FOR ENHANCED AGENT
                 result = await self.patient_agent.process_query(message, user_id)
                 
                 if result['success']:
-                    logger.info(f"✅ Patient chat response sent to {user_id} via {result['agent_used']}")
-                    if result.get('paraphrased_query'):
-                        logger.info(f"🔄 Query paraphrased: '{message}' → '{result['paraphrased_query']}'")
+                    # Handle agents_used (plural) from enhanced agent
+                    agents_used = result.get('agents_used', ['Unknown Agent'])
+                    agent_used_str = ', '.join(agents_used) if isinstance(agents_used, list) else str(agents_used)
                     
-                    # Add user_type to response
+                    logger.info(f"✅ Patient chat response sent to {user_id} via {agent_used_str}")
+                    
+                    # Handle both normalized_query and paraphrased_query for backward compatibility
+                    enhanced_query = result.get('normalized_query') or result.get('paraphrased_query')
+                    if enhanced_query and enhanced_query != message:
+                        logger.info(f"🔄 Query enhanced: '{message}' → '{enhanced_query}'")
+                    
+                    # Add backward compatibility fields for frontend
+                    result['agent_used'] = agent_used_str  # Add singular version for compatibility
                     result['user_type'] = 'patient'
+                    
+                    # Handle paraphrased_query for backward compatibility
+                    if 'normalized_query' in result and not result.get('paraphrased_query'):
+                        result['paraphrased_query'] = result['normalized_query']
+                    
                 else:
                     logger.error(f"❌ Patient chat error for {user_id}: {result.get('error', 'Unknown error')}")
+
+                print(result)
                 
                 return jsonify(result)
             
@@ -407,73 +420,18 @@ class PowerOfPatientsApp:
             </body>
             </html>
             """
-    # Add this to your main.py setup_routes method in the PowerOfPatientsApp class:
 
-        # Add logout API route
-        @app.route('/api/logout', methods=['POST'])
-        def api_logout():
-            return asyncio.run(self.handle_logout())
-
-        # And add this method to your PowerOfPatientsApp class:
-
-        async def handle_logout(self):
-            """Handle user logout and cleanup connections"""
-            try:
-                # Get session ID from request if available
-                data = request.get_json() or {}
-                user_id = data.get('patient_id') or data.get('user_id')
-                user_type = data.get('user_type', 'unknown')
-                
-                logger.info(f"Logout request from {user_type} {user_id}")
-                
-                # Remove from active sessions if being tracked
-                for session_id, session_data in list(active_sessions.items()):
-                    if session_data.get('user_id') == user_id:
-                        del active_sessions[session_id]
-                        logger.info(f"Removed session for {user_id}")
-                        break
-                try:
-                    if user_type == 'researcher':
-                        # Clear researcher agent memory if it has the method
-                        if hasattr(self.researcher_agent, 'clear_conversation_history'):
-                            await self.researcher_agent.clear_conversation_history(user_id)
-                        else:
-                            logger.info("Researcher agent doesn't have clear_conversation_history method")
-                    else:
-                        # Clear patient agent memory
-                        await self.patient_agent.clear_conversation_history(user_id)
-                        
-                    logger.info(f"✅ Cleared conversation memory for {user_type} {user_id}")
-                    
-                except Exception as memory_error:
-                    logger.error(f"Error clearing memory for {user_id}: {memory_error}")
-                    # Don't fail the logout if memory clearing fails
-                
-                return jsonify({
-                    "success": True,
-                    "message": "Logged out successfully"
-                })
-                # Don't close connections here - we'll manage them with ensure_connection
-                # when the user tries to log in again
-                    
-            except Exception as e:
-                logger.exception(f"Error in logout: {e}")
-                return jsonify({
-                    "success": False,
-                    "error": str(e),
-                    "message": "Error during logout"
-                }), 500
 # Create application instance
 power_app = PowerOfPatientsApp()
 
 # Startup function
 async def startup():
     """Initialize the application"""
-    logger.info("🚀 Starting Power of Patients Application...")
+    logger.info("🚀 Starting Power of Patients Application with Enhanced Multi-Agent System...")
     
     success = await power_app.initialize_connections()
     if success:
-        logger.info("✅ Application startup complete")
+        logger.info("✅ Application startup complete - Enhanced Patient Agent with Location Search ready")
         return True
     else:
         logger.error("❌ Application startup failed")
@@ -482,11 +440,17 @@ async def startup():
 # Development server runner
 def run_development_server():
     """Run the development server"""
-    print("=" * 60)
-    print("🏥 POWER OF PATIENTS - INTEGRATED HEALTHCARE PLATFORM")
-    print("=" * 60)
-    print("Supporting both Patients and Researchers")
-    print("=" * 60)
+    print("=" * 70)
+    print("🏥 POWER OF PATIENTS - ENHANCED HEALTHCARE PLATFORM")
+    print("=" * 70)
+    print("🤖 Multi-Agent System:")
+    print("   • Medical Agent (MedPalm) - Medical questions & guidance")
+    print("   • TBI Specialist Agent - Brain injury information")
+    print("   • Healthcare & Wellness Locator - Find facilities, gyms, spas")
+    print("   • Researcher Agent - Data analysis & visualizations")
+    print("=" * 70)
+    print("👥 Supporting both Patients and Researchers")
+    print("=" * 70)
     print("Starting application server...")
     
     # Initialize connections
@@ -512,10 +476,17 @@ def run_development_server():
         print("   3. System automatically redirects to appropriate interface")
         print("   4. Patients → /chat.html")
         print("   5. Researchers → /researcher_chat.html")
-        print("\n🤖 Agents:")
-        print("   • Patients → Sallie (Medical guidance, TBI info)")
-        print("   • Researchers → Sallie (Data analysis, visualizations)")
-        print("\n" + "=" * 60)
+        print("\n🤖 Enhanced Patient Queries:")
+        print("   • Medical: 'What are the symptoms of TBI?'")
+        print("   • Location: 'Find yoga studios near Boston'")
+        print("   • Location: 'TBI rehabilitation centers near me'")
+        print("   • Location: 'Wellness spas in NYC'")
+        print("   • Personal: 'Tell me about my medical history'")
+        print("\n🔬 Researcher Queries:")
+        print("   • Data: 'Show me patient demographics'")
+        print("   • Viz: 'Create a chart of TBI severity distribution'")
+        print("   • Analysis: 'What are the trends in patient outcomes?'")
+        print("\n" + "=" * 70)
         
         # Start Flask development server
         app.run(
@@ -525,12 +496,13 @@ def run_development_server():
             use_reloader=False  # Avoid double initialization
         )
     else:
-        print("❌ Failed to start server. Check your database configuration.")
+        print("❌ Failed to start server. Check your configuration.")
         print("\n🔧 Troubleshooting:")
         print("   • Verify database connection settings in .env file")
-        print("   • Ensure patient_auth table exists with columns: email, password, patient_id, user_type")
-        print("   • Check that patient_summary table exists for patient agent")
-        print("   • Ensure templates/researcher_chat.html exists")
+        print("   • Check GOOGLE_PLACES_API_KEY is set for location search")
+        print("   • Ensure patient_auth table exists")
+        print("   • Check that patient_summary table exists")
+        print("   • Ensure locator_agent.py is in the project directory")
 
 # Command line interface
 if __name__ == "__main__":
@@ -581,6 +553,13 @@ if __name__ == "__main__":
                 user_id = input("Enter user ID (patient_id or researcher email): ").strip()
                 user_type = input("Enter user type (patient/researcher): ").strip().lower()
                 
+                print(f"\n🤖 Enhanced Patient Agent Features:")
+                print("   • Multi-agent processing (Medical + TBI + Locator)")
+                print("   • Location search: 'find gyms near Boston'")
+                print("   • Medical queries: 'symptoms of concussion'")
+                print("   • Personal: 'tell me about my condition'")
+                print()
+                
                 while True:
                     message = input(f"\n[{user_type} {user_id}] Your message (or 'quit'): ").strip()
                     if message.lower() in ['quit', 'exit', 'q']:
@@ -595,12 +574,50 @@ if __name__ == "__main__":
                         print(f"\n🤖 Sallie: {result['response']}")
                         if result.get('has_visualization'):
                             print("📊 [Visualization would appear here in web interface]")
-                        if result.get('paraphrased_query'):
-                            print(f"🔄 Enhanced: '{message}' → '{result['paraphrased_query']}'")
+                        
+                        # Show enhanced query info for patients
+                        if user_type == 'patient':
+                            if result.get('agents_used'):
+                                agents = ', '.join(result['agents_used'])
+                                print(f"🔧 Agents: {agents}")
+                            if result.get('intent_classified'):
+                                print(f"🎯 Intent: {result['intent_classified']}")
+                            enhanced_query = result.get('normalized_query') or result.get('paraphrased_query')
+                            if enhanced_query and enhanced_query != message:
+                                print(f"🔄 Enhanced: '{message}' → '{enhanced_query}'")
                     else:
                         print(f"❌ Error: {result.get('error')}")
             
             asyncio.run(test_chat())
+            
+        elif command == "test-location":
+            # Test location search specifically
+            async def test_location():
+                await startup()
+                
+                user_id = input("Enter patient ID: ").strip()
+                
+                test_queries = [
+                    "find gyms near Boston",
+                    "yoga studios in NYC", 
+                    "TBI rehabilitation centers near me",
+                    "wellness spas for stress relief"
+                ]
+                
+                print(f"\n🧪 Testing Location Search Agent...")
+                
+                for query in test_queries:
+                    print(f"\n🔍 Testing: '{query}'")
+                    result = await patient_agent.process_query(query, user_id)
+                    
+                    if result['success']:
+                        print(f"✅ Intent: {result.get('intent_classified')}")
+                        print(f"🤖 Agents: {', '.join(result.get('agents_used', []))}")
+                        print(f"📍 Response: {result['response'][:200]}...")
+                    else:
+                        print(f"❌ Error: {result.get('error')}")
+            
+            asyncio.run(test_location())
             
         else:
             print(f"Unknown command: {command}")
@@ -608,6 +625,7 @@ if __name__ == "__main__":
             print("  • python main.py              - Start web server")
             print("  • python main.py test-auth    - Test authentication")
             print("  • python main.py test-chat    - Test chat system")
+            print("  • python main.py test-location - Test location search")
     else:
         # Start web server
         run_development_server()

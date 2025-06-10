@@ -1,3 +1,12 @@
+"""
+Enhanced Healthcare & Wellness Locator Agent with JSON Response Format - FIXED
+
+Key fixes:
+1. Fixed AttributeError by ensuring _generate_response_text receives Facility objects
+2. Limited results to 10 locations as requested
+3. Improved error handling and data flow
+"""
+
 import os
 import json
 import logging
@@ -5,64 +14,163 @@ import asyncio
 import requests
 import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
-from typing import Dict, List, Optional, Any, Tuple
+from typing import Dict, List, Optional, Any, Tuple, Union
 from dotenv import load_dotenv
 from datetime import datetime
-from dataclasses import dataclass
-from enum import Enum
-import re
-import urllib.parse
+from dataclasses import dataclass, field, asdict
+from enum import Enum, auto
+from abc import ABC, abstractmethod
+import math
 
+# Configure logging
 logger = logging.getLogger(__name__)
 
-class FacilityType(Enum):
-    """Standardized facility types for healthcare locator"""
+class FacilityCategory(Enum):
+    """Comprehensive facility categories"""
+    # Healthcare Facilities
     HOSPITAL = "hospital"
-    REHABILITATION_CENTER = "rehabilitation_center"
-    NEUROTHERAPY_CLINIC = "neurotherapy_clinic"
-    PHYSICAL_THERAPY = "physical_therapy"
-    MENTAL_HEALTH = "mental_health_clinic"
-    URGENT_CARE = "urgent_care"
     EMERGENCY_ROOM = "emergency_room"
-    NEUROLOGY_CLINIC = "neurology_clinic"
-    BRAIN_INJURY_CENTER = "brain_injury_center"
-    SPEECH_THERAPY = "speech_therapy"
+    URGENT_CARE = "urgent_care"
+    MEDICAL_CLINIC = "medical_clinic"
+    SPECIALTY_CLINIC = "specialty_clinic"
+    
+    # Rehabilitation & Therapy
+    PHYSICAL_THERAPY = "physical_therapy"
     OCCUPATIONAL_THERAPY = "occupational_therapy"
-    GENERAL_CLINIC = "clinic"
+    SPEECH_THERAPY = "speech_therapy"
+    REHABILITATION_CENTER = "rehabilitation_center"
+    
+    # Neurological & Brain Health
+    NEUROLOGY_CLINIC = "neurology_clinic"
+    NEUROTHERAPY_CLINIC = "neurotherapy_clinic"
+    BRAIN_INJURY_CENTER = "brain_injury_center"
+    COGNITIVE_THERAPY = "cognitive_therapy"
+    
+    # Mental Health & Wellness
+    MENTAL_HEALTH_CLINIC = "mental_health_clinic"
+    PSYCHOLOGY_PRACTICE = "psychology_practice"
+    PSYCHIATRY_CLINIC = "psychiatry_clinic"
+    COUNSELING_CENTER = "counseling_center"
+    SUPPORT_GROUP_CENTER = "support_group_center"
+    
+    # Fitness & Exercise
+    GYM = "gym"
+    FITNESS_CENTER = "fitness_center"
+    YOGA_STUDIO = "yoga_studio"
+    PILATES_STUDIO = "pilates_studio"
+    PERSONAL_TRAINING = "personal_training"
+    CROSSFIT_GYM = "crossfit_gym"
+    MARTIAL_ARTS = "martial_arts"
+    DANCE_STUDIO = "dance_studio"
+    
+    # Wellness & Holistic Health
+    WELLNESS_CENTER = "wellness_center"
+    SPA = "spa"
+    MASSAGE_THERAPY = "massage_therapy"
+    ACUPUNCTURE = "acupuncture"
+    CHIROPRACTIC = "chiropractic"
+    MEDITATION_CENTER = "meditation_center"
+    HOLISTIC_HEALTH = "holistic_health"
+    NATUROPATHY = "naturopathy"
+    
+    # Specialized Wellness
+    NUTRITION_COUNSELING = "nutrition_counseling"
+    WEIGHT_LOSS_CENTER = "weight_loss_center"
+    ADDICTION_RECOVERY = "addiction_recovery"
+    SENIOR_FITNESS = "senior_fitness"
+    ADAPTIVE_FITNESS = "adaptive_fitness"
+
+class UrgencyLevel(Enum):
+    """Service urgency levels"""
+    EMERGENCY = "emergency"
+    URGENT = "urgent"
+    ROUTINE = "routine"
+    WELLNESS = "wellness"
+
+class LocationType(Enum):
+    """Location specification types"""
+    ZIP_CODE = "zip_code"
+    CITY = "city"
+    ADDRESS = "address"
+    CURRENT_LOCATION = "current_location"
+    COORDINATES = "coordinates"
 
 @dataclass
-class LocationQuery:
-    """Parsed location query structure"""
+class SearchCriteria:
+    """Comprehensive search criteria from LLM parsing"""
     original_query: str
-    facility_types: List[FacilityType]
+    facility_categories: List[FacilityCategory]
     location: str
-    location_type: str  # "zip_code", "city", "address", "current_location"
-    urgency: str  # "emergency", "urgent", "routine"
+    location_type: LocationType
+    urgency: UrgencyLevel
     radius_miles: int
-    additional_requirements: List[str]
-    confidence: float
-    reasoning: str
+    specific_services: List[str] = field(default_factory=list)
+    accessibility_needs: List[str] = field(default_factory=list)
+    insurance_accepted: List[str] = field(default_factory=list)
+    price_preference: Optional[str] = None
+    availability_preference: Optional[str] = None
+    confidence: float = 0.0
+    reasoning: str = ""
 
 @dataclass
-class HealthcareFacility:
-    """Healthcare facility information structure"""
+class Facility:
+    """Comprehensive facility information"""
+    # Basic Information
     name: str
-    address: str
-    phone: Optional[str]
-    rating: Optional[float]
-    rating_count: Optional[int]
-    place_id: str
-    latitude: float
-    longitude: float
-    facility_type: str
-    business_status: str
-    maps_url: str
-    website: Optional[str] = None
-    hours: Optional[Dict] = None
+    category: str
+    description: str = ""
+    
+    # Location Details
+    address: str = ""
+    latitude: float = 0.0
+    longitude: float = 0.0
     distance_miles: Optional[float] = None
+    
+    # Contact Information
+    phone: Optional[str] = None
+    website: Optional[str] = None
+    email: Optional[str] = None
+    
+    # Quality Indicators
+    rating: Optional[float] = None
+    review_count: Optional[int] = None
+    
+    # Business Details
+    business_status: str = "OPERATIONAL"
+    hours: Optional[Dict[str, str]] = None
+    price_level: Optional[int] = None
+    
+    # Services & Features
+    services: List[str] = field(default_factory=list)
+    accessibility_features: List[str] = field(default_factory=list)
+    insurance_accepted: List[str] = field(default_factory=list)
+    
+    # External Links
+    maps_url: str = ""
+    booking_url: Optional[str] = None
+    
+    # Metadata
+    place_id: str = ""
+    last_updated: datetime = field(default_factory=datetime.now)
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert facility to dictionary for JSON serialization"""
+        data = asdict(self)
+        # Convert datetime to ISO string
+        if isinstance(data.get('last_updated'), datetime):
+            data['last_updated'] = data['last_updated'].isoformat()
+        return data
 
-class IntelligentLocationParser:
-    """LLM-powered location and facility type parser"""
+class SearchParser(ABC):
+    """Abstract base class for search query parsers"""
+    
+    @abstractmethod
+    async def parse_query(self, query: str) -> SearchCriteria:
+        """Parse natural language query into structured search criteria"""
+        pass
+
+class LLMSearchParser(SearchParser):
+    """Advanced LLM-powered search query parser"""
     
     def __init__(self, gemini_model):
         self.model = gemini_model
@@ -72,86 +180,12 @@ class IntelligentLocationParser:
             HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
             HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
         }
-        
-        # Facility type mappings for Google Places API
-        self.facility_mappings = {
-            FacilityType.HOSPITAL: ["hospital", "medical_center"],
-            FacilityType.REHABILITATION_CENTER: ["physiotherapist", "physical_therapy", "rehabilitation"],
-            FacilityType.NEUROTHERAPY_CLINIC: ["doctor", "clinic", "neurologist"],
-            FacilityType.PHYSICAL_THERAPY: ["physiotherapist", "physical_therapy"],
-            FacilityType.MENTAL_HEALTH: ["psychologist", "psychiatrist", "mental_health"],
-            FacilityType.URGENT_CARE: ["urgent_care", "walk_in_clinic"],
-            FacilityType.EMERGENCY_ROOM: ["hospital", "emergency_room"],
-            FacilityType.NEUROLOGY_CLINIC: ["doctor", "neurologist", "clinic"],
-            FacilityType.BRAIN_INJURY_CENTER: ["rehabilitation", "clinic", "doctor"],
-            FacilityType.SPEECH_THERAPY: ["speech_therapist", "clinic"],
-            FacilityType.OCCUPATIONAL_THERAPY: ["occupational_therapist", "rehabilitation"],
-            FacilityType.GENERAL_CLINIC: ["clinic", "doctor"]
-        }
     
-    async def parse_location_query(self, query: str) -> LocationQuery:
-        """Parse natural language query for location and facility information"""
+    async def parse_query(self, query: str) -> SearchCriteria:
+        """Parse natural language query using advanced LLM intelligence"""
         
-        parsing_prompt = f"""
-You are an expert healthcare location query parser. Extract location and facility information from the user's natural language query.
-
-USER QUERY: "{query}"
-
-TASK: Parse this query to extract:
-1. What type of healthcare facility they need
-2. Where they want to search (location)
-3. Any specific requirements or urgency
-
-FACILITY TYPES (choose from these):
-- "hospital" - General hospitals, medical centers
-- "rehabilitation_center" - Physical rehabilitation, recovery centers
-- "neurotherapy_clinic" - Neurology clinics, brain treatment centers
-- "physical_therapy" - Physical therapy clinics, physiotherapy
-- "mental_health" - Mental health clinics, psychology, psychiatry
-- "urgent_care" - Urgent care centers, walk-in clinics
-- "emergency_room" - Emergency departments, ER
-- "neurology_clinic" - Neurology specialists, neurologists
-- "brain_injury_center" - TBI treatment, brain injury rehabilitation
-- "speech_therapy" - Speech therapy, speech pathology
-- "occupational_therapy" - Occupational therapy clinics
-- "general_clinic" - General medical clinics, family practice
-
-LOCATION TYPES:
-- "zip_code" - 5-digit ZIP code (e.g., "90210")
-- "city" - City name with or without state (e.g., "Boston MA", "Boston")
-- "address" - Full street address
-- "current_location" - User wants to use their current location ("near me", "nearby")
-
-URGENCY LEVELS:
-- "emergency" - Immediate medical attention needed
-- "urgent" - Same day or within 24 hours
-- "routine" - General appointment scheduling
-
-DEFAULT VALUES:
-- If no specific location mentioned, assume "current_location"
-- If no urgency specified, assume "routine"
-- Default search radius: 10 miles for routine, 25 miles for urgent, 50 miles for emergency
-
-EXAMPLES:
-- "hospitals near 02134" → hospital, zip_code: 02134
-- "TBI rehabilitation centers in Boston" → brain_injury_center, city: Boston
-- "urgent care near me" → urgent_care, current_location
-- "neurologists in Los Angeles CA" → neurology_clinic, city: Los Angeles CA
-
-Respond in JSON format:
-{{
-    "facility_types": ["list", "of", "facility", "types"],
-    "location": "extracted location string",
-    "location_type": "zip_code/city/address/current_location",
-    "urgency": "emergency/urgent/routine",
-    "radius_miles": number,
-    "additional_requirements": ["any", "specific", "requirements"],
-    "confidence": 0.0-1.0,
-    "reasoning": "explanation of parsing decisions"
-}}
-
-JSON Response:"""
-
+        parsing_prompt = self._build_parsing_prompt(query)
+        
         try:
             loop = asyncio.get_event_loop()
             response = await loop.run_in_executor(
@@ -162,140 +196,347 @@ JSON Response:"""
                 )
             )
             
-            result_text = response.text.strip()
-            # Clean JSON response
-            if result_text.startswith('```json'):
-                result_text = result_text[7:-3]
-            elif result_text.startswith('```'):
-                result_text = result_text[3:-3]
-            
+            result_text = self._clean_json_response(response.text)
             result = json.loads(result_text)
             
-            # Convert facility type strings to enums
-            facility_types = []
-            for facility_str in result.get("facility_types", []):
-                try:
-                    facility_types.append(FacilityType(facility_str))
-                except ValueError:
-                    logger.warning(f"Unknown facility type: {facility_str}")
-                    facility_types.append(FacilityType.GENERAL_CLINIC)
-            
-            if not facility_types:
-                facility_types = [FacilityType.GENERAL_CLINIC]
-            
-            return LocationQuery(
-                original_query=query,
-                facility_types=facility_types,
-                location=result.get("location", ""),
-                location_type=result.get("location_type", "current_location"),
-                urgency=result.get("urgency", "routine"),
-                radius_miles=result.get("radius_miles", 10),
-                additional_requirements=result.get("additional_requirements", []),
-                confidence=result.get("confidence", 0.5),
-                reasoning=result.get("reasoning", "")
-            )
+            return self._convert_to_search_criteria(query, result)
             
         except Exception as e:
-            logger.error(f"Location query parsing failed: {e}")
-            return self._fallback_parsing(query)
+            logger.error(f"LLM parsing failed: {e}")
+            # Return basic search criteria instead of failing
+            return self._create_basic_criteria(query)
     
-    def _fallback_parsing(self, query: str) -> LocationQuery:
-        """Fallback parsing when LLM fails"""
-        query_lower = query.lower()
+    def _build_parsing_prompt(self, query: str) -> str:
+        """Build comprehensive parsing prompt for LLM"""
         
-        # Simple keyword detection
-        facility_type = FacilityType.GENERAL_CLINIC
-        if any(word in query_lower for word in ['hospital', 'emergency', 'er']):
-            facility_type = FacilityType.HOSPITAL
-        elif any(word in query_lower for word in ['rehab', 'rehabilitation', 'physical therapy']):
-            facility_type = FacilityType.REHABILITATION_CENTER
-        elif any(word in query_lower for word in ['urgent care', 'urgent']):
-            facility_type = FacilityType.URGENT_CARE
-        elif any(word in query_lower for word in ['neuro', 'brain', 'tbi']):
-            facility_type = FacilityType.NEUROLOGY_CLINIC
+        return f"""
+You are an expert facility locator query parser. Analyze this user query and extract detailed search criteria for finding healthcare, wellness, and fitness facilities.
+
+USER QUERY: "{query}"
+
+TASK: Extract comprehensive search information including facility types, location, preferences, and special requirements.
+
+FACILITY CATEGORIES (choose all relevant):
+**Healthcare:**
+- "hospital" - General hospitals, medical centers
+- "emergency_room" - Emergency departments, urgent medical care
+- "urgent_care" - Walk-in clinics, immediate care
+- "medical_clinic" - Primary care, family practice
+- "specialty_clinic" - Cardiology, oncology, dermatology, etc.
+
+**Rehabilitation & Therapy:**
+- "physical_therapy" - PT clinics, sports medicine
+- "occupational_therapy" - OT centers, workplace injury recovery
+- "speech_therapy" - Speech pathology, communication disorders
+- "rehabilitation_center" - Comprehensive rehab facilities
+
+**Neurological & Brain Health:**
+- "neurology_clinic" - Neurologists, brain specialists
+- "neurotherapy_clinic" - Brain injury treatment
+- "brain_injury_center" - TBI specialized centers
+- "cognitive_therapy" - Memory, cognitive rehabilitation
+
+**Mental Health & Wellness:**
+- "mental_health_clinic" - General mental health services
+- "psychology_practice" - Psychologists, therapy
+- "psychiatry_clinic" - Psychiatrists, medication management
+- "counseling_center" - Individual and group counseling
+- "support_group_center" - Peer support, group meetings
+
+**Fitness & Exercise:**
+- "gym" - Traditional gyms, weight training
+- "fitness_center" - Full-service fitness facilities
+- "yoga_studio" - Yoga classes, meditation
+- "pilates_studio" - Pilates classes, core fitness
+- "personal_training" - One-on-one fitness coaching
+- "crossfit_gym" - CrossFit boxes, high-intensity training
+- "martial_arts" - Karate, jiu-jitsu, boxing
+- "dance_studio" - Dance classes, movement therapy
+
+**Wellness & Holistic Health:**
+- "wellness_center" - Comprehensive wellness services
+- "spa" - Relaxation, beauty treatments
+- "massage_therapy" - Therapeutic massage, bodywork
+- "acupuncture" - Traditional Chinese medicine
+- "chiropractic" - Spinal health, alignment
+- "meditation_center" - Mindfulness, spiritual wellness
+- "holistic_health" - Alternative medicine, natural healing
+- "naturopathy" - Natural medicine practitioners
+
+**Specialized Wellness:**
+- "nutrition_counseling" - Dietitians, nutrition coaching
+- "weight_loss_center" - Weight management programs
+- "addiction_recovery" - Substance abuse treatment
+- "senior_fitness" - Fitness for older adults
+- "adaptive_fitness" - Disability-friendly fitness
+
+LOCATION TYPES:
+- "zip_code" - 5-digit ZIP code
+- "city" - City name with/without state
+- "address" - Street address
+- "current_location" - Near user's current location
+
+URGENCY LEVELS:
+- "emergency" - Immediate medical attention needed
+- "urgent" - Same day or next day service needed
+- "routine" - Standard appointment scheduling
+- "wellness" - General wellness, no time pressure
+
+DEFAULT VALUES:
+- If no location specified: "current_location"
+- If no urgency specified: "wellness" for fitness/wellness, "routine" for healthcare
+- Default radius: 15 miles for wellness/fitness, 25 miles for healthcare
+
+Respond in JSON format:
+{{
+    "facility_categories": ["list", "of", "relevant", "categories"],
+    "location": "extracted location string",
+    "location_type": "zip_code/city/address/current_location",
+    "urgency": "emergency/urgent/routine/wellness",
+    "radius_miles": number,
+    "specific_services": ["specific", "services", "mentioned"],
+    "accessibility_needs": ["accessibility", "requirements"],
+    "insurance_accepted": ["insurance", "types", "if", "mentioned"],
+    "price_preference": "free/low-cost/any/null",
+    "availability_preference": "24-7/weekends/evenings/flexible/null",
+    "confidence": 0.0-1.0,
+    "reasoning": "detailed explanation of parsing decisions"
+}}
+
+JSON Response:"""
+    
+    def _clean_json_response(self, response_text: str) -> str:
+        """Clean and extract JSON from LLM response"""
+        text = response_text.strip()
         
-        # Simple location detection
-        zip_match = re.search(r'\b\d{5}\b', query)
-        location = zip_match.group() if zip_match else ""
-        location_type = "zip_code" if zip_match else "current_location"
+        # Remove code block markers
+        if text.startswith('```json'):
+            text = text[7:-3]
+        elif text.startswith('```'):
+            text = text[3:-3]
         
-        urgency = "urgent" if "urgent" in query_lower else "routine"
+        return text.strip()
+    
+    def _convert_to_search_criteria(self, query: str, result: Dict) -> SearchCriteria:
+        """Convert LLM result to SearchCriteria object"""
         
-        return LocationQuery(
+        # Convert category strings to enums
+        categories = []
+        for category_str in result.get("facility_categories", []):
+            try:
+                categories.append(FacilityCategory(category_str))
+            except ValueError:
+                logger.warning(f"Unknown facility category: {category_str}")
+        
+        if not categories:
+            categories = [FacilityCategory.MEDICAL_CLINIC]
+        
+        # Convert location type
+        location_type_str = result.get("location_type", "current_location")
+        try:
+            location_type = LocationType(location_type_str)
+        except ValueError:
+            location_type = LocationType.CURRENT_LOCATION
+        
+        # Convert urgency level
+        urgency_str = result.get("urgency", "routine")
+        try:
+            urgency = UrgencyLevel(urgency_str)
+        except ValueError:
+            urgency = UrgencyLevel.ROUTINE
+        
+        return SearchCriteria(
             original_query=query,
-            facility_types=[facility_type],
-            location=location,
+            facility_categories=categories,
+            location=result.get("location", ""),
             location_type=location_type,
             urgency=urgency,
+            radius_miles=result.get("radius_miles", 15),
+            specific_services=result.get("specific_services", []),
+            accessibility_needs=result.get("accessibility_needs", []),
+            insurance_accepted=result.get("insurance_accepted", []),
+            price_preference=result.get("price_preference"),
+            availability_preference=result.get("availability_preference"),
+            confidence=result.get("confidence", 0.5),
+            reasoning=result.get("reasoning", "")
+        )
+    
+    def _create_basic_criteria(self, query: str) -> SearchCriteria:
+        """Create basic search criteria when LLM parsing fails"""
+        return SearchCriteria(
+            original_query=query,
+            facility_categories=[FacilityCategory.MEDICAL_CLINIC],
+            location="",
+            location_type=LocationType.CURRENT_LOCATION,
+            urgency=UrgencyLevel.ROUTINE,
             radius_miles=15,
-            additional_requirements=[],
-            confidence=0.3,
-            reasoning="Fallback parsing due to LLM error"
+            confidence=0.1,
+            reasoning="Basic fallback due to parsing error"
         )
 
-class GooglePlacesConnector:
-    """Google Places API connector for healthcare facility search"""
+class PlacesAPIConnector:
+    """Enhanced Google Places API connector with comprehensive facility support"""
     
     def __init__(self, api_key: str):
-        self.api_key = os.getenv("GOOGLE_PLACES_API_KEY")
+        self.api_key = os.getenv("GOOGLE_API_KEY", api_key)
         self.base_url = "https://maps.googleapis.com/maps/api"
-        
-        # Session for connection pooling
         self.session = requests.Session()
         
+        # Comprehensive Google Places API type mappings
+        self.api_type_mappings = {
+            # Healthcare
+            FacilityCategory.HOSPITAL: ["hospital"],
+            FacilityCategory.EMERGENCY_ROOM: ["hospital"],
+            FacilityCategory.URGENT_CARE: ["doctor", "health"],
+            FacilityCategory.MEDICAL_CLINIC: ["doctor", "health"],
+            FacilityCategory.SPECIALTY_CLINIC: ["doctor", "health"],
+            
+            # Therapy & Rehabilitation
+            FacilityCategory.PHYSICAL_THERAPY: ["physiotherapist", "health"],
+            FacilityCategory.OCCUPATIONAL_THERAPY: ["physiotherapist", "health"],
+            FacilityCategory.SPEECH_THERAPY: ["health"],
+            FacilityCategory.REHABILITATION_CENTER: ["physiotherapist", "health"],
+            
+            # Neurological
+            FacilityCategory.NEUROLOGY_CLINIC: ["doctor", "health"],
+            FacilityCategory.NEUROTHERAPY_CLINIC: ["doctor", "health"],
+            FacilityCategory.BRAIN_INJURY_CENTER: ["health"],
+            FacilityCategory.COGNITIVE_THERAPY: ["health"],
+            
+            # Mental Health
+            FacilityCategory.MENTAL_HEALTH_CLINIC: ["health"],
+            FacilityCategory.PSYCHOLOGY_PRACTICE: ["health"],
+            FacilityCategory.PSYCHIATRY_CLINIC: ["doctor", "health"],
+            FacilityCategory.COUNSELING_CENTER: ["health"],
+            FacilityCategory.SUPPORT_GROUP_CENTER: ["health"],
+            
+            # Fitness
+            FacilityCategory.GYM: ["gym"],
+            FacilityCategory.FITNESS_CENTER: ["gym"],
+            FacilityCategory.YOGA_STUDIO: ["gym"],
+            FacilityCategory.PILATES_STUDIO: ["gym"],
+            FacilityCategory.PERSONAL_TRAINING: ["gym"],
+            FacilityCategory.CROSSFIT_GYM: ["gym"],
+            FacilityCategory.MARTIAL_ARTS: ["gym"],
+            FacilityCategory.DANCE_STUDIO: ["gym"],
+            
+            # Wellness
+            FacilityCategory.WELLNESS_CENTER: ["spa", "health"],
+            FacilityCategory.SPA: ["spa", "beauty_salon"],
+            FacilityCategory.MASSAGE_THERAPY: ["spa", "health"],
+            FacilityCategory.ACUPUNCTURE: ["health"],
+            FacilityCategory.CHIROPRACTIC: ["health"],
+            FacilityCategory.MEDITATION_CENTER: ["health"],
+            FacilityCategory.HOLISTIC_HEALTH: ["health"],
+            FacilityCategory.NATUROPATHY: ["health"],
+            
+            # Specialized
+            FacilityCategory.NUTRITION_COUNSELING: ["health"],
+            FacilityCategory.WEIGHT_LOSS_CENTER: ["health"],
+            FacilityCategory.ADDICTION_RECOVERY: ["health"],
+            FacilityCategory.SENIOR_FITNESS: ["gym", "health"],
+            FacilityCategory.ADAPTIVE_FITNESS: ["gym", "health"]
+        }
+        
+        # Search keywords for text search
+        self.search_keywords = {
+            # Healthcare keywords
+            FacilityCategory.HOSPITAL: ["hospital", "medical center", "emergency room"],
+            FacilityCategory.EMERGENCY_ROOM: ["emergency room", "emergency department", "ER"],
+            FacilityCategory.URGENT_CARE: ["urgent care", "walk-in clinic", "immediate care"],
+            FacilityCategory.MEDICAL_CLINIC: ["medical clinic", "family practice", "primary care"],
+            FacilityCategory.SPECIALTY_CLINIC: ["specialty clinic", "specialist"],
+            
+            # Therapy keywords  
+            FacilityCategory.PHYSICAL_THERAPY: ["physical therapy", "physiotherapy", "PT clinic"],
+            FacilityCategory.OCCUPATIONAL_THERAPY: ["occupational therapy", "OT clinic"],
+            FacilityCategory.SPEECH_THERAPY: ["speech therapy", "speech pathology"],
+            FacilityCategory.REHABILITATION_CENTER: ["rehabilitation center", "rehab facility"],
+            
+            # Neurological keywords
+            FacilityCategory.NEUROLOGY_CLINIC: ["neurology clinic", "neurologist"],
+            FacilityCategory.NEUROTHERAPY_CLINIC: ["neurotherapy", "brain therapy"],
+            FacilityCategory.BRAIN_INJURY_CENTER: ["brain injury center", "TBI center"],
+            FacilityCategory.COGNITIVE_THERAPY: ["cognitive therapy", "memory clinic"],
+            
+            # Mental Health keywords
+            FacilityCategory.MENTAL_HEALTH_CLINIC: ["mental health clinic", "behavioral health"],
+            FacilityCategory.PSYCHOLOGY_PRACTICE: ["psychology practice", "psychologist"],
+            FacilityCategory.PSYCHIATRY_CLINIC: ["psychiatry clinic", "psychiatrist"],
+            FacilityCategory.COUNSELING_CENTER: ["counseling center", "therapy center"],
+            FacilityCategory.SUPPORT_GROUP_CENTER: ["support group", "peer support"],
+            
+            # Fitness keywords
+            FacilityCategory.GYM: ["gym", "fitness center", "health club"],
+            FacilityCategory.FITNESS_CENTER: ["fitness center", "recreation center"],
+            FacilityCategory.YOGA_STUDIO: ["yoga studio", "yoga center"],
+            FacilityCategory.PILATES_STUDIO: ["pilates studio", "pilates center"],
+            FacilityCategory.PERSONAL_TRAINING: ["personal training", "fitness coaching"],
+            FacilityCategory.CROSSFIT_GYM: ["crossfit", "crossfit gym"],
+            FacilityCategory.MARTIAL_ARTS: ["martial arts", "karate", "jiu jitsu", "boxing"],
+            FacilityCategory.DANCE_STUDIO: ["dance studio", "dance center"],
+            
+            # Wellness keywords
+            FacilityCategory.WELLNESS_CENTER: ["wellness center", "holistic health"],
+            FacilityCategory.SPA: ["spa", "day spa", "wellness spa"],
+            FacilityCategory.MASSAGE_THERAPY: ["massage therapy", "therapeutic massage"],
+            FacilityCategory.ACUPUNCTURE: ["acupuncture", "acupuncturist"],
+            FacilityCategory.CHIROPRACTIC: ["chiropractic", "chiropractor"],
+            FacilityCategory.MEDITATION_CENTER: ["meditation center", "mindfulness center"],
+            FacilityCategory.HOLISTIC_HEALTH: ["holistic health", "alternative medicine"],
+            FacilityCategory.NATUROPATHY: ["naturopathy", "naturopathic doctor"],
+            
+            # Specialized keywords
+            FacilityCategory.NUTRITION_COUNSELING: ["nutrition counseling", "dietitian"],
+            FacilityCategory.WEIGHT_LOSS_CENTER: ["weight loss center", "bariatric center"],
+            FacilityCategory.ADDICTION_RECOVERY: ["addiction recovery", "substance abuse treatment"],
+            FacilityCategory.SENIOR_FITNESS: ["senior fitness", "senior center"],
+            FacilityCategory.ADAPTIVE_FITNESS: ["adaptive fitness", "disability fitness"]
+        }
+    
     def __del__(self):
         """Clean up session"""
         if hasattr(self, 'session'):
             self.session.close()
     
-    async def search_facilities(
-        self, 
-        location_query: LocationQuery
-    ) -> Tuple[List[HealthcareFacility], Optional[str]]:
-        """Search for healthcare facilities using Google Places API"""
+    async def search_facilities(self, criteria: SearchCriteria) -> Tuple[List[Facility], Optional[str]]:
+        """Search for facilities based on comprehensive criteria - LIMITED TO 10 RESULTS"""
         
         try:
-            # Step 1: Get location coordinates
-            location_coords, location_error = await self._get_location_coordinates(location_query)
+            # Get location coordinates
+            location_coords, location_error = await self._geocode_location(criteria)
             if location_error:
                 return [], location_error
             
-            # Step 2: Search for each facility type
+            # Search for each facility category
             all_facilities = []
-            
-            for facility_type in location_query.facility_types:
-                facilities = await self._search_facility_type(
-                    facility_type, location_coords, location_query.radius_miles
-                )
+            for category in criteria.facility_categories:
+                facilities = await self._search_category(category, location_coords, criteria)
                 all_facilities.extend(facilities)
             
-            # Step 3: Remove duplicates and sort by rating/distance
-            unique_facilities = self._deduplicate_facilities(all_facilities)
-            sorted_facilities = self._sort_facilities(unique_facilities, location_coords)
+            # Process and filter results - LIMIT TO 10
+            processed_facilities = self._process_facilities(all_facilities, location_coords, criteria)
             
-            # Step 4: Add distance calculations
-            facilities_with_distance = self._add_distance_info(sorted_facilities, location_coords)
-            
-            return facilities_with_distance[:15], None  # Return top 15 results
+            # Return only top 10 results as requested
+            return processed_facilities[:10], None
             
         except Exception as e:
             logger.error(f"Facility search failed: {e}")
             return [], f"Search failed: {str(e)}"
     
-    async def _get_location_coordinates(self, location_query: LocationQuery) -> Tuple[Optional[Dict], Optional[str]]:
-        """Get latitude/longitude for the search location"""
+    async def _geocode_location(self, criteria: SearchCriteria) -> Tuple[Optional[Dict], Optional[str]]:
+        """Convert location to coordinates"""
         
-        if location_query.location_type == "current_location" and not location_query.location:
-            return None, "Current location access not available. Please provide a ZIP code or city name."
-        
-        # Geocoding API call
-        geocode_url = f"{self.base_url}/geocode/json"
-        params = {
-            'address': location_query.location,
-            'key': self.api_key
-        }
+        if criteria.location_type == LocationType.CURRENT_LOCATION and not criteria.location:
+            return None, "Current location access not available. Please provide a location."
         
         try:
+            geocode_url = f"{self.base_url}/geocode/json"
+            params = {
+                'address': criteria.location,
+                'key': self.api_key
+            }
+            
             loop = asyncio.get_event_loop()
             response = await loop.run_in_executor(
                 None,
@@ -312,43 +553,45 @@ class GooglePlacesConnector:
                     'formatted_address': data['results'][0]['formatted_address']
                 }, None
             else:
-                return None, f"Location '{location_query.location}' not found. Please check the spelling or try a different format."
+                return None, f"Location '{criteria.location}' not found."
                 
         except Exception as e:
             return None, f"Location lookup failed: {str(e)}"
     
-    async def _search_facility_type(
+    async def _search_category(
         self, 
-        facility_type: FacilityType, 
+        category: FacilityCategory, 
         location_coords: Dict, 
-        radius_miles: int
-    ) -> List[HealthcareFacility]:
-        """Search for a specific facility type"""
-        
-        if not location_coords:
-            return []
-        
-        # Convert miles to meters for Google API
-        radius_meters = int(radius_miles * 1609.34)
+        criteria: SearchCriteria
+    ) -> List[Facility]:
+        """Search for facilities of a specific category"""
         
         facilities = []
         
-        # For hospitals and emergency rooms, use both type search and text search
-        if facility_type in [FacilityType.HOSPITAL, FacilityType.EMERGENCY_ROOM]:
-            # Text search for hospitals
-            facilities.extend(await self._text_search_hospitals(location_coords, radius_meters))
+        # Try both API type search and text search
+        facilities.extend(await self._nearby_search(category, location_coords, criteria))
+        facilities.extend(await self._text_search(category, location_coords, criteria))
         
-        # Get search types for this facility
-        search_types = self._get_search_types_for_facility(facility_type)
+        return facilities
+    
+    async def _nearby_search(
+        self, 
+        category: FacilityCategory, 
+        location_coords: Dict, 
+        criteria: SearchCriteria
+    ) -> List[Facility]:
+        """Use Google Places Nearby Search API"""
         
-        for search_type in search_types:
+        facilities = []
+        api_types = self.api_type_mappings.get(category, ["health"])
+        
+        for api_type in api_types:
             try:
-                # Nearby Search API
                 nearby_url = f"{self.base_url}/place/nearbysearch/json"
                 params = {
                     'location': f"{location_coords['lat']},{location_coords['lng']}",
-                    'radius': min(radius_meters, 50000),  # Max 50km for API
-                    'type': search_type,
+                    'radius': min(criteria.radius_miles * 1609, 50000),  # Convert to meters, max 50km
+                    'type': api_type,
                     'key': self.api_key
                 }
                 
@@ -361,41 +604,62 @@ class GooglePlacesConnector:
                 data = response.json()
                 
                 if data['status'] == 'OK':
-                    for place in data.get('results', []):
-                        facility = self._parse_place_data(place, facility_type.value)
-                        if facility:
+                    for place_data in data.get('results', []):
+                        facility = self._parse_place_data(place_data, category, location_coords)
+                        if facility and self._is_relevant_facility(facility, criteria):
                             facilities.append(facility)
                 
-                # Add small delay to avoid rate limiting
-                await asyncio.sleep(0.1)
+                await asyncio.sleep(0.1)  # Rate limiting
                 
             except Exception as e:
-                logger.warning(f"Search failed for {search_type}: {e}")
+                logger.warning(f"Nearby search failed for {api_type}: {e}")
                 continue
         
         return facilities
     
-    async def _text_search_hospitals(self, location_coords: Dict, radius_meters: int) -> List[HealthcareFacility]:
-        """Use text search specifically for hospitals"""
+    async def _text_search(
+        self, 
+        category: FacilityCategory, 
+        location_coords: Dict, 
+        criteria: SearchCriteria
+    ) -> List[Facility]:
+        """Use Google Places Text Search API with targeted queries"""
         
         facilities = []
+        keywords = self.search_keywords.get(category, [])
         
-        # Search queries specifically for hospitals
-        hospital_queries = [
-            "hospital",
-            "emergency room",
-            "medical center",
-            "general hospital"
-        ]
+        # Make searches more specific to avoid hotels
+        targeted_keywords = []
+        for keyword in keywords[:2]:  # Limit to prevent too many API calls
+            # Add specific qualifiers to avoid hotels
+            if category in [FacilityCategory.WELLNESS_CENTER, FacilityCategory.SPA]:
+                targeted_keywords.append(f"{keyword} wellness center")
+                targeted_keywords.append(f"day {keyword}")  # "day spa" not hotel spa
+            elif category == FacilityCategory.MASSAGE_THERAPY:
+                targeted_keywords.append(f"massage therapy clinic")
+                targeted_keywords.append(f"therapeutic massage center")
+            elif category == FacilityCategory.MEDITATION_CENTER:
+                targeted_keywords.append(f"meditation center")
+                targeted_keywords.append(f"mindfulness studio")
+            else:
+                targeted_keywords.append(keyword)
         
-        for query in hospital_queries:
+        for keyword in targeted_keywords:
             try:
-                # Text Search API
                 text_search_url = f"{self.base_url}/place/textsearch/json"
+                
+                # Create more specific query
+                search_query = f"{keyword} near {criteria.location}"
+                
+                # Add negative keywords to exclude hotels
+                if category in [FacilityCategory.WELLNESS_CENTER, FacilityCategory.SPA, 
+                               FacilityCategory.MASSAGE_THERAPY]:
+                    search_query += " -hotel -resort -marriott -hilton"
+                
                 params = {
-                    'query': query,
+                    'query': search_query,
                     'location': f"{location_coords['lat']},{location_coords['lng']}",
-                    'radius': min(radius_meters, 50000),
+                    'radius': min(criteria.radius_miles * 1609, 50000),
                     'key': self.api_key
                 }
                 
@@ -408,142 +672,262 @@ class GooglePlacesConnector:
                 data = response.json()
                 
                 if data['status'] == 'OK':
-                    for place in data.get('results', []):
-                        facility = self._parse_place_data(place, "hospital")
-                        if facility:
+                    for place_data in data.get('results', []):
+                        facility = self._parse_place_data(place_data, category, location_coords)
+                        if facility and self._is_relevant_facility(facility, criteria):
                             facilities.append(facility)
+                            logger.debug(f"✅ Added facility from text search: {facility.name}")
                 
-                # Add delay to avoid rate limiting
-                await asyncio.sleep(0.2)
+                await asyncio.sleep(0.2)  # Rate limiting
                 
             except Exception as e:
-                logger.warning(f"Text search failed for {query}: {e}")
+                logger.warning(f"Text search failed for {keyword}: {e}")
                 continue
         
         return facilities
     
-    def _get_search_types_for_facility(self, facility_type: FacilityType) -> List[str]:
-        """Get Google Places API search types for facility"""
-        
-        # Google Places API types - more specific to avoid hotels/irrelevant results
-        type_mappings = {
-            FacilityType.HOSPITAL: ["hospital"],
-            FacilityType.REHABILITATION_CENTER: ["physiotherapist"],
-            FacilityType.NEUROTHERAPY_CLINIC: ["doctor"],
-            FacilityType.PHYSICAL_THERAPY: ["physiotherapist"],
-            FacilityType.MENTAL_HEALTH: ["doctor"],
-            FacilityType.URGENT_CARE: ["doctor"],
-            FacilityType.EMERGENCY_ROOM: ["hospital"],
-            FacilityType.NEUROLOGY_CLINIC: ["doctor"],
-            FacilityType.BRAIN_INJURY_CENTER: ["doctor"],
-            FacilityType.SPEECH_THERAPY: ["doctor"],
-            FacilityType.OCCUPATIONAL_THERAPY: ["physiotherapist"],
-            FacilityType.GENERAL_CLINIC: ["doctor"]
-        }
-        
-        return type_mappings.get(facility_type, ["doctor"])
-    
-    def _parse_place_data(self, place: Dict, facility_type: str) -> Optional[HealthcareFacility]:
-        """Parse Google Places API response into HealthcareFacility object"""
+    def _parse_place_data(
+        self, 
+        place_data: Dict, 
+        category: FacilityCategory, 
+        location_coords: Dict
+    ) -> Optional[Facility]:
+        """Parse Google Places API response into Facility object with enhanced filtering"""
         
         try:
-            # Extract basic information
-            name = place.get('name', 'Unknown')
-            place_id = place.get('place_id', '')
+            # Basic information
+            name = place_data.get('name', 'Unknown')
+            place_id = place_data.get('place_id', '')
             
-            # Filter out irrelevant results (hotels, restaurants, etc.)
-            if self._should_exclude_facility(place, name):
+            # Pre-filter obviously irrelevant places by Google Places types
+            place_types = place_data.get('types', [])
+            
+            # Exclude hotels, restaurants, and other irrelevant business types
+            exclude_types = [
+                'lodging', 'hotel', 'motel', 'resort', 'hostel',
+                'restaurant', 'food', 'meal_takeaway', 'meal_delivery',
+                'bar', 'night_club', 'liquor_store',
+                'store', 'shopping_mall', 'department_store',
+                'gas_station', 'car_dealer', 'car_rental', 'car_repair',
+                'bank', 'atm', 'insurance_agency', 'real_estate_agency',
+                'school', 'university', 'library',
+                'church', 'cemetery', 'funeral_home',
+                'tourist_attraction', 'amusement_park', 'zoo',
+                'movie_theater', 'casino', 'bowling_alley'
+            ]
+            
+            # If any exclude type is present, skip this place
+            if any(exclude_type in place_types for exclude_type in exclude_types):
+                logger.debug(f"Excluded by place type: {name} - {place_types}")
                 return None
             
-            # Location information
-            location = place.get('geometry', {}).get('location', {})
-            lat = location.get('lat', 0.0)
-            lng = location.get('lng', 0.0)
+            # For wellness searches, require specific relevant types
+            if category in [FacilityCategory.WELLNESS_CENTER, FacilityCategory.SPA, 
+                           FacilityCategory.MASSAGE_THERAPY, FacilityCategory.MEDITATION_CENTER]:
+                
+                wellness_types = [
+                    'spa', 'beauty_salon', 'hair_care', 'health', 'gym', 
+                    'physiotherapist', 'doctor', 'establishment'
+                ]
+                
+                # Must have at least one wellness-relevant type
+                if not any(wellness_type in place_types for wellness_type in wellness_types):
+                    logger.debug(f"Excluded wellness facility - no relevant types: {name} - {place_types}")
+                    return None
+            
+            # Additional name-based pre-filtering
+            name_lower = name.lower()
+            immediate_exclude_names = [
+                'marriott', 'hilton', 'hyatt', 'conrad', 'sheraton', 'westin', 
+                'ritz', 'four seasons', 'intercontinental', 'doubletree',
+                'holiday inn', 'best western', 'comfort inn', 'hampton inn',
+                'mandarin oriental', 'the dominick', 'w new york'
+            ]
+            
+            if any(exclude_name in name_lower for exclude_name in immediate_exclude_names):
+                logger.debug(f"Excluded by name pattern: {name}")
+                return None
+            
+            # Location
+            geometry = place_data.get('geometry', {}).get('location', {})
+            lat = geometry.get('lat', 0.0)
+            lng = geometry.get('lng', 0.0)
+            
+            # Calculate distance
+            distance = self._calculate_distance(
+                location_coords['lat'], location_coords['lng'], lat, lng
+            )
             
             # Address
-            address = place.get('vicinity', place.get('formatted_address', ''))
+            address = place_data.get('vicinity', place_data.get('formatted_address', ''))
             
-            # Rating information
-            rating = place.get('rating')
-            rating_count = place.get('user_ratings_total')
+            # Ratings
+            rating = place_data.get('rating')
+            review_count = place_data.get('user_ratings_total')
             
-            # Business status
-            business_status = place.get('business_status', 'OPERATIONAL')
+            # Business details
+            business_status = place_data.get('business_status', 'OPERATIONAL')
+            price_level = place_data.get('price_level')
             
             # Create maps URL
             maps_url = f"https://www.google.com/maps/place/?q=place_id:{place_id}"
             
-            # Phone number (if available)
-            phone = place.get('formatted_phone_number')
-            
-            return HealthcareFacility(
+            facility = Facility(
                 name=name,
+                category=category.value,
                 address=address,
-                phone=phone,
-                rating=rating,
-                rating_count=rating_count,
-                place_id=place_id,
                 latitude=lat,
                 longitude=lng,
-                facility_type=facility_type,
+                distance_miles=distance,
+                phone=place_data.get('formatted_phone_number'),
+                rating=rating,
+                review_count=review_count,
                 business_status=business_status,
-                maps_url=maps_url
+                price_level=price_level,
+                maps_url=maps_url,
+                place_id=place_id
             )
+            
+            logger.debug(f"✅ Successfully parsed facility: {name}")
+            return facility
             
         except Exception as e:
             logger.warning(f"Failed to parse place data: {e}")
             return None
     
-    def _should_exclude_facility(self, place: Dict, name: str) -> bool:
-        """Check if facility should be excluded (hotels, restaurants, etc.)"""
+    def _calculate_distance(self, lat1: float, lng1: float, lat2: float, lng2: float) -> float:
+        """Calculate distance between two points using Haversine formula"""
         
-        # Keywords that indicate non-healthcare facilities
-        exclude_keywords = [
-            'hotel', 'inn', 'resort', 'restaurant', 'cafe', 'bar', 'pub',
-            'store', 'shop', 'mall', 'gym', 'fitness', 'spa', 'salon',
-            'bank', 'atm', 'gas station', 'school', 'university'
-        ]
+        # Convert to radians
+        lat1_rad = math.radians(lat1)
+        lng1_rad = math.radians(lng1)
+        lat2_rad = math.radians(lat2)
+        lng2_rad = math.radians(lng2)
         
-        name_lower = name.lower()
+        # Haversine formula
+        dlat = lat2_rad - lat1_rad
+        dlng = lng2_rad - lng1_rad
         
-        # Check name for exclude keywords
-        if any(keyword in name_lower for keyword in exclude_keywords):
-            return True
+        a = (math.sin(dlat / 2) ** 2 + 
+             math.cos(lat1_rad) * math.cos(lat2_rad) * math.sin(dlng / 2) ** 2)
+        c = 2 * math.asin(math.sqrt(a))
         
-        # Check place types
-        place_types = place.get('types', [])
-        exclude_types = [
-            'lodging', 'restaurant', 'food', 'store', 'shopping_mall',
-            'gas_station', 'bank', 'atm', 'school', 'university',
-            'gym', 'spa', 'beauty_salon'
-        ]
+        # Earth's radius in miles
+        radius_miles = 3956
         
-        if any(exclude_type in place_types for exclude_type in exclude_types):
-            return True
-        
-        # Additional filtering for healthcare relevance
-        healthcare_keywords = [
-            'hospital', 'medical', 'clinic', 'doctor', 'physician', 'health',
-            'emergency', 'urgent care', 'rehabilitation', 'therapy', 'center'
-        ]
-        
-        # If name doesn't contain any healthcare keywords, be suspicious
-        if not any(keyword in name_lower for keyword in healthcare_keywords):
-            # Check if it has healthcare-related types
-            healthcare_types = ['hospital', 'doctor', 'health', 'physiotherapist']
-            if not any(hc_type in place_types for hc_type in healthcare_types):
-                return True
-        
-        return False
+        return round(c * radius_miles, 1)
     
-    def _deduplicate_facilities(self, facilities: List[HealthcareFacility]) -> List[HealthcareFacility]:
-        """Remove duplicate facilities based on name and location"""
+    def _is_relevant_facility(self, facility: Facility, criteria: SearchCriteria) -> bool:
+        """Enhanced facility relevance checking with strict filtering"""
+        
+        facility_name = facility.name.lower()
+        facility_address = facility.address.lower()
+        
+        # Comprehensive exclusion patterns for hotels and irrelevant businesses
+        hotel_patterns = [
+            'hotel', 'inn', 'resort', 'marriott', 'hilton', 'hyatt', 'conrad', 'sheraton',
+            'westin', 'ritz', 'four seasons', 'intercontinental', 'doubletree', 'embassy',
+            'courtyard', 'residence inn', 'extended stay', 'holiday inn', 'best western',
+            'comfort inn', 'hampton inn', 'fairfield inn', 'springhill', 'homewood',
+            'mandarin oriental', 'the dominick', 'w hotel', 'boutique hotel'
+        ]
+        
+        restaurant_patterns = [
+            'restaurant', 'cafe', 'bar', 'grill', 'bistro', 'diner', 'eatery',
+            'kitchen', 'tavern', 'pub', 'steakhouse', 'pizzeria', 'bakery'
+        ]
+        
+        retail_patterns = [
+            'store', 'shop', 'mall', 'market', 'pharmacy', 'cvs', 'walgreens',
+            'target', 'walmart', 'costco', 'shopping', 'retail', 'outlet'
+        ]
+        
+        other_exclude_patterns = [
+            'bank', 'atm', 'gas station', 'school', 'university', 'college',
+            'church', 'temple', 'mosque', 'synagogue', 'library', 'museum',
+            'theater', 'cinema', 'entertainment', 'nightclub', 'casino',
+            'car wash', 'auto repair', 'mechanic', 'insurance', 'real estate'
+        ]
+        
+        # Combine all exclusion patterns
+        all_exclude_patterns = hotel_patterns + restaurant_patterns + retail_patterns + other_exclude_patterns
+        
+        # Check if facility name contains any exclusion patterns
+        if any(pattern in facility_name for pattern in all_exclude_patterns):
+            logger.debug(f"Excluded facility by name pattern: {facility.name}")
+            return False
+        
+        # Check if address contains hotel/retail indicators
+        address_exclude_patterns = ['hotel', 'mall', 'shopping center', 'plaza hotel']
+        if any(pattern in facility_address for pattern in address_exclude_patterns):
+            logger.debug(f"Excluded facility by address pattern: {facility.name}")
+            return False
+        
+        # Positive filtering - facility must contain relevant health/wellness keywords
+        health_wellness_keywords = [
+            # Healthcare
+            'hospital', 'medical', 'clinic', 'doctor', 'physician', 'health',
+            'emergency', 'urgent care', 'rehabilitation', 'therapy', 'treatment',
+            'psychiatric', 'psychology', 'counseling', 'mental health',
+            
+            # Therapy & Rehabilitation  
+            'physical therapy', 'occupational therapy', 'speech therapy',
+            'physiotherapy', 'rehab', 'rehabilitation', 'recovery',
+            
+            # Wellness & Fitness
+            'wellness', 'fitness', 'gym', 'yoga', 'pilates', 'meditation',
+            'spa', 'massage', 'acupuncture', 'chiropractic', 'holistic',
+            'nutrition', 'naturopathy', 'therapeutic', 'healing',
+            
+            # Mental Health
+            'psychiatry', 'psychology', 'behavioral health', 'counseling',
+            'therapy', 'mental health', 'addiction', 'recovery', 'support group'
+        ]
+        
+        # Facility must contain at least one relevant keyword
+        has_relevant_keyword = any(keyword in facility_name for keyword in health_wellness_keywords)
+        
+        if not has_relevant_keyword:
+            logger.debug(f"Excluded facility - no relevant keywords: {facility.name}")
+            return False
+        
+        # Distance constraint
+        if facility.distance_miles and facility.distance_miles > criteria.radius_miles:
+            logger.debug(f"Excluded facility - too far: {facility.name} ({facility.distance_miles} miles)")
+            return False
+        
+        # Business status check
+        if facility.business_status not in ['OPERATIONAL', 'OPEN']:
+            logger.debug(f"Excluded facility - not operational: {facility.name}")
+            return False
+        
+        logger.debug(f"✅ Facility passed all filters: {facility.name}")
+        return True
+    
+    def _process_facilities(
+        self, 
+        facilities: List[Facility], 
+        location_coords: Dict, 
+        criteria: SearchCriteria
+    ) -> List[Facility]:
+        """Process and sort facilities"""
+        
+        # Remove duplicates
+        unique_facilities = self._deduplicate_facilities(facilities)
+        
+        # Sort by relevance
+        sorted_facilities = self._sort_facilities(unique_facilities, criteria)
+        
+        return sorted_facilities
+    
+    def _deduplicate_facilities(self, facilities: List[Facility]) -> List[Facility]:
+        """Remove duplicate facilities"""
         
         seen = set()
         unique_facilities = []
         
         for facility in facilities:
-            # Create a unique key based on name and approximate location
+            # Create unique key based on name and location
             key = (
                 facility.name.lower().strip(),
                 round(facility.latitude, 4),
@@ -556,57 +940,382 @@ class GooglePlacesConnector:
         
         return unique_facilities
     
-    def _sort_facilities(self, facilities: List[HealthcareFacility], location_coords: Dict) -> List[HealthcareFacility]:
-        """Sort facilities by review count first, then rating and distance"""
+    def _sort_facilities(self, facilities: List[Facility], criteria: SearchCriteria) -> List[Facility]:
+        """Sort facilities by relevance and quality"""
         
         def sort_key(facility):
-            # Prioritize review count (more reviews = more reliable)
-            review_count = facility.rating_count or 0
+            # Review count (primary factor for reliability)
+            review_score = min((facility.review_count or 0) / 100, 5.0)
             
-            # Rating score (prefer higher ratings)
+            # Rating score
             rating_score = facility.rating or 0
             
-            # Distance calculation (closer = better)
-            if location_coords:
-                lat_diff = facility.latitude - location_coords['lat']
-                lng_diff = facility.longitude - location_coords['lng']
-                distance_score = -(lat_diff**2 + lng_diff**2)  # Negative for closer = better
-            else:
-                distance_score = 0
+            # Distance score (closer is better)
+            distance_score = max(0, 5 - (facility.distance_miles or 0) / 5)
             
-            # Combined score: review count is primary, then rating, then distance
-            # Normalize review count to 0-5 scale for fair comparison
-            normalized_reviews = min(review_count / 100, 5.0)  # Cap at 5 for 500+ reviews
+            # Business status bonus
+            status_bonus = 1 if facility.business_status == 'OPERATIONAL' else 0
             
-            return (normalized_reviews * 0.5) + (rating_score * 0.3) + (distance_score * 0.2)
+            # Combined score
+            total_score = (
+                review_score * 0.4 +
+                rating_score * 0.3 +
+                distance_score * 0.2 +
+                status_bonus * 0.1
+            )
+            
+            return total_score
         
         return sorted(facilities, key=sort_key, reverse=True)
-    
-    def _add_distance_info(self, facilities: List[HealthcareFacility], location_coords: Dict) -> List[HealthcareFacility]:
-        """Add distance information to facilities"""
-        
-        if not location_coords:
-            return facilities
-        
-        for facility in facilities:
-            # Simple distance calculation (Haversine formula approximation)
-            lat1, lng1 = location_coords['lat'], location_coords['lng']
-            lat2, lng2 = facility.latitude, facility.longitude
-            
-            # Approximate distance in miles
-            lat_diff = lat2 - lat1
-            lng_diff = lng2 - lng1
-            distance_approx = ((lat_diff**2 + lng_diff**2)**0.5) * 69  # Rough miles conversion
-            
-            facility.distance_miles = round(distance_approx, 1)
-        
-        return facilities
 
-class HealthcareLocatorAgent:
-    """Main Healthcare Locator Agent"""
+class ResponseFormatter:
+    """Formats search results into user-friendly responses with JSON support - FIXED VERSION"""
+    
+    def format_response(
+        self, 
+        facilities: List[Facility], 
+        criteria: SearchCriteria, 
+        processing_time: float
+    ) -> Dict[str, Any]:
+        """Format comprehensive response with both text and structured JSON data - FIXED"""
+        
+        if not facilities:
+            return self._format_no_results_response(criteria, processing_time)
+        
+        # IMPORTANT: Keep facilities as Facility objects for text generation
+        # Generate text response first while facilities are still objects
+        response_text = self._generate_response_text(facilities, criteria)
+        
+        # Generate structured JSON data for frontend rendering
+        structured_data = self._generate_structured_response(facilities, criteria)
+        
+        # Convert facilities to dict format AFTER text generation
+        facilities_dict = [facility.to_dict() for facility in facilities]
+        
+        return {
+            "success": True,
+            "query": criteria.original_query,
+            "location": criteria.location,
+            "categories_searched": [cat.value for cat in criteria.facility_categories],
+            "total_results": len(facilities),
+            "urgency_level": criteria.urgency.value,
+            "search_radius_miles": criteria.radius_miles,
+            
+            # Text response for synthesis/display
+            "response": response_text,
+            
+            # Structured data for frontend rendering
+            "structured_data": structured_data,
+            
+            # Facility list for compatibility
+            "facilities": facilities_dict,
+            
+            "processing_time": processing_time,
+            "confidence": criteria.confidence,
+            
+            # Frontend rendering flag
+            "render_mode": "structured"  # Indicates frontend should use structured_data
+        }
+    
+    def _generate_structured_response(self, facilities: List[Facility], criteria: SearchCriteria) -> Dict[str, Any]:
+        """Generate structured data optimized for frontend rendering"""
+        
+        # Create header information
+        categories_display = []
+        for cat in criteria.facility_categories:
+            categories_display.append({
+                "id": cat.value,
+                "name": cat.value.replace('_', ' ').title(),
+                "icon": self._get_category_icon(cat)
+            })
+        
+        # Process facilities for frontend - LIMIT TO 10 AS REQUESTED
+        processed_facilities = []
+        for i, facility in enumerate(facilities[:10]):  # Limit to top 10
+            facility_data = {
+                "id": facility.place_id or f"facility_{i}",
+                "name": facility.name,
+                "category": {
+                    "id": facility.category,
+                    "name": facility.category.replace('_', ' ').title(),
+                    "icon": self._get_category_icon_by_value(facility.category)
+                },
+                "location": {
+                    "address": facility.address,
+                    "latitude": facility.latitude,
+                    "longitude": facility.longitude,
+                    "distance_miles": facility.distance_miles,
+                    "distance_display": f"{facility.distance_miles} miles away" if facility.distance_miles else None
+                },
+                "contact": {
+                    "phone": facility.phone,
+                    "website": facility.website,
+                    "email": facility.email
+                },
+                "reviews": {
+                    "rating": facility.rating,
+                    "review_count": facility.review_count,
+                    "stars_display": "⭐" * int(facility.rating) if facility.rating else None,
+                    "rating_display": f"{facility.rating}/5" if facility.rating else None
+                },
+                "business_info": {
+                    "status": facility.business_status,
+                    "price_level": facility.price_level,
+                    "price_display": "💰" * facility.price_level if facility.price_level else None,
+                    "hours": facility.hours
+                },
+                "actions": {
+                    "maps_url": facility.maps_url,
+                    "booking_url": facility.booking_url,
+                    "call_action": f"tel:{facility.phone}" if facility.phone else None
+                },
+                "accessibility": facility.accessibility_features,
+                "services": facility.services,
+                "insurance": facility.insurance_accepted
+            }
+            processed_facilities.append(facility_data)
+        
+        # Create search metadata
+        search_metadata = {
+            "original_query": criteria.original_query,
+            "parsed_location": criteria.location,
+            "search_radius": criteria.radius_miles,
+            "urgency_level": {
+                "id": criteria.urgency.value,
+                "name": criteria.urgency.value.replace('_', ' ').title(),
+                "color": self._get_urgency_color(criteria.urgency)
+            },
+            "total_found": len(facilities),
+            "showing_count": len(processed_facilities),
+            "has_more": len(facilities) > len(processed_facilities)
+        }
+        
+        # Urgency-specific messages
+        urgency_messages = self._get_urgency_messages(criteria.urgency)
+        
+        return {
+            "header": {
+                "title": f"Found {len(facilities)} facilities near {criteria.location}",
+                "subtitle": f"Showing {categories_display[0]['name'].lower()} results" if len(categories_display) == 1 else "Multiple facility types",
+                "categories": categories_display
+            },
+            "search_metadata": search_metadata,
+            "facilities": processed_facilities,
+            "urgency_info": urgency_messages,
+            "rendering_hints": {
+                "map_view_available": True,
+                "list_view_default": True,
+                "filter_options": ["distance", "rating", "price_level"],
+                "sort_options": ["relevance", "distance", "rating", "review_count"]
+            }
+        }
+    
+    def _get_category_icon(self, category: FacilityCategory) -> str:
+        """Get appropriate icon for facility category"""
+        icon_mapping = {
+            # Healthcare
+            FacilityCategory.HOSPITAL: "🏥",
+            FacilityCategory.EMERGENCY_ROOM: "🚑",
+            FacilityCategory.URGENT_CARE: "⚕️",
+            FacilityCategory.MEDICAL_CLINIC: "🩺",
+            FacilityCategory.SPECIALTY_CLINIC: "👨‍⚕️",
+            
+            # Therapy
+            FacilityCategory.PHYSICAL_THERAPY: "🏃‍♂️",
+            FacilityCategory.OCCUPATIONAL_THERAPY: "🖐️",
+            FacilityCategory.SPEECH_THERAPY: "🗣️",
+            FacilityCategory.REHABILITATION_CENTER: "🏥",
+            
+            # Neurological
+            FacilityCategory.NEUROLOGY_CLINIC: "🧠",
+            FacilityCategory.BRAIN_INJURY_CENTER: "🧠",
+            FacilityCategory.COGNITIVE_THERAPY: "🧠",
+            
+            # Mental Health
+            FacilityCategory.MENTAL_HEALTH_CLINIC: "🧘‍♀️",
+            FacilityCategory.PSYCHOLOGY_PRACTICE: "💭",
+            FacilityCategory.COUNSELING_CENTER: "🗨️",
+            
+            # Fitness
+            FacilityCategory.GYM: "💪",
+            FacilityCategory.FITNESS_CENTER: "🏋️‍♂️",
+            FacilityCategory.YOGA_STUDIO: "🧘‍♀️",
+            FacilityCategory.PILATES_STUDIO: "🤸‍♀️",
+            FacilityCategory.MARTIAL_ARTS: "🥋",
+            FacilityCategory.DANCE_STUDIO: "💃",
+            
+            # Wellness
+            FacilityCategory.WELLNESS_CENTER: "🌿",
+            FacilityCategory.SPA: "💆‍♀️",
+            FacilityCategory.MASSAGE_THERAPY: "💆",
+            FacilityCategory.MEDITATION_CENTER: "🧘",
+            FacilityCategory.ACUPUNCTURE: "🏮",
+            FacilityCategory.CHIROPRACTIC: "🦴"
+        }
+        return icon_mapping.get(category, "🏢")
+    
+    def _get_category_icon_by_value(self, category_value: str) -> str:
+        """Get icon by category value string"""
+        try:
+            category = FacilityCategory(category_value)
+            return self._get_category_icon(category)
+        except ValueError:
+            return "🏢"
+    
+    def _get_urgency_color(self, urgency: UrgencyLevel) -> str:
+        """Get color code for urgency level"""
+        color_mapping = {
+            UrgencyLevel.EMERGENCY: "#DC2626",  # Red
+            UrgencyLevel.URGENT: "#F59E0B",     # Amber
+            UrgencyLevel.ROUTINE: "#10B981",    # Green
+            UrgencyLevel.WELLNESS: "#6366F1"    # Indigo
+        }
+        return color_mapping.get(urgency, "#6B7280")  # Gray default
+    
+    def _get_urgency_messages(self, urgency: UrgencyLevel) -> Dict[str, Any]:
+        """Get urgency-specific messages and actions"""
+        messages = {
+            UrgencyLevel.EMERGENCY: {
+                "message": "🚨 For medical emergencies, call 911 immediately",
+                "action_text": "Call 911",
+                "action_url": "tel:911",
+                "priority": "critical"
+            },
+            UrgencyLevel.URGENT: {
+                "message": "⚡ For urgent needs, call ahead to check availability",
+                "action_text": "Call facility",
+                "priority": "high"
+            },
+            UrgencyLevel.ROUTINE: {
+                "message": "📅 Schedule an appointment for routine care",
+                "action_text": "Schedule appointment",
+                "priority": "normal"
+            },
+            UrgencyLevel.WELLNESS: {
+                "message": "🌿 Take time to explore your wellness options",
+                "action_text": "Learn more",
+                "priority": "low"
+            }
+        }
+        return messages.get(urgency, {"message": "", "priority": "normal"})
+    
+    def _generate_response_text(self, facilities: List[Facility], criteria: SearchCriteria) -> str:
+        """Generate human-readable response text (for synthesis purposes) - FIXED VERSION"""
+        
+        # Create header
+        categories_str = ', '.join([
+            cat.value.replace('_', ' ').title() 
+            for cat in criteria.facility_categories
+        ])
+        
+        location_str = criteria.location or "your area"
+        
+        response_parts = [
+            f"I found {len(facilities)} {categories_str.lower()} near {location_str}:",
+            ""
+        ]
+        
+        # Add facility details - LIMIT TO 10 AS REQUESTED
+        for i, facility in enumerate(facilities[:10], 1):  # Show top 10 only
+            facility_parts = [f"**{i}. {facility.name}**"]
+            
+            if facility.address:
+                facility_parts.append(f"   📍 {facility.address}")
+            
+            if facility.phone:
+                facility_parts.append(f"   📞 {facility.phone}")
+            
+            # Show review count and rating
+            if facility.review_count and facility.rating:
+                stars = "⭐" * int(facility.rating)
+                facility_parts.append(f"   👥 {facility.review_count} reviews | {stars} {facility.rating}/5")
+            elif facility.review_count:
+                facility_parts.append(f"   👥 {facility.review_count} reviews")
+            elif facility.rating:
+                stars = "⭐" * int(facility.rating)
+                facility_parts.append(f"   {stars} {facility.rating}/5")
+            
+            if facility.distance_miles:
+                facility_parts.append(f"   📏 {facility.distance_miles} miles away")
+            
+            if facility.price_level:
+                price_symbols = "💰" * facility.price_level
+                facility_parts.append(f"   {price_symbols} Price level: {facility.price_level}/4")
+            
+            facility_parts.append(f"   🗺️ [View on Maps]({facility.maps_url})")
+            facility_parts.append("")
+            
+            response_parts.extend(facility_parts)
+        
+        # Add urgency-specific advice
+        if criteria.urgency == UrgencyLevel.EMERGENCY:
+            response_parts.extend([
+                "",
+                "🚨 **For medical emergencies, call 911 immediately.**"
+            ])
+        elif criteria.urgency == UrgencyLevel.URGENT:
+            response_parts.extend([
+                "",
+                "⚡ **For urgent needs, call ahead to check availability.**"
+            ])
+        
+        return "\n".join(response_parts)
+    
+    def _format_no_results_response(self, criteria: SearchCriteria, processing_time: float) -> Dict[str, Any]:
+        """Format response when no results found"""
+        
+        categories_str = ', '.join([
+            cat.value.replace('_', ' ') 
+            for cat in criteria.facility_categories
+        ])
+        
+        response_text = f"""I couldn't find any {categories_str} near {criteria.location or 'your location'} within {criteria.radius_miles} miles.
+
+**Suggestions:**
+• Expand your search radius
+• Try nearby cities or areas
+• Search for more general facility types
+• Check online directories
+• Contact your insurance provider for covered facilities"""
+        
+        # Structured data for no results
+        structured_data = {
+            "header": {
+                "title": f"No {categories_str} found",
+                "subtitle": f"Near {criteria.location or 'your location'}"
+            },
+            "search_metadata": {
+                "original_query": criteria.original_query,
+                "parsed_location": criteria.location,
+                "search_radius": criteria.radius_miles,
+                "total_found": 0
+            },
+            "suggestions": [
+                "Expand your search radius",
+                "Try nearby cities or areas", 
+                "Search for more general facility types",
+                "Check online directories",
+                "Contact your insurance provider"
+            ],
+            "facilities": []
+        }
+        
+        return {
+            "success": True,
+            "query": criteria.original_query,
+            "total_results": 0,
+            "response": response_text,
+            "structured_data": structured_data,
+            "facilities": [],
+            "processing_time": processing_time,
+            "render_mode": "no_results"
+        }
+
+class HealthcareWellnessLocator:
+    """Main Healthcare & Wellness Locator Agent with JSON response support - FIXED VERSION"""
     
     def __init__(self, gemini_api_key: str = None, google_places_api_key: str = None):
-        """Initialize the Healthcare Locator Agent"""
+        """Initialize the comprehensive locator agent"""
         
         load_dotenv()
         
@@ -614,26 +1323,29 @@ class HealthcareLocatorAgent:
         self.gemini_api_key = gemini_api_key or os.getenv("GEMINI_API_KEY")
         self.google_places_api_key = google_places_api_key or os.getenv("GOOGLE_PLACES_API_KEY")
         
+        self._validate_configuration()
+        self._initialize_components()
+        
+        logger.info("✅ Healthcare & Wellness Locator Agent initialized with JSON support")
+    
+    def _validate_configuration(self):
+        """Validate required configuration"""
         if not self.gemini_api_key:
             raise ValueError("Gemini API key is required")
         if not self.google_places_api_key:
             raise ValueError("Google Places API key is required")
-        
-        # Initialize components
-        self._initialize_components()
-        
-        logger.info("✅ Healthcare Locator Agent initialized")
     
     def _initialize_components(self):
-        """Initialize LLM and API components"""
+        """Initialize all components using dependency injection pattern"""
         try:
             # Initialize Gemini
             genai.configure(api_key=self.gemini_api_key)
-            self.gemini_model = genai.GenerativeModel('gemini-2.0-flash')
+            gemini_model = genai.GenerativeModel('gemini-2.0-flash')
             
             # Initialize components
-            self.location_parser = IntelligentLocationParser(self.gemini_model)
-            self.places_connector = GooglePlacesConnector(self.google_places_api_key)
+            self.parser = LLMSearchParser(gemini_model)
+            self.connector = PlacesAPIConnector(self.google_places_api_key)
+            self.formatter = ResponseFormatter()
             
             logger.info("✅ All components initialized successfully")
             
@@ -641,32 +1353,33 @@ class HealthcareLocatorAgent:
             logger.error(f"Failed to initialize components: {e}")
             raise
     
-    async def find_healthcare_facilities(self, query: str) -> Dict[str, Any]:
-        """Main method to find healthcare facilities based on natural language query"""
+    async def find_facilities(self, query: str) -> Dict[str, Any]:
+        """Main method to find healthcare and wellness facilities with JSON support - FIXED VERSION"""
         
         start_time = datetime.now()
         
         try:
-            # Step 1: Parse the location query using LLM
+            # Parse query using advanced LLM intelligence
             logger.info(f"🧠 Parsing query: {query[:50]}...")
-            location_query = await self.location_parser.parse_location_query(query)
+            criteria = await self.parser.parse_query(query)
             
-            logger.info(f"🎯 Parsed - Facility: {[f.value for f in location_query.facility_types]}, Location: {location_query.location}")
+            logger.info(f"🎯 Parsed - Categories: {[c.value for c in criteria.facility_categories]}")
+            logger.info(f"📍 Location: {criteria.location}, Radius: {criteria.radius_miles} miles")
             
-            # Step 2: Search for facilities using Google Places API
-            logger.info(f"🔍 Searching for facilities...")
-            facilities, error = await self.places_connector.search_facilities(location_query)
+            # Search for facilities
+            logger.info("🔍 Searching for facilities...")
+            facilities, error = await self.connector.search_facilities(criteria)
             
             if error:
                 return self._create_error_response(error, start_time)
             
-            if not facilities:
-                return self._create_no_results_response(location_query, start_time)
+            # Format response with both text and JSON
+            processing_time = (datetime.now() - start_time).total_seconds()
             
-            # Step 3: Format response
-            response = self._format_facility_response(facilities, location_query, start_time)
+            # IMPORTANT: Pass Facility objects to formatter, not dictionaries
+            response = self.formatter.format_response(facilities, criteria, processing_time)
             
-            logger.info(f"✅ Found {len(facilities)} facilities in {response['processing_time']:.2f}s")
+            logger.info(f"✅ Found {len(facilities)} facilities in {processing_time:.2f}s")
             
             return response
             
@@ -674,171 +1387,42 @@ class HealthcareLocatorAgent:
             logger.exception(f"❌ Error finding facilities: {e}")
             return self._create_error_response(f"Search failed: {str(e)}", start_time)
     
-    def _format_facility_response(
-        self, 
-        facilities: List[HealthcareFacility], 
-        location_query: LocationQuery, 
-        start_time: datetime
-    ) -> Dict[str, Any]:
-        """Format the facility search response"""
-        
-        processing_time = (datetime.now() - start_time).total_seconds()
-        
-        # Group facilities by type for better presentation
-        grouped_facilities = {}
-        for facility in facilities:
-            facility_type = facility.facility_type
-            if facility_type not in grouped_facilities:
-                grouped_facilities[facility_type] = []
-            grouped_facilities[facility_type].append(facility)
-        
-        # Create formatted response text
-        response_text = self._generate_response_text(facilities, location_query)
-        
-        # Create structured facility data
-        facility_data = []
-        for facility in facilities:
-            facility_info = {
-                "name": facility.name,
-                "address": facility.address,
-                "phone": facility.phone,
-                "rating": facility.rating,
-                "rating_count": facility.rating_count,
-                "facility_type": facility.facility_type,
-                "maps_url": facility.maps_url,
-                "distance_miles": facility.distance_miles,
-                "business_status": facility.business_status
-            }
-            facility_data.append(facility_info)
-        
-        return {
-            "success": True,
-            "query": location_query.original_query,
-            "parsed_location": location_query.location,
-            "facility_types_searched": [f.value for f in location_query.facility_types],
-            "total_results": len(facilities),
-            "urgency_level": location_query.urgency,
-            "search_radius_miles": location_query.radius_miles,
-            "response": response_text,
-            "facilities": facility_data,
-            "grouped_facilities": {k: len(v) for k, v in grouped_facilities.items()},
-            "processing_time": processing_time,
-            "confidence": location_query.confidence
-        }
-    
-    def _generate_response_text(self, facilities: List[HealthcareFacility], location_query: LocationQuery) -> str:
-        """Generate human-readable response text"""
-        
-        if not facilities:
-            return f"I couldn't find any {', '.join([f.value for f in location_query.facility_types])} near {location_query.location}. You may want to try expanding your search radius or searching in nearby areas."
-        
-        # Create response header
-        facility_types_str = ', '.join([f.value.replace('_', ' ').title() for f in location_query.facility_types])
-        location_str = location_query.location if location_query.location else "your area"
-        
-        response_parts = [
-            f"I found {len(facilities)} {facility_types_str.lower()} facilities near {location_str}:",
-            ""
-        ]
-        
-        # Add top facilities with details
-        for i, facility in enumerate(facilities[:8], 1):  # Show top 8
-            facility_info = [f"**{i}. {facility.name}**"]
-            
-            if facility.address:
-                facility_info.append(f"   📍 {facility.address}")
-            
-            if facility.phone:
-                facility_info.append(f"   📞 {facility.phone}")
-            
-            # Show reviews first (primary sorting criteria), then rating
-            if facility.rating_count and facility.rating:
-                stars = "⭐" * int(facility.rating)
-                facility_info.append(f"   👥 {facility.rating_count} reviews | {stars} {facility.rating}/5")
-            elif facility.rating_count:
-                facility_info.append(f"   👥 {facility.rating_count} reviews")
-            elif facility.rating:
-                stars = "⭐" * int(facility.rating)
-                facility_info.append(f"   {stars} {facility.rating}/5")
-            
-            if facility.distance_miles:
-                facility_info.append(f"   📏 {facility.distance_miles} miles away")
-            
-            facility_info.append(f"   🗺️ [View on Maps]({facility.maps_url})")
-            facility_info.append("")
-            
-            response_parts.extend(facility_info)
-        
-        # Add additional info if more results available
-        if len(facilities) > 8:
-            response_parts.append(f"*...and {len(facilities) - 8} more facilities found*")
-        
-        # Add urgency-specific advice
-        if location_query.urgency == "emergency":
-            response_parts.extend([
-                "",
-                "🚨 **For medical emergencies, call 911 immediately or go to the nearest emergency room.**"
-            ])
-        elif location_query.urgency == "urgent":
-            response_parts.extend([
-                "",
-                "⚡ **For urgent care needs, I recommend calling ahead to check availability and wait times.**"
-            ])
-        
-        return "\n".join(response_parts)
-    
     def _create_error_response(self, error_message: str, start_time: datetime) -> Dict[str, Any]:
-        """Create error response"""
+        """Create standardized error response with JSON support"""
         processing_time = (datetime.now() - start_time).total_seconds()
         
         return {
             "success": False,
             "error": error_message,
-            "response": f"I encountered an issue while searching for healthcare facilities: {error_message}",
-            "facilities": [],
-            "processing_time": processing_time
-        }
-    
-    def _create_no_results_response(self, location_query: LocationQuery, start_time: datetime) -> Dict[str, Any]:
-        """Create response when no facilities are found"""
-        processing_time = (datetime.now() - start_time).total_seconds()
-        
-        facility_types_str = ', '.join([f.value.replace('_', ' ') for f in location_query.facility_types])
-        
-        response_text = f"""I couldn't find any {facility_types_str} facilities near {location_query.location or 'your location'} within {location_query.radius_miles} miles.
-
-**Suggestions:**
-• Try searching with a larger radius
-• Check nearby cities or ZIP codes  
-• Search for more general facility types (e.g., "hospitals" instead of "neurotherapy clinics")
-• Contact your insurance provider for in-network options
-• Use online directories like Healthgrades or your insurance website"""
-        
-        return {
-            "success": True,
-            "query": location_query.original_query,
-            "total_results": 0,
-            "response": response_text,
+            "response": f"I encountered an issue while searching: {error_message}",
+            "structured_data": {
+                "header": {
+                    "title": "Search Error",
+                    "subtitle": "Unable to complete facility search"
+                },
+                "error": {
+                    "message": error_message,
+                    "suggestions": [
+                        "Check your internet connection",
+                        "Try a different location",
+                        "Simplify your search terms"
+                    ]
+                }
+            },
             "facilities": [],
             "processing_time": processing_time,
-            "suggestions": [
-                "Expand search radius",
-                "Try nearby locations",
-                "Search for general facility types",
-                "Contact insurance provider"
-            ]
+            "render_mode": "error"
         }
 
-
-# Enhanced Testing Interface
-async def test_locator_interface():
-    """Interactive testing interface for Healthcare Locator Agent"""
+# Testing Interface
+async def test_enhanced_locator():
+    """Enhanced testing interface with JSON output examples"""
     
-    print("=" * 80)
-    print("🏥 HEALTHCARE LOCATOR AGENT - TESTING INTERFACE")
-    print("=" * 80)
+    print("=" * 100)
+    print("🏥 FIXED HEALTHCARE & WELLNESS LOCATOR - LIMITED TO 10 RESULTS")
+    print("=" * 100)
     
-    # Check for API keys
+    # Check API keys
     load_dotenv()
     gemini_key = os.getenv("GEMINI_API_KEY")
     places_key = os.getenv("GOOGLE_PLACES_API_KEY")
@@ -851,78 +1435,80 @@ async def test_locator_interface():
         return
     
     # Initialize agent
-    print("🚀 Initializing Healthcare Locator Agent...")
+    print("🚀 Initializing Fixed Healthcare & Wellness Locator...")
     try:
-        agent = HealthcareLocatorAgent(gemini_key, places_key)
+        locator = HealthcareWellnessLocator(gemini_key, places_key)
         print("✅ Agent initialized successfully!")
     except Exception as e:
         print(f"❌ Failed to initialize agent: {e}")
         return
     
-    print("\n🎯 **FEATURES:**")
-    print("   • **Smart Query Parsing** - Understands natural language location requests")
-    print("   • **Google Places Integration** - Real-time facility data with ratings & reviews")
-    print("   • **Multi-Facility Search** - Hospitals, rehab centers, clinics, urgent care")
-    print("   • **Distance & Rating Sorting** - Best facilities first")
-    print("   • **Maps Integration** - Direct links to Google Maps")
-    
-    print("\n📋 **EXAMPLE QUERIES:**")
-    print("   • 'hospitals near 02134'")
-    print("   • 'TBI rehabilitation centers in Boston MA'")
-    print("   • 'urgent care clinics near me in Los Angeles'")
-    print("   • 'neurologists in New York City'")
-    print("   • 'physical therapy near 90210'")
+    print("\n🔧 **FIXES APPLIED:**")
+    print("   • Fixed AttributeError: 'dict' object has no attribute 'name'")
+    print("   • Limited results to 10 locations as requested")
+    print("   • Improved error handling and data flow")
+    print("   • Maintained both text and JSON response formats")
     
     print("\n💡 **COMMANDS:**")
-    print("   • Type your location query naturally")
-    print("   • 'test' - Run sample queries")
+    print("   • Type your search query naturally")
+    print("   • 'demo' - Run comprehensive demo queries")
     print("   • 'quit' - Exit")
-    print("=" * 80)
+    print("=" * 100)
     
     while True:
         try:
-            user_input = input("\n🔍 Enter your healthcare facility search: ").strip()
+            user_input = input("\n🔍 Enter your facility search: ").strip()
             
             if not user_input:
                 continue
             
             if user_input.lower() == 'quit':
-                print("\n👋 Thank you for testing the Healthcare Locator Agent!")
+                print("\n👋 Thank you for testing the Fixed Locator!")
                 break
             
-            elif user_input.lower() == 'test':
-                # Run sample queries
-                test_queries = [
-                    "hospitals near 02134",
-                    "TBI rehabilitation centers in Boston",
-                    "urgent care near 90210"
+            elif user_input.lower() == 'demo':
+                demo_queries = [
+                    "yoga studios in Boston",
+                    "TBI rehabilitation centers near 90210", 
+                    "wellness spas and massage therapy in NYC"
                 ]
                 
-                for query in test_queries:
-                    print(f"\n🧪 **Testing:** '{query}'")
-                    result = await agent.find_healthcare_facilities(query)
-                    print(f"**Result:** {result['success']} - {len(result.get('facilities', []))} facilities found")
+                for query in demo_queries:
+                    print(f"\n🧪 **Demo Query:** '{query}'")
+                    result = await locator.find_facilities(query)
+                    print(f"**Result:** {result['success']} - {len(result.get('facilities', []))} facilities (max 10)")
+                    print(f"**Render Mode:** {result.get('render_mode', 'standard')}")
+                    
+                    if result['success'] and result.get('facilities'):
+                        print(f"**Sample Facilities:**")
+                        for i, facility in enumerate(result['facilities'][:3]):  # Show first 3
+                            print(f"  {i+1}. {facility['name']} - {facility.get('address', 'N/A')}")
                 continue
             
             # Process the query
             print(f"\n🤖 Processing: '{user_input}'...")
-            start_time = datetime.now()
             
-            result = await agent.find_healthcare_facilities(user_input)
+            result = await locator.find_facilities(user_input)
             
             if result["success"]:
-                print(f"\n🏥 **Results:**")
-                print(result['response'])
-                
-                print(f"\n📊 **Search Details:**")
-                print(f"   📍 Location: {result.get('parsed_location', 'N/A')}")
-                print(f"   🏢 Facility Types: {', '.join(result.get('facility_types_searched', []))}")
-                print(f"   📈 Total Results: {result['total_results']}")
+                print(f"\n📊 **Results Summary:**")
+                print(f"   🏢 Total Found: {result['total_results']} (showing max 10)")
+                print(f"   📍 Location: {result.get('location', 'N/A')}")
+                print(f"   🏥 Categories: {', '.join(result.get('categories_searched', []))}")
                 print(f"   ⏱️ Processing Time: {result['processing_time']:.2f}s")
-                print(f"   🎯 Confidence: {result.get('confidence', 0):.2f}")
+                print(f"   🎨 Render Mode: {result.get('render_mode', 'standard')}")
                 
-                if result.get('grouped_facilities'):
-                    print(f"   📋 By Type: {result['grouped_facilities']}")
+                if result.get('facilities'):
+                    print(f"\n🏥 **Top Facilities Found:**")
+                    for i, facility in enumerate(result['facilities'][:5], 1):  # Show top 5
+                        print(f"  {i}. {facility['name']}")
+                        if facility.get('address'):
+                            print(f"     📍 {facility['address']}")
+                        if facility.get('rating'):
+                            print(f"     ⭐ {facility['rating']}/5 ({facility.get('review_count', 0)} reviews)")
+                        if facility.get('distance_miles'):
+                            print(f"     📏 {facility['distance_miles']} miles away")
+                        print()
                 
             else:
                 print(f"\n❌ **Error:** {result['error']}")
@@ -940,4 +1526,5 @@ if __name__ == "__main__":
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
     
-    asyncio.run(test_locator_interface())
+    print("🚀 Starting Fixed Healthcare & Wellness Locator Agent...")
+    asyncio.run(test_enhanced_locator())

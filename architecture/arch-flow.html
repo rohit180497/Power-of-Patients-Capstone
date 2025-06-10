@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TBI Research Platform Architecture</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+            overflow-x: auto;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .diagram-container {
+            position: relative;
+            width: 100%;
+            min-height: 1100px;
+            overflow: visible;
+        }
+        
+        /* Component styles */
+        .component {
+            position: absolute;
+            border-radius: 8px;
+            padding: 12px 16px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 13px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        
+        .component:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 20;
+        }
+        
+        /* Component types */
+        .entry-point {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: 2px solid #1e40af;
+        }
+        
+        .database {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            border: 2px solid #6d28d9;
+            border-radius: 20px;
+        }
+        
+        .agent {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: 2px solid #047857;
+        }
+        
+        .orchestrator {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            border: 2px solid #b45309;
+        }
+        
+        .classifier {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: 2px solid #b91c1c;
+        }
+        
+        .guardrail {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            border: 2px solid #4338ca;
+        }
+        
+        .synthesizer {
+            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+            color: white;
+            border: 2px solid #0f766e;
+        }
+        
+        .memory {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: white;
+            border: 2px solid #c2410c;
+        }
+        
+        .external-api {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+            color: white;
+            border: 2px solid #be185d;
+        }
+        
+        .llm {
+            background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+            color: white;
+            border: 2px solid #7c3aed;
+            font-size: 12px;
+            padding: 10px 14px;
+        }
+        
+        /* Flow arrows */
+        .arrow {
+            stroke: #64748b;
+            stroke-width: 2;
+            fill: none;
+            marker-end: url(#arrowhead);
+            transition: stroke 0.3s ease;
+        }
+        
+        .arrow:hover {
+            stroke: #3b82f6;
+            stroke-width: 3;
+        }
+        
+        .arrow-dashed {
+            stroke-dasharray: 5,5;
+        }
+        
+        .flow-label {
+            position: absolute;
+            background: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+            white-space: nowrap;
+            z-index: 5;
+        }
+        
+        /* Section dividers */
+        .section {
+            position: absolute;
+            border: 2px dashed #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            z-index: 1;
+        }
+        
+        .section-title {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: white;
+            padding: 0 10px;
+            font-weight: 600;
+            color: #475569;
+            font-size: 14px;
+        }
+        
+        /* Legend */
+        .legend {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 12px;
+            max-width: 180px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        
+        /* Flow type indicator */
+        .flow-indicator {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 30;
+        }
+        
+        .flow-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 13px;
+        }
+        
+        .flow-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        
+        /* Note box */
+        .note {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            border-radius: 6px;
+            padding: 10px 15px;
+            font-size: 12px;
+            color: #92400e;
+            max-width: 300px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .diagram-container {
+                min-width: 1400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TBI Research Platform Architecture</h1>
+        <p class="subtitle">Multi-Agent System with Role-Based Access Control</p>
+        
+        <div class="flow-indicator">
+            <button class="flow-btn active" onclick="showFlow('both')">Show Both Flows</button>
+            <button class="flow-btn" onclick="showFlow('patient')">Patient Flow Only</button>
+            <button class="flow-btn" onclick="showFlow('researcher')">Researcher Flow Only</button>
+        </div>
+        
+        <div class="diagram-container">
+            <!-- SVG for arrows -->
+            <svg style="position: absolute; width: 100%; height: 100%; pointer-events: none; z-index: 2;">
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                        <polygon points="0 0, 10 3, 0 6" fill="#64748b" />
+                    </marker>
+                </defs>
+                
+                <!-- Authentication flow -->
+                <path class="arrow" d="M 700 80 L 700 140" />
+                <path class="arrow" d="M 700 180 L 700 240" />
+                
+                <!-- Split to patient/researcher -->
+                <path class="arrow patient-flow" d="M 680 260 L 400 320" />
+                <path class="arrow researcher-flow" d="M 720 260 L 1000 320" />
+                
+                <!-- Patient flow arrows -->
+                <path class="arrow patient-flow" d="M 400 360 L 400 410" />
+                <path class="arrow patient-flow" d="M 400 450 L 400 500" />
+                <path class="arrow patient-flow" d="M 400 540 L 400 590" />
+                
+                <!-- Patient to agents -->
+                <path class="arrow patient-flow" d="M 380 610 L 300 670" />
+                <path class="arrow patient-flow" d="M 400 630 L 400 670" />
+                <path class="arrow patient-flow" d="M 420 610 L 500 670" />
+                
+                <!-- Patient agents to synthesizer -->
+                <path class="arrow patient-flow" d="M 300 710 L 380 770" />
+                <path class="arrow patient-flow" d="M 400 710 L 400 770" />
+                <path class="arrow patient-flow" d="M 500 710 L 420 770" />
+                
+                <!-- Patient synthesizer to output -->
+                <path class="arrow patient-flow" d="M 400 810 L 400 870" />
+                
+                <!-- Researcher flow arrows -->
+                <path class="arrow researcher-flow" d="M 1000 360 L 1000 410" />
+                <path class="arrow researcher-flow" d="M 1000 450 L 1000 500" />
+                <path class="arrow researcher-flow" d="M 1000 540 L 1000 590" />
+                
+                <!-- Researcher to agents -->
+                <path class="arrow researcher-flow" d="M 980 610 L 900 670" />
+                <path class="arrow researcher-flow" d="M 1000 630 L 1000 670" />
+                <path class="arrow researcher-flow" d="M 1020 610 L 1100 670" />
+                
+                <!-- Researcher agents to synthesizer -->
+                <path class="arrow researcher-flow" d="M 900 710 L 980 770" />
+                <path class="arrow researcher-flow" d="M 1000 710 L 1000 770" />
+                <path class="arrow researcher-flow" d="M 1100 710 L 1020 770" />
+                
+                <!-- Researcher synthesizer to output -->
+                <path class="arrow researcher-flow" d="M 1000 810 L 1000 870" />
+                
+                <!-- Database connections -->
+                <!-- Auth DB connection -->
+                <path class="arrow arrow-dashed" d="M 800 160 L 900 160" />
+                
+                <!-- RAG to Pinecone connections -->
+                <path class="arrow arrow-dashed patient-flow" d="M 450 690 L 620 550" />
+                <path class="arrow arrow-dashed researcher-flow" d="M 1050 690 L 720 550" />
+                
+                <!-- Pandas Agent to PostgreSQL -->
+                <path class="arrow arrow-dashed researcher-flow" d="M 850 690 L 740 450" />
+                
+                <!-- MedPalm to LLM connections -->
+                <path class="arrow arrow-dashed patient-flow" d="M 550 690 L 650 600" />
+                <path class="arrow arrow-dashed researcher-flow" d="M 1150 690 L 750 600" />
+                
+                <!-- Memory connections -->
+                <path class="arrow arrow-dashed patient-flow" d="M 450 790 L 620 850" />
+                <path class="arrow arrow-dashed researcher-flow" d="M 950 790 L 730 850" />
+                
+                <!-- External API connection -->
+                <path class="arrow arrow-dashed patient-flow" d="M 250 690 L 150 690" />
+            </svg>
+            
+            <!-- Flow Labels -->
+            <div class="flow-label" style="left: 520px; top: 680px;">connects to</div>
+            <div class="flow-label" style="left: 920px; top: 680px;">connects to</div>
+            <div class="flow-label" style="left: 780px; top: 470px;">queries</div>
+            
+            <!-- Components -->
+            <!-- Entry point -->
+            <div class="component entry-point" style="left: 650px; top: 60px;">
+                Login Page
+            </div>
+            
+            <!-- Authentication -->
+            <div class="component database" style="left: 620px; top: 140px;">
+                PostgreSQL<br>Authentication Table
+            </div>
+            
+            <div class="flow-label" style="left: 810px; top: 150px;">authenticate</div>
+            
+            <!-- Auth Database -->
+            <div class="component database" style="left: 900px; top: 140px;">
+                User Roles<br>Database
+            </div>
+            
+            <!-- Role check -->
+            <div class="component classifier" style="left: 630px; top: 240px;">
+                Role Classifier<br>(Patient/Researcher)
+            </div>
+            
+            <!-- Patient Flow Section -->
+            <div class="section patient-flow" style="left: 200px; top: 300px; width: 400px; height: 620px;">
+                <div class="section-title">Patient Flow</div>
+            </div>
+            
+            <!-- Patient components -->
+            <div class="component entry-point patient-flow" style="left: 350px; top: 340px;">
+                Patient Query
+            </div>
+            
+            <div class="component guardrail patient-flow" style="left: 340px; top: 410px;">
+                Guardrail Agent
+            </div>
+            
+            <div class="component classifier patient-flow" style="left: 320px; top: 480px; width: 160px;">
+                Intent Classifier<br>
+                <span style="font-size: 11px;">(Crisis, TBI, Medical,<br>Self-inquiry, Location)</span>
+            </div>
+            
+            <div class="component orchestrator patient-flow" style="left: 310px; top: 570px;">
+                Multi-Agent Orchestrator
+            </div>
+            
+            <!-- Patient Agents -->
+            <div class="component agent patient-flow" style="left: 250px; top: 670px;">
+                Location Search<br>Agent
+            </div>
+            
+            <div class="component agent patient-flow" style="left: 360px; top: 670px;">
+                Retrieval Agent<br>(RAG)
+            </div>
+            
+            <div class="component agent patient-flow" style="left: 470px; top: 670px;">
+                MedPalm<br>Agent
+            </div>
+            
+            <div class="component synthesizer patient-flow" style="left: 340px; top: 770px;">
+                Response Synthesizer
+            </div>
+            
+            <div class="component entry-point patient-flow" style="left: 340px; top: 870px;">
+                Patient Response
+            </div>
+            
+            <!-- Researcher Flow Section -->
+            <div class="section researcher-flow" style="left: 800px; top: 300px; width: 400px; height: 620px;">
+                <div class="section-title">Researcher Flow</div>
+            </div>
+            
+            <!-- Researcher components -->
+            <div class="component entry-point researcher-flow" style="left: 950px; top: 340px;">
+                Researcher Query
+            </div>
+            
+            <div class="component guardrail researcher-flow" style="left: 940px; top: 410px;">
+                Guardrail Agent
+            </div>
+            
+            <div class="component classifier researcher-flow" style="left: 920px; top: 480px; width: 160px;">
+                Intent Classifier<br>
+                <span style="font-size: 11px;">(Data Analysis,<br>TBI, Medical)</span>
+            </div>
+            
+            <div class="component orchestrator researcher-flow" style="left: 910px; top: 570px;">
+                Multi-Agent Orchestrator
+            </div>
+            
+            <!-- Researcher Agents -->
+            <div class="component agent researcher-flow" style="left: 850px; top: 670px;">
+                Pandas Agent<br>(Data Analysis)
+            </div>
+            
+            <div class="component agent researcher-flow" style="left: 960px; top: 670px;">
+                Retrieval Agent<br>(RAG)
+            </div>
+            
+            <div class="component agent researcher-flow" style="left: 1070px; top: 670px;">
+                MedPalm<br>Agent
+            </div>
+            
+            <div class="component synthesizer researcher-flow" style="left: 940px; top: 770px;">
+                Response Synthesizer
+            </div>
+            
+            <div class="component entry-point researcher-flow" style="left: 940px; top: 870px;">
+                Researcher Response
+            </div>
+            
+            <!-- Shared Resources Section -->
+            <div class="section" style="left: 620px; top: 380px; width: 160px; height: 500px;">
+                <div class="section-title">Shared Resources</div>
+            </div>
+            
+            <div class="component database" style="left: 650px; top: 420px;">
+                PostgreSQL<br>Patient Data
+            </div>
+            
+            <div class="component database" style="left: 650px; top: 510px;">
+                Pinecone<br>Vector Store
+            </div>
+            
+            <div class="component llm" style="left: 660px; top: 590px;">
+                Gemini 2.0<br>Flash LLM
+            </div>
+            
+            <div class="component memory" style="left: 640px; top: 830px; width: 120px;">
+                Conversation<br>Memory
+            </div>
+            
+            <!-- External APIs -->
+            <div class="component external-api patient-flow" style="left: 80px; top: 670px;">
+                Google<br>Location API
+            </div>
+            
+            <!-- Legend -->
+            <div class="legend">
+                <h4 style="margin: 0 0 10px 0;">Component Types</h4>
+                <div class="legend-item">
+                    <div class="legend-color entry-point"></div>
+                    <span>Entry/Exit Points</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color guardrail"></div>
+                    <span>Guardrail Agent</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color classifier"></div>
+                    <span>Classifiers</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color orchestrator"></div>
+                    <span>Orchestrators</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color agent"></div>
+                    <span>Agents</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color synthesizer"></div>
+                    <span>Synthesizers</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color database"></div>
+                    <span>Databases</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color memory"></div>
+                    <span>Memory</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color llm"></div>
+                    <span>LLM Model</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color external-api"></div>
+                    <span>External APIs</span>
+                </div>
+            </div>
+            
+            <!-- Note -->
+            <div class="note">
+                <strong>Note:</strong> Dashed lines indicate data connections between agents and resources. Solid lines show the main request/response flow.
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showFlow(type) {
+            // Update button states
+            const buttons = document.querySelectorAll('.flow-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide elements based on flow type
+            const patientElements = document.querySelectorAll('.patient-flow');
+            const researcherElements = document.querySelectorAll('.researcher-flow');
+            
+            if (type === 'both') {
+                patientElements.forEach(el => el.style.opacity = '1');
+                researcherElements.forEach(el => el.style.opacity = '1');
+            } else if (type === 'patient') {
+                patientElements.forEach(el => el.style.opacity = '1');
+                researcherElements.forEach(el => el.style.opacity = '0.2');
+            } else if (type === 'researcher') {
+                patientElements.forEach(el => el.style.opacity = '0.2');
+                researcherElements.forEach(el => el.style.opacity = '1');
+            }
+        }
+        
+        // Initialize with both flows visible
+        showFlow('both');
+    </script>
+</body>
+</html>

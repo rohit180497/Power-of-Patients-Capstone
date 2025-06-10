@@ -321,166 +321,6 @@
             line-height: 1.6;
         }
 
-        /* NEW: Facility Card Styles */
-        .facilities-container {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 16px;
-            margin: 8px 0;
-        }
-
-        .facilities-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .facilities-header h3 {
-            color: #1e293b;
-            font-size: 18px;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .facilities-count {
-            background: #2563eb;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .facility-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 12px;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .facility-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-color: #2563eb;
-            transform: translateY(-1px);
-        }
-
-        .facility-card:last-child {
-            margin-bottom: 0;
-        }
-
-        .facility-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-        }
-
-        .facility-name {
-            font-weight: 600;
-            color: #1e293b;
-            font-size: 16px;
-            margin: 0 0 4px 0;
-            line-height: 1.4;
-        }
-
-        .facility-category {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            background: #f1f5f9;
-            color: #475569;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        .facility-address {
-            color: #64748b;
-            font-size: 14px;
-            margin: 8px 0;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .facility-details {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #f1f5f9;
-        }
-
-        .facility-rating {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .rating-stars {
-            color: #fbbf24;
-            font-size: 14px;
-        }
-
-        .rating-text {
-            color: #64748b;
-            font-size: 13px;
-        }
-
-        .facility-distance {
-            color: #2563eb;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .facility-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .facility-button {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .facility-button:hover {
-            background: #1d4ed8;
-            transform: translateY(-1px);
-        }
-
-        .facility-button.secondary {
-            background: #f8fafc;
-            color: #475569;
-            border: 1px solid #e2e8f0;
-        }
-
-        .facility-button.secondary:hover {
-            background: #f1f5f9;
-            border-color: #cbd5e1;
-        }
-
         .input-container {
             background: white;
             border-top: 1px solid #e5e7eb;
@@ -578,27 +418,6 @@
         }
 
         @media (max-width: 768px) {
-            .facility-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-
-            .facility-details {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-
-            .facility-actions {
-                width: 100%;
-            }
-
-            .facility-button {
-                flex: 1;
-                justify-content: center;
-            }
-
             .mascot-dog {
                 width: 60px;
                 height: 60px;
@@ -721,6 +540,10 @@
             border-right: 8px solid transparent;
             border-top: 8px solid #1f2937;
         }
+
+        /* .mascot-dog:hover .mascot-tooltip {
+            opacity: 1;
+        } */
 
         /* Pulse animation for mascot */
         @keyframes mascotPulse {
@@ -862,124 +685,11 @@
         const sendButton = document.getElementById('sendButton');
         const connectionError = document.getElementById('connectionError');
 
-        // NEW: Function to render facilities for location searches
-        function renderFacilities(facilitiesData, structuredData = null) {
-            const facilitiesContainer = document.createElement('div');
-            facilitiesContainer.className = 'facilities-container';
-            
-            // Header
-            const header = document.createElement('div');
-            header.className = 'facilities-header';
-            
-            const title = document.createElement('h3');
-            title.textContent = structuredData?.header?.title || `Found ${facilitiesData.length} Healthcare Facilities`;
-            
-            const countBadge = document.createElement('span');
-            countBadge.className = 'facilities-count';
-            countBadge.textContent = facilitiesData.length;
-            
-            header.appendChild(title);
-            header.appendChild(countBadge);
-            facilitiesContainer.appendChild(header);
-            
-            // Render each facility
-            facilitiesData.forEach((facility, index) => {
-                if (index >= 10) return; // Limit to 10 facilities for display
-                
-                const facilityCard = document.createElement('div');
-                facilityCard.className = 'facility-card';
-                
-                // Facility Header (Name and Category)
-                const facilityHeader = document.createElement('div');
-                facilityHeader.className = 'facility-header';
-                
-                const facilityName = document.createElement('h4');
-                facilityName.className = 'facility-name';
-                facilityName.textContent = facility.name || 'Healthcare Facility';
-                
-                const facilityCategory = document.createElement('div');
-                facilityCategory.className = 'facility-category';
-                const categoryIcon = facility.category?.icon || '🏥';
-                const categoryName = facility.category?.name || 'Healthcare';
-                facilityCategory.innerHTML = `${categoryIcon} ${categoryName}`;
-                
-                facilityHeader.appendChild(facilityName);
-                facilityHeader.appendChild(facilityCategory);
-                
-                // Address
-                const address = document.createElement('div');
-                address.className = 'facility-address';
-                const addressText = facility.location?.address || facility.address || 'Address not available';
-                address.innerHTML = `📍 ${addressText}`;
-                
-                // Facility Details (Rating and Distance)
-                const facilityDetails = document.createElement('div');
-                facilityDetails.className = 'facility-details';
-                
-                const ratingDiv = document.createElement('div');
-                ratingDiv.className = 'facility-rating';
-                
-                if (facility.reviews?.rating || facility.rating) {
-                    const starsDiv = document.createElement('div');
-                    starsDiv.className = 'rating-stars';
-                    const rating = facility.reviews?.rating || facility.rating;
-                    const reviewCount = facility.reviews?.review_count || facility.review_count || 0;
-                    
-                    starsDiv.textContent = facility.reviews?.stars_display || '⭐'.repeat(Math.floor(rating));
-                    
-                    const ratingText = document.createElement('div');
-                    ratingText.className = 'rating-text';
-                    ratingText.textContent = `${rating}/5 (${reviewCount} reviews)`;
-                    
-                    ratingDiv.appendChild(starsDiv);
-                    ratingDiv.appendChild(ratingText);
-                } else {
-                    ratingDiv.innerHTML = '<div class="rating-text">No reviews available</div>';
-                }
-                
-                const distanceDiv = document.createElement('div');
-                distanceDiv.className = 'facility-distance';
-                const distance = facility.location?.distance_display || 
-                               (facility.distance_miles ? `${facility.distance_miles} miles away` : 'Distance not available');
-                distanceDiv.textContent = distance;
-                
-                facilityDetails.appendChild(ratingDiv);
-                facilityDetails.appendChild(distanceDiv);
-                
-                // Actions (Maps button)
-                const actionsDiv = document.createElement('div');
-                actionsDiv.className = 'facility-actions';
-                
-                const mapsButton = document.createElement('a');
-                mapsButton.className = 'facility-button';
-                mapsButton.href = facility.actions?.maps_url || facility.maps_url || '#';
-                mapsButton.target = '_blank';
-                mapsButton.innerHTML = '🗺️ View on Maps';
-                
-                if (facility.contact?.phone || facility.phone) {
-                    const callButton = document.createElement('a');
-                    callButton.className = 'facility-button secondary';
-                    callButton.href = `tel:${facility.contact?.phone || facility.phone}`;
-                    callButton.innerHTML = '📞 Call';
-                    actionsDiv.appendChild(callButton);
-                }
-                
-                actionsDiv.appendChild(mapsButton);
-                
-                // Assemble facility card
-                facilityCard.appendChild(facilityHeader);
-                facilityCard.appendChild(address);
-                facilityCard.appendChild(facilityDetails);
-                facilityCard.appendChild(actionsDiv);
-                
-                facilitiesContainer.appendChild(facilityCard);
-            });
-            
-            return facilitiesContainer;
-        }
-
-        // UPDATED: Enhanced addMessage function with JSON support
-        function addMessage(text, isUser = false, senderName = null, jsonData = null) {
+        // Add message to chat with better formatting
+        
+        // Replace the addMessage function with this corrected version
+        // Replace the addMessage function with this corrected version
+        function addMessage(text, isUser = false, senderName = null) {
             // Ensure typing indicator is removed before adding message
             if (!isUser) {
                 hideTypingIndicator();
@@ -1029,150 +739,127 @@
             const textDiv = document.createElement('div');
             textDiv.className = 'message-text';
             
-            // NEW: Handle JSON facility data
-            if (jsonData && jsonData.response_format === 'json' && jsonData.structured_data) {
-                // Add a brief text summary
-                const summaryText = `I found ${jsonData.facilities_found || 0} facilities near ${jsonData.search_location || 'your location'}. Here are the results:`;
+            // Clean text and fix malformed HTML tags
+            let cleanText = text;
+            
+            // Fix malformed HTML tags that are causing display issues
+            cleanText = cleanText
+                .replace(/(\s|^)em>/g, '$1<em>')  // Fix malformed <em> tags
+                .replace(/(\s|^)strong>/g, '$1<strong>'); // Fix malformed <strong> tags
+            
+            // Format text for better readability
+            if (!isUser && cleanText.length > 100) {
+                // Process the text to add proper formatting
+                let formattedText = cleanText;
                 
-                const summaryP = document.createElement('p');
-                summaryP.textContent = summaryText;
-                summaryP.style.marginBottom = '16px';
-                textDiv.appendChild(summaryP);
+                // Replace multiple spaces with single space
+                formattedText = formattedText.replace(/\s+/g, ' ').trim();
                 
-                // Render facilities
-                const facilities = jsonData.structured_data.facilities || [];
-                if (facilities.length > 0) {
-                    const facilitiesElement = renderFacilities(facilities, jsonData.structured_data);
-                    textDiv.appendChild(facilitiesElement);
-                } else {
-                    const noResultsP = document.createElement('p');
-                    noResultsP.textContent = 'No facilities found matching your criteria. Try expanding your search radius or using different keywords.';
-                    noResultsP.style.color = '#64748b';
-                    noResultsP.style.fontStyle = 'italic';
-                    textDiv.appendChild(noResultsP);
-                }
-            } else {
-                // Handle regular text responses
-                let cleanText = text;
+                // Split into sentences more intelligently - avoid splitting abbreviations and URLs
+                // Replace abbreviations temporarily, split sentences, then restore
+                let tempText = formattedText
+                    .replace(/\bU\.S\./g, 'U_S_')
+                    .replace(/\bwww\./g, 'www_')
+                    .replace(/\b[A-Z]\./g, (match) => match.replace('.', '_'))
+                    .replace(/\d+\.\d+/g, (match) => match.replace('.', '_')); // Handle decimal numbers
                 
-                // Fix malformed HTML tags that are causing display issues
-                cleanText = cleanText
-                    .replace(/(\s|^)em>/g, '$1<em>')  // Fix malformed <em> tags
-                    .replace(/(\s|^)strong>/g, '$1<strong>'); // Fix malformed <strong> tags
+                // Now split on sentences (period followed by space and capital letter)
+                const sentences = tempText.match(/[^.!?]*[.!?]+(?=\s+[A-Z]|$)/g) || [tempText];
                 
-                // Format text for better readability
-                if (!isUser && cleanText.length > 100) {
-                    // Process the text to add proper formatting
-                    let formattedText = cleanText;
+                // Restore abbreviations in each sentence
+                const restoredSentences = sentences.map(sentence => 
+                    sentence.replace(/U_S_/g, 'U.S.')
+                        .replace(/www_/g, 'www.')
+                        .replace(/([A-Z])_/g, '$1.')
+                        .replace(/(\d+)_(\d+)/g, '$1.$2')
+                );
+                let processedText = '';
+                let currentParagraph = '';
+                
+                restoredSentences.forEach((sentence, index) => {
+                    const trimmedSentence = sentence.trim();
                     
-                    // Replace multiple spaces with single space
-                    formattedText = formattedText.replace(/\s+/g, ' ').trim();
-                    
-                    // Split into sentences more intelligently - avoid splitting abbreviations and URLs
-                    let tempText = formattedText
-                        .replace(/\bU\.S\./g, 'U_S_')
-                        .replace(/\bwww\./g, 'www_')
-                        .replace(/\b[A-Z]\./g, (match) => match.replace('.', '_'))
-                        .replace(/\d+\.\d+/g, (match) => match.replace('.', '_')); // Handle decimal numbers
-                    
-                    // Now split on sentences (period followed by space and capital letter)
-                    const sentences = tempText.match(/[^.!?]*[.!?]+(?=\s+[A-Z]|$)/g) || [tempText];
-                    
-                    // Restore abbreviations in each sentence
-                    const restoredSentences = sentences.map(sentence => 
-                        sentence.replace(/U_S_/g, 'U.S.')
-                            .replace(/www_/g, 'www.')
-                            .replace(/([A-Z])_/g, '$1.')
-                            .replace(/(\d+)_(\d+)/g, '$1.$2')
-                    );
-                    let processedText = '';
-                    let currentParagraph = '';
-                    
-                    restoredSentences.forEach((sentence, index) => {
-                        const trimmedSentence = sentence.trim();
-                        
-                        // Check for natural paragraph breaks
-                        if (trimmedSentence.match(/^(However|Furthermore|Additionally|Moreover|First|Second|Third|Finally|In conclusion|For example|Therefore)/i) ||
-                            (currentParagraph.length > 200 && index > 0)) {
-                            if (currentParagraph) {
-                                processedText += currentParagraph.trim() + '\n\n';
-                                currentParagraph = '';
-                            }
-                        }
-                        
-                        currentParagraph += trimmedSentence + ' ';
-                        
-                        // Force paragraph break after 3 sentences or at the end
-                        if ((currentParagraph.match(/[.!?]/g) || []).length >= 3 || index === restoredSentences.length - 1) {
-                            processedText += currentParagraph.trim() + (index < restoredSentences.length - 1 ? '\n\n' : '');
+                    // Check for natural paragraph breaks
+                    if (trimmedSentence.match(/^(However|Furthermore|Additionally|Moreover|First|Second|Third|Finally|In conclusion|For example|Therefore)/i) ||
+                        (currentParagraph.length > 200 && index > 0)) {
+                        if (currentParagraph) {
+                            processedText += currentParagraph.trim() + '\n\n';
                             currentParagraph = '';
                         }
-                    });
+                    }
                     
-                    cleanText = processedText.trim();
-                }
-                
-                // Handle different text patterns
-                const paragraphs = cleanText.split(/\n\n+/);
-                
-                paragraphs.forEach((para, index) => {
-                    if (para.trim()) {
-                        const p = document.createElement('p');
-                        
-                        // Check for Medical Disclaimer - add separator and special styling
-                        if (para.includes('Medical Disclaimer') || para.includes('**Medical Disclaimer**')) {
-                            // Add separator line before disclaimer
-                            const separator = document.createElement('div');
-                            separator.className = 'section-break';
-                            separator.style.height = '1px';
-                            separator.style.background = '#e5e7eb';
-                            separator.style.margin = '20px 0';
-                            textDiv.appendChild(separator);
-                            
-                            // Style the disclaimer
-                            p.style.fontSize = '13px';
-                            p.style.color = '#64748b';
-                            p.style.fontStyle = 'italic';
-                            p.style.marginTop = '16px';
-                            p.style.paddingTop = '12px';
-                        }
-                        
-                        // Process markdown and HTML formatting
-                        let formattedPara = para
-                            .replace(/\*\*\*(.*?)\*\*\*/g, '<strong>$1</strong>') // Handle triple asterisks
-                            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                            .replace(/\*(.*?)\*/g, '<em>$1</em>');
-                        
-                        // Handle bullet points - more precise detection
-                        if (para.trim().match(/^[•\-]\s/) || 
-                            para.trim().match(/^\*{1,3}\s*\*{1,3}[A-Z]/) || 
-                            para.trim().match(/^•\s*\*{1,3}/)) {
-                            formattedPara = '• ' + formattedPara.replace(/^[•\-\*]+\s*/, '');
-                            p.style.marginLeft = '20px';
-                            p.style.listStyleType = 'none';
-                        }
-                        
-                        // Handle numbered lists
-                        const numberMatch = para.trim().match(/^(\d+)\./);
-                        if (numberMatch) {
-                            p.style.marginLeft = '20px';
-                        }
-                        
-                        // Set innerHTML to allow HTML formatting
-                        p.innerHTML = formattedPara;
-                        textDiv.appendChild(p);
+                    currentParagraph += trimmedSentence + ' ';
+                    
+                    // Force paragraph break after 3 sentences or at the end
+                    if ((currentParagraph.match(/[.!?]/g) || []).length >= 3 || index === restoredSentences.length - 1) {
+                        processedText += currentParagraph.trim() + (index < restoredSentences.length - 1 ? '\n\n' : '');
+                        currentParagraph = '';
                     }
                 });
                 
-                // If no paragraphs were created, just set the text with HTML formatting
-                if (textDiv.children.length === 0) {
-                    // Process the text for HTML formatting
-                    let processedText = cleanText
+                cleanText = processedText.trim();
+            }
+            
+            // Handle different text patterns
+            const paragraphs = cleanText.split(/\n\n+/);
+            
+            paragraphs.forEach((para, index) => {
+                if (para.trim()) {
+                    const p = document.createElement('p');
+                    
+                    // Check for Medical Disclaimer - add separator and special styling
+                    if (para.includes('Medical Disclaimer') || para.includes('**Medical Disclaimer**')) {
+                        // Add separator line before disclaimer
+                        const separator = document.createElement('div');
+                        separator.className = 'section-break';
+                        separator.style.height = '1px';
+                        separator.style.background = '#e5e7eb';
+                        separator.style.margin = '20px 0';
+                        textDiv.appendChild(separator);
+                        
+                        // Style the disclaimer
+                        p.style.fontSize = '13px';
+                        p.style.color = '#64748b';
+                        p.style.fontStyle = 'italic';
+                        p.style.marginTop = '16px';
+                        p.style.paddingTop = '12px';
+                    }
+                    
+                    // Process markdown and HTML formatting
+                    let formattedPara = para
+                        .replace(/\*\*\*(.*?)\*\*\*/g, '<strong>$1</strong>') // Handle triple asterisks
                         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                         .replace(/\*(.*?)\*/g, '<em>$1</em>');
                     
-                    textDiv.innerHTML = processedText;
+                    // Handle bullet points - more precise detection
+                    if (para.trim().match(/^[•\-]\s/) || 
+                        para.trim().match(/^\*{1,3}\s*\*{1,3}[A-Z]/) || 
+                        para.trim().match(/^•\s*\*{1,3}/)) {
+                        formattedPara = '• ' + formattedPara.replace(/^[•\-\*]+\s*/, '');
+                        p.style.marginLeft = '20px';
+                        p.style.listStyleType = 'none';
+                    }
+                    
+                    // Handle numbered lists
+                    const numberMatch = para.trim().match(/^(\d+)\./);
+                    if (numberMatch) {
+                        p.style.marginLeft = '20px';
+                    }
+                    
+                    // Set innerHTML to allow HTML formatting
+                    p.innerHTML = formattedPara;
+                    textDiv.appendChild(p);
                 }
+            });
+            
+            // If no paragraphs were created, just set the text with HTML formatting
+            if (textDiv.children.length === 0) {
+                // Process the text for HTML formatting
+                let processedText = cleanText
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>');
+                
+                textDiv.innerHTML = processedText;
             }
             
             contentDiv.appendChild(headerDiv);
@@ -1274,7 +961,7 @@
             messageInput.placeholder = 'Type your message to Sallie...';
         }
 
-        // UPDATED: Send message with enhanced JSON handling
+        // Send message
         async function sendMessage(message) {
             let typingTimeout = null;
             
@@ -1284,10 +971,10 @@
                 // Only show typing indicator for actual messages, not initial connection
                 if (message !== 'INITIAL_CONNECTION') {
                     showTypingIndicator();
-                    // Auto-remove typing indicator after 30 seconds (location searches take longer)
+                    // Auto-remove typing indicator after 10 seconds
                     typingTimeout = setTimeout(() => {
                         hideTypingIndicator();
-                    }, 30000);
+                    }, 10000);
                 }
                 
                 const response = await fetch('/api/chat', {
@@ -1301,13 +988,8 @@
                         user_type: 'patient'  // Explicitly set as patient
                     })
                 });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
                 
                 const data = await response.json();
-                console.log('Received response:', data); // Debug log
                 
                 // Clear timeout and hide typing indicator before showing response
                 if (typingTimeout) {
@@ -1321,18 +1003,10 @@
                 if (data.success) {
                     // Another small delay before adding message
                     await new Promise(resolve => setTimeout(resolve, 100));
-                    
-                    // Check if this is a JSON location response
-                    if (data.response_format === 'json' && data.is_location_json) {
-                        console.log('Rendering JSON location response with', data.facilities_found, 'facilities');
-                        addMessage('', false, data.agent_used === 'ReAct' ? 'Sallie (Advanced)' : 'Sallie', data);
-                    } else {
-                        // Regular text response
-                        addMessage(data.response, false, data.agent_used === 'ReAct' ? 'Sallie (Advanced)' : 'Sallie');
-                    }
+                    addMessage(data.response, false, data.agent_used === 'ReAct' ? 'Sallie (Advanced)' : 'Sallie');
                 } else {
                     await new Promise(resolve => setTimeout(resolve, 100));
-                    addMessage(data.error || 'I apologize, but I encountered an error. Please try again.', false);
+                    addMessage('I apologize, but I encountered an error. Please try again.', false);
                     console.error('Chat error:', data.error);
                 }
             } catch (error) {
@@ -1384,7 +1058,7 @@
             const tips = [
                 "Remember to stay hydrated! Drink at least 8 glasses of water daily.",
                 "Gentle yoga or stretching can improve balance and reduce tension.",
-                "Wearing sunglasses can help if you're experiencing light sensitivity.",
+                "Wearing sunglasses can help if you’re experiencing light sensitivity.",
                 "Maintain a regular sleep schedule to support brain healing.",
                 "Take breaks from your screen every 20 minutes to rest your eyes.",
                 "A 10-minute walk can boost your mood and energy levels!",
@@ -1392,7 +1066,7 @@
                 "Getting 7-9 hours of sleep is crucial for your health.",
                 "Eating a balanced diet with fruits and vegetables supports brain health.",
                 "Regular exercise can help improve cognitive function after a TBI.",
-                "Log your symptoms on power of patients to track your recovery progress.",
+                "Keep a symptom journal to track your recovery progress.",
                 "Limit alcohol consumption as it can interfere with brain healing.",
                 "Create a consistent daily routine to help with memory and organization."
             ];
@@ -1432,6 +1106,19 @@
                     mascot.classList.add('pulse');
                 }
             }, 1200);
+            
+            // Show mascot tooltip briefly after page load
+            // setTimeout(() => {
+            //     const tooltip = document.querySelector('.mascot-tooltip');
+            //     if (tooltip) {
+            //         tooltip.style.opacity = '1';
+            //         tooltip.style.transform = 'translateX(-50%) translateY(-5px)';
+            //         setTimeout(() => {
+            //             tooltip.style.opacity = '0';
+            //             tooltip.style.transform = 'translateX(-50%)';
+            //         }, 3000);
+            //     }
+            // }, 2000);
         });
 
         // Focus on input

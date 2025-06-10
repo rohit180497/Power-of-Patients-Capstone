@@ -276,16 +276,6 @@
             border: 1px solid #e5e7eb;
         }
 
-        .message-text strong {
-            font-weight: 600;
-            color: #1e293b;
-        }
-
-        .message-text em {
-            font-style: italic;
-            color: #475569;
-        }
-
         /* Section breaks for topic changes */
         .message-text .section-break {
             height: 1px;
@@ -309,176 +299,81 @@
             display: inline;
         }
 
-        /* List styling */
-        .message-text ul,
-        .message-text ol {
-            margin: 8px 0 8px 20px;
-            padding-left: 20px;
-        }
-
-        .message-text li {
-            margin-bottom: 4px;
-            line-height: 1.6;
-        }
-
-        /* NEW: Facility Card Styles */
-        .facilities-container {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 16px;
-            margin: 8px 0;
-        }
-
-        .facilities-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .facilities-header h3 {
-            color: #1e293b;
-            font-size: 18px;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .facilities-count {
-            background: #2563eb;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .facility-card {
+        /* Visualization container - constrained size */
+        .visualization-container {
+            margin-top: 16px;
             background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 12px;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .facility-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-color: #2563eb;
-            transform: translateY(-1px);
-        }
-
-        .facility-card:last-child {
-            margin-bottom: 0;
-        }
-
-        .facility-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-        }
-
-        .facility-name {
-            font-weight: 600;
-            color: #1e293b;
-            font-size: 16px;
-            margin: 0 0 4px 0;
-            line-height: 1.4;
-        }
-
-        .facility-category {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            background: #f1f5f9;
-            color: #475569;
-            padding: 4px 8px;
+            border: 1px solid #e5e7eb;
             border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-            white-space: nowrap;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            width: 100%;
+            height: 400px; /* Fixed height */
+            position: relative;
+            overflow: hidden;
         }
 
-        .facility-address {
-            color: #64748b;
+        .visualization-content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Ensure all chart types fit within container */
+        .visualization-content canvas,
+        .visualization-content svg,
+        .visualization-content .plotly,
+        .visualization-content .js-plotly-plot,
+        .visualization-content iframe {
+            max-width: 100% !important;
+            max-height: 100% !important;
+            width: auto !important;
+            height: auto !important;
+        }
+
+        /* Loading state */
+        .visualization-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .visualization-loading span {
+            display: block;
+            margin-top: 8px;
+            color: #6b7280;
             font-size: 14px;
-            margin: 8px 0;
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
 
-        .facility-details {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #f1f5f9;
+        /* Error/fallback link */
+        .visualization-fallback {
+            text-align: center;
+            padding: 20px;
         }
 
-        .facility-rating {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .rating-stars {
-            color: #fbbf24;
-            font-size: 14px;
-        }
-
-        .rating-text {
-            color: #64748b;
-            font-size: 13px;
-        }
-
-        .facility-distance {
-            color: #2563eb;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .facility-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .facility-button {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
+        .visualization-fallback a {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 8px;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
         }
 
-        .facility-button:hover {
-            background: #1d4ed8;
-            transform: translateY(-1px);
-        }
-
-        .facility-button.secondary {
-            background: #f8fafc;
-            color: #475569;
-            border: 1px solid #e2e8f0;
-        }
-
-        .facility-button.secondary:hover {
-            background: #f1f5f9;
-            border-color: #cbd5e1;
+        .visualization-fallback a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
         }
 
         .input-container {
@@ -578,27 +473,6 @@
         }
 
         @media (max-width: 768px) {
-            .facility-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-
-            .facility-details {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-
-            .facility-actions {
-                width: 100%;
-            }
-
-            .facility-button {
-                flex: 1;
-                justify-content: center;
-            }
-
             .mascot-dog {
                 width: 60px;
                 height: 60px;
@@ -615,37 +489,23 @@
             }
 
             .mascot-tooltip {
-                position: absolute;
+                font-size: 12px;
+                padding: 6px 10px;
                 bottom: 100%;
-                right: 0;
-                background: #1f2937;
-                color: white;
-                padding: 8px 12px;
-                border-radius: 8px;
-                font-size: 14px;
-                white-space: nowrap;
                 margin-bottom: 10px;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-                pointer-events: none;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-                font-weight: 500;
-                z-index: 101;
+                left: 50%;
+                transform: translateX(-50%);
             }
 
             .mascot-tooltip::after {
-                content: '';
-                position: absolute;
                 top: 100%;
+                bottom: auto;
                 left: 50%;
                 transform: translateX(-50%);
                 border-left: 8px solid transparent;
                 border-right: 8px solid transparent;
                 border-top: 8px solid #1f2937;
-            }
-
-            .mascot-dog:hover .mascot-tooltip {
-                opacity: 1;
+                border-bottom: none;
             }
         }
 
@@ -722,6 +582,22 @@
             border-top: 8px solid #1f2937;
         }
 
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots::after {
+            content: ".";
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { content: "."; }
+            33% { content: ".."; }
+            66% { content: "..."; }
+        }
+        
+
         /* Pulse animation for mascot */
         @keyframes mascotPulse {
             0%, 100% {
@@ -790,6 +666,155 @@
             object-fit: cover;
             border-radius: 50%;
         }
+
+        /* Subtle shake animation */
+        @keyframes mascotShake {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(-3deg);
+            }
+            75% {
+                transform: rotate(3deg);
+            }
+        }
+
+        /* Apply shake before pulse */
+        .mascot-dog.shake {
+            animation: mascotShake 0.5s ease-in-out 2;
+        }
+
+        /* Scrollbar styling */
+        .chat-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Print styles */
+        @media print {
+            .header, .input-container, .sallie-corner, .mascot-dog, .background-logo {
+                display: none !important;
+            }
+            
+            .chat-container {
+                max-width: 100%;
+                padding: 20px;
+            }
+            
+            .message {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* NEW STYLES FOR TABLES */
+        /* Table styling for markdown-like tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 16px 0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .markdown-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 0;
+            background: white;
+            font-size: 14px;
+        }
+
+        .markdown-table th {
+            background-color: #f3f4f6;
+            color: #1f2937;
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .markdown-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid #e5e7eb;
+            color: #374151;
+        }
+
+        .markdown-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .markdown-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        /* Better styling for code blocks */
+        .message-text code {
+            background-color: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+
+        .message-text pre {
+            background-color: #f3f4f6;
+            padding: 12px 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        /* Improved list styling */
+        .message-text ul,
+        .message-text ol {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+
+        .message-text li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        /* Analysis results styling */
+        .analysis-results {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3b82f6;
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        /* Key findings highlight */
+        .key-findings {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .key-findings strong {
+            color: #0369a1;
+        }
     </style>
 </head>
 <body>
@@ -800,7 +825,7 @@
             </div>
             <div class="header-info">
                 <h2>Sallie</h2>
-                <p>Your Healthcare Assistant</p>
+                <p>Your Research Assistant</p>
             </div>
         </div>
         <button class="logout-button" onclick="logout()">Sign Out</button>
@@ -818,10 +843,10 @@
         <!-- Messages will be added here dynamically -->
     </div>
 
-    <div class="mascot-dog" onclick="showRandomTip()" >
-        <div class="mascot-tooltip" id="tooltip">💡 Click me for health tips!</div>
+    <!-- <div class="mascot-dog" onclick="showRandomTip()" >
+        <div class="mascot-tooltip" id="tooltip">💡 Click me for research tips!</div>
         <img src="/static/sallie.gif" alt="Sallie Mascot">
-    </div>
+    </div> -->
     
 
     <div class="input-container">
@@ -830,7 +855,7 @@
                 type="text" 
                 class="message-input" 
                 id="messageInput" 
-                placeholder="Type your message to Sallie..."
+                placeholder="Ask about patient data, statistics, or research insights..."
                 autocomplete="off"
             >
             <button type="submit" class="send-button" id="sendButton">
@@ -848,10 +873,10 @@
             window.location.href = '/';
         }
 
-        // Check user type - redirect researchers to their interface
+        // Check user type - redirect patients to their interface
         const userType = sessionStorage.getItem('user_type');
-        if (userType === 'researcher') {
-            window.location.href = '/researcher_chat.html';
+        if (userType !== 'researcher') {
+            window.location.href = '/chat.html';
         }
 
         const patientId = sessionStorage.getItem('patient_id');
@@ -862,124 +887,302 @@
         const sendButton = document.getElementById('sendButton');
         const connectionError = document.getElementById('connectionError');
 
-        // NEW: Function to render facilities for location searches
-        function renderFacilities(facilitiesData, structuredData = null) {
-            const facilitiesContainer = document.createElement('div');
-            facilitiesContainer.className = 'facilities-container';
+        
+        function processLLMResponse(text) {
+            if (!text) return '';
             
-            // Header
-            const header = document.createElement('div');
-            header.className = 'facilities-header';
+            // First, we need to detect if the text contains actual HTML
+            // that we want to preserve vs just text with special chars
+            const containsHtml = /<[a-z][\s\S]*>/i.test(text);
             
-            const title = document.createElement('h3');
-            title.textContent = structuredData?.header?.title || `Found ${facilitiesData.length} Healthcare Facilities`;
+            if (containsHtml) {
+                // If text already contains HTML markup, try to clean it up
+                
+                // Replace weird HTML entities (fixes cases where HTML is already encoded)
+                text = text.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+                
+                // Return cleaned HTML
+                return text;
+            }
             
-            const countBadge = document.createElement('span');
-            countBadge.className = 'facilities-count';
-            countBadge.textContent = facilitiesData.length;
+            // If it's just text with no intentional HTML, apply our formatting:
             
-            header.appendChild(title);
-            header.appendChild(countBadge);
-            facilitiesContainer.appendChild(header);
+            // 1. Format Key Findings sections (but don't highlight technical terms)
+            text = text.replace(/(Key Findings:)([^<]*)/g, '<div class="key-findings"><strong>$1</strong>$2</div>');
             
-            // Render each facility
-            facilitiesData.forEach((facility, index) => {
-                if (index >= 10) return; // Limit to 10 facilities for display
+            // 2. Format Detailed Breakdown sections
+            text = text.replace(/(Detailed Breakdown:)([^<]*)/g, '<strong>$1</strong>$2');
+            
+            // 3. Handle bullet points
+            // First convert any dashes or asterisks at start of line to bullet points
+            text = text.replace(/^[\*\-•]\s+/gm, '• ');
+            
+            // Then convert numbered lists to bullets for consistency
+            text = text.replace(/^\d+\.\s+/gm, '• ');
+            
+            // 4. Create proper HTML list from bullet points
+            const lines = text.split('\n');
+            let inList = false;
+            let formattedText = '';
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
                 
-                const facilityCard = document.createElement('div');
-                facilityCard.className = 'facility-card';
-                
-                // Facility Header (Name and Category)
-                const facilityHeader = document.createElement('div');
-                facilityHeader.className = 'facility-header';
-                
-                const facilityName = document.createElement('h4');
-                facilityName.className = 'facility-name';
-                facilityName.textContent = facility.name || 'Healthcare Facility';
-                
-                const facilityCategory = document.createElement('div');
-                facilityCategory.className = 'facility-category';
-                const categoryIcon = facility.category?.icon || '🏥';
-                const categoryName = facility.category?.name || 'Healthcare';
-                facilityCategory.innerHTML = `${categoryIcon} ${categoryName}`;
-                
-                facilityHeader.appendChild(facilityName);
-                facilityHeader.appendChild(facilityCategory);
-                
-                // Address
-                const address = document.createElement('div');
-                address.className = 'facility-address';
-                const addressText = facility.location?.address || facility.address || 'Address not available';
-                address.innerHTML = `📍 ${addressText}`;
-                
-                // Facility Details (Rating and Distance)
-                const facilityDetails = document.createElement('div');
-                facilityDetails.className = 'facility-details';
-                
-                const ratingDiv = document.createElement('div');
-                ratingDiv.className = 'facility-rating';
-                
-                if (facility.reviews?.rating || facility.rating) {
-                    const starsDiv = document.createElement('div');
-                    starsDiv.className = 'rating-stars';
-                    const rating = facility.reviews?.rating || facility.rating;
-                    const reviewCount = facility.reviews?.review_count || facility.review_count || 0;
+                if (line.trim().startsWith('• ')) {
+                    if (!inList) {
+                        inList = true;
+                        formattedText += '<ul>\n';
+                    }
                     
-                    starsDiv.textContent = facility.reviews?.stars_display || '⭐'.repeat(Math.floor(rating));
-                    
-                    const ratingText = document.createElement('div');
-                    ratingText.className = 'rating-text';
-                    ratingText.textContent = `${rating}/5 (${reviewCount} reviews)`;
-                    
-                    ratingDiv.appendChild(starsDiv);
-                    ratingDiv.appendChild(ratingText);
+                    // Extract the content after the bullet point
+                    const content = line.trim().substring(2);
+                    formattedText += `<li>${content}</li>\n`;
                 } else {
-                    ratingDiv.innerHTML = '<div class="rating-text">No reviews available</div>';
+                    if (inList) {
+                        inList = false;
+                        formattedText += '</ul>\n';
+                    }
+                    
+                    formattedText += line + '\n';
                 }
-                
-                const distanceDiv = document.createElement('div');
-                distanceDiv.className = 'facility-distance';
-                const distance = facility.location?.distance_display || 
-                               (facility.distance_miles ? `${facility.distance_miles} miles away` : 'Distance not available');
-                distanceDiv.textContent = distance;
-                
-                facilityDetails.appendChild(ratingDiv);
-                facilityDetails.appendChild(distanceDiv);
-                
-                // Actions (Maps button)
-                const actionsDiv = document.createElement('div');
-                actionsDiv.className = 'facility-actions';
-                
-                const mapsButton = document.createElement('a');
-                mapsButton.className = 'facility-button';
-                mapsButton.href = facility.actions?.maps_url || facility.maps_url || '#';
-                mapsButton.target = '_blank';
-                mapsButton.innerHTML = '🗺️ View on Maps';
-                
-                if (facility.contact?.phone || facility.phone) {
-                    const callButton = document.createElement('a');
-                    callButton.className = 'facility-button secondary';
-                    callButton.href = `tel:${facility.contact?.phone || facility.phone}`;
-                    callButton.innerHTML = '📞 Call';
-                    actionsDiv.appendChild(callButton);
-                }
-                
-                actionsDiv.appendChild(mapsButton);
-                
-                // Assemble facility card
-                facilityCard.appendChild(facilityHeader);
-                facilityCard.appendChild(address);
-                facilityCard.appendChild(facilityDetails);
-                facilityCard.appendChild(actionsDiv);
-                
-                facilitiesContainer.appendChild(facilityCard);
-            });
+            }
             
-            return facilitiesContainer;
+            // Close any open list
+            if (inList) {
+                formattedText += '</ul>\n';
+            }
+            
+            // 5. Handle basic markdown formatting
+            formattedText = formattedText
+                // Bold
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                // Italic
+                .replace(/\*(.*?)\*/g, '<em>$1</em>');
+                
+            return formattedText;
         }
 
-        // UPDATED: Enhanced addMessage function with JSON support
-        function addMessage(text, isUser = false, senderName = null, jsonData = null) {
+        /**
+         * This function properly renders HTML tables from table descriptions
+         */
+        function processTableDescriptions(text) {
+            // Check if text contains a table description
+            if (text.includes('table') && text.includes('|')) {
+                // Try to find and convert simple markdown-style tables
+                const tablePattern = /\|(.+)\|/g;
+                const tableMatches = text.match(tablePattern);
+                
+                if (tableMatches) {
+                    // We found a potential table description
+                    let tableHTML = '<div class="table-container"><table class="markdown-table">';
+                    let headerProcessed = false;
+                    
+                    // Process each row of the table
+                    for (const row of tableMatches) {
+                        // Skip separator rows (|----|---|----|)
+                        if (row.replace(/\|/g, '').replace(/-/g, '').replace(/:/g, '').trim() === '') {
+                            continue;
+                        }
+                        
+                        // Extract cells from the row
+                        const cells = row.split('|').filter(cell => cell.trim());
+                        
+                        if (!headerProcessed) {
+                            // First row is treated as header
+                            tableHTML += '<thead><tr>';
+                            cells.forEach(cell => {
+                                tableHTML += `<th>${cell.trim()}</th>`;
+                            });
+                            tableHTML += '</tr></thead><tbody>';
+                            headerProcessed = true;
+                        } else {
+                            // Data rows
+                            tableHTML += '<tr>';
+                            cells.forEach(cell => {
+                                tableHTML += `<td>${cell.trim()}</td>`;
+                            });
+                            tableHTML += '</tr>';
+                        }
+                    }
+                    
+                    tableHTML += '</tbody></table></div>';
+                    
+                    // Replace the table description with the HTML table
+                    text = text.replace(/Here's a table(.+?):/s, 'Here\'s a table:');
+                    text = text.replace(/\|(.+\|)+(\s*\|.+\|)+/gs, tableHTML);
+                }
+            }
+            
+            return text;
+        }
+
+        // IMPROVED FUNCTION: Add visualization with adaptive sizing
+        function addVisualization(vizHtml) {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'message assistant-message';
+            
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'message-avatar assistant-avatar-chat';
+            const avatarImg = document.createElement('img');
+            avatarImg.src = '/static/sallie.gif';
+            avatarImg.alt = 'Sallie';
+            avatarImg.style.width = '100%';
+            avatarImg.style.height = '100%';
+            avatarImg.style.objectFit = 'cover';
+            avatarImg.onerror = function() {
+                this.parentElement.innerHTML = '📊';
+            };
+            avatarDiv.appendChild(avatarImg);
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            // Add a header for the visualization
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'message-header';
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = 'Sallie - Data Visualization';
+            headerDiv.appendChild(nameSpan);
+            
+            // Add timestamp
+            const timeSpan = document.createElement('span');
+            timeSpan.style.fontSize = '12px';
+            timeSpan.style.color = '#9ca3af';
+            timeSpan.style.fontWeight = '400';
+            const now = new Date();
+            timeSpan.textContent = ' • ' + now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+            headerDiv.appendChild(timeSpan);
+            contentDiv.appendChild(headerDiv);
+            
+            // Create the visualization container
+            const vizContainer = document.createElement('div');
+            vizContainer.className = 'visualization-container';
+            
+            // Add fullscreen button
+            const fullscreenBtn = document.createElement('button');
+            fullscreenBtn.className = 'visualization-fullscreen-btn';
+            fullscreenBtn.innerHTML = '⛶ Fullscreen';
+            fullscreenBtn.onclick = function() {
+                vizContainer.classList.toggle('fullscreen');
+                fullscreenBtn.innerHTML = vizContainer.classList.contains('fullscreen') ? '✕ Exit' : '⛶ Fullscreen';
+                
+                // Trigger resize event for chart libraries
+                window.dispatchEvent(new Event('resize'));
+            };
+            vizContainer.appendChild(fullscreenBtn);
+            
+            // Create a loading indicator
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'visualization-loading';
+            loadingDiv.innerHTML = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#3B82F6" opacity="0.3"/><path d="M12 4V8" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/></path></svg><span>Loading visualization...</span>';
+            vizContainer.appendChild(loadingDiv);
+            
+            // Create content wrapper with adaptive sizing
+            const vizContentWrapper = document.createElement('div');
+            vizContentWrapper.className = 'visualization-content';
+            
+            // Check for template strings or invalid content
+            if (typeof vizHtml === 'string' && 
+                (vizHtml.includes('${') || 
+                 vizHtml.includes('$vizContent') || 
+                 vizHtml.includes('$data.visualization_html'))) {
+                
+                console.log("Detected template string variables in visualization HTML");
+                loadingDiv.innerHTML = '<div class="visualization-error">Visualization could not be rendered due to template error.</div>';
+                vizContainer.appendChild(vizContentWrapper);
+            } else {
+                // Set the content
+                vizContentWrapper.innerHTML = vizHtml;
+                vizContainer.appendChild(vizContentWrapper);
+                
+                // Initialize visualization with improved error handling
+                setTimeout(() => {
+                    try {
+                        // Auto-detect and handle different chart libraries
+                        const hasCanvas = vizContentWrapper.querySelector('canvas');
+                        const hasSvg = vizContentWrapper.querySelector('svg');
+                        const hasPlotly = vizContentWrapper.querySelector('.plotly') || 
+                                        vizContentWrapper.querySelector('.js-plotly-plot');
+                        const hasIframe = vizContentWrapper.querySelector('iframe');
+                        
+                        // Apply appropriate sizing based on content type
+                        if (hasCanvas) {
+                            // Chart.js or similar canvas-based charts
+                            const canvas = vizContentWrapper.querySelector('canvas');
+                            if (canvas) {
+                                canvas.style.maxWidth = '100%';
+                                canvas.style.height = 'auto';
+                            }
+                        }
+                        
+                        if (hasPlotly) {
+                            // Handle Plotly charts
+                            const plotlyDiv = vizContentWrapper.querySelector('.plotly, .js-plotly-plot');
+                            if (plotlyDiv && window.Plotly) {
+                                // Trigger Plotly resize
+                                window.Plotly.Plots.resize(plotlyDiv);
+                            }
+                        }
+                        
+                        // Execute any scripts
+                        const scripts = vizContentWrapper.querySelectorAll('script');
+                        scripts.forEach(oldScript => {
+                            const newScript = document.createElement('script');
+                            
+                            // Copy attributes
+                            Array.from(oldScript.attributes).forEach(attr => {
+                                newScript.setAttribute(attr.name, attr.value);
+                            });
+                            
+                            // Wrap script content to catch errors
+                            newScript.textContent = `
+                                try {
+                                    ${oldScript.textContent}
+                                } catch (error) {
+                                    console.error("Visualization script error:", error);
+                                }
+                            `;
+                            
+                            // Replace the old script with the new one
+                            oldScript.parentNode.replaceChild(newScript, oldScript);
+                        });
+                        
+                        // Remove loading indicator after successful load
+                        loadingDiv.style.display = 'none';
+                        
+                        // Adjust container height based on content
+                        setTimeout(() => {
+                            const contentHeight = vizContentWrapper.scrollHeight;
+                            if (contentHeight > 200) {
+                                vizContainer.style.minHeight = contentHeight + 40 + 'px';
+                            }
+                        }, 100);
+                        
+                        console.log("Visualization initialized successfully");
+                    } catch (err) {
+                        console.error("Error executing visualization scripts:", err);
+                        loadingDiv.innerHTML = '<div class="visualization-error">Error rendering visualization: ' + err.message + '</div>';
+                    }
+                }, 500);
+            }
+            
+            // Add the visualization to the message
+            contentDiv.appendChild(vizContainer);
+            vizDiv.appendChild(avatarDiv);
+            vizDiv.appendChild(contentDiv);
+            
+            // Add to chat
+            chatContainer.appendChild(vizDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            // Trigger resize event to ensure charts render properly
+            setTimeout(() => {
+                window.dispatchEvent(new Event('resize'));
+            }, 1000);
+        }
+
+        // Add message to chat with better formatting
+        function addMessage(text, isUser = false, senderName = null) {
             // Ensure typing indicator is removed before adding message
             if (!isUser) {
                 hideTypingIndicator();
@@ -1029,150 +1232,31 @@
             const textDiv = document.createElement('div');
             textDiv.className = 'message-text';
             
-            // NEW: Handle JSON facility data
-            if (jsonData && jsonData.response_format === 'json' && jsonData.structured_data) {
-                // Add a brief text summary
-                const summaryText = `I found ${jsonData.facilities_found || 0} facilities near ${jsonData.search_location || 'your location'}. Here are the results:`;
+            // Only process LLM responses, not user messages
+            if (!isUser) {
+                // Fix any potential HTML tables
+                text = processTableDescriptions(text);
                 
-                const summaryP = document.createElement('p');
-                summaryP.textContent = summaryText;
-                summaryP.style.marginBottom = '16px';
-                textDiv.appendChild(summaryP);
+                // Process with our LLM formatter
+                text = processLLMResponse(text);
                 
-                // Render facilities
-                const facilities = jsonData.structured_data.facilities || [];
-                if (facilities.length > 0) {
-                    const facilitiesElement = renderFacilities(facilities, jsonData.structured_data);
-                    textDiv.appendChild(facilitiesElement);
-                } else {
-                    const noResultsP = document.createElement('p');
-                    noResultsP.textContent = 'No facilities found matching your criteria. Try expanding your search radius or using different keywords.';
-                    noResultsP.style.color = '#64748b';
-                    noResultsP.style.fontStyle = 'italic';
-                    textDiv.appendChild(noResultsP);
-                }
-            } else {
-                // Handle regular text responses
-                let cleanText = text;
-                
-                // Fix malformed HTML tags that are causing display issues
-                cleanText = cleanText
-                    .replace(/(\s|^)em>/g, '$1<em>')  // Fix malformed <em> tags
-                    .replace(/(\s|^)strong>/g, '$1<strong>'); // Fix malformed <strong> tags
-                
-                // Format text for better readability
-                if (!isUser && cleanText.length > 100) {
-                    // Process the text to add proper formatting
-                    let formattedText = cleanText;
-                    
-                    // Replace multiple spaces with single space
-                    formattedText = formattedText.replace(/\s+/g, ' ').trim();
-                    
-                    // Split into sentences more intelligently - avoid splitting abbreviations and URLs
-                    let tempText = formattedText
-                        .replace(/\bU\.S\./g, 'U_S_')
-                        .replace(/\bwww\./g, 'www_')
-                        .replace(/\b[A-Z]\./g, (match) => match.replace('.', '_'))
-                        .replace(/\d+\.\d+/g, (match) => match.replace('.', '_')); // Handle decimal numbers
-                    
-                    // Now split on sentences (period followed by space and capital letter)
-                    const sentences = tempText.match(/[^.!?]*[.!?]+(?=\s+[A-Z]|$)/g) || [tempText];
-                    
-                    // Restore abbreviations in each sentence
-                    const restoredSentences = sentences.map(sentence => 
-                        sentence.replace(/U_S_/g, 'U.S.')
-                            .replace(/www_/g, 'www.')
-                            .replace(/([A-Z])_/g, '$1.')
-                            .replace(/(\d+)_(\d+)/g, '$1.$2')
-                    );
-                    let processedText = '';
-                    let currentParagraph = '';
-                    
-                    restoredSentences.forEach((sentence, index) => {
-                        const trimmedSentence = sentence.trim();
-                        
-                        // Check for natural paragraph breaks
-                        if (trimmedSentence.match(/^(However|Furthermore|Additionally|Moreover|First|Second|Third|Finally|In conclusion|For example|Therefore)/i) ||
-                            (currentParagraph.length > 200 && index > 0)) {
-                            if (currentParagraph) {
-                                processedText += currentParagraph.trim() + '\n\n';
-                                currentParagraph = '';
-                            }
-                        }
-                        
-                        currentParagraph += trimmedSentence + ' ';
-                        
-                        // Force paragraph break after 3 sentences or at the end
-                        if ((currentParagraph.match(/[.!?]/g) || []).length >= 3 || index === restoredSentences.length - 1) {
-                            processedText += currentParagraph.trim() + (index < restoredSentences.length - 1 ? '\n\n' : '');
-                            currentParagraph = '';
+                // Create paragraphs
+                if (text.includes('\n\n') && !text.includes('<p>')) {
+                    const paragraphs = text.split(/\n\n+/);
+                    paragraphs.forEach(para => {
+                        if (para.trim()) {
+                            const p = document.createElement('p');
+                            p.innerHTML = para;
+                            textDiv.appendChild(p);
                         }
                     });
-                    
-                    cleanText = processedText.trim();
+                } else {
+                    // If it already has HTML formatting or no paragraphs, use as is
+                    textDiv.innerHTML = text;
                 }
-                
-                // Handle different text patterns
-                const paragraphs = cleanText.split(/\n\n+/);
-                
-                paragraphs.forEach((para, index) => {
-                    if (para.trim()) {
-                        const p = document.createElement('p');
-                        
-                        // Check for Medical Disclaimer - add separator and special styling
-                        if (para.includes('Medical Disclaimer') || para.includes('**Medical Disclaimer**')) {
-                            // Add separator line before disclaimer
-                            const separator = document.createElement('div');
-                            separator.className = 'section-break';
-                            separator.style.height = '1px';
-                            separator.style.background = '#e5e7eb';
-                            separator.style.margin = '20px 0';
-                            textDiv.appendChild(separator);
-                            
-                            // Style the disclaimer
-                            p.style.fontSize = '13px';
-                            p.style.color = '#64748b';
-                            p.style.fontStyle = 'italic';
-                            p.style.marginTop = '16px';
-                            p.style.paddingTop = '12px';
-                        }
-                        
-                        // Process markdown and HTML formatting
-                        let formattedPara = para
-                            .replace(/\*\*\*(.*?)\*\*\*/g, '<strong>$1</strong>') // Handle triple asterisks
-                            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                            .replace(/\*(.*?)\*/g, '<em>$1</em>');
-                        
-                        // Handle bullet points - more precise detection
-                        if (para.trim().match(/^[•\-]\s/) || 
-                            para.trim().match(/^\*{1,3}\s*\*{1,3}[A-Z]/) || 
-                            para.trim().match(/^•\s*\*{1,3}/)) {
-                            formattedPara = '• ' + formattedPara.replace(/^[•\-\*]+\s*/, '');
-                            p.style.marginLeft = '20px';
-                            p.style.listStyleType = 'none';
-                        }
-                        
-                        // Handle numbered lists
-                        const numberMatch = para.trim().match(/^(\d+)\./);
-                        if (numberMatch) {
-                            p.style.marginLeft = '20px';
-                        }
-                        
-                        // Set innerHTML to allow HTML formatting
-                        p.innerHTML = formattedPara;
-                        textDiv.appendChild(p);
-                    }
-                });
-                
-                // If no paragraphs were created, just set the text with HTML formatting
-                if (textDiv.children.length === 0) {
-                    // Process the text for HTML formatting
-                    let processedText = cleanText
-                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/\*(.*?)\*/g, '<em>$1</em>');
-                    
-                    textDiv.innerHTML = processedText;
-                }
+            } else {
+                // User messages don't need processing
+                textDiv.textContent = text;
             }
             
             contentDiv.appendChild(headerDiv);
@@ -1274,20 +1358,15 @@
             messageInput.placeholder = 'Type your message to Sallie...';
         }
 
-        // UPDATED: Send message with enhanced JSON handling
+
+        // Send message
         async function sendMessage(message) {
-            let typingTimeout = null;
-            
             try {
                 sendButton.disabled = true;
                 
                 // Only show typing indicator for actual messages, not initial connection
                 if (message !== 'INITIAL_CONNECTION') {
                     showTypingIndicator();
-                    // Auto-remove typing indicator after 30 seconds (location searches take longer)
-                    typingTimeout = setTimeout(() => {
-                        hideTypingIndicator();
-                    }, 30000);
                 }
                 
                 const response = await fetch('/api/chat', {
@@ -1298,57 +1377,42 @@
                     body: JSON.stringify({
                         patient_id: patientId,
                         message: message,
-                        user_type: 'patient'  // Explicitly set as patient
+                        user_type: 'researcher'  // Important: specify researcher type
                     })
                 });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
                 
                 const data = await response.json();
-                console.log('Received response:', data); // Debug log
                 
-                // Clear timeout and hide typing indicator before showing response
-                if (typingTimeout) {
-                    clearTimeout(typingTimeout);
-                }
-                
-                // Small delay to ensure smooth transition
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Hide typing indicator immediately when response arrives
                 hideTypingIndicator();
                 
                 if (data.success) {
-                    // Another small delay before adding message
-                    await new Promise(resolve => setTimeout(resolve, 100));
+                    // Add the text response
+                    addMessage(data.response, false, data.metadata?.agent_used || 'Sallie');
                     
-                    // Check if this is a JSON location response
-                    if (data.response_format === 'json' && data.is_location_json) {
-                        console.log('Rendering JSON location response with', data.facilities_found, 'facilities');
-                        addMessage('', false, data.agent_used === 'ReAct' ? 'Sallie (Advanced)' : 'Sallie', data);
-                    } else {
-                        // Regular text response
-                        addMessage(data.response, false, data.agent_used === 'ReAct' ? 'Sallie (Advanced)' : 'Sallie');
+                    // If there's a visualization, add it as a link
+                    if (data.has_visualization && data.visualization_html) {
+                        // Check if the visualization HTML is a template variable
+                        if (data.visualization_html.includes('${') || 
+                            data.visualization_html === '${data.visualization_html}' || 
+                            data.visualization_html === '${vizContent}') {
+                            
+                            console.warn("Received template variable instead of visualization content");
+                            // Don't attempt to render invalid visualization content
+                        } else {
+                            addVisualization(data.visualization_html);
+                        }
                     }
                 } else {
-                    await new Promise(resolve => setTimeout(resolve, 100));
-                    addMessage(data.error || 'I apologize, but I encountered an error. Please try again.', false);
+                    addMessage('I apologize, but I encountered an error. Please try again.', false);
                     console.error('Chat error:', data.error);
                 }
             } catch (error) {
-                // Clear timeout and hide typing indicator on error
-                if (typingTimeout) {
-                    clearTimeout(typingTimeout);
-                }
-                
-                // Small delay to ensure smooth transition
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Hide typing indicator on error
                 hideTypingIndicator();
                 
                 console.error('Network error:', error);
                 connectionError.style.display = 'block';
-                
-                await new Promise(resolve => setTimeout(resolve, 100));
                 addMessage('Connection error. Please check your internet and try again.', false);
             } finally {
                 sendButton.disabled = false;
@@ -1375,29 +1439,62 @@
 
         // Logout function
         function logout() {
-            sessionStorage.clear();
-            window.location.href = '/';
+            // Show a small loading indicator in the button
+            const logoutButton = document.querySelector('.logout-button');
+            const originalText = logoutButton.textContent;
+            logoutButton.innerHTML = 'Signing Out <span class="loading-dots"></span>';
+            logoutButton.disabled = true;
+            
+            // Call the logout API
+            fetch('/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    patient_id: patientId,
+                    user_type: 'researcher'
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.warn('Logout API error, proceeding with local logout anyway');
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.error('Logout network error:', error);
+                // Continue with logout even if API fails
+            })
+            .finally(() => {
+                // Add a small delay to ensure any in-progress operations complete
+                setTimeout(() => {
+                    // Clear session data
+                    sessionStorage.clear();
+                    localStorage.removeItem('pop_session');  // Clear any related localStorage too
+                    
+                    // Redirect to login page
+                    window.location.href = '/';
+                }, 300);
+            });
         }
 
-        // Show random health tip when mascot is clicked
+        // Show random tip when mascot is clicked - Research tips instead of health tips
         function showRandomTip() {
             const tips = [
-                "Remember to stay hydrated! Drink at least 8 glasses of water daily.",
-                "Gentle yoga or stretching can improve balance and reduce tension.",
-                "Wearing sunglasses can help if you're experiencing light sensitivity.",
-                "Maintain a regular sleep schedule to support brain healing.",
-                "Take breaks from your screen every 20 minutes to rest your eyes.",
-                "A 10-minute walk can boost your mood and energy levels!",
-                "Deep breathing exercises can help reduce stress and anxiety.",
-                "Getting 7-9 hours of sleep is crucial for your health.",
-                "Eating a balanced diet with fruits and vegetables supports brain health.",
-                "Regular exercise can help improve cognitive function after a TBI.",
-                "Log your symptoms on power of patients to track your recovery progress.",
-                "Limit alcohol consumption as it can interfere with brain healing.",
-                "Create a consistent daily routine to help with memory and organization."
+                "Use specific date ranges in your queries for more accurate data analysis.",
+                "Try comparing different patient cohorts to identify patterns.",
+                "Export visualizations for your presentations and reports.",
+                "Ask about statistical significance when analyzing treatment outcomes.",
+                "Request correlation analyses between symptoms and demographics.",
+                "Use filters to narrow down large datasets for focused insights.",
+                "Ask for confidence intervals when reviewing statistical data.",
+                "Compare pre and post-treatment data for effectiveness analysis.",
+                "Request trend analyses to identify patterns over time.",
+                "Ask about outliers in the data - they often reveal important insights."
             ];
             const randomTip = tips[Math.floor(Math.random() * tips.length)];
-            addMessage(randomTip, false, 'Sallie\'s Health Tip 💡');
+            addMessage(randomTip, false, 'Sallie\'s Research Tip 💡');
             
             // Stop the pulse animation after first click
             const mascot = document.querySelector('.mascot-dog');
@@ -1418,35 +1515,36 @@
             // Send initial connection message
             try {
                 await sendMessage('INITIAL_CONNECTION');
-            } finally {
-                // Ensure typing indicator is removed
-                hideTypingIndicator();
+            } catch (error) {
+                console.error('Initial connection error:', error);
             }
             
             messageInput.focus();
             
             // Start pulse animation after bounce completes
-            setTimeout(() => {
-                const mascot = document.querySelector('.mascot-dog');
-                if (mascot) {
-                    mascot.classList.add('pulse');
-                }
-            }, 1200);
+            // setTimeout(() => {
+            //     const mascot = document.querySelector('.mascot-dog');
+            //     if (mascot) {
+            //         mascot.classList.add('pulse');
+            //     }
+            // }, 1200);
+            
+            // Show mascot tooltip briefly after page load
+            // setTimeout(() => {
+            //     const tooltip = document.querySelector('.mascot-tooltip');
+            //     if (tooltip) {
+            //         tooltip.style.opacity = '1';
+            //         tooltip.style.transform = 'translateX(-50%) translateY(-5px)';
+            //         setTimeout(() => {
+            //             tooltip.style.opacity = '0';
+            //             tooltip.style.transform = 'translateX(-50%)';
+            //         }, 3000);
+            //     }
+            // }, 2000);
         });
 
         // Focus on input
         messageInput.focus();
-        
-        // Clean up any stray typing indicators periodically
-        setInterval(() => {
-            // Only clean up if we're not actively waiting for a response
-            if (!sendButton.disabled) {
-                const indicators = document.querySelectorAll('.typing-indicator');
-                if (indicators.length > 0) {
-                    hideTypingIndicator();
-                }
-            }
-        }, 5000);
         
         // Remove typing indicator on escape key
         document.addEventListener('keydown', (e) => {
