@@ -441,7 +441,7 @@ AGENT RESPONSES:
 {agent_info}
 
 CRITICAL INSTRUCTIONS:
-1. **ALWAYS provide a complete, helpful response** - Never say you cannot help or provide partial information
+1. **ALWAYS provide a concise, helpful response** - Never say you cannot help or provide partial information
 2. **Handle ALL scenarios intelligently**:
    - If agents succeeded: Synthesize their responses comprehensively
    - If agents failed: Use your medical knowledge to provide helpful guidance

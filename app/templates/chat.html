@@ -183,142 +183,197 @@
             flex: 1;
         }
 
-        .message-header {
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 6px;
-            color: #1f2937;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .assistant-message .message-header {
-            color: #2563eb;
-        }
-
-        .user-message .message-header {
-            color: #4338ca;
-        }
-
+        /* Enhanced message text formatting */
         .message-text {
-            background: white;
-            padding: 16px 20px;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            line-height: 1.7;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-size: 15px;
+            line-height: 1.8;
             color: #1f2937;
+            font-size: 15px;
         }
 
         .message-text p {
-            margin: 0 0 14px 0;
-            line-height: 1.7;
+            margin: 8px 0;
+            line-height: 1.8;
+        }
+
+        .message-text p:first-child {
+            margin-top: 0;
         }
 
         .message-text p:last-child {
             margin-bottom: 0;
         }
 
+        /* Section headers styling */
         .message-text strong {
             font-weight: 600;
-            color: #111827;
+            color: #1e293b;
         }
 
-        .message-text em {
-            font-style: italic;
-            color: #4b5563;
+        .message-text div p strong {
+            display: inline;
+            font-size: inherit;
         }
 
-        /* Better spacing for readability */
+        /* Main section headers */
+        .message-text div[style*="margin-top: 20px"] p strong {
+            font-size: 17px !important;
+            display: block !important;
+            margin-bottom: 8px !important;
+        }
+
+        /* Lists formatting */
         .message-text ul,
         .message-text ol {
-            margin: 12px 0 12px 24px;
-            padding-left: 20px;
+            margin: 8px 0;
+            padding-left: 24px;
+            list-style-position: outside;
+        }
+
+        .message-text ul {
+            list-style-type: disc;
+        }
+
+        .message-text ol {
+            list-style-type: decimal;
         }
 
         .message-text li {
-            margin-bottom: 8px;
-            line-height: 1.7;
+            margin-bottom: 6px;
+            line-height: 1.8;
+            padding-left: 4px;
         }
 
         .message-text li:last-child {
             margin-bottom: 0;
         }
 
-        /* Highlight important information */
-        .message-text .highlight {
-            background-color: #fef3c7;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 500;
-        }
-
-        /* Code or technical terms */
-        .message-text code {
-            background-color: #f3f4f6;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 14px;
-        }
-
-        .user-message .message-text {
-            background: #e0e7ff;
-            color: #1e1b4b;
-        }
-
-        .assistant-message .message-text {
+        .message-text {
+            /* Chat bubble styling */
+            background: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            
+            /* Text formatting */
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 15px;
+            color: #1f2937;
+            position: relative;
             max-width: 100%;
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
         }
 
-        .message-text strong {
-            font-weight: 600;
-            color: #1e293b;
+        /* Nested lists */
+        .message-text ul ul,
+        .message-text ol ul,
+        .message-text ul ol,
+        .message-text ol ol {
+            margin-top: 4px;
+            margin-bottom: 4px;
+            margin-left: 20px;
         }
 
+        .message-text ul ul {
+            list-style-type: circle;
+        }
+
+        .message-text ul ul ul {
+            list-style-type: square;
+        }
+
+        /* Nested list items */
+        .message-text li ul,
+        .message-text li ol {
+            margin-top: 4px;
+        }
+
+        /* Emphasis styles */
         .message-text em {
             font-style: italic;
-            color: #475569;
+            color: #374151;
         }
 
-        /* Section breaks for topic changes */
-        .message-text .section-break {
+        .message-text strong em,
+        .message-text em strong {
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        /* Medical disclaimer special styling */
+        .message-text p[style*="background: #fef3c7"] {
+            background: #fef3c7 !important;
+            border-left: 4px solid #f59e0b !important;
+            padding: 12px 16px !important;
+            margin: 16px 0 8px 0 !important;
+            border-radius: 4px !important;
+            font-size: 13px !important;
+            font-style: italic !important;
+            color: #92400e !important;
+        }
+
+        /* Section separators */
+        .message-text hr {
             height: 1px;
             background: #e5e7eb;
+            border: none;
             margin: 20px 0;
         }
 
-        /* Emphasis for important health information */
-        .message-text .important {
-            background: #fef3c7;
-            border-left: 4px solid #f59e0b;
+        /* Headers within sections */
+        .message-text p strong:first-child {
+            color: #1e293b;
+        }
+
+        /* Improve readability */
+        .message-text {
+            max-width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Better spacing between sections */
+        .message-text > div[style*="margin-top: 20px"] {
+            padding-top: 8px;
+        }
+
+        /* Emergency warning signs emphasis */
+        .message-text p:has(strong:contains("Emergency Warning Signs")),
+        .message-text p:has(strong:contains("When to Seek Immediate Medical Attention")) {
+            background: #fee2e2;
+            border-left: 4px solid #dc2626;
             padding: 12px 16px;
             margin: 16px 0;
             border-radius: 4px;
         }
 
-        /* Question prompts from Sallie */
-        .message-text .question {
-            color: #2563eb;
-            font-weight: 500;
-            display: inline;
+        /* Code blocks if any */
+        .message-text code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            color: #1f2937;
         }
 
-        /* List styling */
-        .message-text ul,
-        .message-text ol {
-            margin: 8px 0 8px 20px;
-            padding-left: 20px;
-        }
-
-        .message-text li {
-            margin-bottom: 4px;
-            line-height: 1.6;
+        /* Ensure proper display on mobile */
+        @media (max-width: 768px) {
+            .message-text {
+                font-size: 14px;
+            }
+            
+            .message-text ul,
+            .message-text ol {
+                padding-left: 20px;
+            }
+            
+            .message-text ul ul,
+            .message-text ol ul,
+            .message-text ul ol,
+            .message-text ol ol {
+                margin-left: 16px;
+            }
         }
 
         /* NEW: Facility Card Styles */
@@ -979,6 +1034,7 @@
         }
 
         // UPDATED: Enhanced addMessage function with JSON support
+        // FINAL OPTIMIZED: Enhanced addMessage function for backend markdown responses
         function addMessage(text, isUser = false, senderName = null, jsonData = null) {
             // Ensure typing indicator is removed before adding message
             if (!isUser) {
@@ -1029,9 +1085,8 @@
             const textDiv = document.createElement('div');
             textDiv.className = 'message-text';
             
-            // NEW: Handle JSON facility data
+            // Handle JSON facility data (keeping existing functionality)
             if (jsonData && jsonData.response_format === 'json' && jsonData.structured_data) {
-                // Add a brief text summary
                 const summaryText = `I found ${jsonData.facilities_found || 0} facilities near ${jsonData.search_location || 'your location'}. Here are the results:`;
                 
                 const summaryP = document.createElement('p');
@@ -1039,7 +1094,6 @@
                 summaryP.style.marginBottom = '16px';
                 textDiv.appendChild(summaryP);
                 
-                // Render facilities
                 const facilities = jsonData.structured_data.facilities || [];
                 if (facilities.length > 0) {
                     const facilitiesElement = renderFacilities(facilities, jsonData.structured_data);
@@ -1052,126 +1106,173 @@
                     textDiv.appendChild(noResultsP);
                 }
             } else {
-                // Handle regular text responses
+                // Parse markdown-style text from backend
                 let cleanText = text;
                 
-                // Fix malformed HTML tags that are causing display issues
-                cleanText = cleanText
-                    .replace(/(\s|^)em>/g, '$1<em>')  // Fix malformed <em> tags
-                    .replace(/(\s|^)strong>/g, '$1<strong>'); // Fix malformed <strong> tags
+                // Convert escaped newlines to actual newlines
+                cleanText = cleanText.replace(/\\n/g, '\n');
                 
-                // Format text for better readability
-                if (!isUser && cleanText.length > 100) {
-                    // Process the text to add proper formatting
-                    let formattedText = cleanText;
+                // Split into lines for processing
+                const lines = cleanText.split('\n');
+                let currentList = null;
+                let listDepth = 0;
+                let inNestedList = false;
+                
+                lines.forEach((line, index) => {
+                    // Skip empty lines unless we're in a list
+                    if (!line.trim() && !currentList) return;
                     
-                    // Replace multiple spaces with single space
-                    formattedText = formattedText.replace(/\s+/g, ' ').trim();
-                    
-                    // Split into sentences more intelligently - avoid splitting abbreviations and URLs
-                    let tempText = formattedText
-                        .replace(/\bU\.S\./g, 'U_S_')
-                        .replace(/\bwww\./g, 'www_')
-                        .replace(/\b[A-Z]\./g, (match) => match.replace('.', '_'))
-                        .replace(/\d+\.\d+/g, (match) => match.replace('.', '_')); // Handle decimal numbers
-                    
-                    // Now split on sentences (period followed by space and capital letter)
-                    const sentences = tempText.match(/[^.!?]*[.!?]+(?=\s+[A-Z]|$)/g) || [tempText];
-                    
-                    // Restore abbreviations in each sentence
-                    const restoredSentences = sentences.map(sentence => 
-                        sentence.replace(/U_S_/g, 'U.S.')
-                            .replace(/www_/g, 'www.')
-                            .replace(/([A-Z])_/g, '$1.')
-                            .replace(/(\d+)_(\d+)/g, '$1.$2')
-                    );
-                    let processedText = '';
-                    let currentParagraph = '';
-                    
-                    restoredSentences.forEach((sentence, index) => {
-                        const trimmedSentence = sentence.trim();
+                    // Check for main numbered sections (e.g., "**1. Section Title:**")
+                    const mainSectionMatch = line.match(/^\*\*(\d+)\.\s+([^:]+):\*\*\s*(.*)/);
+                    if (mainSectionMatch) {
+                        // Close any open list
+                        currentList = null;
+                        listDepth = 0;
                         
-                        // Check for natural paragraph breaks
-                        if (trimmedSentence.match(/^(However|Furthermore|Additionally|Moreover|First|Second|Third|Finally|In conclusion|For example|Therefore)/i) ||
-                            (currentParagraph.length > 200 && index > 0)) {
-                            if (currentParagraph) {
-                                processedText += currentParagraph.trim() + '\n\n';
-                                currentParagraph = '';
+                        // Create section container
+                        const sectionDiv = document.createElement('div');
+                        sectionDiv.style.marginTop = index > 0 ? '20px' : '0';
+                        sectionDiv.style.marginBottom = '12px';
+                        
+                        const headerP = document.createElement('p');
+                        const strong = document.createElement('strong');
+                        strong.style.fontSize = '17px';
+                        strong.style.color = '#1e293b';
+                        strong.style.display = 'block';
+                        strong.style.marginBottom = '8px';
+                        strong.textContent = `${mainSectionMatch[1]}. ${mainSectionMatch[2]}:`;
+                        headerP.appendChild(strong);
+                        
+                        if (mainSectionMatch[3]) {
+                            const contentSpan = document.createElement('span');
+                            contentSpan.innerHTML = processInlineFormatting(mainSectionMatch[3]);
+                            headerP.appendChild(contentSpan);
+                        }
+                        
+                        sectionDiv.appendChild(headerP);
+                        textDiv.appendChild(sectionDiv);
+                        return;
+                    }
+                    
+                    // Check for bullet points (lines starting with * and spaces)
+                    const bulletMatch = line.match(/^(\s*)\*\s+(.+)$/);
+                    if (bulletMatch) {
+                        const indent = bulletMatch[1].length;
+                        const content = bulletMatch[2];
+                        
+                        // Determine list depth based on indentation (4 spaces = 1 level)
+                        const newDepth = Math.floor(indent / 4);
+                        
+                        // Create new list if needed or adjust depth
+                        if (!currentList || newDepth === 0) {
+                            currentList = document.createElement('ul');
+                            currentList.style.marginTop = '8px';
+                            currentList.style.marginBottom = '8px';
+                            textDiv.appendChild(currentList);
+                            listDepth = 0;
+                        }
+                        
+                        // Handle nested lists
+                        if (newDepth > listDepth) {
+                            // Create nested list
+                            const lastLi = currentList.lastElementChild;
+                            if (lastLi) {
+                                const nestedList = document.createElement('ul');
+                                nestedList.style.marginTop = '4px';
+                                nestedList.style.marginBottom = '4px';
+                                lastLi.appendChild(nestedList);
+                                currentList = nestedList;
+                                listDepth = newDepth;
+                            }
+                        } else if (newDepth < listDepth) {
+                            // Go back to parent list
+                            while (newDepth < listDepth && currentList.parentElement) {
+                                if (currentList.parentElement.tagName === 'LI') {
+                                    currentList = currentList.parentElement.parentElement;
+                                    listDepth--;
+                                } else {
+                                    break;
+                                }
                             }
                         }
                         
-                        currentParagraph += trimmedSentence + ' ';
-                        
-                        // Force paragraph break after 3 sentences or at the end
-                        if ((currentParagraph.match(/[.!?]/g) || []).length >= 3 || index === restoredSentences.length - 1) {
-                            processedText += currentParagraph.trim() + (index < restoredSentences.length - 1 ? '\n\n' : '');
-                            currentParagraph = '';
-                        }
-                    });
+                        const li = document.createElement('li');
+                        li.innerHTML = processInlineFormatting(content);
+                        currentList.appendChild(li);
+                        return;
+                    }
                     
-                    cleanText = processedText.trim();
-                }
-                
-                // Handle different text patterns
-                const paragraphs = cleanText.split(/\n\n+/);
-                
-                paragraphs.forEach((para, index) => {
-                    if (para.trim()) {
-                        const p = document.createElement('p');
+                    // Check for bold headers (lines starting with **)
+                    const boldHeaderMatch = line.match(/^\*\*([^*]+):\*\*\s*(.*)/);
+                    if (boldHeaderMatch && !mainSectionMatch) {
+                        currentList = null;
+                        listDepth = 0;
                         
-                        // Check for Medical Disclaimer - add separator and special styling
-                        if (para.includes('Medical Disclaimer') || para.includes('**Medical Disclaimer**')) {
-                            // Add separator line before disclaimer
-                            const separator = document.createElement('div');
-                            separator.className = 'section-break';
+                        const p = document.createElement('p');
+                        p.style.marginTop = '16px';
+                        p.style.marginBottom = '8px';
+                        
+                        const strong = document.createElement('strong');
+                        strong.textContent = boldHeaderMatch[1] + ':';
+                        strong.style.color = '#1e293b';
+                        p.appendChild(strong);
+                        
+                        if (boldHeaderMatch[2]) {
+                            const span = document.createElement('span');
+                            span.innerHTML = ' ' + processInlineFormatting(boldHeaderMatch[2]);
+                            p.appendChild(span);
+                        }
+                        
+                        textDiv.appendChild(p);
+                        return;
+                    }
+                    
+                    // Regular paragraph
+                    const trimmedLine = line.trim();
+                    if (trimmedLine) {
+                        currentList = null;
+                        listDepth = 0;
+                        
+                        const p = document.createElement('p');
+                        p.style.marginTop = '8px';
+                        p.style.marginBottom = '8px';
+                        
+                        // Check for special content
+                        if (trimmedLine.includes('Medical Disclaimer') || 
+                            trimmedLine.includes('⚠️') || 
+                            trimmedLine.includes('**Disclaimer:**')) {
+                            // Add separator before disclaimer
+                            const separator = document.createElement('hr');
                             separator.style.height = '1px';
                             separator.style.background = '#e5e7eb';
-                            separator.style.margin = '20px 0';
+                            separator.style.border = 'none';
+                            separator.style.margin = '20px 0 16px 0';
                             textDiv.appendChild(separator);
                             
-                            // Style the disclaimer
+                            p.style.background = '#fef3c7';
+                            p.style.borderLeft = '4px solid #f59e0b';
+                            p.style.padding = '12px 16px';
+                            p.style.borderRadius = '4px';
                             p.style.fontSize = '13px';
-                            p.style.color = '#64748b';
                             p.style.fontStyle = 'italic';
-                            p.style.marginTop = '16px';
-                            p.style.paddingTop = '12px';
+                            p.style.marginTop = '0';
                         }
                         
-                        // Process markdown and HTML formatting
-                        let formattedPara = para
-                            .replace(/\*\*\*(.*?)\*\*\*/g, '<strong>$1</strong>') // Handle triple asterisks
-                            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                            .replace(/\*(.*?)\*/g, '<em>$1</em>');
-                        
-                        // Handle bullet points - more precise detection
-                        if (para.trim().match(/^[•\-]\s/) || 
-                            para.trim().match(/^\*{1,3}\s*\*{1,3}[A-Z]/) || 
-                            para.trim().match(/^•\s*\*{1,3}/)) {
-                            formattedPara = '• ' + formattedPara.replace(/^[•\-\*]+\s*/, '');
-                            p.style.marginLeft = '20px';
-                            p.style.listStyleType = 'none';
+                        // Special handling for greeting
+                        if (index === 0 && trimmedLine.startsWith('Hello')) {
+                            p.style.marginBottom = '16px';
                         }
                         
-                        // Handle numbered lists
-                        const numberMatch = para.trim().match(/^(\d+)\./);
-                        if (numberMatch) {
-                            p.style.marginLeft = '20px';
-                        }
-                        
-                        // Set innerHTML to allow HTML formatting
-                        p.innerHTML = formattedPara;
+                        p.innerHTML = processInlineFormatting(trimmedLine);
                         textDiv.appendChild(p);
                     }
                 });
                 
-                // If no paragraphs were created, just set the text with HTML formatting
+                // If no content was added, fallback
                 if (textDiv.children.length === 0) {
-                    // Process the text for HTML formatting
-                    let processedText = cleanText
-                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/\*(.*?)\*/g, '<em>$1</em>');
-                    
-                    textDiv.innerHTML = processedText;
+                    const p = document.createElement('p');
+                    p.innerHTML = processInlineFormatting(cleanText);
+                    textDiv.appendChild(p);
                 }
             }
             
@@ -1183,6 +1284,85 @@
             
             chatContainer.appendChild(messageDiv);
             chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Helper function to process inline formatting
+        function processInlineFormatting(text) {
+            // Escape HTML to prevent injection
+            const escapeHtml = (str) => {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            };
+            
+            // Split text into segments to handle formatting
+            let segments = [{ text: text, formatted: false }];
+            
+            // Process bold text (**text**)
+            segments = processFormat(segments, /\*\*([^*]+)\*\*/g, (match) => 
+                `<strong>${escapeHtml(match)}</strong>`
+            );
+            
+            // Process italic text (*text*) - but not at start of line (bullets)
+            segments = processFormat(segments, /(?<!^|\n)\*([^*\n]+)\*/g, (match) => 
+                `<em>${escapeHtml(match)}</em>`
+            );
+            
+            // Process italic text (_text_)
+            segments = processFormat(segments, /_([^_]+)_/g, (match) => 
+                `<em>${escapeHtml(match)}</em>`
+            );
+            
+            // Join all segments
+            return segments.map(seg => seg.formatted ? seg.text : escapeHtml(seg.text)).join('');
+        }
+
+        // Helper function to process formatting patterns
+        function processFormat(segments, pattern, replacer) {
+            const newSegments = [];
+            
+            segments.forEach(segment => {
+                if (segment.formatted) {
+                    newSegments.push(segment);
+                    return;
+                }
+                
+                const parts = segment.text.split(pattern);
+                parts.forEach((part, index) => {
+                    if (index % 2 === 0) {
+                        // Regular text
+                        if (part) {
+                            newSegments.push({ text: part, formatted: false });
+                        }
+                    } else {
+                        // Formatted text
+                        newSegments.push({ 
+                            text: replacer(part), 
+                            formatted: true 
+                        });
+                    }
+                });
+            });
+            
+            return newSegments;
+        }
+
+        // Helper function to process inline formatting
+        function processInlineFormatting(text) {
+            return text
+                // Handle triple asterisks first (bold+italic)
+                .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
+                // Then handle double asterisks (bold)
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                // Then handle single asterisks (italic)
+                .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+                // Handle underscores for emphasis too
+                .replace(/__(.*?)__/g, '<strong>$1</strong>')
+                .replace(/_([^_]+)_/g, '<em>$1</em>')
+                // Clean up any HTML entities
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&amp;/g, '&');
         }
 
         // Add typing indicator
