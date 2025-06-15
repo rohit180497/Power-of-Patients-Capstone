@@ -242,9 +242,9 @@ def predict():
         # Run the model
         result_df = model_runner.run_inference(input_data)
         CLUSTER_LABELS = {
-                            0: "Mild",
-                            2: "Moderate",
-                            1: "Severe"
+                            0: "Severe",
+                            2: "Mild",
+                            1: "Moderate"
                         }
 
         cluster_id = int(result_df['iiss_cluster'].iloc[0])
